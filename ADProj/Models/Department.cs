@@ -9,7 +9,7 @@ namespace ADProj.Models
 {
     public class Department
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Required]
         public string Id { get; set; }
         [Required]
         public string Name { get; set; }

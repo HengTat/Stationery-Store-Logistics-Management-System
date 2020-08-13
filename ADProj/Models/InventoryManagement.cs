@@ -9,7 +9,7 @@ namespace ADProj.Models
 {
     public class InventoryManagement
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
         public int EmployeeId { get; set; }

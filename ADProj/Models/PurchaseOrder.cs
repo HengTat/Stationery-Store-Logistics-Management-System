@@ -8,7 +8,7 @@ namespace ADProj.Models
 {
     public class PurchaseOrder
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public DateTime Date { get; set; }
         public int SupplierId { get; set; }

@@ -9,7 +9,8 @@ namespace ADProj.Models
 {
     public class RetrievalDetails
     {
-        public string Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
         [Required]
         public int QtyNeeded { get; set; }
         public int QtyRetrieved { get; set; }

@@ -10,7 +10,7 @@ namespace ADProj.Models
 {
     public class Request
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public int EmployeeId { get; set; }
         [Required]

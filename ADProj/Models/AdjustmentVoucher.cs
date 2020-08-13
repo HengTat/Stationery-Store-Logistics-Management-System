@@ -9,7 +9,7 @@ namespace ADProj.Models
 {
     public class AdjustmentVoucher
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
         public string EmployeeId { get;  set; }

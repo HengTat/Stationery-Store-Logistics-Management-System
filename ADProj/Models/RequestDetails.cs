@@ -9,7 +9,7 @@ namespace ADProj.Models
 {
     public class RequestDetails
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public int RequestId { get; set; }
         public string ItemId { get; set; }

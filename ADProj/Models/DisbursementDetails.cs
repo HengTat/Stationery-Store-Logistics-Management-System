@@ -10,7 +10,7 @@ namespace ADProj.Models
 {
     public class DisbursementDetails
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
         public int QtyNeeded { get; set; }

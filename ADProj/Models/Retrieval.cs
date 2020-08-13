@@ -9,8 +9,8 @@ namespace ADProj.Models
 {
     public class Retrieval
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public string Id { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
         [Required]
         public DateTime DateRetrieved { get; set; }
         [Required]
