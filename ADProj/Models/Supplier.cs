@@ -13,9 +13,11 @@ namespace ADProj.Models
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string Id { get; set;}
         [Required]
-        public int Name { get; set;}
+        public String Name { get; set;}
         [Required]
         public string ContactName{ get; set;}
+        [Required]
+        public string PhoneNo { get; set; }
         [Required]
         public string FaxNo { get; set;}
         [Required]
