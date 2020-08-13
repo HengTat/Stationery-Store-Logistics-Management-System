@@ -9,7 +9,7 @@ namespace ADProj.Models
     {
 
         public string Id { get; set; }
-        public string CategoryId { get; set; }
+        public int ItemCategoryId { get; set; }
         public string Description { get; set; }
         public string Bin { get; set; }
         public int RequestQty { get; set; }
