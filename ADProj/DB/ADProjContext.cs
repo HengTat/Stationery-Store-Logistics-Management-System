@@ -18,8 +18,6 @@ namespace ADProj.DB
         public DbSet<AdjustmentVoucher> AdjustmentVouchers { get; set; }
         public DbSet<CollectionPoint> CollectionPoints { get; set; }
         public DbSet<Department> Departments { get; set; }
-        public DbSet<DepartmentHead> DepartmentHeads { get; set; }
-        public DbSet<DepartmentRepresentative> DepartmentRepresentatives { get; set; }
         public DbSet<Disbursement> Disbursements { get; set; }
         public DbSet<DisbursementDetails> DisbursementDetails { get; set; }
         public DbSet<Employee> Employees { get; set; }
