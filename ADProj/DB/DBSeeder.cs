@@ -56,6 +56,8 @@ namespace ADProj.DB
             };
             dbcontext.Add(employee3);
 
+ 
+
             //Collectionpoint seeder
             CollectionPoint cp1 = new CollectionPoint()
             {
