@@ -12,9 +12,7 @@ namespace ADProj.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
-        public int? EmployeeId { get; set; }
-        public int DepartmentHeadId { get; set; }
-
+        public int EmployeeId { get; set; }
         [Required]
         public DateTime DateRequested { get; set; }
         [Required]
@@ -23,7 +21,6 @@ namespace ADProj.Models
         public string Remarks { get;  set; }
         public string Comments { get; set; }
 
-        public virtual DepartmentHead DepartmentHead { get; set; }
         public virtual Employee Employee { get; set; }
         public virtual Retrieval Retrieval { get; set; }
         public virtual Disbursement Disbursement { get; set; }

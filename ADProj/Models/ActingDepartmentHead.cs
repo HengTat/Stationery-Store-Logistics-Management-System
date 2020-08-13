@@ -7,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ADProj.Models
 {
-    public class ActingDepartmentHead : Employee
+    public class ActingDepartmentHead : DepartmentHead
     {
         [Required]
         public DateTime StartDate { get; set; }
