@@ -10,13 +10,21 @@ namespace ADProj.DB
     {
         public DBSeeder(ADProjContext dbcontext)
         {
+            CollectionPoint cp1 = new CollectionPoint()
+            {
+                Name = "Stationery Store - Administration Building",
+                Time = "09 30 am",
+            };
+            dbcontext.Add(cp1);
+            
+            dbcontext.SaveChanges();
 
             //Department seeder
             Department department1 = new Department()
             {
                 Id = "SCI",
                 Name = "Science",
-                CollectionPointId = "1"
+                CollectionPointId = cp1.Id
             };
             dbcontext.Add(department1);
 
@@ -72,13 +80,7 @@ namespace ADProj.DB
 
             //collectionpoint seeder
 
-            CollectionPoint cp1 = new CollectionPoint()
-            {
-                Name = "Stationery Store - Administration Building",
-                Time = "09 30 am",
-                EmployeeId = 3
-            };
-            dbcontext.Add(cp1);
+
 
             CollectionPoint cp2 = new CollectionPoint()
             {

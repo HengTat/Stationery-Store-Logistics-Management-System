@@ -15,8 +15,7 @@ namespace ADProj.Models
         public string Name { get; set; }
         [Required]
         public string Time { get; set; }
-        [Required]
-        public int EmployeeId{get;set;}        
+        public int? EmployeeId{get;set;}        
 
         public virtual Employee Employee { get; set;}
     }
