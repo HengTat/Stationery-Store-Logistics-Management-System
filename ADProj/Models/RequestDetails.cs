@@ -12,7 +12,7 @@ namespace ADProj.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public int RequestId { get; set; }
-        public string InnventoryItemId { get; set; }
+        public string InventoryItemId { get; set; }
 
         [Range(1, 99,
             ErrorMessage = "Requested quantity must be below 99")]
