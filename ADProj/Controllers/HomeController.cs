@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ADProj.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace ADProj.Controllers
 {
@@ -23,6 +24,10 @@ namespace ADProj.Controllers
 
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetString("id") == null)
+            {
+                return RedirectToAction("Index", "Account");
+            }
             return View();
         }
 

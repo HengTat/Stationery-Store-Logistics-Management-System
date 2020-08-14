@@ -39,7 +39,7 @@ namespace ADProj.DB
                 Role = "Employee",
                 Name = "John",
                 Email = "John@gmail.com",
-                Password = "Password"
+                Password = Services.Crypto.Sha256("Password")
             };
             dbcontext.Add(employee1);
 
@@ -50,7 +50,7 @@ namespace ADProj.DB
                 Role = "Manager",
                 Name = "David",
                 Email = "David@gmail.com",
-                Password = "Password"
+                Password = Services.Crypto.Sha256("Password")
             };
             dbcontext.Add(employee2);
 
@@ -61,7 +61,7 @@ namespace ADProj.DB
                 Role = "Employee",
                 Name = "Janice",
                 Email = "Janice@gmail.com",
-                Password = "Password"
+                Password = Services.Crypto.Sha256("Password")
             };
             dbcontext.Add(employee3);
 
@@ -72,7 +72,7 @@ namespace ADProj.DB
                 Role = "Employee",
                 Name = "Stephanie",
                 Email = "Stephanie@gmail.com",
-                Password = "Password"
+                Password = Services.Crypto.Sha256("Password")
             };
             dbcontext.Add(employee4);
 
@@ -752,6 +752,16 @@ namespace ADProj.DB
                 UOM = "Set"
             };
             dbcontext.Add(item35);
+            dbcontext.SaveChanges();
+
+            //seed Acting Dept Head
+            ActingDepartmentHead ad1 = new ActingDepartmentHead()
+            {
+                EmployeeId = employee1.Id,
+                StartDate = new DateTime(2020, 8, 14, 0, 0, 0),
+                EndDate = new DateTime(2020, 9, 30, 0, 0, 0)
+            };
+            dbcontext.Add(ad1);
             dbcontext.SaveChanges();
         }
     }

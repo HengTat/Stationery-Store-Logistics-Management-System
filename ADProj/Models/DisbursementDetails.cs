@@ -19,7 +19,7 @@ namespace ADProj.Models
         [Required]
         public int DisbursementId { get; set;  }
         [Required]
-        public string ItemId { get; set; }
+        public string InventoryItemId { get; set; }
 
         public virtual Disbursement Disbursement { get; set; }      
         public virtual InventoryItem InventoryItem { get; set; }

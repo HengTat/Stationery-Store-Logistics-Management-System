@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ADProj.DB;
+using ADProj.Services;
 
 namespace ADProj
 {
@@ -32,6 +33,8 @@ namespace ADProj
             services.AddDbContext<ADProjContext>(opt =>
                 opt.UseLazyLoadingProxies()
                 .UseSqlServer(Configuration.GetConnectionString("DbConn")));
+
+            services.AddScoped<EmployeeService>();
 
         }
 

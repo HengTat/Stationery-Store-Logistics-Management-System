@@ -16,7 +16,7 @@ namespace ADProj.Models
         [Required]
         public DateTime Date { get; set; }
         [Required]
-        public string ItemId { get; set; }
+        public string InventoryItemId { get; set; }
         [Range(1, 100000,
             ErrorMessage = "Quantity must be a positive number")]
         public int addQty { get; set; }

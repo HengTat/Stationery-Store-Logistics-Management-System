@@ -13,7 +13,7 @@ namespace ADProj.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
-        public string EmployeeId { get; set; }
+        public int EmployeeId { get; set; }
         [Required]
         public DateTime StartDate { get; set; }
         [Required]

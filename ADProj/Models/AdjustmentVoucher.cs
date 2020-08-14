@@ -14,7 +14,7 @@ namespace ADProj.Models
         [Required]
         public string EmployeeId { get;  set; }
         [Required]
-        public string ItemId { get; set; }
+        public string InventoryItemId { get; set; }
         [Required]
         public int AdjustQty {get;set;}
         [Required]

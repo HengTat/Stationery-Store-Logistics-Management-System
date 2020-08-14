@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Logic University Stationery Store Inventory System";
+    Layout = "_LoginLayout";
+}
+<h1 class="display-4" align="center">@ViewData["Title"]</h1>
+
+<h5 align="center">Please sign in below</h5>
+<br />
+<br />
+<br />
+
+<form id="loginForm" action="/Account/Login" method="POST">
+    <table align="center">
+        <tr>
+            <td>Username:</td>
+            <td><input id="username" name="username" /></td>
+        </tr>
+        <tr>
+            <td>Password:</td>
+            <td><input id="password" name="password" type="password" /></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="right"><input id="loginBtn" type="submit" value="Submit" /></td>
+        </tr>
+        <tr>
+            <td colspan="2" class="err">
+                <div id="errmsg">
+                    @if (ViewData.ContainsKey("errmsg"))
+                    {
+                        @ViewData["errmsg"];
+                    }
+                </div>
+            </td>
+        </tr>
+
+
+    </table>
+    <input id="hashPwd" name="hashPassword" type="hidden" />
+</form>

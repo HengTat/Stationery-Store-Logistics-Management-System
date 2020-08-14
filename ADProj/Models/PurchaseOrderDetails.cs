@@ -14,7 +14,7 @@ namespace ADProj.Models
         [Required]
         public int PurchaseOrderId { get; set; }
         [Required]
-        public string ItemId { get; set; }
+        public string InventoryItemId { get; set; }
         [Required]
         public string ItemCategoryId { get; set; }
         [Required]
