@@ -11,7 +11,7 @@ namespace ADProj.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public DateTime Date { get; set; }
-        public int SupplierId { get; set; }
+        public string SupplierId { get; set; }
 
         public virtual Supplier Supplier { get; set; }
     }

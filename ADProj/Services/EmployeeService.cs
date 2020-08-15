@@ -46,5 +46,37 @@ namespace ADProj.Services
             employee.Password = Crypto.Sha256(NewPassword);
             dbcontext.SaveChanges();
         }
+
+        public ActingDepartmentHead CurrentDelegate(Employee employee)
+        {
+            DateTime currentDate = DateTime.Today;
+            ActingDepartmentHead actingDepartmentHead = dbcontext.ActingDepartmentHeads.Where(x => x.Employee.DepartmentId == employee.DepartmentId && x.StartDate <= currentDate && x.EndDate >= currentDate).FirstOrDefault();
+            return actingDepartmentHead;
+        }
+
+        public void DeleteActingDepartmentHead(int id)
+        {
+            ActingDepartmentHead actingDepartmentHead = dbcontext.ActingDepartmentHeads.Where(x => x.Id == id).FirstOrDefault();
+            if (actingDepartmentHead != null)
+                dbcontext.ActingDepartmentHeads.Remove(actingDepartmentHead);
+            dbcontext.SaveChanges();
+        }
+
+        public void AddActingDepartmentHead(int employeeId, DateTime startDate, DateTime endDate)
+        {
+            ActingDepartmentHead actingDepartmentHead = new ActingDepartmentHead()
+            {
+                EmployeeId = employeeId,
+                StartDate = startDate,
+                EndDate = endDate
+            };
+            dbcontext.Add(actingDepartmentHead);
+            dbcontext.SaveChanges();
+        }
+
+        public List<Employee> DepartmentEmployeeList(Employee employee)
+        {
+            return dbcontext.Employees.Where(x => x.DepartmentId == employee.DepartmentId && x.Role == "Employee").ToList();
+        }
     }
 }

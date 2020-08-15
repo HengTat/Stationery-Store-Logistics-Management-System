@@ -1,0 +1,49 @@
+﻿@{ ViewData["Title"] = "Assign Delegate";
+    var deptEmployeeList = (List<Employee>)ViewData["deptEmployeeList"];
+    var msg = ViewData["errmsg"]; }
+
+<div align="center">
+    <h2>Assign Delegate</h2>
+    <form class="form-horizontal" action="ConfirmDelegation" method="POST" style="margin-top:40px">
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Employee Name:</label>
+            <div class="col-sm-3">
+                <select class="form-control" id="employeeId" name="employeeId" style="width:300px">
+                    @foreach (var employee in deptEmployeeList)
+                    {
+        <option value="@employee.Id">@employee.Name</option>
+}
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Start Date:</label>
+            <div class="col-sm-3">
+                <input class="form-control" type="date" id="startDate" name="startDate" style="width:300px">
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">End Date:</label>
+            <div class="col-sm-3">
+                <input class="form-control" type="date" id="endDate" name="endDate" style="width:300px">
+            </div>
+        </div>
+        <div id="errmsg" align="center">
+            <span style="color:red">
+                @if (ViewData.ContainsKey("errmsg"))
+                {
+    @ViewData["errmsg"];
+}
+            </span>
+        </div>
+        <div class="form-group">
+            <button type="button" id="cancelBtn" class="btn btn-danger" onclick="window.location.href='/home';">Cancel</button>
+            <button type="submit" id="btnSave" class="btn btn-success">Confirm</button>
+        </div>
+
+    </form>
+</div>

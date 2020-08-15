@@ -14,6 +14,12 @@ namespace ADProj.DB
         public ADProjContext(DbContextOptions<ADProjContext> options)
             : base(options) { }
 
+        protected override void OnModelCreating(ModelBuilder model)
+        {
+            model.Entity<SupplierStationery>().HasAlternateKey(model =>
+            new { model.SupplierId, model.InventoryItemId });
+        }
+
         public DbSet<ActingDepartmentHead> ActingDepartmentHeads { get; set; }
         public DbSet<AdjustmentVoucher> AdjustmentVouchers { get; set; }
         public DbSet<CollectionPoint> CollectionPoints { get; set; }

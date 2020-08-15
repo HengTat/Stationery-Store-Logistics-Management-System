@@ -1,0 +1,26 @@
+﻿@{ ViewData["Title"] = "Delegated Employee";
+    var actingHead = (ActingDepartmentHead)ViewData["currentDelegate"]; }
+
+<form method="post" style="margin-bottom:40px">
+    <div class="container" align="center">
+        <h2>Delegated Employee</h2>
+        <table class="table table-bordered" style="width:500px; margin-top:20px">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>@actingHead.Employee.Name</td>
+                    <td>@actingHead.StartDate.ToString("dd/MM/yyy")</td>
+                    <td>@actingHead.EndDate.ToString("dd/MM/yyy")</td>
+                    <td style="width:100px"><button type="submit" class="btn btn-danger btn-xs" formaction="CancelDelegation?id=@actingHead.Id">Cancel Delegation</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</form>
