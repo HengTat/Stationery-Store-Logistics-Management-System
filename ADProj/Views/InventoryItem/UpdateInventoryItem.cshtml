@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewData["Title"] = "UpdateInventoryItem";
+    List<string> catList = ViewBag.categoryList;
+    InventoryItem item = (InventoryItem)ViewData["item"];
+    var msg = ViewData["alertMsg"];
+}
+@if (msg != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@msg");
+        };
+    </script>
+}
+
+<div align="center">
+    <h2>Edit Inventory Item</h2>
+    <form class="form-horizontal" action="UpdateInvItem" method="POST" style="margin-top:40px">
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Item ID:</label>
+            <div class="col-sm-3">
+                <input class="form-control" type="text" value="@item.Id" name="id" style="width:300px" readonly>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Description:</label>
+            <div class="col-sm-3">
+                <input class="form-control" type="text" value="@item.Description" name="desc" style="width:300px">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Category:</label>
+            <div class="col-sm-3">
+                <select class="form-control" id="sel1" name="catName" value="@item.ItemCategory.Name" style="width:300px">
+                    @foreach (string catName in catList)
+                    {
+                        <option>@catName</option>
+                    }
+
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Bin:</label>
+            <div class="col-sm-3">
+                <input class="form-control" name="bin" value="@item.Bin" type="text" style="width:300px">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Qty In Stock:</label>
+            <div class="col-sm-3">
+                <input class="form-control" name="qtyInStock" value="@item.QtyInStock" type="text" style="width:300px" readonly>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Reorder Level:</label>
+            <div class="col-sm-3">
+                <input class="form-control" name="reorderLevel" value="@item.ReorderLevel" type="text" style="width:300px">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Reorder Qty:</label>
+            <div class="col-sm-3">
+                <input class="form-control" name="reorderQty" value="@item.ReorderQty" type="text" style="width:300px">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Unit of Measure:</label>
+            <div class="col-sm-3">
+                <input class="form-control" name="uom" value="@item.UOM" type="text" style="width:300px">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="button" class="btn btn-danger">Cancel</button>
+            <button type="submit" class="btn btn-success">Update</button>
+        </div>
+
+    </form>
+</div>
+

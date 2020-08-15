@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "CategoryList";
+    var catList = (List<ItemCategory>)ViewData["CatList"];
+    var msg = ViewData["alertMsg"];
+}
+@if (msg != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@msg");
+        };
+    </script>
+}
+
+<form method="post" style="margin-bottom:40px">
+    <div class="container" align="center">
+        <h2>Item Category List</h2>
+        <table class="table table-bordered" style="width:500px; margin-top:20px">
+            <thead>
+                <tr>
+                    <th>Category Name</th>
+                    <th>Action</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var cat in catList)
+                {
+                    <tr>
+                        <td>@cat.Name</td>
+                        <td style="width:100px"><button type="submit" class="btn btn-warning btn-xs" formaction="EditDeleteCategory?cmd=edit&catId=@cat.Id">Edit</button></td>
+                        <td style="width:100px"><button type="submit" class="btn btn-danger btn-xs" formaction="EditDeleteCategory?cmd=delete&catId=@cat.Id">Delete</button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</form>

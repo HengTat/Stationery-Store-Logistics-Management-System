@@ -35,6 +35,7 @@ namespace ADProj
                 .UseSqlServer(Configuration.GetConnectionString("DbConn")));
 
             services.AddScoped<EmployeeService>();
+            services.AddScoped<InventoryService>();
 
         }
 

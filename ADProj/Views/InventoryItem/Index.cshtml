@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewData["Title"] = "InventoryList";
+    var itemList = (List<InventoryItem>)ViewData["itemList"];
+    var msg = ViewData["alertMsg"];
+}
+@if (msg != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@msg");
+        };
+    </script>
+}
+
+
+<form method="post" style="margin-bottom:40px">
+    <div class="container" align="center">
+        <h2>Item Category List</h2>
+        <table class="table table-bordered" style="margin-top:20px; text-align:center">
+            <thead>
+                <tr align="center">
+                    <th style="width:70px; text-align:center">ID</th>
+                    <th style="width:250px; text-align:center">Description</th>
+                    <th style="width:100px; text-align:center">Category</th>
+                    <th style="width:50px; text-align:center">UOM</th>
+                    <th style="width:50px; text-align:center">Bin</th>
+                    <th style="width:50px; text-align:center">InStock Qty</th>
+                    <th style="width:50px; text-align:center">Reorder Level</th>
+                    <th style="width:50px; text-align:center">Reorder Qty</th>
+                    <th style="width:50px; text-align:center">Action</th>
+                    <th style="width:50px; text-align:center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in itemList)
+                {
+                    <tr>
+                        <td>@item.Id</td>
+                        <td>@item.Description</td>
+                        <td>@item.ItemCategory.Name</td>
+                        <td>@item.UOM</td>
+                        <td>@item.Bin</td>
+                        <td>@item.QtyInStock</td>
+                        <td>@item.ReorderLevel</td>
+                        <td>@item.ReorderQty</td>
+                        <td><button type="submit" class="btn btn-warning btn-xs" formaction="InventoryItem/EditDeleteItem?cmd=edit&itemId=@item.Id">Edit</button></td>
+                        <td><button type="submit" class="btn btn-danger btn-xs" formaction="InventoryItem/EditDeleteItem?cmd=delete&itemId=@item.Id">Delete</button></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</form>
+

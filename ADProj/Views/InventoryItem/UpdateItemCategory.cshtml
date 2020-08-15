@@ -1,0 +1,32 @@
+﻿
+@{
+    ViewData["Title"] = "EditItemCategory";
+    ItemCategory cat = (ItemCategory)ViewData["category"];
+    var msg = ViewData["alertMsg"];
+}
+@if (msg != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@msg");
+        };
+    </script>
+}
+
+<div align="center">
+    <h2>Edit Item Category</h2>
+    <form class="form-horizontal" action="UpdateCategory" method="POST" style="margin-top:40px">
+        <input type="hidden" name="id" value="@cat.Id">
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Category Name:</label>
+            <div class="col-sm-3">
+                <input class="form-control" type="text" name="categoryName" value="@cat.Name" style="width:300px">
+            </div>
+        </div>
+        <div class="form-group">
+            <button type="button" class="btn btn-danger">Cancel</button>
+            <button type="submit" class="btn btn-success">Update</button>
+        </div>
+    </form>
+</div>
+

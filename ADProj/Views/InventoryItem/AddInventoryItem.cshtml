@@ -1,0 +1,92 @@
+﻿
+@{
+    ViewData["Title"] = "AddInventoryItem";
+    List<string> catList = ViewBag.categoryList;
+    var msg = ViewData["alertMsg"];
+}
+
+@if (msg != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@msg");
+        };
+    </script>
+}
+
+<div align="center">
+    <h2>New Inventory Item</h2>
+    <form class="form-horizontal" action="SaveInventoryItem" method="POST" style="margin-top:40px">
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Item ID:</label>
+            <div class="col-sm-3">
+                <input class="form-control" type="text" name="id" style="width:300px">
+                
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Description:</label>
+            <div class="col-sm-3">
+                <input class="form-control" type="text" name="desc" style="width:300px">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Category:</label>
+            <div class="col-sm-3">
+                <select class="form-control" id="sel1" name="catName" style="width:300px">
+                    @foreach (string catName in catList)
+                    {
+                        <option>@catName</option>
+                    }
+
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Bin:</label>
+            <div class="col-sm-3">
+                <input class="form-control" name="bin" type="text" style="width:300px">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Qty In Stock:</label>
+            <div class="col-sm-3">
+                <input class="form-control" id="qtyInstock" name="qtyInStock" type="text" style="width:300px">
+                <span id="instockerror" style="float:left; color:red"></span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Reorder Level:</label>
+            <div class="col-sm-3">
+                <input class="form-control" name="reorderLevel" type="text" style="width:300px">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Reorder Qty:</label>
+            <div class="col-sm-3">
+                <input class="form-control" name="reorderQty" type="text" style="width:300px">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Unit of Measure:</label>
+            <div class="col-sm-3">
+                <input class="form-control" name="uom" type="text" style="width:300px">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="button" class="btn btn-danger">Cancel</button>
+            <button type="submit" id="btnSave" class="btn btn-success">Save</button>
+        </div>
+
+    </form>
+</div>
+
