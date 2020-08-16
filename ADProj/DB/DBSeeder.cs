@@ -17,7 +17,7 @@ namespace ADProj.DB
                 Time = "09 30 am",
             };
             dbcontext.Add(cp1);
-            
+
             dbcontext.SaveChanges();
 
             //Department seeder
@@ -28,6 +28,14 @@ namespace ADProj.DB
                 CollectionPointId = cp1.Id
             };
             dbcontext.Add(department1);
+
+            Department department2 = new Department()
+            {
+                Id = "STA",
+                Name = "Stationery Store",
+                CollectionPointId = cp1.Id //dummy collection point for Stationery Store
+            };
+            dbcontext.Add(department2);
 
             dbcontext.SaveChanges();
 
@@ -48,7 +56,7 @@ namespace ADProj.DB
             {
 
                 DepartmentId = department1.Id,
-                Role = "Manager",
+                Role = "Head",
                 Name = "David",
                 Email = "David@gmail.com",
                 Password = Services.Crypto.Sha256("Password")
@@ -70,12 +78,45 @@ namespace ADProj.DB
             {
 
                 DepartmentId = department1.Id,
-                Role = "Employee",
+                Role = "Representative",
                 Name = "Stephanie",
                 Email = "Stephanie@gmail.com",
                 Password = Services.Crypto.Sha256("Password")
             };
             dbcontext.Add(employee4);
+
+            Employee employee5 = new Employee()
+            {
+
+                DepartmentId = department2.Id,
+                Role = "Clerk",
+                Name = "Esther",
+                Email = "Esther@gmail.com",
+                Password = Services.Crypto.Sha256("Password")
+            };
+            dbcontext.Add(employee5);
+
+            Employee employee6 = new Employee()
+            {
+
+                DepartmentId = department2.Id,
+                Role = "Supervisor",
+                Name = "MQ",
+                Email = "MQ@gmail.com",
+                Password = Services.Crypto.Sha256("Password")
+            };
+            dbcontext.Add(employee6);
+
+            Employee employee7 = new Employee()
+            {
+
+                DepartmentId = department2.Id,
+                Role = "Manager",
+                Name = "Koong",
+                Email = "Koong@gmail.com",
+                Password = Services.Crypto.Sha256("Password")
+            };
+            dbcontext.Add(employee7);
 
             dbcontext.SaveChanges();
 
@@ -133,14 +174,14 @@ namespace ADProj.DB
             //SupplierList seeder
             Supplier s1 = new Supplier()
             {
-             Id = "ALPHA" ,
-             Name="ALPHA Office Supplies",
-             ContactName="Ms Irene Tan",
+                Id = "ALPHA",
+                Name = "ALPHA Office Supplies",
+                ContactName = "Ms Irene Tan",
                 PhoneNo = "461 9920",
-                FaxNo ="461 2238",
-             Address= "Blk 1128 Ang Mo Kio Industrial Park #02-1108 Ang Mo Kio Street 62 Singapore 622262",
-             GSTReg= "MR-8500440-2"
-             };
+                FaxNo = "461 2238",
+                Address = "Blk 1128 Ang Mo Kio Industrial Park #02-1108 Ang Mo Kio Street 62 Singapore 622262",
+                GSTReg = "MR-8500440-2"
+            };
             dbcontext.Add(s1);
 
             Supplier s2 = new Supplier()
@@ -148,7 +189,7 @@ namespace ADProj.DB
                 Id = "CHEP",
                 Name = "Cheap Stationer",
                 ContactName = "Mr Soh Kway Koh",
-                PhoneNo="354 3234",
+                PhoneNo = "354 3234",
                 FaxNo = "354 3234",
                 Address = "Blk 34 Clementi Road #07-02 Ban Ban Soh Building Singapore 110525",
                 GSTReg = "-"
@@ -1026,5 +1067,5 @@ namespace ADProj.DB
 
         }
     }
-    
+
 }

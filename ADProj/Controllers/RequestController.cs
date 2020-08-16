@@ -87,9 +87,7 @@ namespace ADProj.Controllers
 
         public IActionResult ViewMyRequestHistory()
         {
-            //replace after login created
-            //int CurrentId = HttpContext.Session.GetString("Userid");            
-            int CurrentId = 3;
+            int CurrentId = int.Parse(HttpContext.Session.GetString("id"));
             List<Request> ListofRequest = rs.FindRequestbyUserId(CurrentId);
             return View(ListofRequest);
         }
@@ -103,9 +101,7 @@ namespace ADProj.Controllers
 
         public IActionResult Requestpendingapproval()
         {
-            //replace after login created
-            //int CurrentId = HttpContext.Session.GetString("Userid");            
-            int CurrentId = 2;
+            int CurrentId = int.Parse(HttpContext.Session.GetString("id"));
             List<Request> Listofrequestpendingapproval = rs.FindPendingRequestByDepartmenthead(CurrentId);
             return View(Listofrequestpendingapproval);
         }

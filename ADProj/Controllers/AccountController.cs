@@ -108,13 +108,14 @@ namespace ADProj.Controllers
             return View("CurrentDelegate");
         }
 
-        public IActionResult CancelDelegation([FromServices] EmployeeService es, int id)
+        public IActionResult CancelDelegation([FromServices] EmployeeService es, [FromServices] Emailservice ems, int id)
         {
             es.DeleteActingDepartmentHead(id);
+            ems.sendDelegateCancellationEmail(id);
             return RedirectToAction("Index", "Home");
         }
 
-        public IActionResult ConfirmDelegation([FromServices] EmployeeService es, int employeeId, DateTime startDate, DateTime endDate)
+        public IActionResult ConfirmDelegation([FromServices] EmployeeService es, [FromServices] Emailservice ems, int employeeId, DateTime startDate, DateTime endDate)
         {
             //check dates
             if (endDate < startDate)
@@ -128,6 +129,7 @@ namespace ADProj.Controllers
                 return RedirectToAction("Delegate");
             }
             es.AddActingDepartmentHead(employeeId, startDate, endDate);
+            ems.sendDelegateAppointmentEmail(employeeId, startDate, endDate);
             return RedirectToAction("Index", "Home");
         }
     }

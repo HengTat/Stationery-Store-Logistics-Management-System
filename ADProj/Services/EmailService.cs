@@ -94,7 +94,7 @@ namespace ADProj.Services
         public void sendlowstockemailnotifitcation(string id)
         {
             InventoryItem item = dbcontext.InventoryItems.Find(id);
-            int stocklevel = item.QtyInStock - item.ReorderQty;
+            int stocklevel = item.QtyInStock - item.RequestQty;
 
             SmtpClient smtpClient = setupsmtpclient();
             MailMessage mail = new MailMessage();
@@ -105,6 +105,36 @@ namespace ADProj.Services
             smtpClient.Send(mail);
         }
 
+        //EMAIL WHEN DELEGATE ASSIGNED
+        public void sendDelegateAppointmentEmail(int id, DateTime startDate, DateTime endDate)
+        {
+            string employeeemail = dbcontext.Employees.Find(id).Email;
 
+            SmtpClient smtpClient = setupsmtpclient();
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress("team9springboot@gmail.com", "team9");
+            mail.To.Add(new MailAddress("team9employee@gmail.com"));
+            //remove comment if employee has correct email
+            //mail.To.Add(new MailAddress(employeeemail));
+            mail.Subject = "Appointment as acting approving authority";
+            mail.Body = "You has been appointed as the Acting Department Head from " + startDate.ToString() + " to " + endDate.ToString() + " .";
+            smtpClient.Send(mail);
+        }
+
+        //EMAIL WHEN DELEGATE CANCELLED
+        public void sendDelegateCancellationEmail(int id)
+        {
+            string employeeemail = dbcontext.Employees.Find(id).Email;
+
+            SmtpClient smtpClient = setupsmtpclient();
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress("team9springboot@gmail.com", "team9");
+            mail.To.Add(new MailAddress("team9employee@gmail.com"));
+            //remove comment if employee has correct email
+            //mail.To.Add(new MailAddress(employeeemail));
+            mail.Subject = "Cancellation of approving authority appointment";
+            mail.Body = "The department head has rescinded your previous Acting Department Head appointment.";
+            smtpClient.Send(mail);
+        }
     }
 }

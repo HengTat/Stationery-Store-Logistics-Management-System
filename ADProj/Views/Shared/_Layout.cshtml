@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@{ string role = (string)Context.Session.GetString("role"); }
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -12,25 +14,128 @@
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown">Inventory<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a asp-controller="InventoryItem" asp-action="AddInventoryItem">Add New Item</a></li>
-                        <li><a asp-controller="InventoryItem" asp-action="Index">Inventory Item List</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown">Category<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a asp-controller="InventoryItem" asp-action="AddItemCategory">Add New Category</a></li>
-                        <li><a asp-controller="InventoryItem" asp-action="CategoryList">Category List</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Page 2</a></li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="AdjustmentVoucher" asp-action="Index">AdjustmentVoucher</a>
-                </li>
+                @{ if (role == "Clerk")
+                    {
+                        <li class="active"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">Inventory<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-controller="InventoryItem" asp-action="AddInventoryItem">Add New Item</a></li>
+                                <li><a asp-controller="InventoryItem" asp-action="Index">Inventory Item List</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">Category<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-controller="InventoryItem" asp-action="AddItemCategory">Add New Category</a></li>
+                                <li><a asp-controller="InventoryItem" asp-action="CategoryList">Category List</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Supplier</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Request" asp-action="Outstanding">Outstanding Requests</a>
+                        </li>
+                        <li><a href="#">Retrieval</a></li>
+                        <li><a href="#">Disbursement</a></li>
+                        <li><a href="#">Order</a></li>
+                    }
+                    else if (role == "Supervisor")
+                    {
+                        <li class="active"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">Inventory<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-controller="InventoryItem" asp-action="AddInventoryItem">Add New Item</a></li>
+                                <li><a asp-controller="InventoryItem" asp-action="Index">Inventory Item List</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">Category<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-controller="InventoryItem" asp-action="AddItemCategory">Add New Category</a></li>
+                                <li><a asp-controller="InventoryItem" asp-action="CategoryList">Category List</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Supplier</a></li>
+                        <li><a href="#">Department</a></li>
+                        <li><a href="#">Trend Analysis</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="AdjustmentVoucher" asp-action="Index">Adjustment Voucher</a>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">...<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-controller="Request" asp-action="Outstanding">Outstanding Requests</a></li>
+                                <li><a href="#">Disbursement</a></li>
+                                <li><a href="#">Retrieval</a></li>
+                                <li><a href="#">Order</a></li>
+                            </ul>
+                        </li>
+                    }
+                    else if (role == "Manager")
+                    {
+                        <li class="active"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">Inventory<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-controller="InventoryItem" asp-action="AddInventoryItem">Add New Item</a></li>
+                                <li><a asp-controller="InventoryItem" asp-action="Index">Inventory Item List</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">Category<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-controller="InventoryItem" asp-action="AddItemCategory">Add New Category</a></li>
+                                <li><a asp-controller="InventoryItem" asp-action="CategoryList">Category List</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Supplier</a></li>
+                        <li><a href="#">Department</a></li>
+                        <li><a href="#">Trend Analysis</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="AdjustmentVoucher" asp-action="Index">Adjustment Voucher</a>
+                        </li>
+                    }
+                    else if (role == "Head")
+                    {
+                        <li class="active"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Request" asp-action="Requestpendingapproval">Approve Request</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Delegate">Delegate Authority</a>
+                        </li>
+                        <li><a href="#">Maintain Department Representative</a></li>
+                    }
+                    else if (role == "ActingHead")
+                    {
+                        <li class="active"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Request" asp-action="Requestpendingapproval">Approve Request</a>
+                        </li>
+                        <li><a href="#">Maintain Department Representative</a></li>
+                    }
+                    else if (role == "Representative")
+                    {
+                        <li class="active"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Request" asp-action="Index">Raise Request</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Request" asp-action="ViewMyRequestHistory">View Request History</a>
+                        </li>
+                        <li><a href="#">Set Collection Point</a></li>
+                    }
+                    else
+                    {
+                        <li class="active"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Request" asp-action="Index">Raise Request</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Request" asp-action="ViewMyRequestHistory">View Request History</a>
+                        </li>
+                    } }
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a asp-controller="Account" asp-action="PasswordChange"><span class="glyphicon glyphicon-lock"></span> Change Password</a></li>
@@ -43,10 +148,9 @@
             @RenderBody()
         </main>
     </div>
-
     <div th:fragment="footer" class="footer" style="position: fixed;left:0;bottom: 0;width: 100%; background-color: black;
-  color: white;
-  text-align: center;">
+         color: white;
+         text-align: center;">
         <p><small>Logic University Stationery Store Inventory System</small></p>
     </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
