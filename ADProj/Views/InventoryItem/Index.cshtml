@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "InventoryList";
+    ViewData["Title"] = "Inventory List";
     var itemList = (List<InventoryItem>)ViewData["itemList"];
     var msg = ViewData["alertMsg"];
 }
@@ -30,6 +30,7 @@
                     <th style="width:50px; text-align:center">Reorder Qty</th>
                     <th style="width:50px; text-align:center">Action</th>
                     <th style="width:50px; text-align:center">Action</th>
+                    <th style="width:50px; text-align:center">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,6 +47,7 @@
                         <td>@item.ReorderQty</td>
                         <td><button type="submit" class="btn btn-warning btn-xs" formaction="InventoryItem/EditDeleteItem?cmd=edit&itemId=@item.Id">Edit</button></td>
                         <td><button type="submit" class="btn btn-danger btn-xs" formaction="InventoryItem/EditDeleteItem?cmd=delete&itemId=@item.Id">Delete</button></td>
+                        <td><button type="submit" class="btn btn-primary btn-xs" formaction="InventoryItem/EditDeleteItem?cmd=manage&itemId=@item.Id">Manage</button></td>
                     </tr>
                 }
 

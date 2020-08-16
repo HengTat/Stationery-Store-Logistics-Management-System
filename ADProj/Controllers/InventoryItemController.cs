@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ADProj.Models;
 using ADProj.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ADProj.Controllers
@@ -122,6 +123,8 @@ namespace ADProj.Controllers
 
         public IActionResult EditDeleteCategory(string cmd, int catId)
         {
+            ViewData["alertMsg"] = TempData["alertMsg"];
+
             if (cmd == "delete")
             {
                 invService.DeleteCategoryById(catId);
@@ -143,17 +146,21 @@ namespace ADProj.Controllers
             {
                 invService.UpdateCategoryById(id, categoryName);
                 TempData["alertMsg"] = "Updated successfully!";
+                return RedirectToAction("CategoryList");
             }
             else
             {
                 TempData["alertMsg"] = "Please enter category name!";
+                return RedirectToAction("EditDeleteCategory", new { cmd = "edit", catId = id });
             }
             
-            return RedirectToAction("CategoryList");
+            
         }
 
         public IActionResult EditDeleteItem(string cmd, string itemId)
         {
+            ViewData["alertMsg"] = TempData["alertMsg"];
+
             if (cmd == "delete")
             {
                 invService.DeleteItemById(itemId);
@@ -174,6 +181,12 @@ namespace ADProj.Controllers
                 ViewData["item"] = item;
                 return View("UpdateInventoryItem");
             }
+            if (cmd == "manage")
+            {
+                InventoryItem item = invService.GetItemById(itemId);
+                ViewData["item"] = item;
+                return View("ManageInventoryItem");
+            }
             return RedirectToAction("Index");
         }
 
@@ -186,31 +199,59 @@ namespace ADProj.Controllers
             if (!(id != null && desc != null && catName != null && bin != null && qtyInStock != null && reorderLevel != null && reorderQty != null && uom != null))
             {
                 TempData["alertMsg"] = "Please enter all information!";
-                return RedirectToAction("Index");
+                return RedirectToAction("EditDeleteItem", new { cmd = "edit", itemId = id });
             }
             else if (!isNum1 || !isNum2 || !isNum3)
             {
                 TempData["alertMsg"] = "Quantity must be number!";
-                return RedirectToAction("Index");
+                return RedirectToAction("EditDeleteItem", new { cmd = "edit", itemId = id });
             }
             else if (stockQty < 0)
             {
                 TempData["alertMsg"] = "Quantity in stock must not be negative number!";
-                return RedirectToAction("Index");
+                return RedirectToAction("EditDeleteItem", new { cmd = "edit", itemId = id });
             }
             else if (reorderLev < 0)
             {
                 TempData["alertMsg"] = "Reorder level must not be negative number!";
-                return RedirectToAction("Index");
+                return RedirectToAction("EditDeleteItem", new { cmd = "edit", itemId = id });
             }
             else if (orderQty < 0)
             {
                 TempData["alertMsg"] = "Reorder quantity must not be negative number!";
-                return RedirectToAction("Index");
+                return RedirectToAction("EditDeleteItem", new { cmd = "edit", itemId = id });
             }
             else
             {
                 invService.UpdateItemById(id, desc, catName, bin, stockQty, reorderLev, orderQty, uom);
+                TempData["alertMsg"] = "updated successfully!";
+                return RedirectToAction("Index");
+            }
+        }
+
+        public IActionResult ManageInvItem(string itemId, string inputupdateQty)
+        {
+            bool isNum = int.TryParse(inputupdateQty, out int updateQty);
+
+            if (!(inputupdateQty != null))
+            {
+                TempData["alertMsg"] = "Please enter update quantity!";
+                return RedirectToAction("EditDeleteItem",new { cmd="manage",itemId=itemId});
+            }
+            else if (!isNum)
+            {
+                TempData["alertMsg"] = "Update quantity must be number!";
+                return RedirectToAction("EditDeleteItem", new { cmd = "manage", itemId = itemId });
+            }
+            else if (updateQty <= 0)
+            {
+                TempData["alertMsg"] = "Update quantity must be greater than 0!";
+                return RedirectToAction("EditDeleteItem", new { cmd = "manage", itemId = itemId });
+            }
+            else
+            {
+                int empId = Convert.ToInt32(HttpContext.Session.GetString("id"));
+                invService.CreateInvMgmt(itemId, updateQty, empId);
                 TempData["alertMsg"] = "Saved successfully!";
                 return RedirectToAction("Index");
             }

@@ -115,5 +115,21 @@ namespace ADProj.Services
         {
             return adProjContext.InventoryItems.Find(id);
         }
+
+        public void CreateInvMgmt(string itemId, int updateQty, int empId)
+        {
+            InventoryItem item = GetItemById(itemId);
+            int currQty = item.QtyInStock;
+            InventoryManagement invMgmt = new InventoryManagement();
+            invMgmt.EmployeeId = empId;
+            invMgmt.Date = DateTime.Now;
+            invMgmt.InventoryItemId = itemId;
+            invMgmt.addQty = updateQty;
+            adProjContext.Add(invMgmt);
+
+            item.QtyInStock = currQty + updateQty;
+            adProjContext.SaveChanges();
+            
+        }
     }
 }
