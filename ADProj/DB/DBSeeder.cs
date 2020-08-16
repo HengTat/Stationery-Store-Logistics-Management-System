@@ -20,7 +20,10 @@ namespace ADProj.DB
 
             dbcontext.SaveChanges();
 
-            //Department seeder
+
+            //commented out department + employee seeder and add new ones below
+
+            /*//Department seeder
             Department department1 = new Department()
             {
                 Id = "SCI",
@@ -118,10 +121,214 @@ namespace ADProj.DB
             };
             dbcontext.Add(employee7);
 
+            dbcontext.SaveChanges();*/
+
+            Department department1 = new Department()
+            {
+                Id = "SCI",
+                Name = "Science",
+                CollectionPointId = cp1.Id
+
+            };
+            dbcontext.Add(department1);
+
+            Department department2 = new Department()
+            {
+                Id = "ENGL",
+                Name = "English Dept",
+                CollectionPointId = cp1.Id
+            };
+            dbcontext.Add(department2);
+
+            Department department3 = new Department()
+            {
+                Id = "CPSC",
+                Name = "Computer Science",
+                CollectionPointId = cp1.Id
+            };
+            dbcontext.Add(department3);
+
+            Department department4 = new Department()
+            {
+                Id = "COMM",
+                Name = "Commerce Dept",
+                CollectionPointId = cp1.Id
+            };
+            dbcontext.Add(department4);
+
+            dbcontext.SaveChanges();
+
+            Employee employee1 = new Employee()
+            {
+
+                DepartmentId = department1.Id,
+                Role = EmployeeRole.EMPLOYEE,
+                Name = "John",
+                Email = "John@gmail.com",
+                Password = Services.Crypto.Sha256("Password")
+            };
+            dbcontext.Add(employee1);
+
+            Employee employee2 = new Employee()
+            {
+
+                DepartmentId = department1.Id,
+                Role = EmployeeRole.EMPLOYEE,
+                Name = "David",
+                Email = "David@gmail.com",
+                Password = Services.Crypto.Sha256("Password")
+            };
+            dbcontext.Add(employee2);
+
+            Employee employee3 = new Employee()
+            {
+
+                DepartmentId = department4.Id,
+                Role = EmployeeRole.STORECLERK,
+                Name = "Janice",
+                Email = "Janice@gmail.com",
+                Password = Services.Crypto.Sha256("Password")
+            };
+            dbcontext.Add(employee3);
+
+            Employee employee4 = new Employee()
+            {
+
+                DepartmentId = department1.Id,
+                Role = EmployeeRole.DEPTHEAD,
+                Name = "Stephanie",
+                Email = "Stephanie@gmail.com",
+                Password = Services.Crypto.Sha256("Password")
+            };
+            dbcontext.Add(employee4);
+
+            Employee employee5 = new Employee()
+            {
+
+                DepartmentId = department2.Id,
+                Role = EmployeeRole.DEPTHEAD,
+                Name = "Edison",
+                Email = "Edison@gmail.com",
+                Password = Services.Crypto.Sha256("Password")
+            };
+            dbcontext.Add(employee5);
+
+            Employee employee6 = new Employee()
+            {
+
+                DepartmentId = department3.Id,
+                Role = EmployeeRole.DEPTHEAD,
+                Name = "Johnson",
+                Email = "Johnson@gmail.com",
+                Password = Services.Crypto.Sha256("Password")
+            };
+            dbcontext.Add(employee6);
+
+            Employee employee7 = new Employee()
+            {
+
+                DepartmentId = department1.Id,
+                Role = EmployeeRole.DEPTREP,
+                Name = "Cornie",
+                Email = "Cornie@gmail.com",
+                Password = Services.Crypto.Sha256("Password")
+            };
+            dbcontext.Add(employee7);
+
+            Employee employee8 = new Employee()
+            {
+
+                DepartmentId = department2.Id,
+                Role = EmployeeRole.DEPTREP,
+                Name = "Cody",
+                Email = "Cody@gmail.com",
+                Password = Services.Crypto.Sha256("Password")
+            };
+            dbcontext.Add(employee8);
+
+            Employee employee9 = new Employee()
+            {
+
+                DepartmentId = department3.Id,
+                Role = EmployeeRole.DEPTREP,
+                Name = "Cashiew",
+                Email = "Cashiew@gmail.com",
+                Password = Services.Crypto.Sha256("Password")
+            };
+
+            dbcontext.Add(employee9);
+            dbcontext.SaveChanges();
+
+            cp1.EmployeeId = employee3.Id;
+            department1.DepartmentHeadId = employee4.Id;
+            department2.DepartmentHeadId = employee5.Id;
+            department3.DepartmentHeadId = employee6.Id;
+            department1.DepartmentRepId = employee7.Id;
+            department2.DepartmentRepId = employee8.Id;
+            department3.DepartmentRepId = employee9.Id;
+            dbcontext.Update(department1);
+            dbcontext.Update(department2);
+            dbcontext.Update(department3);
+            dbcontext.Update(department4);
+            // dbcontext.Update(department5);
+            // dbcontext.Update(department6);
+            dbcontext.SaveChanges();
+
+            // seed 2 more store clerks: 
+            Employee employee10 = new Employee()
+            {
+
+                DepartmentId = department4.Id,
+                Role = EmployeeRole.STORECLERK,
+                Name = "clerk2",
+                Email = "clerk2@gmail.com",
+                Password = Services.Crypto.Sha256("Password")
+            };
+            dbcontext.Add(employee10);
+            dbcontext.SaveChanges();
+
+            Employee employee11 = new Employee()
+            {
+
+                DepartmentId = department4.Id,
+                Role = EmployeeRole.STORECLERK,
+                Name = "clerk3",
+                Email = "clerk3@gmail.com",
+                Password = Services.Crypto.Sha256("Password")
+            };
+            dbcontext.Add(employee11);
+            dbcontext.SaveChanges();
+
+            // seed Store's Head and Store's rep: 
+            Employee employee12 = new Employee()
+            {
+
+                DepartmentId = department4.Id,
+                Role = EmployeeRole.STORESUPERVISOR,
+                Name = "Storesup",
+                Email = "storesup@gmail.com",
+                Password = Services.Crypto.Sha256("Password")
+            };
+            dbcontext.Add(employee12);
+            dbcontext.SaveChanges();
+
+            Employee employee13 = new Employee()
+            {
+
+                DepartmentId = department4.Id,
+                Role = EmployeeRole.STOREMANAGER,
+                Name = "Storemanager",
+                Email = "storemanager@gmail.com",
+                Password = Services.Crypto.Sha256("Password")
+            };
+            dbcontext.Add(employee13);
+            dbcontext.SaveChanges();
+
+            department4.DepartmentHeadId = employee13.Id;
+            department4.DepartmentRepId = employee12.Id;
             dbcontext.SaveChanges();
 
             //collectionpoint seeder
-
 
 
             CollectionPoint cp2 = new CollectionPoint()

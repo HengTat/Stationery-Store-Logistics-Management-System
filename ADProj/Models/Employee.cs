@@ -23,6 +23,10 @@ namespace ADProj.Models
         public string Password { get; set; }
 
         public virtual Department Department { get; set;  }
-
+        public virtual ActingDepartmentHead ActingDepartmentHead { get; set; }
+        public Boolean isActingDepartmentHead()
+        {
+            return ActingDepartmentHead != null && ActingDepartmentHead.EndDate > new DateTime();
+        }
     }
 }

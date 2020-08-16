@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ADProj.DB;
+using ADProj.Enums;
 using ADProj.Models;
 
 namespace ADProj.Services
@@ -16,13 +17,30 @@ namespace ADProj.Services
             this.dbcontext = dbcontext;
         }
 
+        public List<Employee> FindAllEmployeesByDepartment(string DeptId)
+        {
+            List<Employee> employees = dbcontext.Employees.Where(x => x.DepartmentId == DeptId).ToList();
+            return employees;
+        }
+
+        public Employee GetDeptRepByDeptId(string DeptId)
+        {
+            Employee deptrep = dbcontext.Employees.Where(x => x.DepartmentId == DeptId && x.Role == EmployeeRole.DEPTREP).FirstOrDefault();
+            return deptrep;
+        }
+
+        public List<Employee> GetAllClerks()
+        {
+            return dbcontext.Employees.Where(x => x.Role == EmployeeRole.STORECLERK).ToList();
+        }
+
         public Employee GetEmployee(string email)
         {
             Employee employee = dbcontext.Employees.Where(x => x.Email == email).FirstOrDefault();
             return employee;
         }
 
-        public Employee GetEmployee2(int employeeId)
+        public Employee GetEmployeeById(int employeeId)
         {
             Employee employee = dbcontext.Employees.Where(x => x.Id == employeeId).FirstOrDefault();
             return employee;

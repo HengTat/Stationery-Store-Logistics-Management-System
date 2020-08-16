@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewData["Title"] = "Update Collection Point";
+    List<Employee> clerkList = (List<Employee>)ViewData["clerkList"];
+    CollectionPoint cpToEdit = (CollectionPoint)ViewData["cpToEdit"];
+    var msg = ViewData["alertMsg"];
+}
+
+@if (msg != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@msg");
+        };
+    </script>
+}
+
+
+
+<div align="center">
+    <h1> Update Collection Point </h1>
+    <form class="form-horizontal" id="UpdateCollectionPointForm" action="UpdateCollectionPoint" method="post">
+        <input name="cpId" value="@cpToEdit.Id" type="hidden" />
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Name: </label>
+            <div class="col-sm-3">
+                <input class="form-control" type="text" value="@cpToEdit.Name" name="name">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Time: </label>
+            <div class="col-sm-3">
+                <input class="form-control" type="text" value="@cpToEdit.Time" name="time">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Store Clerk: </label>
+            <div class="col-sm-3">
+                <select class="form-control" type="text" name="clerkId">
+                    @foreach (Employee clerk in clerkList)
+                    {
+                        @if (clerk.Id == cpToEdit.EmployeeId)
+                        {
+                            <option value="@clerk.Id" selected> @clerk.Name</option>
+                        }
+                        else
+                        {
+                            <option value="@clerk.Id"> @clerk.Name</option>
+                        }
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <a href="/CollectionPoint/Index"><button type="button" class="btn btn-danger">Cancel</button></a>
+            <button type="submit" id="btnSave" class="btn btn-success">Save</button>
+        </div>
+    </form>
+</div>

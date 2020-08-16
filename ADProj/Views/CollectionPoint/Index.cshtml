@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "Collection Points";
+    List<CollectionPoint> cplist = (List<CollectionPoint>)ViewData["cplist"];
+    var msg = ViewData["alertMsg"];
+}
+
+@if (msg != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@msg");
+        };
+    </script>
+}
+
+
+<a href="/CollectionPoint/AddCollectionPoint"><button type="button" class="btn btn-success">Add New Collection Point</button></a>
+<div align="center">
+    <h1> Collection Points </h1>
+
+    <br />
+    <br />
+    <form id="CollectionPointListForm" method="post">
+        <table align="center">
+            <thead>
+                <tr align="center">
+                    <th>Collection Point</th>
+                    <th>Collection Time</th>
+                    <th>Store Clerk</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (CollectionPoint cp in cplist)
+                {
+                    <tr>
+                        <td>@cp.Name</td>
+                        <td>@cp.Time</td>
+                        <td>@cp.Employee.Name</td>
+                        <td><button type="submit" class="btn btn-warning btn-xs" formaction="/CollectionPoint/EditCollectionPoint?cpId=@cp.Id">Edit</button></td>
+                        <td><button type="submit" class="btn btn-danger btn-xs" formaction="/CollectionPoint/DeleteCollectionPoint?cpId=@cp.Id">Delete</button></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </form>
+</div>

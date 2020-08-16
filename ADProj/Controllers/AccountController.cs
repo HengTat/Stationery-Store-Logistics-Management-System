@@ -76,7 +76,7 @@ namespace ADProj.Controllers
         public IActionResult ChangePassword([FromServices] EmployeeService es, string hashPassword, string newPassword)
         {
             int employeeId = int.Parse(HttpContext.Session.GetString("id"));
-            Employee employee = es.GetEmployee2(employeeId);
+            Employee employee = es.GetEmployeeById(employeeId);
             bool checkPW = es.PasswordCheck(employee, hashPassword);
             if (hashPassword != null && newPassword != null && checkPW == true)
             {
@@ -92,7 +92,7 @@ namespace ADProj.Controllers
         public IActionResult Delegate([FromServices] EmployeeService es)
         {
             int employeeId = int.Parse(HttpContext.Session.GetString("id"));
-            Employee employee = es.GetEmployee2(employeeId);
+            Employee employee = es.GetEmployeeById(employeeId);
             ActingDepartmentHead currentDelegate = es.CurrentDelegate(employee);
             if (currentDelegate == null)
             {

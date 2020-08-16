@@ -1,0 +1,40 @@
+﻿@{
+    ViewData["Title"] = "Maintain Department Representative";
+    List<Employee> employees = (List<Employee>)ViewData["emplist"];
+    Employee currentDeptRep = (Employee)ViewData["currentDeptRep"];
+    Employee deptHead = (Employee)ViewData["deptHead"];
+}
+
+<div class="text-center"
+    <h1>Maintain Department Representative</h1>
+</div>
+
+<form id="maintainDepRepForm" action="/DepartmentHead/MaintainDepartmentRep" method="post">
+    <div class="form-group">
+        <label class="col-sm-5 control-label">Employee Name: </label>
+        <div class="col-sm-3">
+            <select class="form-control" type="text" name="deptRepId">
+                @foreach (Employee employee in employees)
+                {
+                    @if (employee.Id == currentDeptRep.Id)
+                    {
+                        <option value="@employee.Id" selected>@employee.Name</option>
+
+                    }
+                    else if (employee.Id != deptHead.Id && !employee.isActingDepartmentHead())
+                    {
+                        <option value="@employee.Id">@employee.Name</option>
+
+                    }
+                }
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <a href="/" ><button type="button" class="btn btn-danger">Cancel</button></a>
+        <button type="submit" id="btnSave" class="btn btn-success">Save</button>
+    </div>
+</form>
+
+
+
