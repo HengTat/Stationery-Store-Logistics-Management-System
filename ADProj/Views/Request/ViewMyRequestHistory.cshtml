@@ -1,0 +1,73 @@
+﻿@model IEnumerable<ADProj.Models.Request>
+
+@{
+    ViewData["Title"] = "ViewMyRequestHistory";
+}
+
+<div align="center">
+    <h1>ViewMyRequestHistory</h1>
+
+
+    <table class="table">
+        <thead>
+            <tr style="background-color:lightgrey">
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.EmployeeId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateRequested)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Remarks)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Comments)
+                </th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmployeeId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateRequested)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Remarks)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comments)
+                    </td>
+
+                    @{
+                        string id = item.Id.ToString();
+                        string viewdetailurl = "/request/ViewMyRequestHistoryDetail/" + id;
+                    }
+
+                    <td>
+                        <form action=@viewdetailurl>
+                            <input type="submit" value="View Details >" />
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ADProj.Enums;
 using ADProj.Models;
 
 namespace ADProj.DB
@@ -884,6 +885,143 @@ namespace ADProj.DB
                 QtyRequested = 20
             };
             dbcontext.Add(rqDet4);
+            dbcontext.SaveChanges();
+
+            // Request seeder
+            Request r1 = new Request()
+            {
+                EmployeeId = 3,
+                DateRequested = new DateTime(2020, 08, 05),
+                Status = Status.PendingApproval,
+                Remarks = "need more pens",
+            };
+
+            dbcontext.Add(r1);
+
+            Request r2 = new Request()
+            {
+                EmployeeId = 3,
+                DateRequested = new DateTime(2020, 08, 11),
+                Status = Status.PendingApproval,
+                Remarks = "need more files",
+            };
+            dbcontext.Add(r2);
+
+            Request r3 = new Request()
+            {
+                EmployeeId = 3,
+                DateRequested = new DateTime(2020, 08, 07),
+                Status = Status.PendingApproval,
+                Remarks = "alot of clips",
+            };
+            dbcontext.Add(r3);
+
+            Request r4 = new Request()
+            {
+                EmployeeId = 3,
+                DateRequested = new DateTime(2020, 06, 12),
+                Status = Status.PendingApproval,
+                Remarks = "Rulers",
+            };
+            dbcontext.Add(r4);
+
+            Request r5 = new Request()
+            {
+                EmployeeId = 3,
+                DateRequested = new DateTime(2019, 06, 12),
+                Status = Status.PendingApproval,
+                Remarks = "scotch tape",
+            };
+            dbcontext.Add(r5);
+
+
+            dbcontext.SaveChanges();
+            //requestdetail seeder
+
+            // Request seeder
+            //request1
+            RequestDetails rd1 = new RequestDetails()
+            {
+                RequestId = r1.Id,
+                QtyRequested = 10,
+                InventoryItemId = "P030"
+            };
+            dbcontext.Add(rd1);
+
+            RequestDetails rd2 = new RequestDetails()
+            {
+                RequestId = r1.Id,
+                QtyRequested = 10,
+                InventoryItemId = "P031"
+            };
+            dbcontext.Add(rd2);
+
+            //request2
+            RequestDetails rd3 = new RequestDetails()
+            {
+                RequestId = r2.Id,
+                QtyRequested = 10,
+                InventoryItemId = "F020"
+            };
+            dbcontext.Add(rd3);
+
+            RequestDetails rd4 = new RequestDetails()
+            {
+                RequestId = r2.Id,
+                QtyRequested = 10,
+                InventoryItemId = "F021"
+            };
+            dbcontext.Add(rd4);
+
+            //request3
+            RequestDetails rd5 = new RequestDetails()
+            {
+                RequestId = r3.Id,
+                QtyRequested = 10,
+                InventoryItemId = "C001"
+            };
+            dbcontext.Add(rd5);
+
+            RequestDetails rd6 = new RequestDetails()
+            {
+                RequestId = r3.Id,
+                QtyRequested = 150,
+                InventoryItemId = "C002"
+            };
+            dbcontext.Add(rd6);
+
+            RequestDetails rd7 = new RequestDetails()
+            {
+                RequestId = r4.Id,
+                QtyRequested = 10,
+                InventoryItemId = "R001"
+            };
+            dbcontext.Add(rd7);
+
+            RequestDetails rd8 = new RequestDetails()
+            {
+                RequestId = r4.Id,
+                QtyRequested = 10,
+                InventoryItemId = "R002"
+            };
+            dbcontext.Add(rd8);
+
+            RequestDetails rd9 = new RequestDetails()
+            {
+                RequestId = r5.Id,
+                QtyRequested = 10,
+                InventoryItemId = "S040"
+            };
+            dbcontext.Add(rd9);
+
+            RequestDetails rd10 = new RequestDetails()
+            {
+                RequestId = r5.Id,
+                QtyRequested = 10,
+                InventoryItemId = "S041"
+            };
+            dbcontext.Add(rd10);
+
             dbcontext.SaveChanges();
 
         }

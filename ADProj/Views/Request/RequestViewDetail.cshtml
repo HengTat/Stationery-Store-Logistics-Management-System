@@ -1,0 +1,96 @@
+﻿@model IEnumerable<ADProj.Models.RequestDetails>
+
+<head>
+    <style>
+        .approvebutton {
+            background-color: green;
+            color: white;
+        }
+
+        .rejectbutton {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+
+@{
+    ViewData["Title"] = "Request View Detail";
+}
+
+<a href="/request/requestpendingapproval"><h4> < View Request List </h4> </a>
+
+<div align="center">
+    <img src="~/Icons/Listicon.png" alt="listicon" width="260" height="130" />
+    <h1>Request Details</h1>
+</div>
+
+<table class="table">
+    <thead>
+        <tr style="background:lightgrey">
+            <th>
+                @Html.DisplayNameFor(model => model.InventoryItemId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InventoryItem.Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.QtyRequested)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InventoryItem.UOM)
+            </th>
+
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InventoryItemId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InventoryItem.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.QtyRequested)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InventoryItem.UOM)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+
+<div align="center">
+    @{
+        var id = ViewData["Requestid"];
+        string submiturl = "/request/submit/";
+        ;
+    }
+    Enter Additional Comments:
+    <form action=@submiturl>
+        <input type="hidden" name="requestid" value=@id>
+
+        <textarea name="Comments" rows="4" cols="50">        
+       </textarea>
+        <table>
+            <tr>
+                <td>
+                    <input class="rejectbutton" type="submit" name="submitButton" value="Reject" />
+                    &nbsp;&nbsp;&nbsp;
+                </td>
+                <td>
+                    &nbsp;&nbsp;&nbsp;
+                    <input class="approvebutton" type="submit" name="submitButton" value="Approve" />
+                </td>
+            </tr>
+        </table>
+    </form>
+
+</div>

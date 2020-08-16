@@ -101,5 +101,23 @@ namespace ADProj.Services
             return requestList;
         }
 
+        public Request FindRequestbyId(int id)
+        {
+            return dbcontext.Requests.Find(id);
+        }
+
+        public List<Request> FindRequestbyUserId(int Currentid)
+        {
+            return dbcontext.Requests.Where(x => x.EmployeeId == Currentid).ToList();
+        }
+
+        public List<Request> FindPendingRequestByDepartmenthead(int Currentid)
+        {
+            string currentdepartment = dbcontext.Employees.Find(Currentid).DepartmentId;
+            List<Request> Listofrequestpendingapproval = dbcontext.Requests.Where(x => x.Status == Enums.Status.PendingApproval & x.Employee.DepartmentId == currentdepartment).ToList();
+
+            return Listofrequestpendingapproval;
+        }
+
     }
 }

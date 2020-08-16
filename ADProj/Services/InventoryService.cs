@@ -110,5 +110,10 @@ namespace ADProj.Services
             adProjContext.SaveChanges();
 
         }
+
+        public InventoryItem FindbyId(string id)
+        {
+            return adProjContext.InventoryItems.Find(id);
+        }
     }
 }

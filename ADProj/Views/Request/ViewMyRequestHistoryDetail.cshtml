@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ADProj.Models.RequestDetails>
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<a href="/request/Viewmyrequesthistory"><h4> < View Request List </h4> </a>
+
+<div align="center">
+    <img src="~/Icons/Listicon.png" alt="listicon" width="260" height="130" />
+    <h1>Request Detail</h1>
+
+
+    <table class="table">
+        <thead>
+            <tr style="background-color:lightgrey">
+                <th>
+                    @Html.DisplayNameFor(model => model.InventoryItemId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InventoryItem.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.QtyRequested)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InventoryItem.UOM)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InventoryItemId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InventoryItem.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QtyRequested)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InventoryItem.UOM)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
