@@ -15,12 +15,14 @@ namespace ADProj.Controllers
         private EmployeeService es;
         private DepartmentService ds;
         private CollectionPointService cps;
+        private Emailservice ems;
 
-        public DepartmentRepController(EmployeeService es, DepartmentService ds, CollectionPointService cps)
+        public DepartmentRepController(EmployeeService es, DepartmentService ds, CollectionPointService cps, Emailservice ems)
         {
             this.ds = ds;
             this.es = es;
             this.cps = cps;
+            this.ems = ems;
         }
         public IActionResult Index()
         {
@@ -63,6 +65,7 @@ namespace ADProj.Controllers
                     CollectionPoint currentCollectionPoint = cps.GetCollectionPointByDeptId(dept.Id);
                     ViewData["currentCollectionPoint"] = currentCollectionPoint;
                 }
+                ems.sendupdateincollectionpointemailnotification();
                 return View();
             }
         }

@@ -52,17 +52,23 @@
             </div>
         </div>
 
-            <div class="form-group">
-                <label class="col-sm-5 control-label">Department Head: </label>
-                <div class="col-sm-3">
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Department Head: </label>
+            <div class="col-sm-3">
+                @if (deptToEdit.DepartmentHead != null)
+                {
                     <input class="form-control" type="text" value="@deptToEdit.DepartmentHead.Name" name="deptHead" readonly>
-                </div>
+                }
             </div>
+        </div>
 
         <div class="form-group">
             <label class="col-sm-5 control-label">Department Rep: </label>
             <div class="col-sm-3">
-                <input class="form-control" type="text" value="@deptToEdit.DepartmentRep.Name" name="deptRep" readonly>
+                @if (deptToEdit.DepartmentRep != null)
+                {
+                    <input class="form-control" type="text" value="@deptToEdit.DepartmentRep.Name" name="deptRep" readonly>
+                }
             </div>
         </div>
 

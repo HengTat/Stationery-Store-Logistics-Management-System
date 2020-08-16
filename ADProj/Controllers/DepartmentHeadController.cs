@@ -16,11 +16,13 @@ namespace ADProj.Controllers
     {
         private EmployeeService es;
         private DepartmentService ds;
+        private Emailservice ems;
 
-        public DepartmentHeadController(EmployeeService es, DepartmentService ds)
+        public DepartmentHeadController(EmployeeService es, DepartmentService ds, Emailservice ems)
         {
             this.ds = ds;
             this.es = es;
+            this.ems = ems;
         }
 
         public IActionResult MaintainDepartmentRep(int deptRepId)
@@ -59,6 +61,7 @@ namespace ADProj.Controllers
                     Employee currentDeptRep = es.GetDeptRepByDeptId(dept.Id);
                     ViewData["currentDeptRep"] = currentDeptRep;
                 }
+                ems.sendchangeofdeptrepemailnotification();
                 return View();
             }
         }
