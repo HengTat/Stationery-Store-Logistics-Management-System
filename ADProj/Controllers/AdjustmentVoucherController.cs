@@ -44,6 +44,8 @@ namespace ADProj.Controllers
         public IActionResult AddAdjustmentVoucher()
         {
             //ViewData["InventoryItem"] = Amv.ListOfInventoryItem();
+            ViewData["InventoryItem"] = Amv.ListOfInventoryItem();
+            ViewData["SupplierStationery"] = Amv.ListOfSupplierstationery();
             ViewData["ItemCategory"] = Amv.ListOfItem();
             ViewData["Employee"] = Amv.ListOfEmployee();
             if (TempData["Msg"] != null)
@@ -51,6 +53,7 @@ namespace ADProj.Controllers
                 ViewData["Msg"] = TempData["Msg"];
             }
             return View();
+
 
         }
 

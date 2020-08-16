@@ -1,4 +1,6 @@
-﻿@{ ViewData["Title"] = "Adjustment Voucher Form";
+﻿
+
+@{ ViewData["Title"] = "Adjustment Voucher Form";
     Layout = "_Layout";
     var msg = ViewData["Msg"];
 
@@ -20,99 +22,107 @@
     }
 </div>
 
-
 @{var Itemcategory = (List<ItemCategory>)ViewData["ItemCategory"];
-    var employee = (List<Employee>)ViewData["Employee"];}
+    var employee = (List<Employee>)ViewData["Employee"];
+    var SupplierStationery = (List<SupplierStationery>)ViewData["SupplierStationery"];
+    var InventoryItem = (List<InventoryItem>)ViewData["InventoryItem"];}
 @{var time = DateTime.Now;}
 
-<form id="AdjustmentVoucherForm" method="post">
-    <table align="center">
-        @*<tr>
-                <td>Id:</td>
-                <td><input type="text" id="AdjustmentId" name="AdjustmentId" /></td>
-            </tr>*@
-        <tr></tr>
-        <tr>
-            <td>Category:</td>
-            <td>
-                <select id="category" name="ItemName">
+<div align="center">
+
+    <form class="form-horizontal" method="POST" style="margin-top:40px">
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Category:</label>
+            <div class="col-sm-3">
+                <select id="select1" name="ItemName">
                     <option></option>
                     @foreach (var item in Itemcategory)
                     {
-                        <option>@item.Name</option>
+                        <option id="item-name">@item.Name</option>
                     }
                 </select>
-            </td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td>
-                Description:
-            </td>
-            <td>
-                <select id="description" name="description">
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Description:</label>
+            <div class="col-sm-3">
+                <select id="select2" name="description">
                     <option></option>
+                    @foreach (var item in SupplierStationery)
+                    {
+                        <option data-uom=@item.InventoryItem.UOM data-id=@item.InventoryItem.Id data-currentQty=@item.InventoryItem.QtyInStock data-price=@item.TenderPrice>@item.InventoryItem.Description</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Unit of Measure:</label>
+            <div class="col-sm-3">
+                <select id="select3" name="uom">
+                    <option></option>
+                    @foreach (var item in SupplierStationery)
+                    {
+                        <option data-uom=@item.InventoryItem.UOM data-id=@item.InventoryItem.Id>@item.InventoryItem.UOM</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Price:</label>
+            <div class="col-sm-3">
+                <select id="select4" name="price">
+                    <option></option>
+                    @foreach (var item in SupplierStationery)
+                    {
+                        <option data-price=@item.TenderPrice data-id=@item.InventoryItem.Id>@item.TenderPrice</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Current Qty:</label>
+            <div class="col-sm-3">
+                <select id="select5" name="currentQty">
+                    <option></option>
+                    @foreach (var item in SupplierStationery)
+                    {
+                        <option data-currentQty=@item.InventoryItem.QtyInStock data-id=@item.InventoryItem.Id>@item.InventoryItem.QtyInStock</option>
+                    }
                 </select>
 
+            </div>
+        </div>
 
-            </td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td>
-                Adjust Qty:
-            </td>
-            <td>
-                <input type="number" name="adjustQty" id="adjustQty" />
-            </td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td>
-                Unit of Measure:
-            </td>
-            <td>
-                <select id="unitOfMeasure" name="unitOfMeasure">
-                    <option></option>
-                </select>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Adjust Qty:</label>
+            <div class="col-sm-3">
+                <input class="form-control" name="adjustQty" type="number" style="width:100px">
+            </div>
+        </div>
 
-            </td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td>
-                Price($):
-            </td>
-            <td>
-                <select id="price" name="price">
-                    <option></option>
-                </select>
-            </td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td>
-                Current Qty:
-            </td>
-            <td>
-                <select id="currentQty" name="currentQty">
-                    <option></option>
-                </select>
-            </td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td>
-                Adjust Amount($):
-            </td>
-            <td>
-                <input type="text" name="AdjustAmt" id="AdjustAmt" />
-            </td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td>Employee:</td>
-            <td>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Adjust Amount($):</label>
+            <div class="col-sm-3">
+                <input class="form-control" name="AdjustAmt" id="AdjustAmt" type="text" style="width:100px">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Reason:</label>
+            <div class="col-sm-3">
+                <input class="form-control" name="reason" id="reason" type="text" style="width:100px">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Employee Name:</label>
+            <div class="col-sm-3">
                 <select id="employee" name="employee">
                     <option></option>
                     @foreach (var emp in employee)
@@ -120,66 +130,19 @@
                         <option>@emp.Name</option>
                     }
                 </select>
-            </td>
-        </tr>
-        <tr></tr>
-        <tr>
-            <td>
-                Reason:
-            </td>
-            <td>
-                <input type="text" name="reason" id="reason" />
-            </td>
-        </tr>
-        <tr></tr>
+            </div>
+        </div>
 
-        <tr>
-            <td><input type="submit" name="submit" value="submit" id="submit" formaction="SaveAdjustmentVoucher" /></td>
-            <td> <input type="submit" name="cancel" value="cancel" id="cancel" formaction="AddAdjustmentVoucher" /></td>
-        </tr>
+        <div class="form-group">
+            <input type="submit" name="submit" value="submit" id="submit" formaction="SaveAdjustmentVoucher" />
+            <input type="submit" name="cancel" value="cancel" id="cancel" formaction="AddAdjustmentVoucher" />
+
+        </div>
+
+    </form>
+</div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <!--<tr><td><input type="datetime" name="time" value="@time" /></td></tr>-->
-        @*<tr> <td name="date">@time<td></tr>*@
-
-    </table>
-    <div id="errmsg">
-        @if (ViewData.ContainsKey("errmsg"))
-        {
-            <script>alert("cannot above 250");</script>
-        }
-    </div>
-
-</form>
 
 
 
