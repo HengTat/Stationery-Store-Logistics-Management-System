@@ -791,6 +791,102 @@ namespace ADProj.DB
             dbcontext.Add(adjustmentVoucher1);
 
             dbcontext.SaveChanges();
+
+            //seeing request and requestdetails
+
+            Request request1 = new Request()
+            {
+                EmployeeId = employee3.Id,
+                DateRequested = DateTime.Now,
+                Status = Enums.Status.Approved,
+                Remarks = "",
+                Comments = ""
+            };
+            dbcontext.Add(request1);
+            dbcontext.SaveChanges();
+
+            RequestDetails rqDet1 = new RequestDetails()
+            {
+                RequestId = request1.Id,
+                InventoryItemId = "T020",
+                QtyRequested = 5
+            };
+            dbcontext.Add(rqDet1);
+            dbcontext.SaveChanges();
+
+            RequestDetails rqDet1_2 = new RequestDetails()
+            {
+                RequestId = request1.Id,
+                InventoryItemId = "T021",
+                QtyRequested = 10
+            };
+            dbcontext.Add(rqDet1_2);
+            dbcontext.SaveChanges();
+
+
+
+            Request request2 = new Request()
+            {
+                EmployeeId = employee1.Id,
+                DateRequested = DateTime.Now,
+                Status = Enums.Status.PendingStock,
+                Remarks = "",
+                Comments = ""
+            };
+            dbcontext.Add(request2);
+            dbcontext.SaveChanges();
+
+            RequestDetails rqDet2 = new RequestDetails()
+            {
+                RequestId = request2.Id,
+                InventoryItemId = "T021",
+                QtyRequested = 15
+            };
+            dbcontext.Add(rqDet2);
+            dbcontext.SaveChanges();
+
+
+            Request request3 = new Request()
+            {
+                EmployeeId = employee3.Id,
+                DateRequested = DateTime.Now,
+                Status = Enums.Status.PendingStock,
+                Remarks = "",
+                Comments = ""
+            };
+            dbcontext.Add(request3);
+            dbcontext.SaveChanges();
+
+            RequestDetails rqDet3 = new RequestDetails()
+            {
+                RequestId = request3.Id,
+                InventoryItemId = "C001",
+                QtyRequested = 20
+            };
+            dbcontext.Add(rqDet3);
+            dbcontext.SaveChanges();
+
+            Request request4 = new Request()
+            {
+                EmployeeId = employee1.Id,
+                DateRequested = DateTime.Now,
+                Status = Enums.Status.Approved,
+                Remarks = "",
+                Comments = ""
+            };
+            dbcontext.Add(request4);
+            dbcontext.SaveChanges();
+
+            RequestDetails rqDet4 = new RequestDetails()
+            {
+                RequestId = request4.Id,
+                InventoryItemId = "T100",
+                QtyRequested = 20
+            };
+            dbcontext.Add(rqDet4);
+            dbcontext.SaveChanges();
+
         }
     }
+    
 }

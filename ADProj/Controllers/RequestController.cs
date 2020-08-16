@@ -45,6 +45,34 @@ namespace ADProj.Controllers
 
             return View();
         }
+        public IActionResult Outstanding()
+        {
+            /*if (HttpContext.Session.GetString("id") == null)
+            {
+                return RedirectToAction("Login", "Account");
 
+            }*/
+
+            List<Request> approvedRequest = new List<Request>();
+            List<Request> pendingStockRequest = new List<Request>();
+
+            List<Request> requestList = rs.GetRequestList();
+            foreach (Request request in requestList)
+            {
+                //included pending approvalstatus for now to check if it shows up in table html
+                if (request.Status == Enums.Status.Approved || request.Status == Enums.Status.PendingApproval)
+                {
+                    approvedRequest.Add(request);
+                }
+                if (request.Status == Enums.Status.PendingStock)
+                {
+                    pendingStockRequest.Add(request);
+                }
+            }
+
+            ViewData["ApprovedRequest"] = approvedRequest;
+            ViewData["PendingStockRequest"] = pendingStockRequest;
+            return View("OutstandingRequest");
+        }
     }
 }

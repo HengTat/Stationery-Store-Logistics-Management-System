@@ -80,6 +80,26 @@ namespace ADProj.Services
 
 
         }
+        public List<Request> GetRequestList()
+        {
+            List<Request> requestList = dbcontext.Requests.ToList();
+            foreach (Request req in requestList)
+            {
+                if (req.Status == Enums.Status.Approved || req.Status == Enums.Status.PendingStock)
+                {
+                    new Request
+                    {
+                        Id = req.Id,
+                        EmployeeId = req.EmployeeId,
+                        DateRequested = req.DateRequested,
+                        Status = req.Status,
+                        Remarks = req.Remarks,
+                        Comments = req.Comments,
+                    };
+                }
+            }
+            return requestList;
+        }
 
     }
 }
