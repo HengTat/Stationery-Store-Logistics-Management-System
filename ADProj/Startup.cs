@@ -37,6 +37,7 @@ namespace ADProj
             services.AddScoped<EmployeeService>();
             services.AddScoped<InventoryService>();
             services.AddScoped<AdjustmentVoucherValidation>();
+            services.AddScoped<RequestServices>();
 
         }
 

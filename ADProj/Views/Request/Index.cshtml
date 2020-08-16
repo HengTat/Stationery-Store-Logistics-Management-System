@@ -1,0 +1,79 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Request Form";
+    var categories = (List<ItemCategory>)ViewData["CategoryData"];
+    var inventories = (List<InventoryItem>)ViewData["InventoryData"];
+}
+
+<style type="text/css">
+    table {
+        width: 50%;
+    }
+
+        table tr th,
+        table tr td {
+            width: 31%;
+            border: 1px solid black;
+        }
+
+    .center-block {
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+    }
+</style>
+
+
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+</div>
+
+<select id="selectOne" class="center-block">
+    <option style="display:none">Select Category</option>
+    @foreach (var category in categories)
+    {
+        <option id="category-name" value=@category.Id>@category.Name</option>
+
+    }
+</select>
+<br />
+<select id="selectTwo" class="center-block">
+    <option style="display:none">Select Item</option>
+    @foreach (var item in inventories)
+    {
+        <option data-uom=@item.UOM data-id=@item.Id value=@item.ItemCategoryId>@item.Description</option>
+
+    }
+</select>
+<br />
+
+
+<input type="text" name="demo" id="demo" placeholder="Unit of Measurement" class="center-block" readonly />
+<input type="text" id="demo2" placeholder="Item ID(CODE)" class="center-block" style="display:none" />
+
+<input type="text" placeholder="Qty" id="requestQty" name="requestQty" class="center-block" />
+
+<input type="submit" id="btn_Add" value="Add" class="center-block" />
+
+
+
+<table id="tblRequestsDetails" class="center-block">
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Description</th>
+            <th style="display:none">ItemCode</th>
+            <th>Quantity</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<input type="button" value="Submit" id="btnSubmit" name="btnSubmit" class="center-block">
+
+<script src="~/js/request.js"></script>
+
