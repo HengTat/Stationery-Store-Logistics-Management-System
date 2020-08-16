@@ -1,0 +1,186 @@
+﻿@{ ViewData["Title"] = "Adjustment Voucher Form";
+    Layout = "_Layout";
+    var msg = ViewData["Msg"];
+
+}
+
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+</div>
+
+<div id="errmsg">
+    @if (msg != null)
+    {
+
+        <script type="text/javascript">
+        window.onload = function () {
+            alert("@msg");
+        };
+        </script>
+    }
+</div>
+
+
+@{var Itemcategory = (List<ItemCategory>)ViewData["ItemCategory"];
+    var employee = (List<Employee>)ViewData["Employee"];}
+@{var time = DateTime.Now;}
+
+<form id="AdjustmentVoucherForm" method="post">
+    <table align="center">
+        @*<tr>
+                <td>Id:</td>
+                <td><input type="text" id="AdjustmentId" name="AdjustmentId" /></td>
+            </tr>*@
+        <tr></tr>
+        <tr>
+            <td>Category:</td>
+            <td>
+                <select id="category" name="ItemName">
+                    <option></option>
+                    @foreach (var item in Itemcategory)
+                    {
+                        <option>@item.Name</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>
+                Description:
+            </td>
+            <td>
+                <select id="description" name="description">
+                    <option></option>
+                </select>
+
+
+            </td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>
+                Adjust Qty:
+            </td>
+            <td>
+                <input type="number" name="adjustQty" id="adjustQty" />
+            </td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>
+                Unit of Measure:
+            </td>
+            <td>
+                <select id="unitOfMeasure" name="unitOfMeasure">
+                    <option></option>
+                </select>
+
+            </td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>
+                Price($):
+            </td>
+            <td>
+                <select id="price" name="price">
+                    <option></option>
+                </select>
+            </td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>
+                Current Qty:
+            </td>
+            <td>
+                <select id="currentQty" name="currentQty">
+                    <option></option>
+                </select>
+            </td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>
+                Adjust Amount($):
+            </td>
+            <td>
+                <input type="text" name="AdjustAmt" id="AdjustAmt" />
+            </td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>Employee:</td>
+            <td>
+                <select id="employee" name="employee">
+                    <option></option>
+                    @foreach (var emp in employee)
+                    {
+                        <option>@emp.Name</option>
+                    }
+                </select>
+            </td>
+        </tr>
+        <tr></tr>
+        <tr>
+            <td>
+                Reason:
+            </td>
+            <td>
+                <input type="text" name="reason" id="reason" />
+            </td>
+        </tr>
+        <tr></tr>
+
+        <tr>
+            <td><input type="submit" name="submit" value="submit" id="submit" formaction="SaveAdjustmentVoucher" /></td>
+            <td> <input type="submit" name="cancel" value="cancel" id="cancel" formaction="AddAdjustmentVoucher" /></td>
+        </tr>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!--<tr><td><input type="datetime" name="time" value="@time" /></td></tr>-->
+        @*<tr> <td name="date">@time<td></tr>*@
+
+    </table>
+    <div id="errmsg">
+        @if (ViewData.ContainsKey("errmsg"))
+        {
+            <script>alert("cannot above 250");</script>
+        }
+    </div>
+
+</form>
+
+
+
+
