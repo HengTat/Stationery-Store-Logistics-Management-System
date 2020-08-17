@@ -24,13 +24,13 @@ namespace ADProj.Services
 
         public List<Supplier> SupplierList()
         {
-            List<Supplier>supplierList = adProjContext.Suppliers.ToList();
+            List<Supplier> supplierList = adProjContext.Suppliers.ToList();
             return supplierList;
         }
 
         public Supplier GetSupplierById(string id)
         {
-            Supplier supplier=adProjContext.Suppliers.Where(x=>x.Id==id).FirstOrDefault();
+            Supplier supplier = adProjContext.Suppliers.Where(x => x.Id == id).FirstOrDefault();
             return supplier;
         }
 
@@ -39,7 +39,7 @@ namespace ADProj.Services
             SupplierStationery supplierstationery = adProjContext.SupplierStationeries.Where(x => x.Id == id).FirstOrDefault();
             return supplierstationery;
         }
-        
+
         public SupplierStationery GetSupplierStationeryBySupplierId(string supplierid)
         {
             SupplierStationery supplierstationery = adProjContext.SupplierStationeries.Where(x => x.SupplierId == supplierid).FirstOrDefault();
@@ -49,6 +49,12 @@ namespace ADProj.Services
         public List<SupplierStationery> GetSupplierStationeryListById(string id)
         {
             List<SupplierStationery> supplierstationery = adProjContext.SupplierStationeries.Where(x => x.SupplierId == id).ToList();
+            return supplierstationery;
+        }
+
+        public List<SupplierStationery> GetSupplierStationeryListByCompositeKey(string supplierid, string inventoryitemid)
+        {
+            List<SupplierStationery> supplierstationery = adProjContext.SupplierStationeries.Where(x => x.SupplierId == supplierid && x.InventoryItemId == inventoryitemid).ToList();
             return supplierstationery;
         }
 
@@ -66,10 +72,9 @@ namespace ADProj.Services
             adProjContext.Add(item);
             adProjContext.SaveChanges();
         }
-        public void CreateSupplierStationery(int Id, string SupplierId, string InventoryItemId, string UOM, float TenderPrice)
+        public void CreateSupplierStationery(string SupplierId, string InventoryItemId, string UOM, float TenderPrice)
         {
             SupplierStationery item = new SupplierStationery();
-            item.Id = Id;
             item.SupplierId = SupplierId;
             item.InventoryItemId = InventoryItemId;
             item.UOM = UOM;
@@ -77,18 +82,20 @@ namespace ADProj.Services
 
             adProjContext.Add(item);
             adProjContext.SaveChanges();
-        }        
-        
+        }
+
         public void DeleteSupplierById(string id)
         {
             Supplier supplier = GetSupplierById(id);
             adProjContext.Remove(supplier);
             adProjContext.SaveChanges();
         }
-        
+
         public void DeleteSupplierStationeryById(int id)
         {
             SupplierStationery supplierstationery = GetSupplierStationeryById(id);
+            supplierstationery.InventoryItem = null;
+            supplierstationery.Supplier = null;
             adProjContext.Remove(supplierstationery);
             adProjContext.SaveChanges();
         }
@@ -110,9 +117,9 @@ namespace ADProj.Services
         public void UpdateSupplierStationeryById(string SupplierId, string InventoryItemId, string UOM, float TenderPrice)
         {
             SupplierStationery item = GetSupplierStationeryBySupplierId(SupplierId);
-            item.SupplierId = SupplierId;
+            /*item.SupplierId = SupplierId;
             item.InventoryItemId = InventoryItemId;
-            item.UOM = UOM;
+            item.UOM = UOM;*/
             item.TenderPrice = TenderPrice;
             adProjContext.SaveChanges();
         }

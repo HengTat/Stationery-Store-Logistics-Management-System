@@ -1,31 +1,36 @@
 ﻿@{
     ViewData["Title"] = "AddStationery";
-    SupplierStationery item = (SupplierStationery)ViewData["item"];
+    //var supplierid = (string)ViewData["supplierid"];
     var supplierid = ViewData["supplierid"];
+    var msg = ViewData["alertMsg"];
+}
+
+@if (msg != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            alert("@msg");
+
+        };
+    </script>
 }
 <style>
     .btn {
-        border: 2px solid #008CBA;
         transition-duration: 0.4s;
         margin-left: 50px;
         border-radius: 8px;
         height: 40px;
     }
-
-        .btn:hover {
-            background-color: #008CBA; /* Blue */
-            color: white;
-        }
 </style>
 
-@Html.ActionLink("Back to Supplier List","Index")
+@Html.ActionLink("Back to Supplier List", "Index")
 <div align="center">
     <h2>New Stationery</h2>
     <form class="form-horizontal" action="SaveStationery" method="POST" style="margin-top:40px; margin-bottom:50px;">
         <div class="form-group">
             <label class="col-sm-5 control-label">Supplier Id:</label>
             <div class="col-sm-3">
-                <input class="form-control" type="text" name="SupplierId" style="width:300px" >
+                <input class="form-control" type="text" name="SupplierId" value="@supplierid" readonly style="width:300px">
             </div>
         </div>
 
@@ -51,7 +56,7 @@
         </div>
 
         <div class="form-group">
-            <button type="submit" id="btnSave" class="btn">Save</button>
+            <button type="submit" id="btnSave" class="btn btn-success">Save</button>
         </div>
     </form>
 </div>

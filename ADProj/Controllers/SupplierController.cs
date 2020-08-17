@@ -20,7 +20,7 @@ namespace ADProj.Controllers
         {
             List<Supplier> supplierList = supService.SupplierList();
             ViewData["supplierList"] = supplierList;
-            return View();       
+            return View();
         }
 
         public IActionResult AddSupplier(string id)
@@ -28,16 +28,18 @@ namespace ADProj.Controllers
             return View();
         }
 
-        public IActionResult AddStationery(string supplierid)
+        public IActionResult AddStationery(string id)
         {
-            SupplierStationery s = supService.GetSupplierStationeryBySupplierId(supplierid);
-            ViewData["supplierid"] = supplierid;
+
+            SupplierStationery s = supService.GetSupplierStationeryBySupplierId(id);
+            ViewData["supplierid"] = id;
+            ViewData["alertMsg"] = TempData["alreadyExistStationary"];
             return View();
         }
 
         public IActionResult SaveSupplier(string Id, string Name, string ContactName, string PhoneNo, string FaxNo, string Address, string GSTReg)
         {
-            
+
             if (!(Id != null && Name != null && ContactName != null && PhoneNo != null && FaxNo != null && Address != null && GSTReg != null))
             {
                 TempData["alertMsg"] = "Please enter all information!";
@@ -45,7 +47,7 @@ namespace ADProj.Controllers
             }
             else
             {
-                supService.CreateSupplier(Id, Name, ContactName, PhoneNo, FaxNo,Address, GSTReg);
+                supService.CreateSupplier(Id, Name, ContactName, PhoneNo, FaxNo, Address, GSTReg);
                 TempData["alertMsg"] = "Saved successfully!";
                 return RedirectToAction("Index");
             }
@@ -53,18 +55,25 @@ namespace ADProj.Controllers
 
         public IActionResult SaveStationery(int Id, string SupplierId, string InventoryItemId, string UOM, float TenderPrice)
         {
-            Supplier s = supService.GetSupplierById(SupplierId);
-            if (!(SupplierId != null && InventoryItemId != null && UOM != null))
+            List<SupplierStationery> supplierStationeryList = supService.GetSupplierStationeryListByCompositeKey(SupplierId, InventoryItemId);
+            if (supplierStationeryList == null || supplierStationeryList.Count == 0)
             {
-                TempData["alertMsg"] = "Please enter all information!";
-                return RedirectToAction("AddStationery");
+                if (!(SupplierId != null && InventoryItemId != null && UOM != null))
+                {
+                    TempData["alertMsg"] = "Please enter all information!";
+                    return RedirectToAction("AddStationery");
+                }
+                else
+                {
+                    supService.CreateSupplierStationery(SupplierId, InventoryItemId, UOM, TenderPrice);
+                    TempData["alertMsg"] = "Saved successfully!";
+                    return RedirectToAction("Details", new { Id = SupplierId });
+                }
             }
             else
             {
-                supService.CreateSupplierStationery(Id, SupplierId, InventoryItemId,UOM, TenderPrice);
-                TempData["alertMsg"] = "Saved successfully!";
-                /*return RedirectToAction("Details",new { Id = SupplierId});*/
-                return RedirectToAction("Index");
+                TempData["alreadyExistStationary"] = "Already Exist!";
+                return RedirectToAction("AddStationery", new { id = SupplierId });
             }
         }
 
@@ -83,23 +92,24 @@ namespace ADProj.Controllers
             }
             if (cmd == "edit")
             {
-                Supplier supplier =supService.GetSupplierById(Id);
+                Supplier supplier = supService.GetSupplierById(Id);
                 ViewData["item"] = supplier;
                 return View("UpdateSupplier");
             }
             return RedirectToAction("Index");
         }
 
-        public IActionResult EditDeleteStationery(string? cmd, int Id)
+        public IActionResult EditDeleteStationery(string? cmd, int Id) //stationery id
         {
+            SupplierStationery supplierstationery = supService.GetSupplierStationeryById(Id);
             if (cmd == "delete")
             {
                 supService.DeleteSupplierStationeryById(Id);
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { Id = supplierstationery.SupplierId });
             }
             if (cmd == "edit")
             {
-                SupplierStationery supplierstationery = supService.GetSupplierStationeryById(Id);
+
                 ViewData["item"] = supplierstationery;
 
                 return View("UpdateStationery");
@@ -111,26 +121,26 @@ namespace ADProj.Controllers
 
         public IActionResult UpdateSupplier(string Id, string Name, string ContactName, string PhoneNo, string FaxNo, string Address, string GSTReg)
         {
-            supService.UpdateSupplierById(Id,Name,ContactName,PhoneNo,FaxNo,Address,GSTReg);
+            supService.UpdateSupplierById(Id, Name, ContactName, PhoneNo, FaxNo, Address, GSTReg);
 
             return RedirectToAction("Index");
         }
 
-        public IActionResult UpdateStationery(int StationeryId,string SupplierId, string InventoryItemId, string UOM, float TenderPrice)
+        public IActionResult UpdateStationery(int StationeryId, string SupplierId, string InventoryItemId, string UOM, float TenderPrice)
         {
             supService.UpdateSupplierStationeryById(SupplierId, InventoryItemId, UOM, TenderPrice);
             SupplierStationery s = supService.GetSupplierStationeryById(StationeryId);
             /*return RedirectToAction("EditDeleteStationery", new { Id = s.Id });*/
-            return RedirectToAction("Index");
+            return RedirectToAction("Details", new { Id = SupplierId });
         }
 
         public IActionResult Details(string Id)
-        {                
-                List<SupplierStationery> supplierstationeryList = supService.GetSupplierStationeryListById(Id);
-                ViewData["supplierstationeryList"] = supplierstationeryList;
-                ViewData["supplierid"] = Id;
-                Supplier s = supService.GetSupplierById(Id);
-                return View();
+        {
+            List<SupplierStationery> supplierstationeryList = supService.GetSupplierStationeryListById(Id);
+            ViewData["supplierstationeryList"] = supplierstationeryList;
+            ViewData["supplierid"] = Id;
+
+            return View();
         }
     }
 }

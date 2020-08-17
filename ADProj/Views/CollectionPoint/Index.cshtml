@@ -15,19 +15,22 @@
 }
 
 
-<a href="/CollectionPoint/AddCollectionPoint"><button type="button" class="btn btn-success">Add New Collection Point</button></a>
-<div align="center">
-    <h1> Collection Points </h1>
+<div class="container">
+    <h1 style="text-align:center"> Collection Points </h1>
+    <a href="/CollectionPoint/AddCollectionPoint"><button type="button" class="btn btn-success">Add New Collection Point</button></a>
 
     <br />
     <br />
     <form id="CollectionPointListForm" method="post">
-        <table align="center">
-            <thead>
+
+        <table class="table table-bordered">
+            <thead style="background-color:lightgrey">
                 <tr align="center">
                     <th>Collection Point</th>
                     <th>Collection Time</th>
                     <th>Store Clerk</th>
+                    <th>Action</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>

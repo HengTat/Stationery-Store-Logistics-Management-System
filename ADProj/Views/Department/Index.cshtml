@@ -14,22 +14,22 @@
     </script>
 }
 
-
-<a href="/Department/AddDepartment"><button type="button" class="btn btn-success">Add New Department</button></a>
-<div align="center">
-    <h1> Departments </h1>
-
+<div class="container">
+    <h1 style="text-align:center"> Departments </h1>
+    <a href="/Department/AddDepartment"><button type="button" class="btn btn-success" ">Add New Department</button></a>
     <br />
     <br />
     <form id="DepartmentListForm" method="post">
-        <table align="center">
-            <thead>
+        <table align="center" class="table table-bordered">
+            <thead style="background-color:lightgrey">
                 <tr align="center">
                     <th>Dept Code</th>
                     <th>Name</th>
                     <th>Collection Point</th>
                     <th>Department Head</th>
                     <th>Department Rep</th>
+                    <th>Action</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -45,17 +45,17 @@
                             {
                                 @department.DepartmentHead.Name
                             }
-                    </td>
-                    <td>
-                        @if (department.DepartmentRep != null)
-                        {
-                            @department.DepartmentRep.Name
-                        }
-                </td>
-                <td><button type="submit" class="btn btn-warning btn-xs" formaction="/Department/EditDepartment?deptId=@department.Id">Edit</button></td>
-                <td><button type="submit" class="btn btn-danger btn-xs" formaction="/Department/DeleteDepartment?deptId=@department.Id">Delete</button></td>
-            </tr>
-        }
+                        </td>
+                        <td>
+                            @if (department.DepartmentRep != null)
+                            {
+                                @department.DepartmentRep.Name
+                            }
+                        </td>
+                        <td><button type="submit" class="btn btn-warning btn-xs" formaction="/Department/EditDepartment?deptId=@department.Id">Edit</button></td>
+                        <td><button type="submit" class="btn btn-danger btn-xs" formaction="/Department/DeleteDepartment?deptId=@department.Id">Delete</button></td>
+                    </tr>
+                }
             </tbody>
         </table>
     </form>

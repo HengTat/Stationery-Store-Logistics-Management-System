@@ -5,21 +5,14 @@
 }
 <style>
     #Add {
-        border: 2px solid #008CBA;
         transition-duration: 0.4s;
         margin-left: 50px;
         border-radius: 8px;
         height: 40px;
     }
 
-    #Add:hover 
-    {
-         background-color: #008CBA; /* Blue */
-         color: white;
-    }
 
-    #Delete 
-    {
+    #Delete {
         background-color: transparent;
         border: none;
         outline: none;
@@ -27,12 +20,10 @@
         overflow: hidden;
     }
 
-    #Edit 
-    {
+    #Edit {
         background-color: transparent;
         border: none;
         outline: none;
-
     }
 
     #Details {
@@ -45,8 +36,8 @@
 
 <form method="post">
     <div class="container">
-        <h1 style="text-align:center">Supplier List</h1>
-       <input name="Button1" id="Add" title="Submit" value="Add Supplier" formaction="Supplier/AddSupplier?id=@supplierid" style="border-style:Solid;" type="submit"></>
+        <h1 style="text-align:center">SUPPLIER LIST</h1>
+        <input name="Button1" class="btn btn-success" id="Add" title="Submit" value="Add Supplier" formaction="Supplier/AddSupplier?id=@supplierid" style="border-style:Solid;" type="submit"></>
         <br />
         <br />
 
