@@ -42,8 +42,14 @@
                         </li>
                         <li><a href="#">Retrieval</a></li>
                         <li><a href="#">Disbursement</a></li>
-                        <li><a href="#">Order</a></li>
-                    }
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown">Order<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a asp-controller="PurchaseOrder" asp-action="RaisePO">Raise Purchase Order</a></li>
+                                <li><a asp-controller="PurchaseOrder" asp-action="Index">Purchase Order List</a></li>
+                            </ul>
+                        </li>
+ }
                     else if (role == ADProj.Enums.EmployeeRole.STORESUPERVISOR)
                     {
                         <li class="active"><a asp-controller="Home" asp-action="Index">Home</a></li>

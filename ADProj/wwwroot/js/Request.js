@@ -82,8 +82,6 @@ $(document).ready(function () {
             rd.Qty = row.find("TD").eq(3).html();
             requestDetails.push(rd);
         });
-        alert(JSON.stringify(requestDetails));
-
         $.ajax({
             type: "POST",
             url: "/Request/InsertRequests",

@@ -16,13 +16,12 @@ namespace ADProj.Models
         [Required]
         public string InventoryItemId { get; set; }
         [Required]
-        public string ItemCategoryId { get; set; }
+        public int ItemCategoryId { get; set; }
         [Required]
         public int Qty { get; set; }
 
         public virtual PurchaseOrder PurchaseOrder { get; set; }
         public virtual InventoryItem InventoryItem { get; set; }
-        public virtual ItemCategory ItemCategory{ get; set; }  
     
     }
 }

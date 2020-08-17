@@ -43,6 +43,8 @@ namespace ADProj
             services.AddScoped<RequestDetailService>();
             services.AddScoped<Emailservice>();
             services.AddScoped<SupplierService>();
+            services.AddScoped<PurchaseOrderServices>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

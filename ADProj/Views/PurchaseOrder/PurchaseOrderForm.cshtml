@@ -1,0 +1,97 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Purchase Order Form";
+    var supplierStationeries = (List<SupplierStationery>)ViewData["SupplierList"];
+}
+
+
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+</div>
+
+<div class=" col-sm-6" style="margin-bottom:40px">
+    <div class="form-group">
+        <label class="col-sm-6 control-label">Supplier Code:</label>
+        <div class="col-sm-5">
+            <select id="selectOne" class="form-control">
+                <option style="display:none">Select a supplier</option>
+                @foreach (var supplier in supplierStationeries)
+                {
+                    <option id="category-name" value=@supplier.Id>@supplier.SupplierId</option>
+
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-6 control-label">Description:</label>
+        <div class="col-sm-5">
+            <select id="selectTwo" class="form-control">
+                <option style="display:none">Select Item</option>
+                @foreach (var itemId in supplierStationeries)
+                {
+                    <option data-cat=@itemId.InventoryItem.ItemCategoryId data-uom=@itemId.UOM value=@itemId.Id>@itemId.InventoryItemId</option>
+
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-6 control-label">Unit of Measurement:</label>
+        <div class="col-sm-5">
+            <input type="text" name="uom" id="uom" class="form-control" readonly />
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-6 control-label">Order Quantity:</label>
+        <div class="col-sm-5">
+            <input type="text" name="orderQty" id="orderQty" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-6 control-label" style="display:none">add button:</label>
+        <div class="col-sm-5">
+            <button type="button" id="btn_Add" class="btn btn-danger">Add</button>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-6 control-label" style="display:none">category:</label>
+        <div class="col-sm-5">
+            <input type="text" name="cat" id="cat" class="form-control" style="display:none" />
+        </div>
+    </div>
+</div>
+
+<div class=" col-sm-6" style="margin-bottom:40px">
+    <div class="container">
+        <table id="tblOrderDetails" class="table table-bordered" style="width:500px; margin-top:20px">
+            <thead>
+                <tr>
+                    <th>Supplier Code</th>
+                    <th>Item Code</th>
+                    <th>Quantity</th>
+                    <th>UOM</th>
+                    <th style="display:none">CategoryId</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-6">
+
+            <button type="button" value="Reset" id="btnReset" class="btn btn-danger">Reset</button>
+            <button type="button" value="Submit" id="btnSubmit" class="btn btn-success">Submit</button>
+        </div>
+    </div>
+</div>
+
+<script src="~/js/purchaseOrder.js"></script>
