@@ -29,5 +29,6 @@ namespace ADProj.Models
 
         [InverseProperty("Department")]
         public virtual ICollection<Employee> Employees { get; set; }
+        public virtual ICollection<Disbursement> Disbursements { get; set; }
     }
 }

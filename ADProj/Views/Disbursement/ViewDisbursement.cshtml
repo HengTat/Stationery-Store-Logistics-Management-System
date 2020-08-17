@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Disbursement";
+    var disbursementList = (List<Disbursement>)ViewData["selectedDisbursements"];
+}
+@Html.ActionLink("Back to Disbursement Records", "Index")
+<form method="post" style="margin-bottom:40px">
+    <div class="container" align="center">
+        <h2>Disbursement - @disbursementList[0].DisbursedDate.ToString("dd/MMM/yyyy")</h2>
+        <table class="table table-bordered" style="margin-top:20px; text-align:center">
+            <thead>
+                <tr align="center">
+                    <th style="width:100px; text-align:center">Department Code</th>
+                    <th style="width:200px; text-align:center">Department</th>
+                    <th style="width:150px; text-align:center">Department Representative</th>
+                    <th style="width:70px; text-align:center">Collection Point</th>
+                    <th style="width:50px; text-align:center">Unique Item(s)</th>
+                    <th style="width:50px; text-align:center">Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var dbm in disbursementList)
+                {
+                    <tr>
+                        <td>@dbm.DepartmentId</td>
+                        <td>@dbm.Department.Name</td>
+                        <td>@dbm.Department.DepartmentRep.Name</td>
+                        <td>@dbm.Department.CollectionPointId</td>
+                        <td>to be completed</td>
+                        <td><button type="submit" formaction="ViewDisbursementDetails?Id=@dbm.Id">View Details</button></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</form>

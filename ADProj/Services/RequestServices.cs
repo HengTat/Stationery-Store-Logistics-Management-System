@@ -118,5 +118,20 @@ namespace ADProj.Services
             return Listofrequestpendingapproval;
         }
 
+        public List<Request> GetRequestsByRetrievalId(int retrievalId)
+        {
+            return dbcontext.Requests.Where(x => x.RetrievalId == retrievalId).ToList();
+        }
+
+        public void UpdateDisbursementId(int requestId, int disbursementId)
+        {
+            Request request = dbcontext.Requests.Where(x => x.Id == requestId).FirstOrDefault();
+            if (request != null)
+            {
+                request.DisbursementId = disbursementId;
+                dbcontext.Update(request);
+                dbcontext.SaveChanges();
+            }
+        }
     }
 }

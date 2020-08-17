@@ -18,8 +18,7 @@ namespace ADProj.Models
         [Required]
         public DateTime DisbursedDate { get; set; }
         [Required]
-        public int DepartmentId { get; set; }
-
+        public string DepartmentId { get; set; }
         public virtual Department Department { get; set; }
     }
 }

@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Disbursement Records";
+    var dates = (List<DateTime>)ViewData["dates"];
+}
+<style>
+    #Date {
+        background-color: transparent;
+        border: none;
+        outline: none;
+        color: #33BAFF;
+    }
+</style>
+
+<form method="post">
+    <div class="container" align="center">
+        <h2>Disbursement Records</h2>
+        <table class="table table-bordered" style="margin-top:20px; text-align:center">
+            <thead>
+                <tr align="center">
+                    <th style="width:100px; text-align:center">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var date in dates)
+                {
+                    <tr>
+                        <td>
+                            <button type="submit" id="Date" formaction="Disbursement/ViewDisbursement?Date=@date.ToString("dd/MM/yyyy")">@date.ToString("dd/MMM/yyyy")</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</form>

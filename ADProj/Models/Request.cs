@@ -19,6 +19,8 @@ namespace ADProj.Models
         public Status Status{ get; set; }
 
         public string Comments { get; set; }
+        public int? RetrievalId { get; set; }
+        public int? DisbursementId { get; set; }
 
         public virtual Employee Employee { get; set; }
         public virtual Retrieval Retrieval { get; set; }

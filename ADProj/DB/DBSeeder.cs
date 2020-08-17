@@ -1129,28 +1129,48 @@ namespace ADProj.DB
             {
                 EmployeeId = 3,
                 DateRequested = new DateTime(2020, 08, 07),
-                Status = Status.PendingApproval,
+                Status = Status.Approved,
             };
             dbcontext.Add(r3);
 
             Request r4 = new Request()
             {
-                EmployeeId = 3,
+                EmployeeId = 7,
                 DateRequested = new DateTime(2020, 06, 12),
-                Status = Status.PendingApproval,
+                Status = Status.Approved,
             };
             dbcontext.Add(r4);
 
             Request r5 = new Request()
             {
-                EmployeeId = 3,
+                EmployeeId = 8,
                 DateRequested = new DateTime(2019, 06, 12),
-                Status = Status.PendingApproval,
+                Status = Status.Approved,
             };
             dbcontext.Add(r5);
 
 
             dbcontext.SaveChanges();
+
+            //seed retrieval 
+            Retrieval rtv1 = new Retrieval()
+            {
+                DateRetrieved = new DateTime(2020, 08, 12),
+                EmployeeId = 2
+            };
+            dbcontext.Add(rtv1);
+            dbcontext.SaveChanges();
+
+            //update requests with retrievalId
+
+            r3.RetrievalId = rtv1.Id;
+            r4.RetrievalId = rtv1.Id;
+            r5.RetrievalId = rtv1.Id;
+            dbcontext.Update(r3);
+            dbcontext.Update(r4);
+            dbcontext.Update(r5);
+            dbcontext.SaveChanges();
+
             //requestdetail seeder
 
             // Request seeder

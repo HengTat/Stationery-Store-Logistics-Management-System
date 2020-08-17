@@ -44,6 +44,7 @@ namespace ADProj
             services.AddScoped<Emailservice>();
             services.AddScoped<SupplierService>();
             services.AddScoped<PurchaseOrderServices>();
+            services.AddScoped<DisbursementService>();
 
         }
 
