@@ -14,7 +14,7 @@
                 <th>
                     @Html.DisplayNameFor(model => model.Id)
                 </th>
-                <th>
+                <th style="display:none">
                     @Html.DisplayNameFor(model => model.EmployeeId)
                 </th>
                 <th>
@@ -22,9 +22,6 @@
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Status)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Remarks)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Comments)
@@ -39,7 +36,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.Id)
                     </td>
-                    <td>
+                    <td style="display:none">
                         @Html.DisplayFor(modelItem => item.EmployeeId)
                     </td>
                     <td>
@@ -47,9 +44,6 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Status)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Remarks)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Comments)

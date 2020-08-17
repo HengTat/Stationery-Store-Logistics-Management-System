@@ -93,7 +93,6 @@ namespace ADProj.Services
                         EmployeeId = req.EmployeeId,
                         DateRequested = req.DateRequested,
                         Status = req.Status,
-                        Remarks = req.Remarks,
                         Comments = req.Comments,
                     };
                 }

@@ -6,6 +6,8 @@
     var approved = (List<Request>)ViewData["ApprovedRequest"];
     var pendingStock = (List<Request>)ViewData["PendingStockRequest"];
 
+
+
 }
 
 <style type="text/css">
@@ -43,10 +45,18 @@
     <tbody>
         @foreach (var canFufill in approved)
         {
+
+            string id = canFufill.Id.ToString();
+            string viewdetailurl = "/Request/OutstandingDetails/" + id;
+
             <tr>
                 <td>@canFufill.DateRequested</td>
                 <td>@canFufill.Id</td>
-                <td>view details</td>
+                <td>
+                    <form action=@viewdetailurl>
+                        <input type="submit" value="View Details >" />
+                    </form>
+                </td>
             </tr>
         }
     </tbody>
@@ -63,6 +73,9 @@
     }
 </select>
 <br />
+
+
+<input type="button" id="generateRetrievalBtn" value="Generate Retrieval Form" class="center-block" />
 
 <h2>Orders that require restock</h2>
 
@@ -86,10 +99,16 @@
     <tbody>
         @foreach (var cannotFufill in pendingStock)
         {
+            string id = cannotFufill.Id.ToString();
+            string viewdetailurl = "/Request/OutstandingDetails/" + id;
             <tr>
                 <td>@cannotFufill.DateRequested</td>
                 <td>@cannotFufill.Id</td>
-                <td>view details</td>
+                <td>
+                    <form action=@viewdetailurl>
+                        <input type="submit" value="View Details >" />
+                    </form>
+                </td>
             </tr>
         }
     </tbody>

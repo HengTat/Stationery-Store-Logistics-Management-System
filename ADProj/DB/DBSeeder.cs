@@ -1024,7 +1024,6 @@ namespace ADProj.DB
                 EmployeeId = employee3.Id,
                 DateRequested = DateTime.Now,
                 Status = Enums.Status.Approved,
-                Remarks = "",
                 Comments = ""
             };
             dbcontext.Add(request1);
@@ -1055,7 +1054,6 @@ namespace ADProj.DB
                 EmployeeId = employee1.Id,
                 DateRequested = DateTime.Now,
                 Status = Enums.Status.PendingStock,
-                Remarks = "",
                 Comments = ""
             };
             dbcontext.Add(request2);
@@ -1076,7 +1074,6 @@ namespace ADProj.DB
                 EmployeeId = employee3.Id,
                 DateRequested = DateTime.Now,
                 Status = Enums.Status.PendingStock,
-                Remarks = "",
                 Comments = ""
             };
             dbcontext.Add(request3);
@@ -1096,7 +1093,6 @@ namespace ADProj.DB
                 EmployeeId = employee1.Id,
                 DateRequested = DateTime.Now,
                 Status = Enums.Status.Approved,
-                Remarks = "",
                 Comments = ""
             };
             dbcontext.Add(request4);
@@ -1117,7 +1113,6 @@ namespace ADProj.DB
                 EmployeeId = 3,
                 DateRequested = new DateTime(2020, 08, 05),
                 Status = Status.PendingApproval,
-                Remarks = "need more pens",
             };
 
             dbcontext.Add(r1);
@@ -1127,7 +1122,6 @@ namespace ADProj.DB
                 EmployeeId = 3,
                 DateRequested = new DateTime(2020, 08, 11),
                 Status = Status.PendingApproval,
-                Remarks = "need more files",
             };
             dbcontext.Add(r2);
 
@@ -1136,7 +1130,6 @@ namespace ADProj.DB
                 EmployeeId = 3,
                 DateRequested = new DateTime(2020, 08, 07),
                 Status = Status.PendingApproval,
-                Remarks = "alot of clips",
             };
             dbcontext.Add(r3);
 
@@ -1145,7 +1138,6 @@ namespace ADProj.DB
                 EmployeeId = 3,
                 DateRequested = new DateTime(2020, 06, 12),
                 Status = Status.PendingApproval,
-                Remarks = "Rulers",
             };
             dbcontext.Add(r4);
 
@@ -1154,7 +1146,6 @@ namespace ADProj.DB
                 EmployeeId = 3,
                 DateRequested = new DateTime(2019, 06, 12),
                 Status = Status.PendingApproval,
-                Remarks = "scotch tape",
             };
             dbcontext.Add(r5);
 

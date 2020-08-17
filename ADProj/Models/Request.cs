@@ -18,7 +18,6 @@ namespace ADProj.Models
         [Required]
         public Status Status{ get; set; }
 
-        public string Remarks { get;  set; }
         public string Comments { get; set; }
 
         public virtual Employee Employee { get; set; }

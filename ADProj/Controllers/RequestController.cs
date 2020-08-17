@@ -84,6 +84,15 @@ namespace ADProj.Controllers
             return View("OutstandingRequest");
         }
 
+        public IActionResult OutstandingDetails(int id)
+        {
+            List<RequestDetails> Listofitems = requestdetailservice.FindRequestDetailByRequestId(id);
+            ViewData["Requestid"] = id;
+            ViewData["Listofitems"] = Listofitems;
+            return View("OutstandingRequestDetail");
+        }
+
+
 
         public IActionResult ViewMyRequestHistory()
         {
