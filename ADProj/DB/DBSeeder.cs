@@ -1272,6 +1272,25 @@ namespace ADProj.DB
 
             dbcontext.SaveChanges();
 
+            SupplierStationery stationery1 = new SupplierStationery()
+            {
+                SupplierId = "ALPHA",
+                InventoryItemId = item35.Id,
+                UOM = item35.UOM,
+                TenderPrice = 31.3F
+            };
+            dbcontext.Add(stationery1);
+            dbcontext.SaveChanges();
+
+            SupplierStationery stationery2 = new SupplierStationery()
+            {
+                SupplierId = "CHEP",
+                InventoryItemId = item34.Id,
+                UOM = item34.UOM,
+                TenderPrice = 21.2F
+            };
+            dbcontext.Add(stationery2);
+            dbcontext.SaveChanges();
         }
     }
 
