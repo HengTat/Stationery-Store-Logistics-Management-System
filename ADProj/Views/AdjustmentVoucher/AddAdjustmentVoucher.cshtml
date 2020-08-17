@@ -1,4 +1,13 @@
-﻿
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+
+    var categories = (List<ItemCategory>)ViewData["ItemCategory"];
+    var inventories = (List<InventoryItem>)ViewData["InventoryItem"];
+    var supplierstationary = (List<SupplierStationery>)ViewData["SupplierStationery"];
+    var employee = (List<Employee>)ViewData["Employee"];
+}
 
 @{ ViewData["Title"] = "Adjustment Voucher Form";
     Layout = "_Layout";
@@ -6,9 +15,31 @@
 
 }
 
+
+
+<style type="text/css">
+    table {
+        width: 50%;
+    }
+
+        table tr th,
+        table tr td {
+            width: 31%;
+            border: 1px solid black;
+        }
+
+    .center-block {
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+    }
+</style>
+
+
 <div class="text-center">
     <h1 class="display-4">@ViewData["Title"]</h1>
 </div>
+
 
 <div id="errmsg">
     @if (msg != null)
@@ -22,87 +53,73 @@
     }
 </div>
 
-@{var Itemcategory = (List<ItemCategory>)ViewData["ItemCategory"];
-    var employee = (List<Employee>)ViewData["Employee"];
-    var SupplierStationery = (List<SupplierStationery>)ViewData["SupplierStationery"];
-    var InventoryItem = (List<InventoryItem>)ViewData["InventoryItem"];}
-@{var time = DateTime.Now;}
-
 <div align="center">
 
     <form class="form-horizontal" method="POST" style="margin-top:40px">
 
         <div class="form-group">
-            <label class="col-sm-5 control-label">Category:</label>
+            <label class="col-sm-5 control-label">Item Name:</label>
             <div class="col-sm-3">
-                <select id="select1" name="ItemName">
-                    <option></option>
-                    @foreach (var item in Itemcategory)
-                    {
-                        <option id="item-name">@item.Name</option>
-                    }
-                </select>
+        <select id="selectTwo" name="itemname" class="center-block">
+            <option style="display:none">Select Item</option>
+            @foreach (var item in supplierstationary)
+            {
+                <option name="itemname" data-uom=@item.UOM data-yy=@item.InventoryItem.QtyInStock data-price=@item.TenderPrice data-desription=@item.InventoryItem.Description data-id=@item.Id value="@item.InventoryItem.ItemCategory.Name">@item.InventoryItem.ItemCategory.Name</option>
 
+            }
+        </select>
+            </div>
+        </div>
+
+
+
+        <br />
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Unit of Measure:</label>
+            <div class="col-sm-3">
+                <input type="text" name="demo" id="demo" placeholder="Unit of Measurement" class="center-block" readonly />
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-sm-5 control-label">Description:</label>
             <div class="col-sm-3">
-                <select id="select2" name="description">
-                    <option></option>
-                    @foreach (var item in SupplierStationery)
-                    {
-                        <option data-uom=@item.InventoryItem.UOM data-id=@item.InventoryItem.Id data-currentQty=@item.InventoryItem.QtyInStock data-price=@item.TenderPrice>@item.InventoryItem.Description</option>
-                    }
-                </select>
+                <input type="text" name="demo3" id="demo3" placeholder="Description" class="center-block" readonly />
+
             </div>
         </div>
-
-        <div class="form-group">
-            <label class="col-sm-5 control-label">Unit of Measure:</label>
-            <div class="col-sm-3">
-                <select id="select3" name="uom">
-                    <option></option>
-                    @foreach (var item in SupplierStationery)
-                    {
-                        <option data-uom=@item.InventoryItem.UOM data-id=@item.InventoryItem.Id>@item.InventoryItem.UOM</option>
-                    }
-                </select>
-            </div>
-        </div>
-
         <div class="form-group">
             <label class="col-sm-5 control-label">Price:</label>
             <div class="col-sm-3">
-                <select id="select4" name="price">
-                    <option></option>
-                    @foreach (var item in SupplierStationery)
-                    {
-                        <option data-price=@item.TenderPrice data-id=@item.InventoryItem.Id>@item.TenderPrice</option>
-                    }
-                </select>
+                <input type="text" name="demo4" id="demo4" placeholder="Price" class="center-block" readonly />
+
             </div>
         </div>
-
         <div class="form-group">
             <label class="col-sm-5 control-label">Current Qty:</label>
             <div class="col-sm-3">
-                <select id="select5" name="currentQty">
-                    <option></option>
-                    @foreach (var item in SupplierStationery)
-                    {
-                        <option data-currentQty=@item.InventoryItem.QtyInStock data-id=@item.InventoryItem.Id>@item.InventoryItem.QtyInStock</option>
-                    }
-                </select>
-
+                <input type="text" name="demo5" id="demo5" placeholder="CurrentQty" class="center-block" readonly />
             </div>
         </div>
+
+
+        @*<input type="text" name="demo" id="demo" placeholder="Unit of Measurement" class="center-block" readonly />
+        <input type="text" id="demo2" placeholder="Item ID(CODE)" class="center-block" style="display:none" />
+        <input type="text" name="demo3" id="demo3" placeholder="Description" class="center-block" readonly />
+        <input type="text" name="demo4" id="demo4" placeholder="Price" class="center-block" readonly />
+        <input type="text" name="demo5" id="demo5" placeholder="CurrentQty" class="center-block" readonly />*@
+
+
+
+
+
+        @*<input type="text" placeholder="Qty" id="requestQty" name="requestQty" class="center-block" />*@
 
         <div class="form-group">
             <label class="col-sm-5 control-label">Adjust Qty:</label>
             <div class="col-sm-3">
-                <input class="form-control" name="adjustQty" type="number" style="width:100px">
+                <input class="form-control" name="AdjustQty" type="number" style="width:100px">
             </div>
         </div>
 
@@ -146,4 +163,6 @@
 
 
 
+
+<script src="~/js/adjust.js"></script>
 

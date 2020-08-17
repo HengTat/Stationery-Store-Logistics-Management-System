@@ -57,12 +57,20 @@ namespace ADProj.Controllers
 
         }
 
-        public IActionResult saveAdjustmentVoucher(string itemname, int AdjustQty, double AdjustAmt, string reason, string employee)
+        public IActionResult saveAdjustmentVoucher(string itemname, int AdjustQty, string AdjustAmt, string reason, string employee)
         {
-            if (itemname == null || employee == null || AdjustQty == 0 || AdjustAmt == 0)
+            bool isNum1 = double.TryParse(AdjustAmt, out double adjustAmt);
+
+            if (itemname == null || employee == null || AdjustQty == 0 || AdjustAmt == null)
             {
                 TempData["Msg"] = "please must enter all information (reason is optional)";
                 return RedirectToAction("AddAdjustmentVoucher");
+            }
+            else if (!isNum1)
+            {
+                TempData["Msg"] = "The adjustment Qty musy be a number";
+                return RedirectToAction("AddAdjustmentVoucher");
+
             }
             else if (AdjustQty > 250 || AdjustQty < 0)
             {
@@ -70,7 +78,7 @@ namespace ADProj.Controllers
 
                 return RedirectToAction("AddAdjustmentVoucher");
             }
-            else if (AdjustAmt < 0)
+            else if (adjustAmt < 0)
             {
                 TempData["Msg"] = "Please input the positive number of Adjust Amt";
                 return RedirectToAction("AddAdjustmentVoucher");
@@ -78,7 +86,7 @@ namespace ADProj.Controllers
 
             else
             {
-                Amv.createAdjustmentVoucher(itemname, AdjustQty, AdjustAmt, reason, employee);
+                Amv.createAdjustmentVoucher(itemname, AdjustQty, adjustAmt, reason, employee);
                 TempData["Msg"] = "save successfully";
                 return RedirectToAction("AddAdjustmentVoucher");
                 // return RedirectToAction("Index", "AdjustmentVoucher");

@@ -1012,32 +1012,8 @@ namespace ADProj.DB
             };
             dbcontext.Add(ad1);
             //test
-            SupplierStationery ss1 = new SupplierStationery()
-            {
-                // Id = 1,
-                InventoryItemId = item35.Id,
-                UOM = "Set",
-                TenderPrice = 2,
-                Supplier = s2,
-                InventoryItem = item35
-
-            };
-            dbcontext.Add(ss1);
-            //test
-            AdjustmentVoucher adjustmentVoucher1 = new AdjustmentVoucher()
-            {
-                date = DateTime.Now,
-                EmployeeId = employee1.Name,
-                InventoryItemId = item3.Id,
-                AdjustAmt = 200,
-                AdjustQty = 100,
-                Reason = "XXXXYYY",
-                Employee = employee1,
-                InventoryItem = item3,
-                SupplierStationery = ss1
-
-            };
-            dbcontext.Add(adjustmentVoucher1);
+          
+  
 
             dbcontext.SaveChanges();
 
@@ -1291,6 +1267,24 @@ namespace ADProj.DB
             };
             dbcontext.Add(stationery2);
             dbcontext.SaveChanges();
+
+            //test
+            AdjustmentVoucher adjustmentVoucher1 = new AdjustmentVoucher()
+            {
+                date = DateTime.Now,
+                EmployeeId = employee1.Name,
+                InventoryItemId = item35.Id,
+                AdjustAmt = 200,
+                AdjustQty = 100,
+                Reason = "XXXXYYY",
+                Employee = employee1,
+                InventoryItem = item3,
+                SupplierStationery = stationery1
+
+            };
+            dbcontext.Add(adjustmentVoucher1);
+            dbcontext.SaveChanges();
+
         }
     }
 

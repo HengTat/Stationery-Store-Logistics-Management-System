@@ -144,9 +144,9 @@ namespace ADProj.Services
 
 
         //create a adjustment Voucher;
-        public void createAdjustmentVoucher(string ItemName, int adjustQty, double AdjustAmt, string reason, string employee)
+        public void createAdjustmentVoucher(string itemname, int AdjustQty, double AdjustAmt, string reason, string employee)
         {
-            string name = ItemName;
+            string name = itemname;
             InventoryItem inventoryItem = GetInventoryItem(name);
             SupplierStationery supplierStationery = GetSupplierStationery(name);
             Employee emp = GetEmployee(employee);
@@ -157,7 +157,7 @@ namespace ADProj.Services
             AdjustmentVoucher adjustmentVoucher = new AdjustmentVoucher();
             // adjustmentVoucher.Id = AdjustmentId;
             adjustmentVoucher.date = DateTime.Now;
-            adjustmentVoucher.AdjustQty = adjustQty;
+            adjustmentVoucher.AdjustQty = AdjustQty;
             adjustmentVoucher.InventoryItemId = inventoryItem.Id;
             adjustmentVoucher.AdjustAmt = AdjustAmt;
             adjustmentVoucher.InventoryItem = inventoryItem;
