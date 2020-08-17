@@ -98,6 +98,10 @@ $(document).ready(function () {
 
     });
 
+    $("#btnReset").click(function (event) {
+        $("#tblRequestsDetails tbody tr").remove();
+    });
+
     $(document).on('click', '.btn_Delete', function () {
         var currentTr = $(this).closest('tr');
         currentTr.remove();
