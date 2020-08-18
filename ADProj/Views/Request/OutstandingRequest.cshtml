@@ -34,82 +34,86 @@
 
 <h2>Orders to be fufilled</h2>
 
-<table id="tblFufill" class="center-block">
-    <thead>
-        <tr>
-            <th>Request Date</th>
-            <th>Request Id</th>
-            <th>Details</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var canFufill in approved)
-        {
-
-            string id = canFufill.Id.ToString();
-            string viewdetailurl = "/Request/OutstandingDetails/" + id;
-
-            <tr>
-                <td>@canFufill.DateRequested</td>
-                <td>@canFufill.Id</td>
-                <td>
-                    <form action=@viewdetailurl>
-                        <input type="submit" value="View Details >" />
-                    </form>
-                </td>
+<div class="container" align="center" style="margin-bottom:40px">
+    <table id="tblFufill" class="table table-bordered" style="margin-top:20px; text-align:center">
+        <thead>
+            <tr align="center">
+                <th style="width:100px; text-align:center">Request Date</th>
+                <th style="width:50px; text-align:center">Request Id</th>
+                <th style="width:50px; text-align:center">Details</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var canFufill in approved)
+            {
+
+                string id = canFufill.Id.ToString();
+                string viewdetailurl = "/Request/OutstandingDetails/" + id;
+
+                <tr>
+                    <td>@canFufill.DateRequested</td>
+                    <td>@canFufill.Id</td>
+                    <td>
+                        <form action=@viewdetailurl>
+                            <input type="submit" value="View Details >" />
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 
 
-<select id="selectOne" class="center-block">
+
+<select id="selectOne" class="center-block" style="display:none">
 
     @foreach (var app in approved)
     {
-        <option id="category-name" value=@app.Id>@app.EmployeeId</option>
+        <option id="category-name" style="display:none" value=@app.Id>@app.EmployeeId</option>
 
     }
 </select>
-<br />
 
 
 <input type="button" id="generateRetrievalBtn" value="Generate Retrieval Form" class="center-block" />
 
 <h2>Orders that require restock</h2>
 
-<select id="selectTwo" class="center-block">
+<select id="selectTwo" class="center-block" style="display:none">
 
     @foreach (var ps in pendingStock)
     {
-        <option id="category-name" value=@ps.Id>@ps.EmployeeId</option>
+        <option id="category-name" style="display:none" value=@ps.Id>@ps.EmployeeId</option>
 
     }
 </select>
 
-<table id="tblPendingStock" class="center-block">
-    <thead>
-        <tr>
-            <th>Request Date</th>
-            <th>Request Id</th>
-            <th>Details</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var cannotFufill in pendingStock)
-        {
-            string id = cannotFufill.Id.ToString();
-            string viewdetailurl = "/Request/OutstandingDetails/" + id;
+<div class="container" align="center" style="margin-bottom:40px">
+    <table class="table table-bordered" style="margin-top:20px; text-align:center" id="tblPendingStock">
+        <thead>
             <tr>
-                <td>@cannotFufill.DateRequested</td>
-                <td>@cannotFufill.Id</td>
-                <td>
-                    <form action=@viewdetailurl>
-                        <input type="submit" value="View Details >" />
-                    </form>
-                </td>
+                <th style="width:100px; text-align:center">Request Date</th>
+                <th style="width:20px; text-align:center">Request Id</th>
+                <th style="width:50px; text-align:center">Details</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var cannotFufill in pendingStock)
+            {
+                string id = cannotFufill.Id.ToString();
+                string viewdetailurl = "/Request/OutstandingDetails/" + id;
+                <tr>
+                    <td>@cannotFufill.DateRequested</td>
+                    <td>@cannotFufill.Id</td>
+                    <td>
+                        <form action=@viewdetailurl>
+                            <input type="submit" value="View Details >" />
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
