@@ -6,47 +6,57 @@
 <div class="text-center">
     <h1 class="display-4">@ViewData["Title"]</h1>
 </div>
+@*@if (ViewData["msg"] == null)
+{
+    <div align="center">@ViewData["msg"]</div>
+}*@
+
+<br>
+<br>
 
 
-<div class="container">
-    <form id="AdjustmentVoucherList" method="post" action="AdjustmentVoucher/AddAdjustmentVoucher">
-        <input type="submit" value="+ New Adjustment Voucher" id="addNewAdjustmentVoucher" class="btn btn-success" />
-        <br>
-        <br>
-        <table id="table" border="1" align="center" class="table table-bordered">
-            <thead style="background-color:lightgrey">
-                <tr align="center">
-                    <th style="width:200px; text-align:center">Date</th>
-                    <th style="width:60px; text-align:center">Category</th>
-                    <th style="width:30px; text-align:center">ItemCode</th>
-                    <th style="width:250px; text-align:center">Description</th>
-                    <th style="width:30px; text-align:center">Price($)</th>
-                    <th style="width:50px; text-align:center">UMO</th>
-                    <th style="width:30px; text-align:center">AdjustmentAmt</th>
-                    <th style="width:30px; text-align:center">AsjustmentQty</th>
-                    <th style="width:100px; text-align:center">Reason</th>
+<form id="AdjustmentVoucherList" method="post" action="AdjustmentVoucher/AddAdjustmentVoucher">
+    <input type="submit" value="+ New Adjustment Voucher" id="addNewAdjustmentVoucher"  />
+    <br>
+    <br>
 
+    <table id="table" border="1" align="center">
+        <thead>
+            <tr align="center">
+                <th style="width:200px; text-align:center">Date</th>
+                <th style="width:60px; text-align:center">Category</th>
+                <th style="width:30px; text-align:center">ItemCode</th>
+                <th style="width:50px; text-align:center">UMO</th>
+                <th style="width:250px; text-align:center">Description</th>
+                <th style="width:30px; text-align:center">Price($)</th>
+                
+                <th style="width:30px; text-align:center">AsjustmentQty</th>
+                <th style="width:30px; text-align:center">AdjustmentAmt</th>
+                <th style="width:100px; text-align:center">Reason</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var adjustmentvoucher in adjustmentvoucherlist)
+            {
+                <tr>
+                    <td>@adjustmentvoucher.date</td>
+                    <td>@adjustmentvoucher.InventoryItem.ItemCategory.Name</td>
+                    <td>@adjustmentvoucher.InventoryItemId</td>
+                    <td>@adjustmentvoucher.InventoryItem.UOM</td>
+                    <td>@adjustmentvoucher.InventoryItem.Description</td>
+                    <td>@adjustmentvoucher.SupplierStationery.TenderPrice</td>
+                    <td>@adjustmentvoucher.AdjustQty</td>
+                    <td>@adjustmentvoucher.AdjustAmt</td>
+               
+                    <td>@adjustmentvoucher.Reason</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var adjustmentvoucher in adjustmentvoucherlist)
-                {
-                    <tr>
-                        <td>@adjustmentvoucher.date</td>
-                        <td>@adjustmentvoucher.InventoryItem.ItemCategory.Name</td>
-                        <td>@adjustmentvoucher.InventoryItemId</td>
-                        <td>@adjustmentvoucher.InventoryItem.Description</td>
-                        <td>@adjustmentvoucher.SupplierStationery.TenderPrice</td>
-                        <td>@adjustmentvoucher.InventoryItem.UOM</td>
-                        <td>@adjustmentvoucher.AdjustAmt</td>
-                        <td>@adjustmentvoucher.AdjustQty</td>
-                        <td>@adjustmentvoucher.Reason</td>
-                    </tr>
 
-                }
-            </tbody>
+            }
+        </tbody>
 
 
-        </table>
-    </form>
-</div>
+    </table>
+
+
+</form>

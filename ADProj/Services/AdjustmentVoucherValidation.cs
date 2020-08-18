@@ -131,13 +131,13 @@ namespace ADProj.Services
         //get inventoryitem by category(name);
         public InventoryItem GetInventoryItem(string name)
         {
-            InventoryItem item = dbcontext.InventoryItems.Where(x => x.ItemCategory.Name == name).FirstOrDefault();
+            InventoryItem item = dbcontext.InventoryItems.Where(x => x.Id == name).FirstOrDefault();
             return item;
         }
 
         public SupplierStationery GetSupplierStationery(string name)
         {
-            SupplierStationery item = dbcontext.SupplierStationeries.Where(x => x.InventoryItem.ItemCategory.Name == name).FirstOrDefault();
+            SupplierStationery item = dbcontext.SupplierStationeries.Where(x => x.InventoryItem.Id == name).FirstOrDefault();
             return item;
         }
 
@@ -148,6 +148,7 @@ namespace ADProj.Services
         {
             string name = itemname;
             InventoryItem inventoryItem = GetInventoryItem(name);
+            inventoryItem.QtyInStock += AdjustQty;
             SupplierStationery supplierStationery = GetSupplierStationery(name);
             Employee emp = GetEmployee(employee);
             // float price = GetSupplierStationery(name).TenderPrice;

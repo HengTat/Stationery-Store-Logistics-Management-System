@@ -1,5 +1,5 @@
 ﻿using System;
-
+using ADProj.Enums;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -24,73 +24,90 @@ namespace ADProj.Controllers
 
 
         private AdjustmentVoucherValidation Amv;
+        private EmployeeService es;
 
-        public AdjustmentVoucherController(AdjustmentVoucherValidation Amv)
+        public AdjustmentVoucherController(AdjustmentVoucherValidation Amv, EmployeeService es)
         {
             this.Amv = Amv;
+            this.es = es;
         }
 
 
         public IActionResult Index()
         {
+            if (HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER)
+            {
 
-            List<AdjustmentVoucher> voucherlist = Amv.ListofAdjustmentVoucher();
-            ViewData["AdjustmentVoucherList"] = voucherlist;
-            //ViewData["InventoryItem"]=Amv.ListOfInventoryItem();
+                List<AdjustmentVoucher> voucherlist = Amv.ListofAdjustmentVoucher();
+                ViewData["AdjustmentVoucherList"] = voucherlist;
 
-            return View();
+
+                return View();
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         public IActionResult AddAdjustmentVoucher()
         {
-            //ViewData["InventoryItem"] = Amv.ListOfInventoryItem();
-            ViewData["InventoryItem"] = Amv.ListOfInventoryItem();
-            ViewData["SupplierStationery"] = Amv.ListOfSupplierstationery();
-            ViewData["ItemCategory"] = Amv.ListOfItem();
-            ViewData["Employee"] = Amv.ListOfEmployee();
-            if (TempData["Msg"] != null)
+            if (HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER)
             {
-                ViewData["Msg"] = TempData["Msg"];
+                List<Employee> clerkList = es.GetAllClerks();
+                ViewData["clerkList"] = clerkList;
+
+                //ViewData["InventoryItem"] = Amv.ListOfInventoryItem();
+                ViewData["InventoryItem"] = Amv.ListOfInventoryItem();
+                ViewData["SupplierStationery"] = Amv.ListOfSupplierstationery();
+                ViewData["ItemCategory"] = Amv.ListOfItem();
+
+                if (TempData["Msg"] != null)
+                {
+                    ViewData["Msg"] = TempData["Msg"];
+                }
+                return View();
             }
-            return View();
+            return RedirectToAction("Index", "Home");
 
 
         }
 
-        public IActionResult saveAdjustmentVoucher(string itemname, int AdjustQty, string AdjustAmt, string reason, string employee)
+        public IActionResult saveAdjustmentVoucher(string itemname, int AdjustQty, double AdjustAmt, string reason)
         {
-            bool isNum1 = double.TryParse(AdjustAmt, out double adjustAmt);
 
-            if (itemname == null || employee == null || AdjustQty == 0 || AdjustAmt == null)
+
+
+            if (HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER)
             {
-                TempData["Msg"] = "please must enter all information (reason is optional)";
-                return RedirectToAction("AddAdjustmentVoucher");
-            }
-            else if (!isNum1)
-            {
-                TempData["Msg"] = "The adjustment Qty musy be a number";
-                return RedirectToAction("AddAdjustmentVoucher");
+
+                string employeeId = HttpContext.Session.GetString("id");
+                //bool isNum1 = double.TryParse(AdjustAmt, out double adjustAmt);
+                // double adjustamt = System.Math.Abs(AdjustAmt);
+                if (itemname == null || AdjustQty == 0)
+                {
+                    TempData["Msg"] = "please must enter all information (reason is optional)";
+                    return RedirectToAction("AddAdjustmentVoucher");
+                }
+
+
+
+                else if (HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR && System.Math.Abs(AdjustAmt) > 250)
+                {
+
+
+                    TempData["Msg"] = "The Adjustment Amount is above 250";
+
+                    return RedirectToAction("AddAdjustmentVoucher");
+                }
+
+                else
+                {
+                    Amv.createAdjustmentVoucher(itemname, AdjustQty, AdjustAmt, reason, employeeId);
+                    TempData["Msg"] = "save successfully";
+                    return RedirectToAction("AddAdjustmentVoucher");
+                    // return RedirectToAction("Index", "AdjustmentVoucher");
+                }
 
             }
-            else if (AdjustQty > 250 || AdjustQty < 0)
-            {
-                TempData["Msg"] = "The number of AdjustQty can not be above 250 or below 0";
-
-                return RedirectToAction("AddAdjustmentVoucher");
-            }
-            else if (adjustAmt < 0)
-            {
-                TempData["Msg"] = "Please input the positive number of Adjust Amt";
-                return RedirectToAction("AddAdjustmentVoucher");
-            }
-
-            else
-            {
-                Amv.createAdjustmentVoucher(itemname, AdjustQty, adjustAmt, reason, employee);
-                TempData["Msg"] = "save successfully";
-                return RedirectToAction("AddAdjustmentVoucher");
-                // return RedirectToAction("Index", "AdjustmentVoucher");
-            }
+            return RedirectToAction("Index", "Home");
 
         }
 

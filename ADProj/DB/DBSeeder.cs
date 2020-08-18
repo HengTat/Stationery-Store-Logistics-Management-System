@@ -1259,11 +1259,12 @@ namespace ADProj.DB
 
             dbcontext.SaveChanges();
 
+
             SupplierStationery stationery1 = new SupplierStationery()
             {
                 SupplierId = "ALPHA",
-                InventoryItemId = item35.Id,
-                UOM = item35.UOM,
+                InventoryItemId = item1.Id,
+                UOM = item1.UOM,
                 TenderPrice = 31.3F
             };
             dbcontext.Add(stationery1);
@@ -1271,32 +1272,356 @@ namespace ADProj.DB
 
             SupplierStationery stationery2 = new SupplierStationery()
             {
-                SupplierId = "CHEP",
-                InventoryItemId = item34.Id,
-                UOM = item34.UOM,
+                SupplierId = "ALPHA",
+                InventoryItemId = item2.Id,
+                UOM = item2.UOM,
                 TenderPrice = 21.2F
             };
             dbcontext.Add(stationery2);
             dbcontext.SaveChanges();
 
-            //test
-            AdjustmentVoucher adjustmentVoucher1 = new AdjustmentVoucher()
-            {
-                date = DateTime.Now,
-                EmployeeId = employee1.Name,
-                InventoryItemId = item35.Id,
-                AdjustAmt = 200,
-                AdjustQty = 100,
-                Reason = "XXXXYYY",
-                Employee = employee1,
-                InventoryItem = item3,
-                SupplierStationery = stationery1
 
+            SupplierStationery stationery3 = new SupplierStationery()
+            {
+                SupplierId = "AlPHA",
+                InventoryItemId = item3.Id,
+                UOM = item3.UOM,
+                TenderPrice = 23.1F
             };
-            dbcontext.Add(adjustmentVoucher1);
+            dbcontext.Add(stationery3);
+            dbcontext.SaveChanges();
+
+
+            SupplierStationery stationery4 = new SupplierStationery()
+            {
+                SupplierId = "ALPHA",
+                InventoryItemId = item4.Id,
+                UOM = item4.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery4);
+            dbcontext.SaveChanges();
+
+            SupplierStationery stationery5 = new SupplierStationery()
+            {
+                SupplierId = "ALPHA",
+                InventoryItemId = item5.Id,
+                UOM = item5.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery5);
+            dbcontext.SaveChanges();
+
+            SupplierStationery stationery6 = new SupplierStationery()
+            {
+                SupplierId = "ALPHA",
+                InventoryItemId = item6.Id,
+                UOM = item6.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery6);
+            dbcontext.SaveChanges();
+
+            SupplierStationery stationery7 = new SupplierStationery()
+            {
+                SupplierId = "ALPHA",
+                InventoryItemId = item7.Id,
+                UOM = item7.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery7);
+            dbcontext.SaveChanges();
+
+            SupplierStationery stationery8 = new SupplierStationery()
+            {
+                SupplierId = "ALPHA",
+                InventoryItemId = item8.Id,
+                UOM = item8.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery8);
+            dbcontext.SaveChanges();
+
+            SupplierStationery stationery9 = new SupplierStationery()
+            {
+                SupplierId = "ALPHA",
+                InventoryItemId = item9.Id,
+                UOM = item9.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery9);
+            dbcontext.SaveChanges();
+
+            SupplierStationery stationery10 = new SupplierStationery()
+            {
+                SupplierId = "ALPHA",
+                InventoryItemId = item10.Id,
+                UOM = item10.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery10);
+            dbcontext.SaveChanges();
+
+            SupplierStationery stationery11 = new SupplierStationery()
+            {
+                SupplierId = "ALPHA",
+                InventoryItemId = item11.Id,
+                UOM = item11.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery11);
+            dbcontext.SaveChanges();
+
+            SupplierStationery stationery12 = new SupplierStationery()
+            {
+                SupplierId = "ALPHA",
+                InventoryItemId = item12.Id,
+                UOM = item12.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery12);
+            dbcontext.SaveChanges();
+
+            SupplierStationery stationery13 = new SupplierStationery()
+            {
+                SupplierId = "ALPHA",
+                InventoryItemId = item13.Id,
+                UOM = item13.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery13);
+            dbcontext.SaveChanges();
+
+            SupplierStationery stationery14 = new SupplierStationery()
+            {
+                SupplierId = "ALPHA",
+                InventoryItemId = item14.Id,
+                UOM = item14.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery14);
+            dbcontext.SaveChanges();
+
+            SupplierStationery stationery15 = new SupplierStationery()
+            {
+                SupplierId = "ALPHA",
+                InventoryItemId = item15.Id,
+                UOM = item15.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery15);
+            dbcontext.SaveChanges();
+
+            SupplierStationery stationery16 = new SupplierStationery()
+            {
+                SupplierId = "ALPHA",
+                InventoryItemId = item16.Id,
+                UOM = item16.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery16);
+            dbcontext.SaveChanges();
+
+            SupplierStationery stationery17 = new SupplierStationery()
+            {
+                SupplierId = "CHEP",
+                InventoryItemId = item17.Id,
+                UOM = item17.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery17);
+            dbcontext.SaveChanges();
+
+            SupplierStationery stationery18 = new SupplierStationery()
+            {
+                SupplierId = "CHEP",
+                InventoryItemId = item18.Id,
+                UOM = item18.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery18);
+            dbcontext.SaveChanges();
+
+            SupplierStationery stationery19 = new SupplierStationery()
+            {
+                SupplierId = "CHEP",
+                InventoryItemId = item19.Id,
+                UOM = item19.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery19);
+            dbcontext.SaveChanges();
+
+
+            SupplierStationery stationery20 = new SupplierStationery()
+            {
+                SupplierId = "CHEP",
+                InventoryItemId = item20.Id,
+                UOM = item20.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery20);
+            dbcontext.SaveChanges();
+
+            SupplierStationery stationery21 = new SupplierStationery()
+            {
+                SupplierId = "CHEP",
+                InventoryItemId = item21.Id,
+                UOM = item21.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery21);
+            dbcontext.SaveChanges();
+
+            SupplierStationery stationery22 = new SupplierStationery()
+            {
+                SupplierId = "CHEP",
+                InventoryItemId = item22.Id,
+                UOM = item22.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery22);
+            dbcontext.SaveChanges();
+
+            SupplierStationery stationery23 = new SupplierStationery()
+            {
+                SupplierId = "CHEP",
+                InventoryItemId = item23.Id,
+                UOM = item23.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery23);
+            dbcontext.SaveChanges();
+
+            SupplierStationery stationery24 = new SupplierStationery()
+            {
+                SupplierId = "CHEP",
+                InventoryItemId = item24.Id,
+                UOM = item24.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery24);
+            dbcontext.SaveChanges();
+
+            SupplierStationery stationery25 = new SupplierStationery()
+            {
+                SupplierId = "CHEP",
+                InventoryItemId = item25.Id,
+                UOM = item25.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery25);
+            dbcontext.SaveChanges();
+
+            SupplierStationery stationery26 = new SupplierStationery()
+            {
+                SupplierId = "CHEP",
+                InventoryItemId = item26.Id,
+                UOM = item26.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery26);
+            dbcontext.SaveChanges();
+
+            SupplierStationery stationery27 = new SupplierStationery()
+            {
+                SupplierId = "CHEP",
+                InventoryItemId = item27.Id,
+                UOM = item27.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery27);
+            dbcontext.SaveChanges();
+
+            SupplierStationery stationery28 = new SupplierStationery()
+            {
+                SupplierId = "CHEP",
+                InventoryItemId = item28.Id,
+                UOM = item28.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery28);
+            dbcontext.SaveChanges();
+
+            SupplierStationery stationery29 = new SupplierStationery()
+            {
+                SupplierId = "CHEP",
+                InventoryItemId = item29.Id,
+                UOM = item29.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery29);
+            dbcontext.SaveChanges();
+
+
+            SupplierStationery stationery30 = new SupplierStationery()
+            {
+                SupplierId = "CHEP",
+                InventoryItemId = item30.Id,
+                UOM = item30.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery30);
+            dbcontext.SaveChanges();
+
+
+            SupplierStationery stationery31 = new SupplierStationery()
+            {
+                SupplierId = "CHEP",
+                InventoryItemId = item31.Id,
+                UOM = item31.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery31);
+            dbcontext.SaveChanges();
+
+
+            SupplierStationery stationery32 = new SupplierStationery()
+            {
+                SupplierId = "CHEP",
+                InventoryItemId = item32.Id,
+                UOM = item32.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery32);
+            dbcontext.SaveChanges();
+
+
+            SupplierStationery stationery33 = new SupplierStationery()
+            {
+                SupplierId = "CHEP",
+                InventoryItemId = item33.Id,
+                UOM = item33.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery33);
+            dbcontext.SaveChanges();
+
+
+            SupplierStationery stationery34 = new SupplierStationery()
+            {
+                SupplierId = "CHEP",
+                InventoryItemId = item34.Id,
+                UOM = item34.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery34);
+            dbcontext.SaveChanges();
+
+            SupplierStationery stationery35 = new SupplierStationery()
+            {
+                SupplierId = "CHEP",
+                InventoryItemId = item35.Id,
+                UOM = item35.UOM,
+                TenderPrice = 20.2F
+            };
+            dbcontext.Add(stationery35);
             dbcontext.SaveChanges();
 
         }
     }
 
 }
+
+
+        

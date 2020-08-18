@@ -6,7 +6,7 @@
     var categories = (List<ItemCategory>)ViewData["ItemCategory"];
     var inventories = (List<InventoryItem>)ViewData["InventoryItem"];
     var supplierstationary = (List<SupplierStationery>)ViewData["SupplierStationery"];
-    var employee = (List<Employee>)ViewData["Employee"];
+
 }
 
 @{ ViewData["Title"] = "Adjustment Voucher Form";
@@ -55,22 +55,36 @@
 
 <div align="center">
 
-    <form class="form-horizontal" method="POST" style="margin-top:40px">
+    <form class="form-horizontal" method="POST" action="" style="margin-top:40px">
 
         <div class="form-group">
             <label class="col-sm-5 control-label">Item Name:</label>
             <div class="col-sm-3">
-        <select id="selectTwo" name="itemname" class="center-block">
-            <option style="display:none">Select Item</option>
-            @foreach (var item in supplierstationary)
-            {
-                <option name="itemname" data-uom=@item.UOM data-yy=@item.InventoryItem.QtyInStock data-price=@item.TenderPrice data-desription=@item.InventoryItem.Description data-id=@item.Id value="@item.InventoryItem.ItemCategory.Name">@item.InventoryItem.ItemCategory.Name</option>
 
-            }
-        </select>
+                <select id="selectOne" class="center-block">
+                    <option style="display:none">Select Category</option>
+                    @foreach (var item in categories)
+                    {
+                        <option id="category-name" value=@item.Id>@item.Name</option>
+
+                    }
+                </select>
             </div>
         </div>
 
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Item Description:</label>
+            <div class="col-sm-3">
+                <select id="selectTwo" class="center-block">
+                    <option style="display:none">Select Item</option>
+                    @foreach (var item in supplierstationary)
+                    {
+                        <option data-uom=@item.UOM data-yy=@item.InventoryItem.QtyInStock data-price=@item.TenderPrice data-id=@item.InventoryItem.Id value="@item.InventoryItem.ItemCategoryId">@item.InventoryItem.Description</option>
+
+                    }
+                </select>
+            </div>
+        </div>
 
 
         <br />
@@ -81,14 +95,8 @@
                 <input type="text" name="demo" id="demo" placeholder="Unit of Measurement" class="center-block" readonly />
             </div>
         </div>
+        <input type="text" id="demo2" name="itemname" placeholder="Item ID(CODE)" class="center-block" style="display:none" />
 
-        <div class="form-group">
-            <label class="col-sm-5 control-label">Description:</label>
-            <div class="col-sm-3">
-                <input type="text" name="demo3" id="demo3" placeholder="Description" class="center-block" readonly />
-
-            </div>
-        </div>
         <div class="form-group">
             <label class="col-sm-5 control-label">Price:</label>
             <div class="col-sm-3">
@@ -104,29 +112,17 @@
         </div>
 
 
-        @*<input type="text" name="demo" id="demo" placeholder="Unit of Measurement" class="center-block" readonly />
-        <input type="text" id="demo2" placeholder="Item ID(CODE)" class="center-block" style="display:none" />
-        <input type="text" name="demo3" id="demo3" placeholder="Description" class="center-block" readonly />
-        <input type="text" name="demo4" id="demo4" placeholder="Price" class="center-block" readonly />
-        <input type="text" name="demo5" id="demo5" placeholder="CurrentQty" class="center-block" readonly />*@
-
-
-
-
-
-        @*<input type="text" placeholder="Qty" id="requestQty" name="requestQty" class="center-block" />*@
-
         <div class="form-group">
             <label class="col-sm-5 control-label">Adjust Qty:</label>
             <div class="col-sm-3">
-                <input class="form-control" name="AdjustQty" type="number" style="width:100px">
+                <input class="form-control" id="demo7" name="AdjustQty" type="number" value="" onchange="checkform()" style="width:100px">
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-sm-5 control-label">Adjust Amount($):</label>
             <div class="col-sm-3">
-                <input class="form-control" name="AdjustAmt" id="AdjustAmt" type="text" style="width:100px">
+                <input class="form-control" name="AdjustAmt" id="demo8" value="" type="text" style="width:100px" readonly>
             </div>
         </div>
 
@@ -137,18 +133,6 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="col-sm-5 control-label">Employee Name:</label>
-            <div class="col-sm-3">
-                <select id="employee" name="employee">
-                    <option></option>
-                    @foreach (var emp in employee)
-                    {
-                        <option>@emp.Name</option>
-                    }
-                </select>
-            </div>
-        </div>
 
         <div class="form-group">
             <input type="submit" name="submit" value="submit" id="submit" formaction="SaveAdjustmentVoucher" />
@@ -159,6 +143,12 @@
     </form>
 </div>
 
+
+<script>function checkform() {
+
+        document.getElementById("demo8").value = parseFloat(document.getElementById("demo4").value) * parseFloat(document.getElementById("demo7").value);
+
+    }</script>
 
 
 
