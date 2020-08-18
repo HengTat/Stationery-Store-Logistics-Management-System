@@ -16,7 +16,8 @@
                 <tr style="background-color:lightgrey">
                     <th style="width:50px; text-align:center">Supplier Id</th>
                     <th style="width:50px; text-align:center">Item Id</th>
-                    <th style="width:50px; text-align:center">Quantity Id</th>
+                    <th style="width:50px; text-align:center">Description</th>
+                    <th style="width:50px; text-align:center">Quantity</th>
                     <th style="width:50px; text-align:center">UOM</th>
                 </tr>
             </thead>
@@ -29,6 +30,9 @@
                         </td>
                         <td>
                             @item.InventoryItemId
+                        </td>
+                        <td>
+                            @item.InventoryItem.Description
                         </td>
                         <td>
                             @item.Qty

@@ -6,7 +6,8 @@ $(document).ready(function () {
     $("#btn_Add").click(function (event) {
         //Extracting all selected fields
         var txtSupplier = $("#selectOne option:selected").text().toString();
-        var txtItemId = $("#selectTwo option:selected").text().toString();
+        var txtDescription = $("#selectTwo option:selected").text().toString();
+        var itemId = $("#itemid").val();
         var qty = $("#orderQty").val();
         var UOM = $("#uom").val();
         var cat = $("#cat").val();
@@ -24,7 +25,7 @@ $(document).ready(function () {
             alert("Please choose a supplier");
             return;
         }
-        if (txtItemId == "" || txtItemId == "Select Item") {
+        if (txtDescription == "" || txtDescription == "Select Item") {
             alert("Please choose an item");
             return;
         }
@@ -39,27 +40,32 @@ $(document).ready(function () {
         var cell4 = newRow.insertCell(3);
         var cell5 = newRow.insertCell(4);
         var cell6 = newRow.insertCell(5);
+        var cell7 = newRow.insertCell(6);
+
 
 
         var cell1Text = document.createTextNode(txtSupplier);
         cell1.appendChild(cell1Text);
 
-        var cell2Text = document.createTextNode(txtItemId);
+        var cell2Text = document.createTextNode(txtDescription);
         cell2.appendChild(cell2Text);
 
-        var cell3Text = document.createTextNode(txtQty);
+        var cell3Text = document.createTextNode(itemId);
         cell3.appendChild(cell3Text);
 
-        var cell4Text = document.createTextNode(UOM);
+        var cell4Text = document.createTextNode(txtQty);
         cell4.appendChild(cell4Text);
 
-        var cell5Text = document.createTextNode(cat);
+        var cell5Text = document.createTextNode(UOM);
         cell5.appendChild(cell5Text);
 
-        cell6.innerHTML = '<button class="btn_Delete" type="button">'
+        var cell6Text = document.createTextNode(cat);
+        cell6.appendChild(cell6Text);
+
+        cell7.innerHTML = '<button class="btn_Delete" type="button">'
             + 'Delete</button>'
 
-        $('td:nth-child(5),th:nth-child(5)').hide();
+        $('td:nth-child(6),th:nth-child(6)').hide();
 
         //Disable dropdown box to restrict 1 supplier
         document.getElementById("selectOne").disabled = true;
@@ -67,6 +73,8 @@ $(document).ready(function () {
         $("#orderQty").val('');
         $("#uom").val('');
         $("#cat").val('');
+        $("#itemid").val('');
+
     })
 
     $(".btn_Delete").click(function (event) {
@@ -88,9 +96,9 @@ $(document).ready(function () {
             var row = $(this);
             var rd = {};
             rd.SupplierId = row.find("TD").eq(0).html();
-            rd.ItemId = row.find("TD").eq(1).html();
-            rd.Quantity = row.find("TD").eq(2).html();
-            rd.CategoryId = row.find("TD").eq(4).html();
+            rd.ItemId = row.find("TD").eq(2).html();
+            rd.Quantity = row.find("TD").eq(3).html();
+            rd.CategoryId = row.find("TD").eq(5).html();
             orderDetails.push(rd);
         });
 
@@ -132,16 +140,22 @@ $(document).ready(function () {
 
         var uom = $("#selectTwo").find(':selected').data('uom')
         var cat = $("#selectTwo").find(':selected').data('cat')
+        var itemid = $("#selectTwo").find(':selected').data('itemid')
+
         $('#uom').val(uom);
         $('#cat').val(cat);
+        $('#itemid').val(itemid);
+
 
 
     });
     $("#selectTwo").change(function () {
         var uom = $(this).find(':selected').data('uom')
         var cat = $(this).find(':selected').data('cat')
+        var itemid = $("#selectTwo").find(':selected').data('itemid')
         $('#uom').val(uom);
         $('#cat').val(cat);
+        $('#itemid').val(itemid);
 
 
     });

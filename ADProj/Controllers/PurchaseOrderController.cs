@@ -31,7 +31,8 @@ namespace ADProj.Controllers
 
         public IActionResult RaisePO()
         {
-            ViewData["SupplierList"] = supService.SupplierStationeryList();
+            ViewData["SupplierDetailsList"] = supService.SupplierStationeryList();
+            ViewData["SupplierList"] = supService.SupplierList();
 
             return View("PurchaseOrderForm");
         }

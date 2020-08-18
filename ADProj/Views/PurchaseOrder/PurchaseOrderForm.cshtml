@@ -3,7 +3,8 @@
 *@
 @{
     ViewData["Title"] = "Purchase Order Form";
-    var supplierStationeries = (List<SupplierStationery>)ViewData["SupplierList"];
+    var supplierStationeries = (List<SupplierStationery>)ViewData["SupplierDetailsList"];
+    var supplierList = (List<Supplier>)ViewData["SupplierList"];
 }
 
 
@@ -17,9 +18,9 @@
         <div class="col-sm-5">
             <select id="selectOne" class="form-control">
                 <option style="display:none">Select a supplier</option>
-                @foreach (var supplier in supplierStationeries)
+                @foreach (var supplier in supplierList)
                 {
-                    <option id="category-name" value=@supplier.Id>@supplier.SupplierId</option>
+                    <option id="category-name" value=@supplier.Id>@supplier.Id</option>
 
                 }
             </select>
@@ -31,12 +32,19 @@
         <div class="col-sm-5">
             <select id="selectTwo" class="form-control">
                 <option style="display:none">Select Item</option>
-                @foreach (var itemId in supplierStationeries)
+                @foreach (var stationery in supplierStationeries)
                 {
-                    <option data-cat=@itemId.InventoryItem.ItemCategoryId data-uom=@itemId.UOM value=@itemId.Id>@itemId.InventoryItemId</option>
+                    <option data-itemid=@stationery.InventoryItemId data-cat=@stationery.InventoryItem.ItemCategoryId data-uom=@stationery.UOM value=@stationery.SupplierId>@stationery.InventoryItem.Description</option>
 
                 }
             </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-sm-6 control-label">Item Id:</label>
+        <div class="col-sm-5">
+            <input type="text" name="itemid" id="itemid" class="form-control" readonly />
         </div>
     </div>
 
@@ -74,7 +82,8 @@
             <thead>
                 <tr>
                     <th>Supplier Code</th>
-                    <th>Item Code</th>
+                    <th>Description</th>
+                    <th>Item Id</th>
                     <th>Quantity</th>
                     <th>UOM</th>
                     <th style="display:none">CategoryId</th>
