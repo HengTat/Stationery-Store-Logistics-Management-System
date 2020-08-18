@@ -18,40 +18,6 @@ namespace ADProj.Services
             this.dbcontext = dbcontext;
         }
 
-        public List<ItemCategory> GetCategoryList()
-        {
-            List<ItemCategory> categoryList = dbcontext.ItemCategories.ToList();
-            foreach (ItemCategory category in categoryList)
-            {
-                new ItemCategory
-                {
-                    Id = category.Id,
-                    Name = category.Name
-                };
-            }
-            return categoryList;
-        }
-
-        public List<InventoryItem> GetInventoryList()
-        {
-            List<InventoryItem> inventoryList = dbcontext.InventoryItems.ToList();
-            foreach (InventoryItem item in inventoryList)
-            {
-                new InventoryItem
-                {
-                    Id = item.Id,
-                    ItemCategoryId = item.ItemCategoryId,
-                    Description = item.Description,
-                    Bin = item.Bin,
-                    RequestQty = item.RequestQty,
-                    QtyInStock = item.QtyInStock,
-                    ReorderLevel = item.ReorderLevel,
-                    ReorderQty = item.ReorderQty,
-                    UOM = item.UOM
-                };
-            }
-            return inventoryList;
-        }
         public int addRequest(string employeeId)
         {
             Request request = new Request();
@@ -80,24 +46,9 @@ namespace ADProj.Services
 
 
         }
-        public List<Request> GetRequestList()
+        public List<Request> GetApprovedAndPendingStockRequests()
         {
-            List<Request> requestList = dbcontext.Requests.ToList();
-            foreach (Request req in requestList)
-            {
-                if (req.Status == Enums.Status.Approved || req.Status == Enums.Status.PendingStock)
-                {
-                    new Request
-                    {
-                        Id = req.Id,
-                        EmployeeId = req.EmployeeId,
-                        DateRequested = req.DateRequested,
-                        Status = req.Status,
-                        Comments = req.Comments,
-                    };
-                }
-            }
-            return requestList;
+            return dbcontext.Requests.Where(x => x.Status == Enums.Status.Approved || x.Status == Enums.Status.PendingStock).ToList();
         }
 
         public Request FindRequestbyId(int id)
@@ -125,7 +76,7 @@ namespace ADProj.Services
 
         public int GetNumberOfOutstandingRequests()
         {
-            return GetRequestList().Count();
+            return GetApprovedAndPendingStockRequests().Count();
         }
 
         public List<Request> GetLastFiveRequestsByUserIdOrderByDate(int empId)

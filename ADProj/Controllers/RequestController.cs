@@ -39,8 +39,8 @@ namespace ADProj.Controllers
 
             }
 
-            ViewData["CategoryData"] = rs.GetCategoryList();
-            ViewData["InventoryData"] = rs.GetInventoryList();
+            ViewData["CategoryData"] = inventoryitemservice.CategoryList();
+            ViewData["InventoryData"] = inventoryitemservice.ItemList();
             return View();
 
         }
@@ -65,7 +65,7 @@ namespace ADProj.Controllers
             List<Request> approvedRequest = new List<Request>();
             List<Request> pendingStockRequest = new List<Request>();
 
-            List<Request> requestList = rs.GetRequestList();
+            List<Request> requestList = rs.GetApprovedAndPendingStockRequests();
             foreach (Request request in requestList)
             {
                 //included pending approvalstatus for now to check if it shows up in table html
