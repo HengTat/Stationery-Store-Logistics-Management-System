@@ -45,14 +45,23 @@
     @if (msg != null)
     {
 
-        <script type="text/javascript">
+    <script type="text/javascript">
         window.onload = function () {
-            alert("@msg");
+            if ("@msg" === "Adjustment voucher form has been created!")
+            {
+                swal("Success", "@msg", "success");
+
+            }
+            else if ("@msg" === "Adjust amount has exceeded $250! Please direct to your manager for item adjustment.")
+            {
+                swal("Amount Exceeded", "@msg", "error");
+
+            }
+            else { swal("@msg"); }
         };
-        </script>
+    </script>
     }
 </div>
-
 <div align="center">
 
     <form class="form-horizontal" method="POST" action="" style="margin-top:40px">
@@ -144,7 +153,8 @@
 </div>
 
 
-<script>function checkform() {
+<script>
+    function checkform() {
 
         document.getElementById("demo8").value = parseFloat(document.getElementById("demo4").value) * parseFloat(document.getElementById("demo7").value);
 

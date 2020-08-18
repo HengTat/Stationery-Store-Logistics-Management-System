@@ -83,7 +83,7 @@ namespace ADProj.Controllers
                 // double adjustamt = System.Math.Abs(AdjustAmt);
                 if (itemname == null || AdjustQty == 0)
                 {
-                    TempData["Msg"] = "please must enter all information (reason is optional)";
+                    TempData["Msg"] = "Please enter all information (Reason is optional)";
                     return RedirectToAction("AddAdjustmentVoucher");
                 }
 
@@ -93,7 +93,7 @@ namespace ADProj.Controllers
                 {
 
 
-                    TempData["Msg"] = "The Adjustment Amount is above 250";
+                    TempData["Msg"] = "Adjust amount has exceeded $250! Please direct to your manager for item adjustment.";
 
                     return RedirectToAction("AddAdjustmentVoucher");
                 }
@@ -101,7 +101,7 @@ namespace ADProj.Controllers
                 else
                 {
                     Amv.createAdjustmentVoucher(itemname, AdjustQty, AdjustAmt, reason, employeeId);
-                    TempData["Msg"] = "save successfully";
+                    TempData["Msg"] = "Adjustment voucher form has been created!";
                     return RedirectToAction("AddAdjustmentVoucher");
                     // return RedirectToAction("Index", "AdjustmentVoucher");
                 }
