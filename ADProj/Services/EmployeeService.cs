@@ -96,5 +96,11 @@ namespace ADProj.Services
         {
             return dbcontext.Employees.Where(x => x.DepartmentId == employee.DepartmentId && x.Role == "Employee").ToList();
         }
+
+        public ActingDepartmentHead GetActingDepartmentHeadByDepartment(Department dept)
+        {
+            ActingDepartmentHead actingDepartmentHead = dbcontext.ActingDepartmentHeads.Where(x => x.Employee.Department == dept).FirstOrDefault();
+            return actingDepartmentHead;
+        }
     }
 }

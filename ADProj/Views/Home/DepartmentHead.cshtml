@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewData["Title"] = "Department Head Homepage";
+    int numberOfRequestsPendingApproval = (int)ViewData["numberofRequestsPendingApproval"];
+    Employee currentDeptRep = (Employee)ViewData["currentDeptRep"];
+    ActingDepartmentHead currentActingDepartmentHead = (ActingDepartmentHead)ViewData["currentActingDepartmentHead"];
+}
+
+
+<div class="container">
+    <div class="col-sm-4">
+        <div style="padding : 10px">
+            <div style="padding: 10px; text-align: center; font-size:30px">
+                <h3><b>Pending Approvals: </b></h3>
+                <br />
+                <img src="~/Icons/form.png" alt="formicon" width="100" height="100" />
+                <b><u>@numberOfRequestsPendingApproval</u></b>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <div style="padding : 10px">
+            <div style="padding: 10px; text-align: center; font-size:30px">
+                <h3><b>Current Representative: </b></h3>
+                <br />
+                <img src="~/Icons/person.png" alt="personicon" width="100" height="100" />
+                <b><u>@currentDeptRep.Name</u></b>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+        <div style="padding : 10px">
+            <div style="padding: 10px; text-align: center; font-size:30px">
+                <h3><b>Delegated Authority: </b></h3>
+                <br />
+                <img src="~/Icons/person.png" alt="personicon" width="100" height="100" />
+                <b><u>
+                    @if (currentActingDepartmentHead != null)
+                    {
+                        @currentActingDepartmentHead.Employee.Name
+                    }
+                    else
+                    {
+                        @:Null
+                    }
+                </u></b>
+            </div>
+        </div>
+    </div>
+</div>

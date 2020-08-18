@@ -1019,7 +1019,7 @@ namespace ADProj.DB
 
             //seeing request and requestdetails
 
-            Request request1 = new Request()
+ /*           Request request1 = new Request()
             {
                 EmployeeId = employee3.Id,
                 DateRequested = DateTime.Now,
@@ -1150,9 +1150,9 @@ namespace ADProj.DB
             dbcontext.Add(r5);
 
 
-            dbcontext.SaveChanges();
+            dbcontext.SaveChanges();*/
 
-            //seed retrieval 
+/*            //seed retrieval 
             Retrieval rtv1 = new Retrieval()
             {
                 DateRetrieved = new DateTime(2020, 08, 12),
@@ -1169,6 +1169,220 @@ namespace ADProj.DB
             dbcontext.Update(r3);
             dbcontext.Update(r4);
             dbcontext.Update(r5);
+            dbcontext.SaveChanges();*/
+
+            //requestdetail seeder
+
+/*            // Request seeder
+            //request1
+            RequestDetails rd1 = new RequestDetails()
+            {
+                RequestId = r1.Id,
+                QtyRequested = 10,
+                InventoryItemId = "P030"
+            };
+            dbcontext.Add(rd1);
+
+            RequestDetails rd2 = new RequestDetails()
+            {
+                RequestId = r1.Id,
+                QtyRequested = 10,
+                InventoryItemId = "P031"
+            };
+            dbcontext.Add(rd2);
+
+            //request2
+            RequestDetails rd3 = new RequestDetails()
+            {
+                RequestId = r2.Id,
+                QtyRequested = 10,
+                InventoryItemId = "F020"
+            };
+            dbcontext.Add(rd3);
+
+            RequestDetails rd4 = new RequestDetails()
+            {
+                RequestId = r2.Id,
+                QtyRequested = 10,
+                InventoryItemId = "F021"
+            };
+            dbcontext.Add(rd4);
+
+            //request3
+            RequestDetails rd5 = new RequestDetails()
+            {
+                RequestId = r3.Id,
+                QtyRequested = 10,
+                InventoryItemId = "C001"
+            };
+            dbcontext.Add(rd5);
+
+            RequestDetails rd6 = new RequestDetails()
+            {
+                RequestId = r3.Id,
+                QtyRequested = 150,
+                InventoryItemId = "C002"
+            };
+            dbcontext.Add(rd6);
+
+            RequestDetails rd7 = new RequestDetails()
+            {
+                RequestId = r4.Id,
+                QtyRequested = 10,
+                InventoryItemId = "R001"
+            };
+            dbcontext.Add(rd7);
+
+            RequestDetails rd8 = new RequestDetails()
+            {
+                RequestId = r4.Id,
+                QtyRequested = 10,
+                InventoryItemId = "R002"
+            };
+            dbcontext.Add(rd8);
+
+            RequestDetails rd9 = new RequestDetails()
+            {
+                RequestId = r5.Id,
+                QtyRequested = 10,
+                InventoryItemId = "S040"
+            };
+            dbcontext.Add(rd9);
+
+            RequestDetails rd10 = new RequestDetails()
+            {
+                RequestId = r5.Id,
+                QtyRequested = 10,
+                InventoryItemId = "S041"
+            };
+            dbcontext.Add(rd10);
+
+            dbcontext.SaveChanges();*/
+
+
+            // Request seeder - change requester to David to test Employee homepage to view last 5 request sort by latest date
+            Request r1 = new Request()
+            {
+                EmployeeId = employee2.Id,
+                DateRequested = new DateTime(2020, 08, 05),
+                Status = Status.PendingApproval,
+            };
+
+            dbcontext.Add(r1);
+
+            Request r2 = new Request()
+            {
+                EmployeeId = employee2.Id,
+                DateRequested = new DateTime(2020, 08, 11),
+                Status = Status.PendingApproval,
+            };
+            dbcontext.Add(r2);
+
+            Request r3 = new Request()
+            {
+                EmployeeId = employee2.Id,
+                DateRequested = new DateTime(2020, 08, 07),
+                Status = Status.PendingApproval,
+            };
+            dbcontext.Add(r3);
+
+            Request r4 = new Request()
+            {
+                EmployeeId = employee2.Id,
+                DateRequested = new DateTime(2020, 06, 12),
+                Status = Status.PendingApproval,
+            };
+            dbcontext.Add(r4);
+
+            Request r5 = new Request()
+            {
+                EmployeeId = employee2.Id,
+                DateRequested = new DateTime(2019, 06, 12),
+                Status = Status.PendingApproval,
+            };
+            dbcontext.Add(r5);
+
+
+
+            Request r6 = new Request()
+            {
+                EmployeeId = employee2.Id,
+                DateRequested = new DateTime(2020, 08, 16),
+                Status = Status.Approved,
+            };
+            dbcontext.Add(r6);
+
+
+            Request r7 = new Request()
+            {
+                EmployeeId = employee2.Id,
+                DateRequested = new DateTime(2020, 08, 17),
+                Status = Status.Approved,
+            };
+            dbcontext.Add(r7);
+
+            // To test employee homepage for DeptRep: Cornie
+            Request r8 = new Request()
+            {
+                EmployeeId = employee7.Id,
+                DateRequested = new DateTime(2020, 08, 05),
+                Status = Status.PendingApproval,
+            };
+
+            dbcontext.Add(r8);
+
+            Request r9 = new Request()
+            {
+                EmployeeId = employee7.Id,
+                DateRequested = new DateTime(2020, 08, 11),
+                Status = Status.PendingApproval,
+            };
+            dbcontext.Add(r9);
+
+            Request r10 = new Request()
+            {
+                EmployeeId = employee7.Id,
+                DateRequested = new DateTime(2020, 08, 07),
+                Status = Status.PendingApproval,
+            };
+            dbcontext.Add(r10);
+
+            Request r11 = new Request()
+            {
+                EmployeeId = employee7.Id,
+                DateRequested = new DateTime(2020, 06, 12),
+                Status = Status.PendingApproval,
+            };
+            dbcontext.Add(r11);
+
+            Request r12 = new Request()
+            {
+                EmployeeId = employee7.Id,
+                DateRequested = new DateTime(2019, 06, 12),
+                Status = Status.PendingApproval,
+            };
+            dbcontext.Add(r12);
+
+
+
+            Request r13 = new Request()
+            {
+                EmployeeId = employee7.Id,
+                DateRequested = new DateTime(2020, 08, 16),
+                Status = Status.Approved,
+            };
+            dbcontext.Add(r13);
+
+
+            Request r14 = new Request()
+            {
+                EmployeeId = employee7.Id,
+                DateRequested = new DateTime(2020, 08, 17),
+                Status = Status.Approved,
+            };
+            dbcontext.Add(r14);
+
+
             dbcontext.SaveChanges();
 
             //requestdetail seeder
@@ -1257,8 +1471,161 @@ namespace ADProj.DB
             };
             dbcontext.Add(rd10);
 
+            RequestDetails rd11 = new RequestDetails()
+            {
+                RequestId = r6.Id,
+                QtyRequested = 10,
+                InventoryItemId = "S041"
+            };
+            dbcontext.Add(rd11);
+
+            RequestDetails rd12 = new RequestDetails()
+            {
+                RequestId = r6.Id,
+                QtyRequested = 10,
+                InventoryItemId = "S041"
+            };
+            dbcontext.Add(rd12);
+
+            RequestDetails rd13 = new RequestDetails()
+            {
+                RequestId = r7.Id,
+                QtyRequested = 10,
+                InventoryItemId = "S041"
+            };
+            dbcontext.Add(rd13);
+
+
+            // seed request details for dept rep to test employee homepage for dept rep: Cornie
+            RequestDetails rd14 = new RequestDetails()
+            {
+                RequestId = r8.Id,
+                QtyRequested = 10,
+                InventoryItemId = "P030"
+            };
+            dbcontext.Add(rd14);
+
+            RequestDetails rd15 = new RequestDetails()
+            {
+                RequestId = r8.Id,
+                QtyRequested = 10,
+                InventoryItemId = "P031"
+            };
+            dbcontext.Add(rd15);
+
+            //request2
+            RequestDetails rd16 = new RequestDetails()
+            {
+                RequestId = r9.Id,
+                QtyRequested = 10,
+                InventoryItemId = "F020"
+            };
+            dbcontext.Add(rd16);
+
+            RequestDetails rd17 = new RequestDetails()
+            {
+                RequestId = r9.Id,
+                QtyRequested = 10,
+                InventoryItemId = "F021"
+            };
+            dbcontext.Add(rd17);
+
+            //request3
+            RequestDetails rd18 = new RequestDetails()
+            {
+                RequestId = r10.Id,
+                QtyRequested = 10,
+                InventoryItemId = "C001"
+            };
+            dbcontext.Add(rd18);
+
+            RequestDetails rd19 = new RequestDetails()
+            {
+                RequestId = r10.Id,
+                QtyRequested = 150,
+                InventoryItemId = "C002"
+            };
+            dbcontext.Add(rd19);
+
+            RequestDetails rd20 = new RequestDetails()
+            {
+                RequestId = r11.Id,
+                QtyRequested = 10,
+                InventoryItemId = "R001"
+            };
+            dbcontext.Add(rd20);
+
+            RequestDetails rd21 = new RequestDetails()
+            {
+                RequestId = r11.Id,
+                QtyRequested = 10,
+                InventoryItemId = "R002"
+            };
+            dbcontext.Add(rd21);
+
+            RequestDetails rd22 = new RequestDetails()
+            {
+                RequestId = r12.Id,
+                QtyRequested = 10,
+                InventoryItemId = "S040"
+            };
+            dbcontext.Add(rd22);
+
+            RequestDetails rd23 = new RequestDetails()
+            {
+                RequestId = r12.Id,
+                QtyRequested = 10,
+                InventoryItemId = "S041"
+            };
+            dbcontext.Add(rd23);
+
+            RequestDetails rd24 = new RequestDetails()
+            {
+                RequestId = r13.Id,
+                QtyRequested = 10,
+                InventoryItemId = "S041"
+            };
+            dbcontext.Add(rd24);
+
+            RequestDetails rd25 = new RequestDetails()
+            {
+
+                RequestId = r13.Id,
+                QtyRequested = 10,
+                InventoryItemId = "S041"
+            };
+            dbcontext.Add(rd25);
+
+            RequestDetails rd26 = new RequestDetails()
+            {
+                RequestId = r14.Id,
+                QtyRequested = 10,
+                InventoryItemId = "S041"
+            };
+            dbcontext.Add(rd25);
+
             dbcontext.SaveChanges();
 
+            //seed retrieval 
+            Retrieval rtv1 = new Retrieval()
+            {
+                DateRetrieved = new DateTime(2020, 08, 12),
+                EmployeeId = 2
+            };
+            dbcontext.Add(rtv1);
+            dbcontext.SaveChanges();
+
+            //update requests with retrievalId
+
+            r3.RetrievalId = rtv1.Id;
+            r4.RetrievalId = rtv1.Id;
+            r5.RetrievalId = rtv1.Id;
+            dbcontext.Update(r3);
+            dbcontext.Update(r4);
+            dbcontext.Update(r5);
+            dbcontext.SaveChanges();
+
+            //Seed Supplier Stationery
 
             SupplierStationery stationery1 = new SupplierStationery()
             {

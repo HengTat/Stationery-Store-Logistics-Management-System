@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ADProj.Enums;
 using ADProj.Models;
 using ADProj.Services;
 using Microsoft.AspNetCore.Http;
@@ -47,7 +48,23 @@ namespace ADProj.Controllers
                 HttpContext.Session.SetString("id", employee.Id.ToString());
                 HttpContext.Session.SetString("role", employee.Role);
 
-                return RedirectToAction("Index", "Home");
+                string role = HttpContext.Session.GetString("role");
+
+                switch (role)
+                {
+                    case EmployeeRole.DEPTHEAD:
+                        return RedirectToAction("DepartmentHead", "Home");
+                    case EmployeeRole.STORECLERK:
+                        return RedirectToAction("StoreClerk", "Home");
+                    /*                    
+                    case EmployeeRole.STORESUPERVISOR:
+                        return RedirectToAction("", "");
+                    case EmployeeRole.STOREMANAGER:
+                        return RedirectToAction("", "");
+                        */
+                    default:
+                        return RedirectToAction("Employee", "Home");
+                }
             }
             bool pwdcheck2 = es.PasswordCheck(actingDepartmentHead.Employee, hashPassword);
             if (pwdcheck2 == false)
@@ -59,7 +76,7 @@ namespace ADProj.Controllers
             HttpContext.Session.SetString("id", actingDepartmentHead.EmployeeId.ToString());
             HttpContext.Session.SetString("role", "ActingHead");
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("DepartmentHead", "Home");
         }
 
         public IActionResult Logout()

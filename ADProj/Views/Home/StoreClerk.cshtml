@@ -1,0 +1,52 @@
+﻿
+@{
+    ViewData["Title"] = "StoreClerk";
+    int numberOfOutstandingRequests = (int)ViewData["numberOfOutstandingRequests"];
+    List<InventoryItem> itemsRequiringReorder = (List<InventoryItem>)ViewData["itemsRequiringReorder"];
+}
+
+
+<div class="container">
+    <div class="col-sm-4">
+        <div style="padding : 10px">
+            <div style="padding: 10px; text-align: center">
+                <img src="~/Icons/form.png" alt="formicon" width="100" height="100" />
+                <h2>Outstanding Requests:</h2>
+                <br />
+                <h1><b><u><a href="~/Request/Outstanding">@numberOfOutstandingRequests</a></u></b></h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-8">
+        <div style="padding : 10px">
+            <div style="padding: 10px; text-align: center">
+                <img src="~/Icons/pencil.png" alt="pencilicon" width="100" height="100" />
+                <h2>Items Requiring Reorder</h2>
+                <br />
+                <table class="table table-bordered">
+                    <thead style="background-color:lightgrey">
+                        <tr align="center">
+                            <th>Item Code</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                            <th>Quantity in stock</th>
+                            <th>Reorder Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (InventoryItem item in itemsRequiringReorder)
+                        {
+                            <tr>
+                                <td>@item.Id</td>
+                                <td>@item.ItemCategory.Name</td>
+                                <td>@item.Description</td>
+                                <td>@item.QtyInStock</td>
+                                <td>@item.ReorderQty</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

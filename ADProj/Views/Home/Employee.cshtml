@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewData["Title"] = "Employee";
+    List<Request> lastFiveRequests = (List<Request>)ViewData["lastFiveRequests"];
+}
+
+
+<div class="container">
+    <div style="padding : 10px">
+        <div style="padding: 10px; text-align: center">
+            <h1><b>Your Last 5 Requests</b></h1>
+            <img src="~/Icons/folder.png" alt="foldericon" width="100" height="100" />
+
+            <table class="table table-bordered">
+                <thead style="background-color:lightgrey">
+                    <tr align="center">
+                        <th>RequestId</th>
+                        <th>DateRequested</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Request request in lastFiveRequests)
+                    {
+                        <tr>
+                            <td>@request.Id</td>
+                            <td>@request.DateRequested</td>
+                            <td>@request.Status</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

@@ -118,6 +118,21 @@ namespace ADProj.Services
             return Listofrequestpendingapproval;
         }
 
+        public int GetNumberOfPendingRequestsByDepartmentHead(int deptHeadId)
+        {
+            return FindPendingRequestByDepartmenthead(deptHeadId).Count();
+        }
+
+        public int GetNumberOfOutstandingRequests()
+        {
+            return GetRequestList().Count();
+        }
+
+        public List<Request> GetLastFiveRequestsByUserIdOrderByDate(int empId)
+        {
+            return dbcontext.Requests.Where(x => x.EmployeeId == empId).OrderByDescending(x => x.DateRequested).Take(5).ToList();
+        }
+
         public List<Request> GetRequestsByRetrievalId(int retrievalId)
         {
             return dbcontext.Requests.Where(x => x.RetrievalId == retrievalId).ToList();
