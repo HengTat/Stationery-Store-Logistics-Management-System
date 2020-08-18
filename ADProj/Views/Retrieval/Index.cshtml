@@ -1,40 +1,28 @@
 ﻿
 @{
-    ViewData["Title"] = "Retrieval Form";
-    var rtList = (List<RetrievalDetails>)ViewData["retrieveList"];
-    string retId =(Convert.ToString(ViewData["retId"])).ToUpper();
+    ViewData["Title"] = "Retrieval List";
+    var rtList=(List<Retrieval>)ViewData["rtList"];
 }
-
     <form method="post" style="margin-bottom:40px" action="/Disbursement/Generate">
         <div class="container" align="center">
-            <h2>Retrieval Form ID - @retId</h2>
+            <h2>Retrieval Records</h2>
             <table class="table table-bordered" style="width:500px; margin-top:20px">
                 <thead>
                     <tr>
-                        <th>Item Code</th>
-                        <th>Category</th>
-                        <th>Description</th>
-                        <th>Qty</th>
-                        <th>UOM</th>
+                        <th>Date</th>
+                        <th>ID</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var rtd in rtList)
                     {
                         <tr>
-                            <td>@rtd.InventoryItemId</td>
-                            <td>@rtd.InventoryItem.ItemCategory.Name</td>
-                            <td>@rtd.InventoryItem.Description</td>
-                            <td>@rtd.QtyNeeded</td>
-                            <td>@rtd.InventoryItem.UOM</td>
+                            <td>@rtd.DateRetrieved</td>
+                            <td><a href="/Retrieval/RetrievalDetails?rId=@rtd.Id">RT @rtd.Id</a></td>
                         </tr>
                     }
                 </tbody>
             </table>
-            <div class="col-sm-12">
-                <button type="submit" class="btn btn-primary">Generate Disbursement List</button>
-                <input id="retrievalId" name="retrievalId" value="1" type="hidden" />
-            </div>
         </div>
     </form>
 

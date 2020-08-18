@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewData["Title"] = "Retrieval List";
+    var rtd=(List<RetrievalDetails>)ViewData["rtd"];
+    var rId = ViewData["rId"];
+}
+    <form method="post" style="margin-bottom:40px" action="/Disbursement/Generate">
+        <div class="container" align="center">
+            <h2>Retrieval Form ID - @rId</h2>
+            <table class="table table-bordered" style="width:500px; margin-top:20px">
+                <thead>
+                    <tr>
+                        <th>Item Code</th>
+                        <th>Description</th>
+                        <th>Bin</th>
+                        <th>Qty</th>
+                        <th>UOM</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var r in rtd)
+                    {
+                    <tr>
+                        <td>@r.InventoryItemId</td>
+                        <td>@r.InventoryItem.Description</td>
+                        <td>@r.InventoryItem.Bin</td>
+                        <td>@r.QtyNeeded</td>
+                        <td>@r.InventoryItem.UOM</td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </form>
+

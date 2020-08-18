@@ -19,13 +19,20 @@ namespace ADProj.Controllers
         }
         public IActionResult Index()
         {
+            List<Retrieval> retrivals = rs.GetRetrievals();
+            ViewData["rtList"] = retrivals;
+            return View();
+        }
+
+        public IActionResult GenerateRetrievalList()
+        {
             Dictionary<string, int> retrieveList = new Dictionary<string, int>();
             List<Request> requests = rs.RetrieveApprovedRequest();
             int empId = Convert.ToInt32(HttpContext.Session.GetString("id"));
             foreach (Request r in requests)
             {
                 List<RequestDetails> rds = rs.FindRquestDetailsById(r.Id);
-                foreach(RequestDetails rd in rds)
+                foreach (RequestDetails rd in rds)
                 {
                     if (retrieveList.ContainsKey(rd.InventoryItemId))
                     {
@@ -44,6 +51,14 @@ namespace ADProj.Controllers
             List<RetrievalDetails> rtList = rs.FindRetrievalDetails(retId);
             ViewData["retrieveList"] = rtList;
             ViewData["retId"] = retId;
+            return View();
+        }
+
+        public IActionResult RetrievalDetails(int rId)
+        {
+            List<RetrievalDetails> rtd = rs.FindRetrievalDetails(rId);
+            ViewData["rtd"] = rtd;
+            ViewData["rId"] = rId;
             return View();
         }
     }
