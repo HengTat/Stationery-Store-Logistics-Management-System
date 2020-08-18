@@ -69,7 +69,7 @@ namespace ADProj.Controllers
             foreach (Request request in requestList)
             {
                 //included pending approvalstatus for now to check if it shows up in table html
-                if (request.Status == Enums.Status.Approved || request.Status == Enums.Status.PendingApproval)
+                if (request.Status == Enums.Status.Approved)
                 {
                     approvedRequest.Add(request);
                 }
