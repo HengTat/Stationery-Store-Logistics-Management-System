@@ -36,7 +36,7 @@ namespace ADProj.Controllers
                 }
                 return View();
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
         }
 
         public IActionResult AddDepartment()
@@ -51,7 +51,7 @@ namespace ADProj.Controllers
                 }
                 return View();
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
         }
 
         //[HttpPost]
@@ -71,14 +71,16 @@ namespace ADProj.Controllers
                 dept.Name = name;
                 dept.CollectionPointId = cpId;
                 ds.AddDepartment(empId, dept);
+                TempData["alertMsg"] = "Department is successfully created!";
                 return RedirectToAction("Index");
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
         }
 
 
         public IActionResult EditDepartment(string deptId)
         {
+            ViewData["alertMsg"] = TempData["alertMsg"];
             if (HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER)
             {
                 List<CollectionPoint> cplist = cps.ListCollectionPoints();
@@ -88,7 +90,7 @@ namespace ADProj.Controllers
 
                 return View("UpdateDepartment");
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
         }
 
 
@@ -101,7 +103,7 @@ namespace ADProj.Controllers
                 if (!(deptId != null && name != null))
                 {
                     TempData["alertMsg"] = "Please enter all information";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("EditDepartment", new { deptId });
                 }
                 dept = ds.GetDepartmentById(deptId);
                 dept.Id = deptId;
@@ -111,7 +113,7 @@ namespace ADProj.Controllers
                 TempData["alertMsg"] = "Updated successfully!";
                 return RedirectToAction("Index");
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
         }
 
         public IActionResult DeleteDepartment(string deptId)
@@ -124,7 +126,7 @@ namespace ADProj.Controllers
                 TempData["alertMsg"] = "Deleted successfully!";
                 return RedirectToAction("Index");
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
         }
 
     }

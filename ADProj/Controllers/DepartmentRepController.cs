@@ -35,7 +35,7 @@ namespace ADProj.Controllers
 
             if (!(HttpContext.Session.GetString("role") == EmployeeRole.DEPTREP))
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
             }
 
             Department dept = null;

@@ -35,7 +35,7 @@ namespace ADProj.Controllers
                 }
                 return View();
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
         }
 
         public IActionResult AddCollectionPoint()
@@ -50,7 +50,7 @@ namespace ADProj.Controllers
                 }
                 return View();
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
         }
 
         //[HttpPost]
@@ -70,14 +70,16 @@ namespace ADProj.Controllers
                 cp.Time = time;
                 cp.EmployeeId = clerkId;
                 cps.AddCollectionPoint(empId, cp);
+                TempData["alertMsg"] = "Collection point is successfully created!";
                 return RedirectToAction("Index");
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
         }
 
 
         public IActionResult EditCollectionPoint(int cpId)
         {
+            ViewData["alertMsg"] = TempData["alertMsg"];
             if (HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER)
             {
                 List<Employee> clerkList = es.GetAllClerks();
@@ -87,7 +89,7 @@ namespace ADProj.Controllers
 
                 return View("UpdateCollectionPoint");
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
         }
 
 
@@ -100,7 +102,7 @@ namespace ADProj.Controllers
                 if (!(name != null && time != null))
                 {
                     TempData["alertMsg"] = "Please enter all information";
-                    return RedirectToAction("Index");
+                    return RedirectToAction("EditCollectionPoint", new{cpId});
                 }
                 cp = cps.GetCollectionPointById(cpId);
                 
@@ -111,7 +113,7 @@ namespace ADProj.Controllers
                 TempData["alertMsg"] = "Collection point has been updated!";
                 return RedirectToAction("Index");
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
         }
 
         public IActionResult DeleteCollectionPoint(int cpId)
@@ -124,7 +126,7 @@ namespace ADProj.Controllers
                 TempData["alertMsg"] = "Deleted successfully!";
                 return RedirectToAction("Index");
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
         }
 
     }

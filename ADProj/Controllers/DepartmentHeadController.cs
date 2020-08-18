@@ -30,7 +30,7 @@ namespace ADProj.Controllers
             int empId = Convert.ToInt32(HttpContext.Session.GetString("id"));
             if (!(HttpContext.Session.GetString("role") == EmployeeRole.DEPTHEAD || HttpContext.Session.GetString("role") == "ActingHead"))
             {
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
             }
 
             Department dept = null;
