@@ -9,11 +9,15 @@
 {
     <script type="text/javascript">
         window.onload = function () {
-            alert("@msg");
+            if ("@msg" === "Collection point has been updated!")
+            {
+                swal("Success", "@msg", "success");
+
+            }
+            else { swal("@msg"); }
         };
     </script>
 }
-
 
 <div class="container">
     <h1 style="text-align:center"> Collection Points </h1>

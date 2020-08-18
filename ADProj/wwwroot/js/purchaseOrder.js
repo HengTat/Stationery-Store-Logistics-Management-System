@@ -12,21 +12,21 @@ $(document).ready(function () {
         var UOM = $("#uom").val();
         var cat = $("#cat").val();
 
+        if (txtDescription == "" || txtDescription == "Select Item") {
+            swal("Please select an item");
+            return;
+        }
+        if (txtSupplier == "" || txtSupplier == "Select a supplier") {
+            swal("Please select a supplier");
+            return;
+        }
         if (qty <= 0) {
-            alert("Please enter a positive quantity");
+            swal("Please enter a positive quantity");
             return;
         }
 
         if (qty > 99) {
-            alert("Unable make a request for more than 99 items");
-            return;
-        }
-        if (txtSupplier == "" || txtSupplier == "Select a supplier") {
-            alert("Please choose a supplier");
-            return;
-        }
-        if (txtDescription == "" || txtDescription == "Select Item") {
-            alert("Please choose an item");
+            swal("Unable make a request for more than 99 items");
             return;
         }
 
@@ -66,6 +66,7 @@ $(document).ready(function () {
             + 'Delete</button>'
 
         $('td:nth-child(6),th:nth-child(6)').hide();
+        swal("Item has been added to the list");
 
         //Disable dropdown box to restrict 1 supplier
         document.getElementById("selectOne").disabled = true;
@@ -87,7 +88,8 @@ $(document).ready(function () {
         //valid if submitting an empty table
         var tbody = $("#tblOrderDetails tbody");
         if (tbody.children().length == 0) {
-            alert("Unable to submit an empty request form");
+            swal("Error!", "Unable to submit an empty form", "error");
+
             return;
         }
 
@@ -108,20 +110,43 @@ $(document).ready(function () {
             data: JSON.stringify(orderDetails),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            success: function () {
+            success: function (msg) {
             }
-
         });
         $("#tblOrderDetails tbody tr").remove();
         //Enable combox box after submitting form
         document.getElementById("selectOne").disabled = false;
 
+        swal("Success!", "Purchase order form has been created", "success");
+
     });
 
+
+
+
     $("#btnReset").click(function (event) {
-        $("#tblOrderDetails tbody tr").remove();
-        //Enable combox box after resetting form
-        document.getElementById("selectOne").disabled = false;
+
+        var tbody = $("#tblOrderDetails tbody");
+        if (tbody.children().length != 0) {
+
+            swal({
+                title: "Are you sure you want to clear the list?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $("#tblOrderDetails tbody tr").remove();
+                        //Enable combox box after resetting form
+                        document.getElementById("selectOne").disabled = false;
+                        swal("Purchase form has been cleared", {
+                            icon: "success",
+                        });
+                    } else {
+                    }
+                });
+        }
     });
 
     $(document).on('click', '.btn_Delete', function () {

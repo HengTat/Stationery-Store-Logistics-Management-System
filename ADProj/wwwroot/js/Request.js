@@ -11,17 +11,21 @@ $(document).ready(function () {
         var qty = $("#requestQty").val();
 
         //validations for quantity, category,item
+        if (txtCategroy == "" || txtCategroy == "Select Category") {
+            swal("Please select a category");
+            return;
+        }
+        if (txtDescription == "" || txtDescription == "Select Item") {
+            swal("Please select a category");
+            return;
+        }
         if (qty <= 0) {
-            alert("Please enter a positive quantity");
+            swal("Please enter a positive quantity");
             return;
         }
 
         if (qty > 99) {
-            alert("Unable make a request for more than 99 items");
-            return;
-        }
-        if (txtDescription == "" || txtDescription == "Select Item") {
-            alert("Please choose an item");
+            swal("Unable make a request for more than 99 items");
             return;
         }
 
@@ -48,6 +52,7 @@ $(document).ready(function () {
         var cell4Text = document.createTextNode(txtQty);
         cell4.appendChild(cell4Text);
 
+
         cell5.innerHTML = '<button class="btn_Delete" type="button">'
             + 'Delete</button>'
         $("#selectOne").val('');
@@ -58,6 +63,7 @@ $(document).ready(function () {
 
         $('td:nth-child(3),th:nth-child(3)').hide();
 
+        swal("Item has been added to the list");
     })
     $(".btn_Delete").click(function (event) {
         var currentTr = $(this).closest('tr');
@@ -68,7 +74,7 @@ $(document).ready(function () {
         //valid if submitting an empty table
         var tbody = $("#tblRequestsDetails tbody");
         if (tbody.children().length == 0) {
-            alert("Unable to submit an empty request form");
+            swal("Error!", "Unable to submit an empty form", "error");
             return;
         }
 
@@ -94,10 +100,31 @@ $(document).ready(function () {
         });
         $("#tblRequestsDetails tbody tr").remove();
 
+        swal("Success", "Your request has been submitted!", "success");
+
     });
 
     $("#btnReset").click(function (event) {
-        $("#tblRequestsDetails tbody tr").remove();
+        var tbody = $("#tblRequestsDetails tbody");
+        if (tbody.children().length != 0) {
+            swal({
+                title: "Are you sure you want to clear the list?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        $("#tblRequestsDetails tbody tr").remove();
+                        //Enable combox box after resetting form
+                        document.getElementById("selectOne").disabled = false;
+                        swal("Request form has been cleared", {
+                            icon: "success",
+                        });
+                    } else {
+                    }
+                });
+        }
     });
 
     $(document).on('click', '.btn_Delete', function () {

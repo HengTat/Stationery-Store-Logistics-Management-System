@@ -9,7 +9,11 @@
 {
     <script type="text/javascript">
         window.onload = function () {
-            alert("@msg");
+            if ("@msg" === "Item has been created!") {
+                swal("Success", "@msg", "success");
+
+            }
+            else { swal("@msg"); }
         };
     </script>
 }

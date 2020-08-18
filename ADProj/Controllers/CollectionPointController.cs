@@ -108,7 +108,7 @@ namespace ADProj.Controllers
                 cp.Time = time;
                 cp.EmployeeId = clerkId;
                 cps.UpdateCollectionPoint(empId, cp);
-                TempData["alertMsg"] = "Updated successfully!";
+                TempData["alertMsg"] = "Collection point has been updated!";
                 return RedirectToAction("Index");
             }
             return RedirectToAction("Index", "Home");
