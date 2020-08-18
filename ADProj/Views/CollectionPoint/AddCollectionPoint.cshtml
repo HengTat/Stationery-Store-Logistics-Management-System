@@ -9,7 +9,12 @@
 {
     <script type="text/javascript">
         window.onload = function () {
-            swal("@msg");
+            if ("@msg" === "Collection point has been updated!")
+            {
+                swal("Success", "@msg", "success");
+
+            }
+            else { swal("@msg"); }
         };
     </script>
 }
