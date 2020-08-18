@@ -38,13 +38,12 @@ namespace ADProj.Controllers
                         retrieveList[rd.InventoryItemId] = rd.QtyRequested;
                     }
                 }
-
-                int retId = rs.CreateRetrieval(empId, requests);
-                rs.CreateRetrievalDetails(retId, retrieveList);
-                List<RetrievalDetails> rtList = rs.FindRetrievalDetails(retId);
-                ViewData["retrieveList"] = rtList;
-                ViewData["retId"] = retId;
             }
+            int retId = rs.CreateRetrieval(empId, requests);
+            rs.CreateRetrievalDetails(retId, retrieveList);
+            List<RetrievalDetails> rtList = rs.FindRetrievalDetails(retId);
+            ViewData["retrieveList"] = rtList;
+            ViewData["retId"] = retId;
             return View();
         }
     }
