@@ -1,5 +1,9 @@
 ﻿@using Microsoft.AspNetCore.Http
-@{ string role = (string)Context.Session.GetString("role"); }
+@{ string role = (string)Context.Session.GetString("role");
+    string name = (string)Context.Session.GetString("name");
+    string id = (string)Context.Session.GetString("id");
+    string userimageurl = "/employeeimages/" + @id + ".jpg";
+    }
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -178,6 +182,7 @@
                     } }
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li><a>Welcome @name ! <img src=@userimageurl onerror="this.src='/employeeimages/avatarimage.png'" style="border-radius:28px; width:50px" /></a></li>
                 <li><a asp-controller="Account" asp-action="PasswordChange"><span class="glyphicon glyphicon-lock"></span> Change Password</a></li>
                 <li><a asp-controller="Account" asp-action="Logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
             </ul>

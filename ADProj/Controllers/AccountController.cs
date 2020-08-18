@@ -47,7 +47,7 @@ namespace ADProj.Controllers
                 //employee validated, store username in session, redirect to Home
                 HttpContext.Session.SetString("id", employee.Id.ToString());
                 HttpContext.Session.SetString("role", employee.Role);
-
+                HttpContext.Session.SetString("name", employee.Name);
                 string role = HttpContext.Session.GetString("role");
 
                 switch (role)
