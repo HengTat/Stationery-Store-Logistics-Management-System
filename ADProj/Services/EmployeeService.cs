@@ -65,6 +65,11 @@ namespace ADProj.Services
             dbcontext.SaveChanges();
         }
 
+        public bool PasswordDoubleCheck(string NewPassword, string ConfirmPassword)
+        {
+            return (NewPassword == ConfirmPassword);
+        }
+
         public ActingDepartmentHead CurrentDelegate(Employee employee)
         {
             DateTime currentDate = DateTime.Today;

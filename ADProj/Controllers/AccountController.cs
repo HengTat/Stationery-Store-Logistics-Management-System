@@ -90,13 +90,14 @@ namespace ADProj.Controllers
         {
             return View("ChangePassword");
         }
-        public IActionResult ChangePassword([FromServices] EmployeeService es, string hashPassword, string newPassword)
+        public IActionResult ChangePassword([FromServices] EmployeeService es, string hashPassword, string newPassword, string confirmPassword)
         {
             int employeeId = int.Parse(HttpContext.Session.GetString("id"));
             Employee employee = es.GetEmployeeById(employeeId);
+            bool comfirmPW = es.PasswordDoubleCheck(newPassword, confirmPassword);
             bool checkPW = es.PasswordCheck(employee, hashPassword);
-            if (hashPassword != null && newPassword != null && checkPW == true)
-            {
+            if (hashPassword != null && newPassword != null && confirmPassword != null && checkPW == true && comfirmPW == true)
+                {
                 es.ChangePassword(employee, newPassword);
                 HttpContext.Session.Clear();
                 TempData.Clear();
