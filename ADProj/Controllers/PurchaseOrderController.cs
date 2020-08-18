@@ -23,6 +23,9 @@ namespace ADProj.Controllers
 
         public IActionResult Index()
         {
+            List<PurchaseOrder> poHistory = poService.GetPOList();
+            poHistory.Reverse();
+            ViewData["poHistory"] = poHistory;
             return View();
         }
 
@@ -41,6 +44,13 @@ namespace ADProj.Controllers
             int newPOId = poService.addPO(supplierId);
             poService.addPODetails(newPOId, data);
             return View();
+        }
+        public IActionResult Details(int id)
+        {
+            List<PurchaseOrderDetails> podList = poService.FindPODetailByPOId(id);
+            ViewData["poId"] = id;
+            ViewData["ListofPO"] = podList;
+            return View("Details");
         }
     }
 

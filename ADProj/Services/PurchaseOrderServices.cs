@@ -38,5 +38,16 @@ namespace ADProj.Services
                 dbcontext.SaveChanges();
             }
         }
+        public List<PurchaseOrder> GetPOList()
+        {
+            List<PurchaseOrder> poList = dbcontext.PurchaseOrders.ToList();
+            return poList;
+        }
+
+        public List<PurchaseOrderDetails> FindPODetailByPOId(int id)
+        {
+            return dbcontext.PurchaseOrderDetails.Where(x => x.PurchaseOrderId == id).ToList();
+
+        }
     }
 }

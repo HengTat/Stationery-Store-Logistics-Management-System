@@ -2,4 +2,42 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    ViewData["Title"] = "Purchase Order History";
+    var poList = (List<PurchaseOrder>)ViewData["poHistory"];
 }
+
+<div class="text-center">
+    <h1 class="display-4">@ViewData["Title"]</h1>
+</div>
+
+<div class="container" align="center" style="margin-bottom:40px">
+    <table id="tblFufill" class="table table-bordered" style="margin-top:20px; text-align:center">
+        <thead>
+            <tr align="center" style="background-color:lightgrey">
+                <th style="width:100px; text-align:center">Purchase Order Id</th>
+                <th style="width:50px; text-align:center">Date raised</th>
+                <th style="width:50px; text-align:center">Supplier Id</th>
+                <th style="width:50px; text-align:center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var po in poList)
+            {
+
+                string id = po.Id.ToString();
+                string viewdetailurl = "/PurchaseOrder/Details/" + id;
+
+                <tr>
+                    <td>@po.Id</td>
+                    <td>@po.Date</td>
+                    <td>@po.SupplierId</td>
+                    <td>
+                        <form action=@viewdetailurl>
+                            <input type="submit" value="View Details >" />
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

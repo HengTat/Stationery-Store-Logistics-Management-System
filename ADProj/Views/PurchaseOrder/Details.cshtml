@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Purchase Order Details";
+    var details = (List<PurchaseOrderDetails>)ViewData["ListofPO"];
+    var poId = (int)ViewData["poId"];
+}
+
+<a href="/PurchaseOrder/Index"><h4> < View Puchase Order History </h4> </a>
+
+<div align="center">
+    <img src="~/Icons/Listicon.png" alt="listicon" width="260" height="130" />
+    <h1>Purchase Order Id: @poId</h1>
+
+    <div class="container" align="center" style="margin-bottom:40px">
+        <table class="table table-bordered" style="margin-top:20px; text-align:center">
+            <thead>
+                <tr style="background-color:lightgrey">
+                    <th style="width:50px; text-align:center">Supplier Id</th>
+                    <th style="width:50px; text-align:center">Item Id</th>
+                    <th style="width:50px; text-align:center">Quantity Id</th>
+                    <th style="width:50px; text-align:center">UOM</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in details)
+                {
+                    <tr>
+                        <td>
+                            @item.PurchaseOrder.SupplierId
+                        </td>
+                        <td>
+                            @item.InventoryItemId
+                        </td>
+                        <td>
+                            @item.Qty
+                        </td>
+                        <td>
+                            @item.InventoryItem.UOM
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+</div>

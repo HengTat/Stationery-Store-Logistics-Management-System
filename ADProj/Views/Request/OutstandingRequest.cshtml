@@ -38,8 +38,8 @@
     <table id="tblFufill" class="table table-bordered" style="margin-top:20px; text-align:center">
         <thead>
             <tr align="center">
-                <th style="width:100px; text-align:center">Request Date</th>
-                <th style="width:50px; text-align:center">Request Id</th>
+                <th style="width:100px; text-align:center">Request Id</th>
+                <th style="width:50px; text-align:center">Request Date</th>
                 <th style="width:50px; text-align:center">Details</th>
             </tr>
         </thead>
@@ -51,8 +51,8 @@
                 string viewdetailurl = "/Request/OutstandingDetails/" + id;
 
                 <tr>
-                    <td>@canFufill.DateRequested</td>
                     <td>@canFufill.Id</td>
+                    <td>@canFufill.DateRequested</td>
                     <td>
                         <form action=@viewdetailurl>
                             <input type="submit" value="View Details >" />
@@ -94,8 +94,8 @@
     <table class="table table-bordered" style="margin-top:20px; text-align:center" id="tblPendingStock">
         <thead>
             <tr>
-                <th style="width:100px; text-align:center">Request Date</th>
-                <th style="width:20px; text-align:center">Request Id</th>
+                <th style="width:100px; text-align:center">Request Id</th>
+                <th style="width:20px; text-align:center">Request Date</th>
                 <th style="width:50px; text-align:center">Details</th>
             </tr>
         </thead>
@@ -105,8 +105,8 @@
                 string id = cannotFufill.Id.ToString();
                 string viewdetailurl = "/Request/OutstandingDetails/" + id;
                 <tr>
-                    <td>@cannotFufill.DateRequested</td>
                     <td>@cannotFufill.Id</td>
+                    <td>@cannotFufill.DateRequested</td>
                     <td>
                         <form action=@viewdetailurl>
                             <input type="submit" value="View Details >" />
