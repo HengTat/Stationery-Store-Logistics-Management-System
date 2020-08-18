@@ -159,7 +159,7 @@ namespace ADProj.Services
                     foreach (RequestDetails rd in ListofRequestdetail)
                     {
                         InventoryItem item = adProjContext.InventoryItems.Find(rd.InventoryItemId);
-                        item.QtyInStock = item.RequestQty + rd.QtyRequested;
+                        item.RequestQty += rd.QtyRequested;
                     }
                     adProjContext.SaveChanges();
                 }
