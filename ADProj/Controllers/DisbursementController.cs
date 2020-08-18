@@ -14,12 +14,14 @@ namespace ADProj.Controllers
         private RequestServices rs;
         private RequestDetailService rds;
         private DisbursementService ds;
+        private Emailservice ems;
 
-        public DisbursementController(RequestServices rs, RequestDetailService rds, DisbursementService ds)
+        public DisbursementController(RequestServices rs, RequestDetailService rds, DisbursementService ds, Emailservice ems)
         {
             this.rs = rs;
             this.rds = rds;
             this.ds = ds;
+            this.ems = ems;
         }
 
         public static DateTime GetNextWeekday(DateTime today, DayOfWeek day)
@@ -47,7 +49,9 @@ namespace ADProj.Controllers
             {
                 DateTime nextMonday = GetNextWeekday(DateTime.Today.AddDays(1), DayOfWeek.Monday);
                 int disbursementId = ds.GenerateDisbursement(DateTime.Today, nextMonday, grp.Key);
-                currentDisbursements.Add(ds.GetDisbursementById(disbursementId));
+                Disbursement currentDisbursement = ds.GetDisbursementById(disbursementId);
+                ems.sendDisbursementEmail((int)currentDisbursement.Department.DepartmentRepId, nextMonday, currentDisbursement.Department.CollectionPoint.Time, currentDisbursement.Department.CollectionPoint.Name);
+                currentDisbursements.Add(currentDisbursement);
                 List<RequestDetails> deptRequestDetails = new List<RequestDetails>();
                 foreach (var req in grp)
                 {

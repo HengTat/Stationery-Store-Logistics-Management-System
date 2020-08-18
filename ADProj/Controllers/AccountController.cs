@@ -108,6 +108,11 @@ namespace ADProj.Controllers
 
         public IActionResult Delegate([FromServices] EmployeeService es)
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.DEPTHEAD))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
+
             int employeeId = int.Parse(HttpContext.Session.GetString("id"));
             Employee employee = es.GetEmployeeById(employeeId);
             ActingDepartmentHead currentDelegate = es.CurrentDelegate(employee);
@@ -127,13 +132,21 @@ namespace ADProj.Controllers
 
         public IActionResult CancelDelegation([FromServices] EmployeeService es, [FromServices] Emailservice ems, int id)
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.DEPTHEAD))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
             es.DeleteActingDepartmentHead(id);
             ems.sendDelegateCancellationEmail(id);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("DepartmentHead", "Home");
         }
 
         public IActionResult ConfirmDelegation([FromServices] EmployeeService es, [FromServices] Emailservice ems, int employeeId, DateTime startDate, DateTime endDate)
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.DEPTHEAD))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
             //check dates
             if (endDate < startDate)
             {
@@ -147,7 +160,7 @@ namespace ADProj.Controllers
             }
             es.AddActingDepartmentHead(employeeId, startDate, endDate);
             ems.sendDelegateAppointmentEmail(employeeId, startDate, endDate);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("DepartmentHead", "Home");
         }
     }
 }

@@ -136,5 +136,21 @@ namespace ADProj.Services
             mail.Body = "The department head has rescinded your previous Acting Department Head appointment.";
             smtpClient.Send(mail);
         }
+
+        //EMAIL TO INFORM OF DISBURSEMENT
+        public void sendDisbursementEmail(int id, DateTime date, string time, string location)
+        {
+            string employeeemail = dbcontext.Employees.Find(id).Email;
+
+            SmtpClient smtpClient = setupsmtpclient();
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress("team9springboot@gmail.com", "team9");
+            mail.To.Add(new MailAddress("team9employee@gmail.com"));
+            //remove comment if employee has correct email
+            //mail.To.Add(new MailAddress(employeeemail));
+            mail.Subject = "Stationery Disbursement on " + date.ToString("dd/MMM/yyyy") + ", " + time + " at " + location;
+            mail.Body = "Please be present at your department's stationery collection point to collect your department's stationeries.";
+            smtpClient.Send(mail);
+        }
     }
 }
