@@ -56,12 +56,10 @@ namespace ADProj.Controllers
                         return RedirectToAction("DepartmentHead", "Home");
                     case EmployeeRole.STORECLERK:
                         return RedirectToAction("StoreClerk", "Home");
-                    /*                    
                     case EmployeeRole.STORESUPERVISOR:
-                        return RedirectToAction("", "");
+                        return RedirectToAction("GeneralTrend", "TrendAnalysis");
                     case EmployeeRole.STOREMANAGER:
-                        return RedirectToAction("", "");
-                        */
+                        return RedirectToAction("GeneralTrend", "TrendAnalysis");
                     default:
                         return RedirectToAction("Employee", "Home");
                 }
