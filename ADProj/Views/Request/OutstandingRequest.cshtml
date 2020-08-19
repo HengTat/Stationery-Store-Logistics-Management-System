@@ -5,117 +5,100 @@
     ViewData["Title"] = "Outstanding Requests";
     var approved = (List<Request>)ViewData["ApprovedRequest"];
     var pendingStock = (List<Request>)ViewData["PendingStockRequest"];
-
-
-
 }
 
-<style type="text/css">
-    table {
-        width: 50%;
-    }
+<h1 align="center"><b>Outstanding Requests</b></h1>
+<div style="margin-left:60px; margin-top:40px">
+    <div class="container col-sm-5" align="center">
+        <img src="https://img.icons8.com/material-outlined/50/000000/checked-2.png" />
+        <h3><b>Requests to be fulfilled</b></h3>
+        @{
+            if (approved.Count != 0)
+            {
+                <table class="table table-bordered" id="tblFufill" style="width:550px; margin-top:20px; text-align:center">
+                    <thead style="background-color:lightgrey">
+                        <tr align="center">
+                            <th style="text-align:center">Request Id</th>
+                            <th style="text-align:center">Request Date</th>
+                            <th style="text-align:center">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var canFufill in approved)
+                        {
 
-        table tr th,
-        table tr td {
-            width: 31%;
-            border: 1px solid black;
+                            string id = canFufill.Id.ToString();
+                            string viewdetailurl = "/Request/OutstandingDetails/" + id;
+
+                            <tr>
+                                <td>@canFufill.Id</td>
+                                <td>@canFufill.DateRequested</td>
+                                <td>
+                                    <form action=@viewdetailurl>
+                                        <input type="submit" class="btn btn-primary btn-xs" value="View Details >" />
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <form method="post" action="/Retrieval/GenerateRetrievalList">
+                    <input type="submit" id="generateRetrievalBtn" value="Generate Retrieval Form" class="btn btn-success" />
+                </form>
+            }
+            else
+            {
+                <p style="color:red">There is no outstanding requests.</p>
+            }
         }
 
-    .center-block {
-        display: block;
-        margin-right: auto;
-        margin-left: auto;
-    }
-</style>
+    </div>
 
-<div class="text-center">
-    <h1 class="display-4">@ViewData["Title"]</h1>
-</div>
+    <select id="selectOne" class="center-block" style="display:none">
 
-<h2>Orders to be fulfilled</h2>
+        @foreach (var app in approved)
+        {
+            <option id="category-name" style="display:none" value=@app.Id>@app.EmployeeId</option>
 
-<div class="container" align="center" style="margin-bottom:40px">
-    <table id="tblFufill" class="table table-bordered" style="margin-top:20px; text-align:center">
-        <thead>
-            <tr align="center">
-                <th style="width:100px; text-align:center">Request Id</th>
-                <th style="width:50px; text-align:center">Request Date</th>
-                <th style="width:50px; text-align:center">Details</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var canFufill in approved)
+        }
+    </select>
+
+    <div class="container col-sm-7" align="center">
+        <img src="https://img.icons8.com/metro/52/000000/minus.png" />
+        <h3><b>Requests that require restock</b></h3>
+        @{
+            if (pendingStock.Count != 0)
             {
-
-                string id = canFufill.Id.ToString();
-                string viewdetailurl = "/Request/OutstandingDetails/" + id;
-
-                <tr>
-                    <td>@canFufill.Id</td>
-                    <td>@canFufill.DateRequested</td>
-                    <td>
-                        <form action=@viewdetailurl>
-                            <input type="submit" value="View Details >" />
-                        </form>
-                    </td>
-                </tr>
+                <table class="table table-bordered" style="width:550px; margin-top:18px; text-align:center">
+                    <thead style="background-color:lightgrey">
+                        <tr>
+                            <th style="text-align:center">Request Id</th>
+                            <th style="text-align:center">Request Date</th>
+                            <th style="text-align:center">Details</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var cannotFufill in pendingStock)
+                        {
+                            string id = cannotFufill.Id.ToString();
+                            string viewdetailurl = "/Request/OutstandingDetails/" + id;
+                            <tr>
+                                <td>@cannotFufill.Id</td>
+                                <td>@cannotFufill.DateRequested</td>
+                                <td>
+                                    <form action=@viewdetailurl>
+                                        <input type="submit" class="btn btn-primary btn-xs" value="View Details >" />
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             }
-        </tbody>
-    </table>
-</div>
-
-
-
-
-<select id="selectOne" class="center-block" style="display:none">
-
-    @foreach (var app in approved)
-    {
-        <option id="category-name" style="display:none" value=@app.Id>@app.EmployeeId</option>
-
-    }
-</select>
-
-
-<form method="post" action="/Retrieval/GenerateRetrievalList">
-    <input type="submit" id="generateRetrievalBtn" value="Generate Retrieval Form" class="center-block" />
-</form>
-
-<h2>Orders that require restock</h2>
-
-<select id="selectTwo" class="center-block" style="display:none">
-
-    @foreach (var ps in pendingStock)
-    {
-        <option id="category-name" style="display:none" value=@ps.Id>@ps.EmployeeId</option>
-
-    }
-</select>
-
-<div class="container" align="center" style="margin-bottom:40px">
-    <table class="table table-bordered" style="margin-top:20px; text-align:center" id="tblPendingStock">
-        <thead>
-            <tr>
-                <th style="width:100px; text-align:center">Request Id</th>
-                <th style="width:20px; text-align:center">Request Date</th>
-                <th style="width:50px; text-align:center">Details</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var cannotFufill in pendingStock)
+            else
             {
-                string id = cannotFufill.Id.ToString();
-                string viewdetailurl = "/Request/OutstandingDetails/" + id;
-                <tr>
-                    <td>@cannotFufill.Id</td>
-                    <td>@cannotFufill.DateRequested</td>
-                    <td>
-                        <form action=@viewdetailurl>
-                            <input type="submit" value="View Details >" />
-                        </form>
-                    </td>
-                </tr>
+                <p style="color:red">There is no requests that require stock.</p>
             }
-        </tbody>
-    </table>
+        }
+    </div>
 </div>
