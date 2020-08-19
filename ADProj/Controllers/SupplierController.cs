@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using ADProj.Models;
 using ADProj.Services;
 using Microsoft.AspNetCore.Mvc;
-
 namespace ADProj.Controllers
 {
     public class SupplierController : Controller
@@ -20,26 +19,35 @@ namespace ADProj.Controllers
         {
             List<Supplier> supplierList = supService.SupplierList();
             ViewData["supplierList"] = supplierList;
+            if (TempData["alertMsg"] != null)
+            {
+                ViewData["alertMsg"] = TempData["alertMsg"];
+            }
             return View();
         }
 
         public IActionResult AddSupplier(string id)
         {
+            if (TempData["alertMsg"] != null)
+            {
+                ViewData["alertMsg"] = TempData["alertMsg"];
+            }
             return View();
         }
 
         public IActionResult AddStationery(string id)
         {
-
             SupplierStationery s = supService.GetSupplierStationeryBySupplierId(id);
             ViewData["supplierid"] = id;
-            ViewData["alertMsg"] = TempData["alreadyExistStationary"];
+            if (TempData["alertMsg"] != null)
+            {
+                ViewData["alertMsg"] = TempData["alertMsg"];
+            }
             return View();
         }
 
         public IActionResult SaveSupplier(string Id, string Name, string ContactName, string PhoneNo, string FaxNo, string Address, string GSTReg)
         {
-
             if (!(Id != null && Name != null && ContactName != null && PhoneNo != null && FaxNo != null && Address != null && GSTReg != null))
             {
                 TempData["alertMsg"] = "Please enter all information!";
@@ -72,7 +80,7 @@ namespace ADProj.Controllers
             }
             else
             {
-                TempData["alreadyExistStationary"] = "Already Exist!";
+                TempData["alertMsg"] = "Already Exist!";
                 return RedirectToAction("AddStationery", new { id = SupplierId });
             }
         }
@@ -81,13 +89,20 @@ namespace ADProj.Controllers
         {
             List<Supplier> supplierList = supService.SupplierList();
             ViewData["SupplierList"] = supplierList;
+            if (TempData["alertMsg"] != null)
+            {
+                ViewData["alertMsg"] = TempData["alertMsg"];
+            }
             return View();
         }
         public IActionResult EditDeleteSupplier(string cmd, string Id)
         {
+            ViewData["alertMsg"] = TempData["alertMsg"];
+
             if (cmd == "delete")
             {
                 supService.DeleteSupplierById(Id);
+                TempData["alertMsg"] = "Deleted successfully!";
                 return RedirectToAction("Index");
             }
             if (cmd == "edit")
@@ -101,28 +116,32 @@ namespace ADProj.Controllers
 
         public IActionResult EditDeleteStationery(string? cmd, int Id) //stationery id
         {
-            SupplierStationery supplierstationery = supService.GetSupplierStationeryById(Id);
+            ViewData["alertMsg"] = TempData["alertMsg"];
+            SupplierStationery s = supService.GetSupplierStationeryById(Id);
+
             if (cmd == "delete")
             {
                 supService.DeleteSupplierStationeryById(Id);
-                return RedirectToAction("Details", new { Id = supplierstationery.SupplierId });
+                TempData["alertMsg"] = "Deleted successfully!";
+                return RedirectToAction("Details", new { Id = s.SupplierId });
             }
             if (cmd == "edit")
             {
-
-                ViewData["item"] = supplierstationery;
-
+                ViewData["item"] = s;
                 return View("UpdateStationery");
             }
-
-            SupplierStationery s = supService.GetSupplierStationeryById(Id);
             return RedirectToAction("Details", new { Id = s.SupplierId });
         }
 
         public IActionResult UpdateSupplier(string Id, string Name, string ContactName, string PhoneNo, string FaxNo, string Address, string GSTReg)
         {
+            if (!(Id != null && Name != null && ContactName != null && PhoneNo != null && FaxNo != null && Address != null && GSTReg != null))
+            {
+                TempData["alertMsg"] = "Please enter all information!";
+                return RedirectToAction("EditDeleteSupplier", new { cmd = "edit", Id = Id });
+            }
             supService.UpdateSupplierById(Id, Name, ContactName, PhoneNo, FaxNo, Address, GSTReg);
-
+            TempData["alertMsg"] = "Updated successfully!";
             return RedirectToAction("Index");
         }
 

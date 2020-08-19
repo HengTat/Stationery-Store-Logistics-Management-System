@@ -3,8 +3,29 @@
     ViewData["Title"] = "UpdateSupplier";
     List<string> supplierList = ViewBag.supplierList;
     Supplier item = (Supplier)ViewData["item"];
+    var msg = ViewData["alertMsg"];
 }
 
+@if (msg != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            swal("@msg");
+        };
+    </script>
+}
+
+<style>
+    .btn {
+        transition-duration: 0.4s;
+        margin-left: 50px;
+        border-radius: 8px;
+        height: 40px;
+    }
+</style>
+
+
+@Html.ActionLink("Back to Supplier List", "Index")
 <div align="center">
     <h2>Edit Supplier</h2>
 
@@ -60,7 +81,6 @@
         </div>
 
         <div class="form-group">
-            <button type="submit" class="btn btn-danger" formaction="Index">Cancel</button>
             <button type="submit" class="btn btn-success">Update</button>
         </div>
 
