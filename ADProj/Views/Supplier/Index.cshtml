@@ -3,41 +3,10 @@
     var supplierList = (List<Supplier>)ViewData["supplierList"];
     var supplierid = ViewData["supplierid"];
 }
-<style>
-    #Add {
-        transition-duration: 0.4s;
-        margin-left: 50px;
-        border-radius: 8px;
-        height: 40px;
-    }
-
-
-    #Delete {
-        background-color: transparent;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        overflow: hidden;
-    }
-
-    #Edit {
-        background-color: transparent;
-        border: none;
-        outline: none;
-    }
-
-    #Details {
-        background-color: transparent;
-        border: none;
-        outline: none;
-        color: #33BAFF;
-    }
-</style>
-
 <form method="post">
     <div class="container">
         <h1 style="text-align:center">Supplier List</h1>
-        <input name="Button1" class="btn btn-success" id="Add" title="Submit" value="Add Supplier" formaction="Supplier/AddSupplier?id=@supplierid" style="border-style:Solid;" type="submit"></>
+        <input name="Button1" class="btn btn-success" id="Add" title="Submit" value="Add New Supplier" formaction="Supplier/AddSupplier?id=@supplierid" type="submit"></>
         <br />
         <br />
 
@@ -51,31 +20,32 @@
                     <th>Fax No</th>
                     <th>Adddress</th>
                     <th>GSTReg</th>
-
+                    <th>Action</th>
+                    <th>Action</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in supplierList)
                 {
-                    <tr>
-                        <td>@item.Id</td>
-                        <td>@item.Name</td>
-                        <td>@item.ContactName</td>
-                        <td>@item.PhoneNo</td>
-                        <td>@item.FaxNo</td>
-                        <td>@item.Address</td>
-                        <td>@item.GSTReg</td>
-
-
-                        <td width="10%">
-                            <button type="submit" id="Details" formaction="Supplier/Details?Id=@item.Id">View Details</button>
-                            <br />
-                            <button type="submit" id="Edit" formaction="Supplier/EditDeleteSupplier?cmd=edit&Id=@item.Id">Edit</button>
-                            <br />
-                            <button type="submit" id="Delete" formaction="Supplier/EditDeleteSupplier?cmd=delete&Id=@item.Id" style="color:red">Delete</button>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.ContactName</td>
+                    <td>@item.PhoneNo</td>
+                    <td>@item.FaxNo</td>
+                    <td>@item.Address</td>
+                    <td>@item.GSTReg</td>
+                    <td>
+                        <button type="submit" class="btn btn-warning btn-xs" formaction="/Supplier/EditDeleteSupplier?cmd=edit&Id=@item.Id">Edit</button>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-danger btn-xs" formaction="/Supplier/EditDeleteSupplier?cmd=delete&Id=@item.Id">Delete</button>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-primary btn-xs" formaction="/Supplier/Details?Id=@item.Id">View Details</button>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>

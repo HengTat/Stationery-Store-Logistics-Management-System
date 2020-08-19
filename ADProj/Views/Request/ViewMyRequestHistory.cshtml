@@ -8,14 +8,14 @@
     <h1>View My Request History</h1>
 
 
-    <table class="table">
+    <table class="table table-bordered" style="width:800px; margin-top:20px; text-align:center">
         <thead>
             <tr style="background-color:lightgrey">
                 <th>
                     @Html.DisplayNameFor(model => model.Id)
                 </th>
                 <th style="display:none">
-                    @Html.DisplayNameFor(model => model.EmployeeId)
+                    Employee Name
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.DateRequested)
@@ -56,7 +56,7 @@
 
                     <td>
                         <form action=@viewdetailurl>
-                            <input type="submit" value="View Details >" />
+                            <input type="submit" class="btn btn-primary btn-xs" value="View Details >" />
                         </form>
                     </td>
                 </tr>

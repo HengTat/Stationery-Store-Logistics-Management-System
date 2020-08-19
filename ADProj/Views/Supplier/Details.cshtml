@@ -5,34 +5,9 @@
     var supplierid = ViewData["supplierid"];
     var suppliername = ViewData["suppliername"];
 }
-<style>
-    #Delete {
-        background-color: transparent;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        overflow: hidden;
-    }
 
-    #Edit {
-        background-color: transparent;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        overflow: hidden;
-    }
-</style>
-
-@Html.ActionLink("Back to Supplier List", "Index")
 <h1 style="text-align:center">Supplier Stationery Details</h1>
-<style>
-    #Add {
-        transition-duration: 0.4s;
-        margin-left: 50px;
-        border-radius: 8px;
-        height: 40px;
-    }
-</style>
+
 <form method="post">
     <div class="container">
         <br />
@@ -41,7 +16,7 @@
                 <td><h3 style="margin-left:500px;">SUPPLIER ID:@supplierid </h3></td>
             </tr>
         </table>
-        <input name="Button1" id="Add" title="Submit" class="btn btn-success" value="Add Stationery" formaction="~/Supplier/AddStationery?id=@supplierid" style="border-style:Solid;" type="submit"></>
+        <input name="Button1" title="Submit" class="btn btn-success" value="Add New Stationery" formaction="~/Supplier/AddStationery?id=@supplierid" style="border-style:Solid;" type="submit"></>
         <br />
         <br />
         <table class="table table-bordered">
@@ -51,22 +26,24 @@
                     <th>UOM</th>
                     <th>Tender Price</th>
                     <th>Action</th>
+                    <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in supplierstationeryList)
                 {
-                    <tr>
-                        <td>@item.InventoryItemId</td>
-                        <td>@item.UOM</td>
-                        <td>@item.TenderPrice</td>
+                <tr>
+                    <td>@item.InventoryItemId</td>
+                    <td>@item.UOM</td>
+                    <td>@item.TenderPrice</td>
 
-                        <td width="10%">
-                            <button type="submit" id="Edit" formaction="~/Supplier/EditDeleteStationery?cmd=edit&Id=@item.Id">Edit</button>
-                            <br />
-                            <button type="submit" id="Delete" formaction="~/Supplier/EditDeleteStationery?cmd=delete&Id=@item.Id" style="color:red">Delete</button>
-                        </td>
-                    </tr>
+                    <td>
+                        <button type="submit" class="btn btn-warning btn-xs" formaction="/Supplier/EditDeleteStationery?cmd=edit&Id=@item.Id">Edit</button>
+                    </td>
+                    <td>
+                        <button type="submit" class="btn btn-danger btn-xs" formaction="/Supplier/EditDeleteStationery?cmd=delete&Id=@item.Id">Delete</button>
+                    </td>                    
+                </tr>
                 }
             </tbody>
         </table>
