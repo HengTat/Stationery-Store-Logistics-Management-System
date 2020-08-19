@@ -336,7 +336,7 @@ namespace ADProj.DB
 
                 Name = "Management School",
                 Time = "11 00 am",
-                EmployeeId = 3
+                EmployeeId = employee3.Id
             };
             dbcontext.Add(cp2);
 
@@ -345,7 +345,7 @@ namespace ADProj.DB
 
                 Name = "Medical School",
                 Time = "09 30 am",
-                EmployeeId = 3
+                EmployeeId = employee3.Id
             };
             dbcontext.Add(cp3);
 
@@ -354,7 +354,7 @@ namespace ADProj.DB
 
                 Name = "Engineering School",
                 Time = "11 00 am",
-                EmployeeId = 3
+                EmployeeId = employee3.Id
             };
             dbcontext.Add(cp4);
 
@@ -363,7 +363,7 @@ namespace ADProj.DB
 
                 Name = "Science School",
                 Time = "0930 am",
-                EmployeeId = 3
+                EmployeeId = employee3.Id
             };
             dbcontext.Add(cp5);
 
@@ -371,7 +371,7 @@ namespace ADProj.DB
             {
                 Name = "University Hospital ",
                 Time = "11 00 am",
-                EmployeeId = 3
+                EmployeeId = employee3.Id
             };
             dbcontext.Add(cp6);
 
