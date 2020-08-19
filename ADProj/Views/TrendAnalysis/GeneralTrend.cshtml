@@ -1,0 +1,136 @@
+﻿
+@{
+    ViewData["Title"] = "GeneralTrend";
+
+    List<string> Listofcat = (List<string>)ViewData["Listofcategories"];
+    List<int> ListofRequestqty = (List<int>)ViewData["ListofRequestyQty"];
+
+}
+
+
+<div align="center">
+    <h1><img src="~/Icons/generaltrendicon2.png" alt="dataicon" width="80" height="80" />General Trend</h1>
+</div>
+<table align="center" class="table">
+    <tr>
+
+        <td class="container" style="vertical-align:middle">
+            <div>
+                <h4 style="margin-left:45px">Item Categories:</h4>
+                @for (int i = 0; i < Listofcat.Count; i++)
+                {
+                    <div align="center" style="margin-left:60px">
+                        <b>
+                            @Listofcat[i] :  @ListofRequestqty[i]
+                        </b>
+                    </div>
+
+                }
+            </div>
+        </td>
+        <td class="container">
+            <div align="left" id=container1 style="width:750px;height:600px;margin-right:40px;margin-top:20px;">
+            </div>
+
+
+        </td>
+
+        <td class="container">
+            <div align="right" id=container2 style="width:870px;height:600px;margin-top:20px">
+            </div>
+        </td>
+    </tr>
+</table>
+
+
+
+<br>
+<h4 align="right"><a href="/trendanalysis/trendanalysisrequestvolume" style="margin-right:28px">Detailed Analysis > </a></h4>
+&nbsp;
+&nbsp;
+&nbsp;
+
+
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/variable-pie.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script>
+    //list of categories that were order in past month
+    var Listofcategory = @Html.Raw(Json.Serialize(ViewData["Listofcategories"]));
+    // List of total request quantity by category in past month
+    var ListofAmountRequested = @Html.Raw(Json.Serialize(ViewData["ListofRequestyQty"]));
+
+    var listofdata = new Array();
+
+    for (i = 0; i < Listofcategory.length; i++) {
+        listofdata.push({ name: Listofcategory[i], y: ListofAmountRequested[i]});
+    }
+
+
+
+    Highcharts.chart('container1', {
+        chart: {
+            type: 'variablepie'
+        },
+        title: {
+            text: 'Reorder Category of Past Month.'
+        },
+        tooltip: {
+            headerFormat: '',
+            pointFormat: '<span style="color:{point.color}">\u25CF</span> <b> {point.name}</b><br/>' +
+                'Amount Requested: <b>{point.y}</b><br/>'
+        },
+        series: [{
+            minPointSize: 80,
+            innerSize: '20%',
+            data: listofdata
+        }]
+    });
+</script>
+
+
+<script>
+
+    var thisyear = @Html.Raw(Json.Serialize(ViewData["CurrentYear"]));
+    var pastyear = @Html.Raw(Json.Serialize(ViewData["PastYear"]));
+
+
+    Highcharts.chart('container2', {
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Total Request'
+        },
+        subtitle: {
+            text: 'Past Year Vs Current Year'
+        },
+        xAxis: {
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        },
+        yAxis: {
+            title: {
+                text: 'Total Request Amount'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        },
+        series: [{
+            name: 'Current Year',
+            data: thisyear
+        }, {
+            name: 'Past Year',
+            data: pastyear
+        }]
+    });
+</script>
+

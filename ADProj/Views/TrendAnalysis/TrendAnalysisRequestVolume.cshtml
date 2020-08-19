@@ -1,0 +1,191 @@
+﻿@{
+    ViewData["Title"] = "Trend Analysis Request Volume";
+    List<string> listofdept = (List<string>)ViewData["ListofDepartments"];
+    List<string> listofselecteddept = (List<string>)ViewData["ListofselectedDepartments"];
+    List<int> listofcurrentmonth = (List<int>)ViewData["Listoftotalordercurrentmonth"];
+    List<int> listofpastmonth = (List<int>)ViewData["Listoftotalorderpastmonth"];
+    List<int> listofpasttwomonth = (List<int>)ViewData["Listoftotalorderpasttwomonth"];
+    string M1 = (string)ViewData["M1"];
+    string M2 = (string)ViewData["M2"];
+}
+
+<h1 align="center"><img src="~/Icons/generaltrendicon2.png" alt="dataicon" width="80" height="80" />  Trend Analysis Request Volume</h1>
+<h3 align="center"><u>Department</u> | <a href="~/trendanalysis/trendanalysisorderquantity"> Item Category</a></h3>
+
+<table align="center" class="table">
+    <tr>
+        <td class="container">
+            <form style="margin-left:60px" action="/trendanalysis/submitforrequestvolume">
+
+                <h3 style="margin-left:-30px">Month Selection: </h3>
+                <h4><label>M1</label><br /></h4>
+                <input type="month" name="M1" class="date" value="@M1">
+                <br />
+                <br />
+                <h4><label>M2</label><br /></h4>
+                <input type="month" name="M2" class="date" value="@M2">
+
+                <h3 style="margin-left:-30px">Department Selection :</h3>
+                <h4>
+                    @{
+                        bool isEqual = !listofdept.Except(listofselecteddept).Any();
+                    }
+                    @if (isEqual == true)
+                    {
+                        <input type="checkbox" name="all" id="checkall" checked>
+                        <label>Select All</label><br>
+                    }
+                    else
+                    {
+                        <input type="checkbox" name="all" id="checkall">
+                        <label>Select All</label><br>
+                    }
+                    @foreach (string i in listofdept)
+                    {
+                        @if (listofselecteddept.Contains(i))
+                        {
+
+                            <input type="checkbox" class="cb-element" id=dept name=dept value="@i" checked>
+                            <label for="vehicle1"> @i</label><br>
+                        }
+                        else
+                        {
+                            <input type="checkbox" class="cb-element" id=dept name=dept value="@i">
+                            <label for="vehicle1"> @i</label><br>
+                        }
+
+                    }
+                </h4>
+                <input type="submit" value="Generate Analysis >" class="btn" style="background-color:lightgrey">
+            </form>
+        </td>
+
+        <td class="container">
+            @if (listofselecteddept.Count == 0)
+            {
+                <h3 align="center" style="margin-top:200px"> Please select a department to begin Analysis! </h3>
+            }
+            else
+            {
+                <div align="center" id=container style="width:950px;height:670px;margin:0 auto">
+                </div>
+            }
+        </td>
+
+        <td class="container">
+            @if (listofselecteddept.Count != 0)
+            {
+                <table class="table">
+                    <tr>
+
+                        <td>
+                            <h4>
+                                Departments &nbsp;&nbsp;
+                            </h4>
+                        </td>
+                        <td>
+                            <h4 align="center">
+                                Current<br /> Month &nbsp;&nbsp;
+                            </h4>
+                        </td>
+                        <td>
+                            <h4 align="center">
+                                M1 &nbsp;&nbsp;
+                            </h4>
+                        </td>
+                        <td>
+                            <h4 align="center">
+                                M2 &nbsp;&nbsp;
+                            </h4>
+                        </td>
+
+                    </tr>
+                    @for (int j = 0; j < listofselecteddept.Count; j++)
+                    {
+                        <tr align="center">
+                            <td align="center">
+                                @listofselecteddept[j]
+                            </td>
+                            <td align="center">
+                                @listofcurrentmonth[j]
+                            </td>
+                            <td align="center">
+                                @listofpastmonth[j]
+                            </td>
+                            <td align="center">
+                                @listofpasttwomonth[j]
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </td>
+    </tr>
+</table>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script>
+    var listofdept=@Html.Raw(Json.Serialize(ViewData["ListofselectedDepartments"]));
+
+    var listofcurrentmonth= @Html.Raw(Json.Serialize(ViewData["Listoftotalordercurrentmonth"]));
+
+    var listofpastmonth= @Html.Raw(Json.Serialize(ViewData["Listoftotalorderpastmonth"]));
+
+    var listofpasttwomonth= @Html.Raw(Json.Serialize(ViewData["Listoftotalorderpasttwomonth"]));
+
+    Highcharts.chart('container', {
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Total Request Volume By Department'
+        },
+        xAxis: {
+            categories: listofdept
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Total Request Volume'
+            }
+        },
+        legend: {
+            reversed: true
+        },
+        plotOptions: {
+            series: {
+                stacking: 'normal'
+            }
+        },
+        series: [{
+            name: 'M2',
+            data: listofpasttwomonth
+        }, {
+            name: 'M1',
+            data:  listofpastmonth
+        }, {
+                name: 'Current Month',
+                data:  listofcurrentmonth
+        }]
+    });
+</script>
+
+<script>
+    $('#checkall').change(function () {
+        $('.cb-element').prop('checked', this.checked);
+    });
+
+    $('.cb-element').change(function () {
+        if ($('.cb-element:checked').length == $('.cb-element').length) {
+            $('#checkall').prop('checked', true);
+        }
+        else {
+            $('#checkall').prop('checked', false);
+        }
+    });
+</script>
+
+

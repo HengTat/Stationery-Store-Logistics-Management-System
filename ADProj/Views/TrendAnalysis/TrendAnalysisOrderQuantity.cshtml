@@ -1,0 +1,260 @@
+﻿@{
+    ViewData["Title"] = "TrendAnalysisOrderQuantity";
+    List<string> listofcat = (List<string>)ViewData["ListofCategories"];
+    List<string> listofselectedcat = (List<string>)ViewData["ListofselectedCategories"];
+    List<int> listofcurrentmonth = (List<int>)ViewData["Listoftotalordercurrentmonth"];
+    List<int> listofpastmonth = (List<int>)ViewData["Listoftotalorderpastmonth"];
+    List<int> listofpasttwomonth = (List<int>)ViewData["Listoftotalorderpasttwomonth"];
+    string M1 = (string)ViewData["M1"];
+    string M2 = (string)ViewData["M2"];
+}
+
+<style>
+    .display {
+        max-width: 500px;
+        overflow: hidden;
+        font-size: 14px;
+        height: 370px;
+        padding-left: 20px
+    }
+
+    .displaybutton {
+        display: block;
+        background: transparent;
+        border: none;
+        border-top: 1px solid #222;
+        width: 175px;
+        max-width: 80%;
+        font-size: 15px
+    }
+</style>
+
+<h1 align="center"><img src="~/Icons/generaltrendicon2.png" alt="dataicon" width="80" height="80" />  TrendAnalysisOrderQuantity</h1>
+<h3 align="center"><a href="~/trendanalysis/trendanalysisrequestvolume">Department </a>|  <u>Item Category</u></h3>
+
+<table align="center" class="table">
+    <tr>
+        <td class="container">
+
+            <form action="/trendanalysis/submitforOrderQuantity" style="margin-left:60px">
+
+                <h3 style="margin-left:-30px">Month Selection: </h3>
+
+                <h4><label>M1</label><br /></h4>
+                <input type="month" name="M1" class="date" value="@M1">
+                <br />
+                <br />
+                <h4><label>M2</label><br /></h4>
+                <input type="month" name="M2" class="date" value="@M2">
+
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+                <h3 style="margin-left:-30px">Item Category Selection :</h3>
+                <div class="display">
+
+                    <h4>
+                        @{
+                            bool isEqual = !listofcat.Except(listofselectedcat).Any();
+                        }
+                        @if (isEqual == true)
+                        {
+                            <input type="checkbox" name="all" id="checkall" checked>
+                            <label>Select All</label><br>
+                        }
+                        else
+                        {
+                            <input type="checkbox" name="all" id="checkall">
+                            <label>Select All</label><br>
+                        }
+
+                        @foreach (string i in listofcat)
+                        {
+
+                            @if (listofselectedcat.Contains(i))
+                            {
+                                <input type="checkbox" class="cb-element" id=cat name=cat value=@i checked>
+                                <label> @i</label><br>
+                            }
+                            else
+                            {
+                                <input type="checkbox" class="cb-element" id=cat name=cat value=@i>
+                                <label> @i</label><br>
+                            }
+                        }
+                        &nbsp;
+                    </h4>
+                </div>
+                <p class="displaybutton" style="padding-left:40px">Show more</p>
+                <input type="submit" value="Generate Analysis >" class="btn" style="background-color:lightgray">
+                <br />
+                <br />
+            </form>
+
+        </td>
+
+        <td class="container">
+
+            @if (listofselectedcat.Count == 0)
+            {
+
+                <h3 align="center" style="margin-top:200px">Please select a category to begin Analysis!</h3>
+            }
+            else
+            {
+                <div align="center" id=container style="width:950px;height:670px;margin:0 auto">
+                </div>
+            }
+        </td>
+
+        <td class="container">
+            @if (listofselectedcat.Count != 0)
+            {
+                <table class="table">
+                    <tr>
+
+                        <td>
+                            <h4 align="center">
+                                Departments &nbsp;&nbsp;
+                            </h4>
+                        </td>
+                        <td>
+                            <h4 align="center">
+                                Current<br> Month &nbsp;&nbsp;
+                            </h4>
+                        </td>
+                        <td>
+                            <h4 align="center">
+                                M1 &nbsp;&nbsp;
+                            </h4>
+                        </td>
+                        <td>
+                            <h4 align="center">
+                                M2 &nbsp;&nbsp;
+                            </h4>
+                        </td>
+                    </tr>
+                    @for (int j = 0; j < listofselectedcat.Count; j++)
+                    {
+                        <tr align="center">
+                            <td align="center">
+                                @listofselectedcat[j]
+                            </td>
+                            <td align="center">
+                                @listofcurrentmonth[j]
+                            </td>
+                            <td align="center">
+                                @listofpastmonth[j]
+                            </td>
+                            <td align="center">
+                                @listofpasttwomonth[j]
+                            </td>
+                        </tr>
+                    }
+                </table>
+            }
+        </td>
+    </tr>
+</table>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+<script>
+    var listofdept=@Html.Raw(Json.Serialize(ViewData["ListofselectedCategories"]));
+
+    var listofcurrentmonth= @Html.Raw(Json.Serialize(ViewData["Listoftotalordercurrentmonth"]));
+
+    var listofpastmonth= @Html.Raw(Json.Serialize(ViewData["Listoftotalorderpastmonth"]));
+
+    var listofpasttwomonth= @Html.Raw(Json.Serialize(ViewData["Listoftotalorderpasttwomonth"]));
+
+    Highcharts.chart('container', {
+        chart: {
+            type: 'bar'
+        },
+        title: {
+            text: 'Total Request Volume By Item Category'
+        },
+        xAxis: {
+            categories: listofdept
+        },
+        yAxis: {
+            min: 0,
+            title: {
+                text: 'Total Request Volume'
+            }
+        },
+        legend: {
+            reversed: true
+        },
+        plotOptions: {
+            series: {
+                stacking: 'normal'
+            }
+        },
+        series: [{
+            name: 'M2',
+            data: listofpasttwomonth
+        }, {
+                name: 'M1',
+            data:  listofpastmonth
+        }, {
+                name: 'Current Month',
+                data:  listofcurrentmonth
+        }]
+    });
+</script>
+
+<script>
+    $('#checkall').change(function () {
+        $('.cb-element').prop('checked', this.checked);
+    });
+
+    $('.cb-element').change(function () {
+        if ($('.cb-element:checked').length == $('.cb-element').length) {
+            $('#checkall').prop('checked', true);
+        }
+        else {
+            $('#checkall').prop('checked', false);
+        }
+    });
+
+    $(document).ready(function () {
+        var text = $('.display'),
+            btn = $('.displaybutton'),
+            h = text[0].scrollHeight;
+
+        if (h > 370) {
+            btn.addClass('less');
+        }
+        btn.click(function (e) {
+            e.stopPropagation();
+
+            if (btn.hasClass('less')) {
+                btn.removeClass('less');
+                btn.addClass('more');
+                btn.text('Show less');
+
+                text.animate({ 'height': h });
+            } else {
+                btn.addClass('less');
+                btn.removeClass('more');
+                btn.text('Show more');
+                text.animate({ 'height': '370px' });
+            }
+        });
+
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+

@@ -13,6 +13,5 @@
 
   <ItemGroup>
     <Folder Include="Views\AdjustmentVoucher\" />
-    <Folder Include="Views\TrendAnalysis\" />
   </ItemGroup>
 </Project>
