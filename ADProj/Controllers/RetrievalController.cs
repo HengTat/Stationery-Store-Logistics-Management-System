@@ -46,19 +46,22 @@ namespace ADProj.Controllers
                     }
                 }
             }
-            int retId = rs.CreateRetrieval(empId, requests);
-            rs.CreateRetrievalDetails(retId, retrieveList);
-            List<RetrievalDetails> rtList = rs.FindRetrievalDetails(retId);
+            Retrieval ret = rs.CreateRetrieval(empId, requests);
+            rs.CreateRetrievalDetails(ret.Id, retrieveList);
+            List<RetrievalDetails> rtList = rs.FindRetrievalDetails(ret.Id);
             ViewData["retrieveList"] = rtList;
-            ViewData["retId"] = retId;
+            ViewData["retId"] = ret.Id;
             return View();
         }
 
         public IActionResult RetrievalDetails(int rId)
         {
             List<RetrievalDetails> rtd = rs.FindRetrievalDetails(rId);
+            Request req = rs.FindRequestByRetId(rId);
+            Retrieval ret = rs.FindRetById(rId);
+            ViewData["disbId"] = req.DisbursementId;
             ViewData["rtd"] = rtd;
-            ViewData["rId"] = rId;
+            ViewData["ret"] = ret;
             return View();
         }
     }

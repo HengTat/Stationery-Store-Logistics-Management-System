@@ -29,7 +29,7 @@ namespace ADProj.Services
             return reqDetails;
         }
 
-        public int CreateRetrieval(int empId, List<Request> approvedList)
+        public Retrieval CreateRetrieval(int empId, List<Request> approvedList)
         {
             Retrieval r = new Retrieval();
             r.DateRetrieved = DateTime.Now;
@@ -45,7 +45,7 @@ namespace ADProj.Services
 
             adProjContext.SaveChanges();
 
-            return r.Id;
+            return r;
         }
 
         public void CreateRetrievalDetails(int retId, Dictionary<string, int> retrievList)
@@ -72,6 +72,18 @@ namespace ADProj.Services
         {
             List<Retrieval> retrievals = adProjContext.Retrievals.ToList();
             return retrievals;
+        }
+
+        public Retrieval FindRetById(int id)
+        {
+            Retrieval ret = adProjContext.Retrievals.Where(x => x.Id == id).FirstOrDefault();
+            return ret;
+        }
+
+        public Request FindRequestByRetId(int id)
+        {
+            Request req = adProjContext.Requests.Where(x => x.RetrievalId == id).FirstOrDefault();
+            return req;
         }
     }
 }

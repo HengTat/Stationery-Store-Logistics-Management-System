@@ -125,12 +125,6 @@ namespace ADProj.Controllers
         {
             ViewData["alertMsg"] = TempData["alertMsg"];
 
-            if (cmd == "delete")
-            {
-                invService.DeleteCategoryById(catId);
-                TempData["alertMsg"] = "Deleted successfully!";
-                return RedirectToAction("CategoryList");
-            }
             if (cmd == "edit")
             {
                 ItemCategory cat = invService.GetCategoryById(catId);
@@ -161,12 +155,6 @@ namespace ADProj.Controllers
         {
             ViewData["alertMsg"] = TempData["alertMsg"];
 
-            if (cmd == "delete")
-            {
-                invService.DeleteItemById(itemId);
-                TempData["alertMsg"] = "Deleted successfully!";
-                return RedirectToAction("Index");
-            }
             if (cmd == "edit")
             {
                 List<ItemCategory> catList = invService.CategoryList();

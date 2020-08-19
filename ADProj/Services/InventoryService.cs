@@ -74,12 +74,6 @@ namespace ADProj.Services
             adProjContext.SaveChanges();
         }
 
-        public void DeleteCategoryById(int catId)
-        {
-            ItemCategory cat = GetCategoryById(catId);
-            adProjContext.Remove(cat);
-            adProjContext.SaveChanges();
-        }
 
         public void UpdateCategoryById(int catId, string newCatName)
         {
@@ -88,12 +82,6 @@ namespace ADProj.Services
             adProjContext.SaveChanges();
         }
 
-        public void DeleteItemById(string id)
-        {
-            InventoryItem item = GetItemById(id);
-            adProjContext.Remove(item);
-            adProjContext.SaveChanges();
-        }
 
         public void UpdateItemById(string id, string desc, string catName, string bin,
             int qtyInStock, int reorderLevel, int reorderQty, string uom)
