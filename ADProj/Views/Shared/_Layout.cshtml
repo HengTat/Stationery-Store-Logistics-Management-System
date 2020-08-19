@@ -14,11 +14,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <style>
+        .navbaralign {
+            margin-top: 13px;
+        }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav navbaralign">
                 @{ if (role == ADProj.Enums.EmployeeRole.STORECLERK)
                     {
                         <li class="active"><a asp-controller="Home" asp-action="StoreClerk">Home</a></li>
@@ -182,9 +187,9 @@
                     } }
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a>Welcome @name ! <img src=@userimageurl onerror="this.src='/employeeimages/avatarimage.png'" style="border-radius:28px; width:50px" /></a></li>
-                <li><a asp-controller="Account" asp-action="PasswordChange"><span class="glyphicon glyphicon-lock"></span> Change Password</a></li>
-                <li><a asp-controller="Account" asp-action="Logout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                <li><a>Welcome @name ! &nbsp;&nbsp;&nbsp; <img src=@userimageurl onerror="this.src='/employeeimages/avatarimage.png'" style="border-radius:28px; width:50px" /></a></li>
+                <li><a asp-controller="Account" asp-action="PasswordChange"class="navbaralign"><span class="glyphicon glyphicon-lock"></span> Change Password</a></li>
+                <li><a asp-controller="Account" asp-action="Logout"class="navbaralign"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
             </ul>
         </div>
     </nav>
