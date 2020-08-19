@@ -13,7 +13,6 @@
                     <th style="width:200px; text-align:center">Department</th>
                     <th style="width:150px; text-align:center">Department Representative</th>
                     <th style="width:70px; text-align:center">Collection Point</th>
-                    <th style="width:50px; text-align:center">Unique Item(s)</th>
                     <th style="width:50px; text-align:center">Details</th>
                 </tr>
             </thead>
@@ -25,7 +24,6 @@
                         <td>@dbm.Department.Name</td>
                         <td>@dbm.Department.DepartmentRep.Name</td>
                         <td>@dbm.Department.CollectionPointId</td>
-                        <td>to be completed</td>
                         <td><button type="submit" formaction="ViewDisbursementDetails?Id=@dbm.Id">View Details</button></td>
                     </tr>
                 }

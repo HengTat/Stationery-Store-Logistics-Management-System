@@ -252,6 +252,7 @@ namespace ADProj.Controllers
             {
                 int empId = Convert.ToInt32(HttpContext.Session.GetString("id"));
                 invService.CreateInvMgmt(itemId, updateQty, empId);
+                invService.checkifpendingstockrequestcanbefufilled();
                 TempData["alertMsg"] = "Item has been updated!";
                 return RedirectToAction("Index");
             }

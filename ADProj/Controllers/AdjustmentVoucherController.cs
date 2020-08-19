@@ -15,21 +15,15 @@ namespace ADProj.Controllers
 
     public class AdjustmentVoucherController : Controller
     {
-        /* private EmpValidation em;
-
-         public AdjustmentVoucherController(EmpValidation em)
-         {
-             this.em = em;
-         }*/
-
-
         private AdjustmentVoucherValidation Amv;
         private EmployeeService es;
+        private InventoryService invService;
 
-        public AdjustmentVoucherController(AdjustmentVoucherValidation Amv, EmployeeService es)
+        public AdjustmentVoucherController(AdjustmentVoucherValidation Amv, EmployeeService es, InventoryService invService)
         {
             this.Amv = Amv;
             this.es = es;
+            this.invService = invService;
         }
 
 
@@ -101,6 +95,7 @@ namespace ADProj.Controllers
                 else
                 {
                     Amv.createAdjustmentVoucher(itemname, AdjustQty, AdjustAmt, reason, employeeId);
+                    invService.checkifpendingstockrequestcanbefufilled();
                     TempData["Msg"] = "Adjustment voucher form has been created!";
                     return RedirectToAction("AddAdjustmentVoucher");
                     // return RedirectToAction("Index", "AdjustmentVoucher");
