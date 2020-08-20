@@ -8,92 +8,100 @@
 }
 
 
-<div class="text-center">
-    <h1 class="display-4">@ViewData["Title"]</h1>
+<div>
+    <div align="center" style="margin-top:20px"><img src="https://img.icons8.com/metro/52/000000/overview-pages-3.png" /></div>
+    <h2 align="center">Purchase Order</h2>
+    <form class="form-horizontal col-sm-5" style="margin-top:40px; margin-bottom:50px">
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Supplier Code:</label>
+            <div class="col-sm-3">
+                <select id="selectOne" class="form-control" style="width:300px">
+                    <option style="display:none">Select a supplier</option>
+                    @foreach (var supplier in supplierList)
+                    {
+                        <option id="category-name" value=@supplier.Id>@supplier.Id</option>
+
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Description:</label>
+            <div class="col-sm-3">
+                <select id="selectTwo" class="form-control" style="width:300px">
+                    <option style="display:none">Select Item</option>
+                    @foreach (var stationery in supplierStationeries)
+                    {
+                        <option data-itemid=@stationery.InventoryItemId data-cat=@stationery.InventoryItem.ItemCategoryId data-uom=@stationery.UOM value=@stationery.SupplierId>@stationery.InventoryItem.Description</option>
+
+                    }
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Item ID:</label>
+            <div class="col-sm-3">
+                <input type="text" name="itemid" id="itemid" class="form-control" style="width:300px" readonly />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Unit of Measurement:</label>
+            <div class="col-sm-3">
+                <input type="text" name="uom" id="uom" class="form-control" style="width:300px" readonly />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Order Quantity:</label>
+            <div class="col-sm-3">
+                <input type="text" name="orderQty" id="orderQty" class="form-control" style="width:300px" />
+            </div>
+        </div>
+
+        <div class="form-group" style="margin-left:300px">
+            <div>
+                <button type="button" id="btn_Add" class="btn btn-danger">Add</button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-5 control-label" style="display:none">ItemId:</label>
+            <div class="col-sm-3">
+                <input type="text" name="demo2" id="demo2" class="form-control" style="display:none" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-6 control-label" style="display:none">category:</label>
+            <div class="col-sm-5">
+                <input type="text" name="cat" id="cat" class="form-control" style="display:none" />
+            </div>
+        </div>
+
+    </form>
 </div>
 
-<div class=" col-sm-6" style="margin-bottom:40px">
-    <div class="form-group">
-        <label class="col-sm-6 control-label">Supplier Code:</label>
-        <div class="col-sm-5">
-            <select id="selectOne" class="form-control">
-                <option style="display:none">Select a supplier</option>
-                @foreach (var supplier in supplierList)
-                {
-                    <option id="category-name" value=@supplier.Id>@supplier.Id</option>
+<div class="container" align="center" style="margin-top:30px">
+    <table id="tblOrderDetails" class="table table-bordered" style="text-align:center; width:600px; margin-top:20px">
+        <thead>
+            <tr>
+                <th style="text-align:center">Supplier Code</th>
+                <th style="text-align:center">Description</th>
+                <th style="text-align:center">Item ID</th>
+                <th style="text-align:center">Quantity</th>
+                <th style="text-align:center">UOM</th>
+                <th style="display:none">Category ID</th>
+                <th style="text-align:center">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
 
-                }
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-6 control-label">Description:</label>
-        <div class="col-sm-5">
-            <select id="selectTwo" class="form-control">
-                <option style="display:none">Select Item</option>
-                @foreach (var stationery in supplierStationeries)
-                {
-                    <option data-itemid=@stationery.InventoryItemId data-cat=@stationery.InventoryItem.ItemCategoryId data-uom=@stationery.UOM value=@stationery.SupplierId>@stationery.InventoryItem.Description</option>
-
-                }
-            </select>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-6 control-label">Item Id:</label>
-        <div class="col-sm-5">
-            <input type="text" name="itemid" id="itemid" class="form-control" readonly />
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-6 control-label">Unit of Measurement:</label>
-        <div class="col-sm-5">
-            <input type="text" name="uom" id="uom" class="form-control" readonly />
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-6 control-label">Order Quantity:</label>
-        <div class="col-sm-5">
-            <input type="text" name="orderQty" id="orderQty" class="form-control" />
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="col-sm-6 control-label" style="display:none">add button:</label>
-        <div class="col-sm-5">
-            <button type="button" id="btn_Add" class="btn btn-danger">Add</button>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="col-sm-6 control-label" style="display:none">category:</label>
-        <div class="col-sm-5">
-            <input type="text" name="cat" id="cat" class="form-control" style="display:none" />
-        </div>
-    </div>
-</div>
-
-<div class=" col-sm-6" style="margin-bottom:40px">
-    <div class="container">
-        <table id="tblOrderDetails" class="table table-bordered" style="width:500px; margin-top:20px">
-            <thead>
-                <tr>
-                    <th>Supplier Code</th>
-                    <th>Description</th>
-                    <th>Item Id</th>
-                    <th>Quantity</th>
-                    <th>UOM</th>
-                    <th style="display:none">CategoryId</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-            </tbody>
-        </table>
-    </div>
     <div class="form-group">
         <div class="col-sm-6">
 

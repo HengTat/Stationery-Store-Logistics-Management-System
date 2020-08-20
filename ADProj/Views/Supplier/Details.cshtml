@@ -8,42 +8,37 @@
 
 <h1 style="text-align:center">Supplier Stationery Details</h1>
 
-<form method="post">
+<form method="post" style="margin-bottom:50px">
     <div class="container">
+
+        <h3 align="center">SUPPLIER ID:@supplierid </h3>
+        <input name="Button1" style="margin-left:70px" title="Submit" class="btn btn-success" value="Add New Stationery" formaction="~/Supplier/AddStationery?id=@supplierid" style="border-style:Solid;" type="submit"></>
         <br />
-        <table>
-            <tr>
-                <td><h3 style="margin-left:500px;">SUPPLIER ID:@supplierid </h3></td>
-            </tr>
-        </table>
-        <input name="Button1" title="Submit" class="btn btn-success" value="Add New Stationery" formaction="~/Supplier/AddStationery?id=@supplierid" style="border-style:Solid;" type="submit"></>
-        <br />
-        <br />
-        <table class="table table-bordered">
+        <table class="table table-bordered" align="center" style="margin-top:20px; width:1000px; text-align:center">
             <thead style="background-color:lightgrey">
                 <tr align="center">
-                    <th>InventoryItemId</th>
-                    <th>UOM</th>
-                    <th>Tender Price</th>
-                    <th>Action</th>
-                    <th>Action</th>
+                    <th style="text-align:center">InventoryItemId</th>
+                    <th style="text-align:center">UOM</th>
+                    <th style="text-align:center">Tender Price</th>
+                    <th style="text-align:center">Action</th>
+                    <th style="text-align:center">Action</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var item in supplierstationeryList)
                 {
-                <tr>
-                    <td>@item.InventoryItemId</td>
-                    <td>@item.UOM</td>
-                    <td>@item.TenderPrice</td>
+                    <tr>
+                        <td>@item.InventoryItemId</td>
+                        <td>@item.UOM</td>
+                        <td>@item.TenderPrice</td>
 
-                    <td>
-                        <button type="submit" class="btn btn-warning btn-xs" formaction="/Supplier/EditDeleteStationery?cmd=edit&Id=@item.Id">Edit</button>
-                    </td>
-                    <td>
-                        <button type="submit" class="btn btn-danger btn-xs" formaction="/Supplier/EditDeleteStationery?cmd=delete&Id=@item.Id">Delete</button>
-                    </td>                    
-                </tr>
+                        <td>
+                            <button type="submit" class="btn btn-warning btn-xs" formaction="/Supplier/EditDeleteStationery?cmd=edit&Id=@item.Id">Edit</button>
+                        </td>
+                        <td>
+                            <button type="submit" class="btn btn-danger btn-xs" formaction="/Supplier/EditDeleteStationery?cmd=delete&Id=@item.Id">Delete</button>
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>

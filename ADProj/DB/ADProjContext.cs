@@ -38,6 +38,7 @@ namespace ADProj.DB
         public DbSet<RetrievalDetails> RetrievalDetails{ get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<SupplierStationery> SupplierStationeries { get; set; }
+        public DbSet<ADProj.Models.CustomEmployeeMobile> CustomEmployeeMobile { get; set; }
 
 
     }

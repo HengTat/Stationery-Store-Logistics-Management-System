@@ -2,12 +2,14 @@
     ViewData["Title"] = "Disbursement";
     var disbursementList = (List<Disbursement>)ViewData["selectedDisbursements"];
 }
-@Html.ActionLink("Back to Disbursement Records", "Index")
+<div style="margin-left:50px">
+    <a href="/request/outstanding"><h4> << View Request List </h4> </a>
+</div>
 <form method="post" style="margin-bottom:40px">
     <div class="container" align="center">
         <h2>Disbursement - @disbursementList[0].DisbursedDate.ToString("dd/MMM/yyyy")</h2>
-        <table class="table table-bordered" style="margin-top:20px; text-align:center">
-            <thead>
+        <table class="table table-bordered" style="width:800px; margin-top:20px; text-align:center">
+            <thead style="background-color:lightgrey">
                 <tr align="center">
                     <th style="width:100px; text-align:center">Department Code</th>
                     <th style="width:200px; text-align:center">Department</th>
@@ -24,7 +26,7 @@
                         <td>@dbm.Department.Name</td>
                         <td>@dbm.Department.DepartmentRep.Name</td>
                         <td>@dbm.Department.CollectionPointId</td>
-                        <td><button type="submit" formaction="ViewDisbursementDetails?Id=@dbm.Id">View Details</button></td>
+                        <td><button type="submit" formaction="ViewDisbursementDetails?Id=@dbm.Id" class="btn btn-primary btn-xs">View Details ></button></td>
                     </tr>
                 }
 

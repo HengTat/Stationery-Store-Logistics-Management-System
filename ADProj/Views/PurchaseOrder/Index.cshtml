@@ -7,13 +7,14 @@
 }
 
 <div class="text-center">
+    <div align="center" style="margin-top:20px"><img src="https://img.icons8.com/metro/52/000000/overview-pages-3.png" /></div>
     <h1 class="display-4">@ViewData["Title"]</h1>
 </div>
 
 <div class="container" align="center" style="margin-bottom:40px">
-    <table id="tblFufill" class="table table-bordered" style="margin-top:20px; text-align:center">
-        <thead>
-            <tr align="center" style="background-color:lightgrey">
+    <table id="tblFufill" class="table table-bordered" style="width:800px; margin-top:20px; text-align:center">
+        <thead style="background-color:lightgrey">
+            <tr align="center">
                 <th style="width:100px; text-align:center">Purchase Order Id</th>
                 <th style="width:50px; text-align:center">Date raised</th>
                 <th style="width:50px; text-align:center">Supplier Id</th>
@@ -33,7 +34,7 @@
                     <td>@po.SupplierId</td>
                     <td>
                         <form action=@viewdetailurl>
-                            <input type="submit" value="View Details >" />
+                            <input type="submit" class="btn btn-primary btn-xs" value="View Details >" />
                         </form>
                     </td>
                 </tr>

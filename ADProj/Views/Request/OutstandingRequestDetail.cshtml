@@ -6,26 +6,28 @@
 
 }
 
-<a href="/request/outstanding"><h4> < View Request List </h4> </a>
+    <div style="margin-left:50px">
+        <a href="/request/outstanding"><h4> << View Request List </h4> </a>
+    </div>
 
 <div align="center">
-    <img src="~/Icons/Listicon.png" alt="listicon" width="260" height="130" />
-    <h1>Request Detail</h1>
+    <div align="center" style="margin-top:20px"><img src="https://img.icons8.com/metro/52/000000/overview-pages-3.png" /></div>
+    <h1 class="display-4">Request Detail</h1>
 
 
     <table class="table table-bordered" style="width:800px; text-align:center">
         <thead>
             <tr style="background-color:lightgrey">
-                <th>
+                <th style="text-align:center">
                     @Html.DisplayNameFor(model => model.InventoryItemId)
                 </th>
-                <th>
+                <th style="text-align:center">
                     @Html.DisplayNameFor(model => model.InventoryItem.Description)
                 </th>
-                <th>
+                <th style="text-align:center">
                     @Html.DisplayNameFor(model => model.QtyRequested)
                 </th>
-                <th>
+                <th style="text-align:center">
                     @Html.DisplayNameFor(model => model.InventoryItem.UOM)
                 </th>
             </tr>

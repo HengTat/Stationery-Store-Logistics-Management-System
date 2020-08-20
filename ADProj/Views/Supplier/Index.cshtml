@@ -23,56 +23,24 @@
     </script>
 }
 
-<style>
-    #Add {
-        transition-duration: 0.4s;
-        margin-left: 50px;
-        border-radius: 8px;
-        height: 40px;
-    }
-
-
-    #Delete {
-        background-color: transparent;
-        border: none;
-        outline: none;
-        cursor: pointer;
-        overflow: hidden;
-    }
-
-    #Edit {
-        background-color: transparent;
-        border: none;
-        outline: none;
-    }
-
-    #Details {
-        background-color: transparent;
-        border: none;
-        outline: none;
-        color: #33BAFF;
-    }
-</style>
-
 <form method="post">
     <div class="container">
         <h1 style="text-align:center">Supplier List</h1>
-        <input name="Button1" class="btn btn-success" id="Add" title="Submit" value="Add Supplier" formaction="Supplier/AddSupplier?id=@supplierid" style="border-style:Solid;" type="submit"></>
-        <br />
-        <br />
+        <input name="Button1" class="btn btn-success" id="Add" title="Submit" value="Add New Supplier" formaction="Supplier/AddSupplier?id=@supplierid" style="border-style:Solid;" type="submit" />
 
-        <table class="table table-bordered">
+        <table class="table table-bordered" style="margin-top:20px; text-align:center">
             <thead style="background-color:lightgrey">
                 <tr align="center">
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Contact Name</th>
-                    <th>Phone No</th>
-                    <th>Fax No</th>
-                    <th>Adddress</th>
-                    <th>GSTReg</th>
-
-                    <th>Action</th>
+                    <th style="text-align:center">ID</th>
+                    <th style="text-align:center">Name</th>
+                    <th style="text-align:center">Contact Name</th>
+                    <th style="text-align:center">Phone No</th>
+                    <th style="text-align:center">Fax No</th>
+                    <th style="text-align:center">Adddress</th>
+                    <th style="text-align:center">GSTReg</th>
+                    <th style="text-align:center">Action</th>
+                    <th style="text-align:center">Action</th>
+                    <th style="text-align:center">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -88,13 +56,9 @@
                         <td>@item.GSTReg</td>
 
 
-                        <td width="10%">
-                            <button type="submit" id="Details" formaction="Supplier/Details?Id=@item.Id">View Details</button>
-                            <br />
-                            <button type="submit" id="Edit" formaction="Supplier/EditDeleteSupplier?cmd=edit&Id=@item.Id">Edit</button>
-                            <br />
-                            <button type="submit" id="Delete" formaction="Supplier/EditDeleteSupplier?cmd=delete&Id=@item.Id" style="color:red">Delete</button>
-                        </td>
+                        <td><button type="submit" class="btn btn-warning btn-xs" formaction="/Supplier/EditDeleteSupplier?cmd=edit&Id=@item.Id">Edit</button></td>
+                        <td><button type="submit" class="btn btn-danger btn-xs" formaction="/Supplier/EditDeleteSupplier?cmd=delete&Id=@item.Id">Delete</button></td>
+                        <td><button type="submit" class="btn btn-primary btn-xs" formaction="/Supplier/Details?Id=@item.Id">View Details</button></td>
                     </tr>
                 }
             </tbody>
