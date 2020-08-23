@@ -37,7 +37,7 @@ namespace ADProj.Services
             //mail.To.Add(new MailAddress(employeeemail));
             mail.Subject = "CollectionPoint has been updated";
             mail.Body = " Please note that Collection point has Changed. Please Log In to find out more.";
-            smtpClient.Send(mail);
+            //smtpClient.Send(mail);
         }
 
         //EMAIL FOR CHANGE IN DEPT REP (EMPLOYEE + CLERK)
@@ -50,7 +50,7 @@ namespace ADProj.Services
             mail.CC.Add(new MailAddress("team9clerk@gmail.com"));
             mail.Subject = "Dept Rep has changed";
             mail.Body = " Please note that Dept Rep has Changed. Please Log In to find out more.";
-            smtpClient.Send(mail);
+            //smtpClient.Send(mail);
         }
 
 
@@ -67,7 +67,7 @@ namespace ADProj.Services
             //mail.To.Add(new MailAddress(employeeemail));
             mail.Subject = "Request has been submitted";
             mail.Body = "Your Request has been submitted";
-            smtpClient.Send(mail);
+            //smtpClient.Send(mail);
         }
 
 
@@ -86,7 +86,7 @@ namespace ADProj.Services
             //mail.To.Add(new MailAddress(employeeemail));
             mail.Subject = "Request has been Approved";
             mail.Body = "Your Request has been Approved. Please login to find out more";
-            smtpClient.Send(mail);
+            //smtpClient.Send(mail);
         }
 
 
@@ -102,7 +102,7 @@ namespace ADProj.Services
             mail.To.Add(new MailAddress("team9clerk@gmail.com"));
             mail.Subject = item.Description + " has Low Stock";
             mail.Body = item.Description + " has Low Stock. Currently in stock:" + stocklevel + " Please Order more Items. Reorder Level:" + item.ReorderLevel;
-            smtpClient.Send(mail);
+            //smtpClient.Send(mail);
         }
 
         //EMAIL WHEN DELEGATE ASSIGNED
@@ -118,7 +118,7 @@ namespace ADProj.Services
             //mail.To.Add(new MailAddress(employeeemail));
             mail.Subject = "Appointment as acting approving authority";
             mail.Body = "You has been appointed as the Acting Department Head from " + startDate.ToString() + " to " + endDate.ToString() + " .";
-            smtpClient.Send(mail);
+            //smtpClient.Send(mail);
         }
 
         //EMAIL WHEN DELEGATE CANCELLED
@@ -134,7 +134,7 @@ namespace ADProj.Services
             //mail.To.Add(new MailAddress(employeeemail));
             mail.Subject = "Cancellation of approving authority appointment";
             mail.Body = "The department head has rescinded your previous Acting Department Head appointment.";
-            smtpClient.Send(mail);
+            //smtpClient.Send(mail);
         }
 
         //EMAIL TO INFORM OF DISBURSEMENT
@@ -150,7 +150,7 @@ namespace ADProj.Services
             //mail.To.Add(new MailAddress(employeeemail));
             mail.Subject = "Stationery Disbursement on " + date.ToString("dd/MMM/yyyy") + ", " + time + " at " + location;
             mail.Body = "Please be present at your department's stationery collection point to collect your department's stationeries.";
-            smtpClient.Send(mail);
+            //smtpClient.Send(mail);
         }
     }
 }

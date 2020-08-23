@@ -48,6 +48,7 @@ namespace ADProj
             services.AddScoped<DisbursementService>();
             services.AddScoped<RetrievalService>();
             services.AddScoped<TrendAnalysisService>();
+            services.AddScoped<DisbursementAPIService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
