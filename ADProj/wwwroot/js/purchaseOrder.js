@@ -20,6 +20,10 @@ $(document).ready(function () {
             swal("Please select a supplier");
             return;
         }
+        if (isNaN(qty)) {
+            swal("Please enter a positive integer");
+            return;
+        }
         if (qty <= 0) {
             swal("Please enter a positive quantity");
             return;

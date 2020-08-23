@@ -2,6 +2,19 @@
     var deptEmployeeList = (List<Employee>)ViewData["deptEmployeeList"];
     var msg = ViewData["errmsg"]; }
 
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+@if (msg != null)
+{
+    <script type="text/javascript">
+    window.onload = function () {
+        swal("@msg");
+    };
+    </script>
+}
+
+
 <div align="center">
     <h2>Assign Delegate</h2>
     <form class="form-horizontal" action="ConfirmDelegation" method="POST" style="margin-top:40px">
@@ -12,8 +25,8 @@
                 <select class="form-control" id="employeeId" name="employeeId" style="width:300px">
                     @foreach (var employee in deptEmployeeList)
                     {
-        <option value="@employee.Id">@employee.Name</option>
-}
+                        <option value="@employee.Id">@employee.Name</option>
+                    }
                 </select>
             </div>
         </div>
@@ -32,14 +45,6 @@
                 <input class="form-control" type="date" id="endDate" name="endDate" style="width:300px">
             </div>
         </div>
-        <div id="errmsg" align="center">
-            <span style="color:red">
-                @if (ViewData.ContainsKey("errmsg"))
-                {
-    @ViewData["errmsg"];
-}
-            </span>
-        </div>
         <div class="form-group">
             <button type="button" id="cancelBtn" class="btn btn-danger" onclick="window.location.href='/home/departmenthead';">Cancel</button>
             <button type="submit" id="btnSave" class="btn btn-success">Confirm</button>
@@ -47,3 +52,5 @@
 
     </form>
 </div>
+
+

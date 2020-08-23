@@ -45,7 +45,7 @@
     @if (msg != null)
     {
 
-    <script type="text/javascript">
+        <script type="text/javascript">
         window.onload = function () {
             if ("@msg" === "Adjustment voucher form has been created!")
             {
@@ -59,18 +59,17 @@
             }
             else { swal("@msg"); }
         };
-    </script>
+        </script>
     }
 </div>
 <div align="center">
 
-    <form class="form-horizontal" method="POST" action="" style="margin-top:40px">
+    <form class="form-horizontal" method="POST" action="" style="margin-top:40px; margin-bottom:50px;">
 
         <div class="form-group">
             <label class="col-sm-5 control-label">Item Name:</label>
             <div class="col-sm-3">
-
-                <select id="selectOne" class="center-block">
+                <select id="selectOne" class="form-control" style="width:300px">
                     <option style="display:none">Select Category</option>
                     @foreach (var item in categories)
                     {
@@ -84,7 +83,7 @@
         <div class="form-group">
             <label class="col-sm-5 control-label">Item Description:</label>
             <div class="col-sm-3">
-                <select id="selectTwo" class="center-block">
+                <select id="selectTwo" class="form-control" style="width:300px">
                     <option style="display:none">Select Item</option>
                     @foreach (var item in supplierstationary)
                     {
@@ -95,13 +94,10 @@
             </div>
         </div>
 
-
-        <br />
-
         <div class="form-group">
             <label class="col-sm-5 control-label">Unit of Measurement:</label>
             <div class="col-sm-3">
-                <input type="text" name="demo" id="demo" placeholder="Unit of Measurement" class="center-block" readonly />
+                <input type="text" name="demo" id="demo" placeholder="Unit of Measurement" class="form-control" style="width:300px" readonly />
             </div>
         </div>
         <input type="text" id="demo2" name="itemname" placeholder="Item ID(CODE)" class="center-block" style="display:none" />
@@ -109,14 +105,14 @@
         <div class="form-group">
             <label class="col-sm-5 control-label">Price:</label>
             <div class="col-sm-3">
-                <input type="text" name="demo4" id="demo4" placeholder="Price" class="center-block" readonly />
+                <input type="text" name="demo4" id="demo4" placeholder="Price" class="form-control" style="width:300px" readonly />
 
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-5 control-label">Current Quantity:</label>
             <div class="col-sm-3">
-                <input type="text" name="demo5" id="demo5" placeholder="CurrentQty" class="center-block" readonly />
+                <input type="text" name="demo5" id="demo5" placeholder="CurrentQty" class="form-control" style="width:300px" readonly />
             </div>
         </div>
 
@@ -124,28 +120,28 @@
         <div class="form-group">
             <label class="col-sm-5 control-label">Adjustment Quantity:</label>
             <div class="col-sm-3">
-                <input class="form-control" id="demo7" name="AdjustQty" type="number" value="" onchange="checkform()" style="width:100px">
+                <input class="form-control" id="demo7" name="AdjustQty" type="number" value="" onchange="checkform()" style="width:300px">
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-sm-5 control-label">Adjustment Amount($):</label>
             <div class="col-sm-3">
-                <input class="form-control" name="AdjustAmt" id="demo8" value="" type="text" style="width:100px" readonly>
+                <input class="form-control" name="AdjustAmt" id="demo8" value="" type="text" style="width:300px" readonly>
             </div>
         </div>
 
         <div class="form-group">
             <label class="col-sm-5 control-label">Reason:</label>
             <div class="col-sm-3">
-                <input class="form-control" name="reason" id="reason" type="text" style="width:100px">
+                <input class="form-control" name="reason" id="reason" type="text" style="width:300px">
             </div>
         </div>
 
 
         <div class="form-group">
-            <input type="submit" name="submit" value="submit" id="submit" formaction="SaveAdjustmentVoucher" />
-            <input type="submit" name="cancel" value="cancel" id="cancel" formaction="AddAdjustmentVoucher" />
+            <input type="submit" class="btn btn-danger" name="cancel" value="cancel" id="cancel" formaction="AddAdjustmentVoucher" />
+            <input type="submit" class="btn btn-success" name="submit" value="submit" id="submit" formaction="SaveAdjustmentVoucher" />
 
         </div>
 
