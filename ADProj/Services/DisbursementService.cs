@@ -30,7 +30,8 @@ namespace ADProj.Services
             {
                 DateRequested = dateRequested,
                 DisbursedDate = disbursedDate,
-                DepartmentId = department.Id
+                DepartmentId = department.Id,
+                DisbursementStatus = Enums.DisbursementStatus.NOTCOLLECTED
             };
             dbcontext.Add(disbursement);
             dbcontext.SaveChanges();

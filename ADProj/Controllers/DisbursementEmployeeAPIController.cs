@@ -56,13 +56,18 @@ namespace ADProj.Controllers
         {
             try
             {
-                foreach (DisbursementDetailAPIModel apimodel in ListofdisbursementdetailsAPIModel)
+                for (int i = 0; i < ListofdisbursementdetailsAPIModel.Count; i++)
                 {
-                    DisbursementDetails disbursementdetails = disbursementapiservice.APImodelconvertoDisbursementDetailmodel(apimodel);
+                    DisbursementDetails disbursementdetails = disbursementapiservice.APImodelconvertoDisbursementDetailmodel(ListofdisbursementdetailsAPIModel[i]);
+
                     _context.Entry(disbursementdetails).State = EntityState.Modified;
+                    //use first disbursementdetails to change disbursementdetailapproval
+                    if (i == 0)
+                    {
+                        disbursementapiservice.ChangeDisbursementStatustocollectbyDisbursementDetail(disbursementdetails);
+                    }
                 }
                 await _context.SaveChangesAsync();
-
                 return NoContent();
             }
             catch (DbUpdateConcurrencyException)

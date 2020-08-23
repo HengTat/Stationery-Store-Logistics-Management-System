@@ -90,13 +90,24 @@ namespace ADProj.Services
         {
             string Departmentid = dbcontext.Employees.Find(id).DepartmentId;
             List<DisbursementAPIModel> Listofapimodels = new List<DisbursementAPIModel>();
-            List<Disbursement> Listofdisbursements = dbcontext.Disbursements.Where(x => x.DepartmentId == Departmentid).ToList();
+            List<Disbursement> Listofdisbursements = dbcontext.Disbursements.Where(x => x.DepartmentId == Departmentid & x.DisbursementStatus == Enums.DisbursementStatus.NOTCOLLECTED).ToList();
             foreach (Disbursement d in Listofdisbursements)
             {
                 DisbursementAPIModel APIModel = DisbursementConverttoDisbursementAPIModel(d);
                 Listofapimodels.Add(APIModel);
             }
             return Listofapimodels;
+        }
+
+        public void ChangeDisbursementStatustocollectbyDisbursementDetail(DisbursementDetails dd)
+        {
+            Disbursement d = dbcontext.Disbursements.Where(x => x.Id == dd.DisbursementId).FirstOrDefault();
+            if (d.DisbursementStatus != Enums.DisbursementStatus.COLLECTED)
+            {
+                d.DisbursementStatus = Enums.DisbursementStatus.COLLECTED;
+            }
+            dbcontext.Update(d);
+            dbcontext.SaveChanges();
         }
     }
 }
