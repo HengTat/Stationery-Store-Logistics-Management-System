@@ -99,12 +99,6 @@ namespace ADProj.Controllers
         {
             ViewData["alertMsg"] = TempData["alertMsg"];
 
-            if (cmd == "delete")
-            {
-                supService.DeleteSupplierById(Id);
-                TempData["alertMsg"] = "Deleted successfully!";
-                return RedirectToAction("Index");
-            }
             if (cmd == "edit")
             {
                 Supplier supplier = supService.GetSupplierById(Id);

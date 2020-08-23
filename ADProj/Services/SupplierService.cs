@@ -84,13 +84,6 @@ namespace ADProj.Services
             adProjContext.SaveChanges();
         }
 
-        public void DeleteSupplierById(string id)
-        {
-            Supplier supplier = GetSupplierById(id);
-            adProjContext.Remove(supplier);
-            adProjContext.SaveChanges();
-        }
-
         public void DeleteSupplierStationeryById(int id)
         {
             SupplierStationery supplierstationery = GetSupplierStationeryById(id);

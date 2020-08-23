@@ -41,20 +41,11 @@ namespace ADProj.Services
                 reqDetails.InventoryItemId = detail.ItemId;
                 dbcontext.Add(reqDetails);
                 dbcontext.SaveChanges();
+
             }
-        }
 
-        public void addRequestDetailsMobile(int requestId, CustomRequestDetails reqDetail)
-        {
-                RequestDetails addDetail = new RequestDetails();
-                addDetail.RequestId = requestId;
-                addDetail.QtyRequested = int.Parse(reqDetail.Qty);
-                addDetail.InventoryItemId = reqDetail.ItemId;
-                dbcontext.Add(addDetail);
-                dbcontext.SaveChanges();
-            
-        }
 
+        }
         public List<Request> GetApprovedAndPendingStockRequests()
         {
             return dbcontext.Requests.Where(x => x.Status == Enums.Status.Approved || x.Status == Enums.Status.PendingStock).ToList();
@@ -92,7 +83,11 @@ namespace ADProj.Services
         {
             return dbcontext.Requests.Where(x => x.EmployeeId == empId).OrderByDescending(x => x.DateRequested).Take(5).ToList();
         }
-
+        public List<Request> getRequests()
+        {
+            List<Request> requests = dbcontext.Requests.ToList();
+            return requests;
+        }
         public List<Request> GetRequestsByRetrievalId(int retrievalId)
         {
             return dbcontext.Requests.Where(x => x.RetrievalId == retrievalId).ToList();
