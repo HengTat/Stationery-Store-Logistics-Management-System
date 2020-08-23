@@ -160,5 +160,26 @@ namespace ADProj.Services
             }
 
         }
+
+        public List<InventoryItem> DistinctItemsInPendingStockRequestsRequiringRestock()
+        {
+            List<Request> allPendingStock = adProjContext.Requests.Where(x => x.Status == Enums.Status.PendingStock).ToList();
+            List<RequestDetails> associatedDetails = new List<RequestDetails>();
+            foreach (Request req in allPendingStock)
+            {
+                associatedDetails.AddRange(adProjContext.RequestDetails.Where(x => x.RequestId == req.Id).ToList());
+            }
+            var iter = associatedDetails
+                .GroupBy(det => det.InventoryItemId)
+                .Select(det => new { InventoryItemId = det.Key, Qty = det.Sum(t => t.QtyRequested) });
+            List<InventoryItem> restockRequired = new List<InventoryItem>();
+            foreach (var distinctItem in iter)
+            {
+                InventoryItem item = adProjContext.InventoryItems.Find(distinctItem.InventoryItemId);
+                if (item.RequestQty + distinctItem.Qty > item.QtyInStock - item.ReorderLevel)
+                    restockRequired.Add(item);
+            }
+            return restockRequired;
+        }
     }
 }

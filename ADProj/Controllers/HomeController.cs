@@ -90,16 +90,17 @@ namespace ADProj.Controllers
                 int numberOfOutstandingRequests = rs.GetNumberOfOutstandingRequests();
                 List<InventoryItem> listOfAllIntItems = ints.ItemList();
                 List<InventoryItem> itemsRequiringReorder = new List<InventoryItem>();
+
                 foreach (InventoryItem item in listOfAllIntItems)
                 {
-                    if (item.QtyInStock < item.ReorderQty)
+                    if (item.QtyInStock - item.RequestQty < item.ReorderLevel)
                     {
                         itemsRequiringReorder.Add(item);
                     }
                 }
-
+                itemsRequiringReorder.AddRange(ints.DistinctItemsInPendingStockRequestsRequiringRestock());
                 ViewData["numberOfOutstandingRequests"] = numberOfOutstandingRequests;
-                ViewData["itemsRequiringReorder"] = itemsRequiringReorder;
+                ViewData["itemsRequiringReorder"] = itemsRequiringReorder.Distinct().ToList();
             }
             return View();
         }
