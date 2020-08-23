@@ -2,6 +2,7 @@
 
 @{
     ViewData["Title"] = "Request Details";
+    int requestId = Convert.ToInt32(ViewData["Requestid"]);
 }
 
 <a href="/request/Viewmyrequesthistory"><h4> < View Request List </h4> </a>
@@ -48,5 +49,8 @@
             }
         </tbody>
     </table>
+    <form method="post">
+        <input type="submit" class="btn btn-primary" formaction="/Request/RepeatRequest?id=@requestId" value="Repeat Request" align="center" />
+    </form>
 
 </div>

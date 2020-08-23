@@ -12,29 +12,24 @@ namespace ADProj.Controllers
     [ApiController]
     public class RetrievalAPIController : ControllerBase
     {
-        private InventoryService inventService;
-        private RequestDetailService requestDetailservice;
-        private RequestServices requestService;
+        private RetrievalService rs;
 
-        public RetrievalAPIController(InventoryService inventService, RequestDetailService requestDetailservice, RequestServices requestService)
+        public RetrievalAPIController(RetrievalService rs)
         {
-            this.inventService = inventService;
-            this.requestDetailservice = requestDetailservice;
-            this.requestService = requestService;
+            this.rs = rs;
         }
 
-        //public IEnumerable<Request> Get()
-        //{
-            //List<Request> list = new List<Request>();
-            //list = requestService.getRequests();
-           // return list;
-        //}
+        public IEnumerable<Retrieval> Get()
+        {
+            List<Retrieval> list = rs.GetRetrievals();
+            return list;
+        }
 
         [HttpGet("{id}")]
         public List<RequestDetails> Get(int id)
         {
             List<RequestDetails> list = new List<RequestDetails>();
-            list = requestDetailservice.FindRequestDetailByRequestId(id);
+            list = rs.FindRquestDetailsById(id);
             return list;
         }
     }

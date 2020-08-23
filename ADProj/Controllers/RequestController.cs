@@ -97,6 +97,11 @@ namespace ADProj.Controllers
 
         public IActionResult ViewMyRequestHistory()
         {
+            if (TempData["repeatRequestStatus"] != null)
+            {
+                ViewData["repeatRequestStatus"] = TempData["repeatRequestStatus"];
+            }
+
             int CurrentId = int.Parse(HttpContext.Session.GetString("id"));
             List<Request> ListofRequest = rs.FindRequestbyUserId(CurrentId);
             return View(ListofRequest);
@@ -191,6 +196,28 @@ namespace ADProj.Controllers
             dbcontext.SaveChanges();
 
             return RedirectToAction("Requestpendingapproval");
+        }
+
+        public IActionResult RepeatRequest(int id)
+        {
+            string employeeId = HttpContext.Session.GetString("id");
+            List<RequestDetails> requestDetails = requestdetailservice.FindRequestDetailByRequestId(id);
+            int requestId = rs.addRequest(employeeId);
+            List<CustomRequestDetails> customRequestDetailsList = new List<CustomRequestDetails>();
+
+            foreach(RequestDetails rd in requestDetails)
+            {
+                CustomRequestDetails cusReqDet = new CustomRequestDetails();
+                cusReqDet.Category = rd.InventoryItem.ItemCategory.Name;
+                cusReqDet.Description = rd.InventoryItem.Description;
+                cusReqDet.ItemId = rd.InventoryItemId;
+                cusReqDet.Qty = Convert.ToString(rd.QtyRequested);
+
+                customRequestDetailsList.Add(cusReqDet);
+            }
+            rs.addRequestDetails(requestId, customRequestDetailsList);
+            TempData["repeatRequestStatus"] = "success";
+            return RedirectToAction("ViewMyRequestHistory");
         }
     }
 }
