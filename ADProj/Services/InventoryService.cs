@@ -42,6 +42,11 @@ namespace ADProj.Services
             ItemCategory cat = adProjContext.ItemCategories.Where(x => x.Name == catName).FirstOrDefault();
             return cat;
         }
+        public InventoryItem GetItemByDescription(string description)
+        {
+            InventoryItem item = adProjContext.InventoryItems.Where(x => x.Description == description).FirstOrDefault();
+            return item;
+        }
 
         public ItemCategory GetCategoryById(int id)
         {

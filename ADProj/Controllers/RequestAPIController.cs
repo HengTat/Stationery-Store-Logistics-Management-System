@@ -43,10 +43,38 @@ namespace ADProj.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] CustomRequestDetails data)
+        public IActionResult Post([FromBody] CustomRequestMobile data)
         {
-            //int RequestId = rs.addRequest(employeeId);
-            //requestService.addRequestDetails(RequestId, data);
-        }
+            if(data.Category.Equals("Select Category"))
+            {
+                return NotFound();
+
+            }
+            if (data.Description.Equals(""))
+            {
+                return NotFound();
+
+            }
+            if (data.RequestQty.Equals(""))
+            {
+                return NotFound();
+            }
+
+            string employeeId = data.EmployeeId.ToString();
+            int RequestId = requestService.addRequest(employeeId);
+
+
+            CustomRequestDetails crq = new CustomRequestDetails();
+            crq.Category = data.Category;
+            crq.Description = data.Description;
+            crq.Qty = data.RequestQty;
+
+            InventoryItem findItem = new InventoryItem();
+            findItem= inventService.GetItemByDescription(crq.Description);
+            crq.ItemId = findItem.Id;
+            requestService.addRequestDetailsMobile(RequestId, crq);
+            return Ok(crq);
+
+    }
     }
 }

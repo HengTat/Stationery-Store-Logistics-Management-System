@@ -41,11 +41,20 @@ namespace ADProj.Services
                 reqDetails.InventoryItemId = detail.ItemId;
                 dbcontext.Add(reqDetails);
                 dbcontext.SaveChanges();
-
             }
-
-
         }
+
+        public void addRequestDetailsMobile(int requestId, CustomRequestDetails reqDetail)
+        {
+                RequestDetails addDetail = new RequestDetails();
+                addDetail.RequestId = requestId;
+                addDetail.QtyRequested = int.Parse(reqDetail.Qty);
+                addDetail.InventoryItemId = reqDetail.ItemId;
+                dbcontext.Add(addDetail);
+                dbcontext.SaveChanges();
+            
+        }
+
         public List<Request> GetApprovedAndPendingStockRequests()
         {
             return dbcontext.Requests.Where(x => x.Status == Enums.Status.Approved || x.Status == Enums.Status.PendingStock).ToList();
