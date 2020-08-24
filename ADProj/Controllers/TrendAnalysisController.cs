@@ -6,8 +6,10 @@ using System.Runtime.ExceptionServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using ADProj.DB;
+using ADProj.Enums;
 using ADProj.Models;
 using ADProj.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
@@ -25,12 +27,21 @@ namespace ADProj.Controllers
 
         public IActionResult Index()
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
             return View();
         }
 
 
         public IActionResult GeneralTrend()
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
+
             //First Diagram           
             List<string> ListofCategories = trendAnalysisSerivce.returnlistofcatogeriesorderinpastmonth();
             List<int> ListofRequestQty = trendAnalysisSerivce.returnlistofvolumeofcatogeriesorderinpastmonth();
@@ -49,6 +60,10 @@ namespace ADProj.Controllers
 
         public IActionResult submitforrequestvolume(string[] dept, string M1, string M2)
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
             List<string> listofselecteddept = new List<string>();
             for (int i = 0; i < dept.Length; i++)
             {
@@ -62,6 +77,10 @@ namespace ADProj.Controllers
 
         public IActionResult TrendAnalysisRequestVolume(List<string> listofselecteddep, string Month1, string Month2)
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
             ViewData["M1"] = Month1;
             ViewData["M2"] = Month2;
             DateTime M1 = DateTime.Now; ;
@@ -113,6 +132,11 @@ namespace ADProj.Controllers
 
         public IActionResult submitforOrderQuantity(string[] cat, string M1, string M2)
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
+
             List<string> listofselectedcat = new List<string>();
             for (int i = 0; i < cat.Length; i++)
             {
@@ -124,6 +148,11 @@ namespace ADProj.Controllers
 
         public IActionResult TrendAnalysisOrderQuantity(List<string> listofselectedcat, string Month1, string Month2)
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
+
             ViewData["M1"] = Month1;
             ViewData["M2"] = Month2;
             DateTime M1 = DateTime.Now; ;

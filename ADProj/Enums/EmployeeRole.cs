@@ -8,11 +8,11 @@ namespace ADProj.Enums
 {
     public class EmployeeRole
     {
-        public const string DEPTHEAD = "Department Head";
-        public const string DEPTREP = "Department Rep";
+        public const string DEPTHEAD = "DepartmentHead";
+        public const string DEPTREP = "DepartmentRep";
         public const string EMPLOYEE = "Employee";
-        public const string STOREMANAGER = "Store Manager";
-        public const string STORESUPERVISOR = "Store Supervisor";
-        public const string STORECLERK = "Store Clerk";
+        public const string STOREMANAGER = "StoreManager";
+        public const string STORESUPERVISOR = "StoreSupervisor";
+        public const string STORECLERK = "StoreClerk";
     }
 }

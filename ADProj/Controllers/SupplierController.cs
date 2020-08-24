@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ADProj.Enums;
 using ADProj.Models;
 using ADProj.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 namespace ADProj.Controllers
 {
@@ -12,13 +14,21 @@ namespace ADProj.Controllers
         private SupplierService supService;
         private InventoryService inventService;
 
-        public SupplierController(SupplierService supService, InventoryService inventService )
+        public SupplierController(SupplierService supService, InventoryService inventService)
         {
             this.supService = supService;
             this.inventService = inventService;
         }
         public IActionResult Index()
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK ||
+                HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER ||
+                HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
+
+
             List<Supplier> supplierList = supService.SupplierList();
             ViewData["supplierList"] = supplierList;
             if (TempData["alertMsg"] != null)
@@ -30,6 +40,12 @@ namespace ADProj.Controllers
 
         public IActionResult AddSupplier(string id)
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK ||
+                HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER ||
+                HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
             if (TempData["alertMsg"] != null)
             {
                 ViewData["alertMsg"] = TempData["alertMsg"];
@@ -39,6 +55,13 @@ namespace ADProj.Controllers
 
         public IActionResult AddStationery(string id)
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK ||
+                HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER ||
+                HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
+
             //SupplierStationery s = supService.GetSupplierStationeryBySupplierId(id);
             List<InventoryItem> iList = inventService.ItemList();
             if (id != null)
@@ -50,7 +73,7 @@ namespace ADProj.Controllers
                 ViewData["supplierid"] = TempData["supplierId"];
             }
             ViewData["inventList"] = iList;
-            
+
             if (TempData["alertMsg"] != null)
             {
                 ViewData["alertMsg"] = TempData["alertMsg"];
@@ -60,6 +83,13 @@ namespace ADProj.Controllers
 
         public IActionResult SaveSupplier(string Id, string Name, string ContactName, string PhoneNo, string FaxNo, string Address, string GSTReg)
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK ||
+                HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER ||
+                HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
+
             if (!(Id != null && Name != null && ContactName != null && PhoneNo != null && FaxNo != null && Address != null && GSTReg != null))
             {
                 TempData["alertMsg"] = "Please enter all information!";
@@ -75,37 +105,50 @@ namespace ADProj.Controllers
 
         public IActionResult SaveStationery(int Id, string SupplierId, string InventoryItemId, string UOM, float TenderPrice)
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK ||
+                HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER ||
+                HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
+
             List<SupplierStationery> supplierStationeryList = supService.GetSupplierStationeryListByCompositeKey(SupplierId, InventoryItemId);
 
-                if (!(SupplierId != null && InventoryItemId != null && UOM != null))
-                {
-                    TempData["alertMsg"] = "Please enter all information!";
-                    TempData["supplierId"] = SupplierId;
-                    return RedirectToAction("AddStationery");
-                }
-                else if (TenderPrice == 0)
-                {
-                    TempData["alertMsg"] = "Please enter Tender Price!";
-                    TempData["supplierId"] = SupplierId;
-                    return RedirectToAction("AddStationery");
-                }
-                else if(supplierStationeryList.Count != 0)
-                {
-                    TempData["alertMsg"] = "Item already exist!";
-                    TempData["supplierId"] = SupplierId;
-                    return RedirectToAction("AddStationery");
-                }
-                else
-                {
-                    supService.CreateSupplierStationery(SupplierId, InventoryItemId, UOM, TenderPrice);
-                    TempData["alertMsg"] = "Saved successfully!";
-                    return RedirectToAction("Details", new { Id = SupplierId });
-                }
+            if (!(SupplierId != null && InventoryItemId != null && UOM != null))
+            {
+                TempData["alertMsg"] = "Please enter all information!";
+                TempData["supplierId"] = SupplierId;
+                return RedirectToAction("AddStationery");
+            }
+            else if (TenderPrice == 0)
+            {
+                TempData["alertMsg"] = "Please enter Tender Price!";
+                TempData["supplierId"] = SupplierId;
+                return RedirectToAction("AddStationery");
+            }
+            else if (supplierStationeryList.Count != 0)
+            {
+                TempData["alertMsg"] = "Item already exist!";
+                TempData["supplierId"] = SupplierId;
+                return RedirectToAction("AddStationery");
+            }
+            else
+            {
+                supService.CreateSupplierStationery(SupplierId, InventoryItemId, UOM, TenderPrice);
+                TempData["alertMsg"] = "Saved successfully!";
+                return RedirectToAction("Details", new { Id = SupplierId });
+            }
 
         }
 
         public IActionResult SupplierList()
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK ||
+                HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER ||
+                HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
             List<Supplier> supplierList = supService.SupplierList();
             ViewData["SupplierList"] = supplierList;
             if (TempData["alertMsg"] != null)
@@ -116,6 +159,13 @@ namespace ADProj.Controllers
         }
         public IActionResult EditDeleteSupplier(string cmd, string Id)
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK ||
+                HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER ||
+                HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
+
             ViewData["alertMsg"] = TempData["alertMsg"];
 
             if (cmd == "edit")
@@ -129,6 +179,13 @@ namespace ADProj.Controllers
 
         public IActionResult EditDeleteStationery(string? cmd, int Id) //stationery id
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK ||
+                HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER ||
+                HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
+
             ViewData["alertMsg"] = TempData["alertMsg"];
             SupplierStationery s = supService.GetSupplierStationeryById(Id);
 
@@ -148,6 +205,18 @@ namespace ADProj.Controllers
 
         public IActionResult UpdateSupplier(string Id, string Name, string ContactName, string PhoneNo, string FaxNo, string Address, string GSTReg)
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK ||
+                HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER ||
+                HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK ||
+                HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER ||
+                HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
             if (!(Id != null && Name != null && ContactName != null && PhoneNo != null && FaxNo != null && Address != null && GSTReg != null))
             {
                 TempData["alertMsg"] = "Please enter all information!";
@@ -160,6 +229,12 @@ namespace ADProj.Controllers
 
         public IActionResult UpdateStationery(int StationeryId, string SupplierId, string InventoryItemId, string UOM, float TenderPrice)
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK ||
+                HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER ||
+                HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
             supService.UpdateSupplierStationeryById(SupplierId, InventoryItemId, UOM, TenderPrice);
             SupplierStationery s = supService.GetSupplierStationeryById(StationeryId);
             /*return RedirectToAction("EditDeleteStationery", new { Id = s.Id });*/
@@ -168,13 +243,20 @@ namespace ADProj.Controllers
 
         public IActionResult Details(string Id)
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK ||
+                HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER ||
+                HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
             List<SupplierStationery> supplierstationeryList = supService.GetSupplierStationeryListById(Id);
             ViewData["supplierstationeryList"] = supplierstationeryList;
             ViewData["supplierid"] = Id;
-            
-            if(TempData["alertMsg"]!=null)
-                ViewData["alertMsg"]=TempData["alertMsg"];
+
+            if (TempData["alertMsg"] != null)
+                ViewData["alertMsg"] = TempData["alertMsg"];
             return View();
         }
+
     }
 }

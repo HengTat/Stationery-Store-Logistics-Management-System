@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ADProj.Enums;
 using ADProj.Models;
 using ADProj.Services;
 using Microsoft.AspNetCore.Http;
@@ -23,6 +24,11 @@ namespace ADProj.Controllers
 
         public IActionResult Index()
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+
+            }
             List<PurchaseOrder> poHistory = poService.GetPOList();
             poHistory.Reverse();
             ViewData["poHistory"] = poHistory;
@@ -31,6 +37,11 @@ namespace ADProj.Controllers
 
         public IActionResult RaisePO()
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+
+            }
             ViewData["SupplierDetailsList"] = supService.SupplierStationeryList();
             ViewData["SupplierList"] = supService.SupplierList();
 
@@ -39,6 +50,11 @@ namespace ADProj.Controllers
 
         public IActionResult InsertOrders([FromBody] List<CustomPODetails> data)
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+
+            }
             var firstElement = data.First();
             string supplierId = firstElement.SupplierId;
             //string employeeId = HttpContext.Session.GetString("id");
@@ -48,6 +64,11 @@ namespace ADProj.Controllers
         }
         public IActionResult Details(int id)
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+
+            }
             List<PurchaseOrderDetails> podList = poService.FindPODetailByPOId(id);
             ViewData["poId"] = id;
             ViewData["ListofPO"] = podList;

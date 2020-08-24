@@ -121,6 +121,29 @@ namespace ADProj.Controllers
             }
             return View();
         }
+        public IActionResult DepartmentRep()
+        {
+            return RedirectToAction("Employee");
+        }
+        public IActionResult StoreManager()
+        {
+            int empId = Convert.ToInt32(HttpContext.Session.GetString("id"));
+            if (HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER)
+            {
+                return RedirectToAction("GeneralTrend", "TrendAnalysis");
 
+            }
+            return RedirectToAction("Index", "Home");
+        }
+        public IActionResult StoreSupervisor()
+        {
+            int empId = Convert.ToInt32(HttpContext.Session.GetString("id"));
+            if (HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR)
+            {
+                return RedirectToAction("GeneralTrend", "TrendAnalysis");
+
+            }
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

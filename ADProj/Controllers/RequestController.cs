@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using ADProj.DB;
+using ADProj.Enums;
 using ADProj.Models;
 using ADProj.Services;
 using Microsoft.AspNetCore.Http;
@@ -33,9 +34,9 @@ namespace ADProj.Controllers
 
         public IActionResult Index()
         {
-            if(HttpContext.Session.GetString("id") == null)
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.EMPLOYEE || HttpContext.Session.GetString("role") == EmployeeRole.DEPTREP))
             {
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
 
             }
 
@@ -47,6 +48,11 @@ namespace ADProj.Controllers
         [HttpPost]
         public IActionResult InsertRequests([FromBody] List<CustomRequestDetails> data)
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.EMPLOYEE || HttpContext.Session.GetString("role") == EmployeeRole.DEPTREP))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+
+            }
             string employeeId = HttpContext.Session.GetString("id");
             int RequestId = rs.addRequest(employeeId);
             rs.addRequestDetails(RequestId, data);
@@ -57,19 +63,17 @@ namespace ADProj.Controllers
 
         public IActionResult Outstanding()
         {
-            /*if (HttpContext.Session.GetString("id") == null)
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
             {
-                return RedirectToAction("Login", "Account");
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
 
-            }*/
-
+            }
             List<Request> approvedRequest = new List<Request>();
             List<Request> pendingStockRequest = new List<Request>();
 
             List<Request> requestList = rs.GetApprovedAndPendingStockRequests();
             foreach (Request request in requestList)
             {
-                //included pending approvalstatus for now to check if it shows up in table html
                 if (request.Status == Enums.Status.Approved)
                 {
                     approvedRequest.Add(request);
@@ -87,6 +91,12 @@ namespace ADProj.Controllers
 
         public IActionResult OutstandingDetails(int id)
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+
+            }
+
             List<RequestDetails> Listofitems = requestdetailservice.FindRequestDetailByRequestId(id);
             ViewData["Requestid"] = id;
             ViewData["Listofitems"] = Listofitems;
@@ -97,6 +107,12 @@ namespace ADProj.Controllers
 
         public IActionResult ViewMyRequestHistory()
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.EMPLOYEE || HttpContext.Session.GetString("role") == EmployeeRole.DEPTREP))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+
+            }
+
             if (TempData["repeatRequestStatus"] != null)
             {
                 ViewData["repeatRequestStatus"] = TempData["repeatRequestStatus"];
@@ -109,6 +125,11 @@ namespace ADProj.Controllers
 
         public IActionResult ViewMyRequestHistoryDetail(int id)
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.EMPLOYEE || HttpContext.Session.GetString("role") == EmployeeRole.DEPTREP))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+
+            }
             List<RequestDetails> Listofitems = requestdetailservice.FindRequestDetailByRequestId(id);
             ViewData["Requestid"] = id;
             return View(Listofitems);
@@ -116,6 +137,11 @@ namespace ADProj.Controllers
 
         public IActionResult Requestpendingapproval()
         {
+            if (HttpContext.Session.GetString("role") != EmployeeRole.DEPTHEAD)
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+
+            }
             int CurrentId = int.Parse(HttpContext.Session.GetString("id"));
             List<Request> Listofrequestpendingapproval = rs.FindPendingRequestByDepartmenthead(CurrentId);
             return View(Listofrequestpendingapproval);
@@ -124,6 +150,11 @@ namespace ADProj.Controllers
 
         public IActionResult RequestViewDetail(int id)
         {
+            if (HttpContext.Session.GetString("role") != EmployeeRole.DEPTHEAD)
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+
+            }
             List<RequestDetails> Listofitems = requestdetailservice.FindRequestDetailByRequestId(id);
             ViewData["Requestid"] = id;
             return View(Listofitems);
@@ -132,6 +163,12 @@ namespace ADProj.Controllers
 
         public IActionResult Submit(string submitButton, int requestid, string Comments)
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.EMPLOYEE || HttpContext.Session.GetString("role") == EmployeeRole.DEPTREP))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+
+            }
+
             Request request = rs.FindRequestbyId(requestid);
             request.Comments = Comments;
             dbcontext.SaveChanges();
@@ -150,6 +187,11 @@ namespace ADProj.Controllers
 
         public IActionResult RejectRequest(int id)
         {
+            if (HttpContext.Session.GetString("role") != EmployeeRole.DEPTHEAD)
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+
+            }
             Request request = rs.FindRequestbyId(id);
             request.Status = Enums.Status.Rejected;
             dbcontext.SaveChanges();
@@ -159,7 +201,11 @@ namespace ADProj.Controllers
 
         public IActionResult ApproveRequest(int id)
         {
+            if (HttpContext.Session.GetString("role") != EmployeeRole.DEPTHEAD)
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
 
+            }
             // push this to service
             Request request = rs.FindRequestbyId(id);
             List<RequestDetails> RDlist = requestdetailservice.FindRequestDetailByRequestId(id);
@@ -200,12 +246,17 @@ namespace ADProj.Controllers
 
         public IActionResult RepeatRequest(int id)
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.EMPLOYEE || HttpContext.Session.GetString("role") == EmployeeRole.DEPTREP))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+
+            }
             string employeeId = HttpContext.Session.GetString("id");
             List<RequestDetails> requestDetails = requestdetailservice.FindRequestDetailByRequestId(id);
             int requestId = rs.addRequest(employeeId);
             List<CustomRequestDetails> customRequestDetailsList = new List<CustomRequestDetails>();
 
-            foreach(RequestDetails rd in requestDetails)
+            foreach (RequestDetails rd in requestDetails)
             {
                 CustomRequestDetails cusReqDet = new CustomRequestDetails();
                 cusReqDet.Category = rd.InventoryItem.ItemCategory.Name;

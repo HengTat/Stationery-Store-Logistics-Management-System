@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using ADProj.Services;
 using ADProj.Models;
 using Microsoft.AspNetCore.Http;
+using ADProj.Enums;
 
 namespace ADProj.Controllers
 {
@@ -21,6 +22,11 @@ namespace ADProj.Controllers
         }
         public IActionResult Index()
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
+
             List<Retrieval> retrivals = rs.GetRetrievals();
             ViewData["rtList"] = retrivals;
             return View();
@@ -28,6 +34,11 @@ namespace ADProj.Controllers
 
         public IActionResult GenerateRetrievalList()
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
+
             Dictionary<string, int> retrieveList = new Dictionary<string, int>();
             List<Request> requests = rs.RetrieveApprovedRequest();
             int empId = Convert.ToInt32(HttpContext.Session.GetString("id"));
@@ -59,6 +70,11 @@ namespace ADProj.Controllers
 
         public IActionResult RetrievalDetails(int rId)
         {
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
+
             List<RetrievalDetails> rtd = rs.FindRetrievalDetails(rId);
             Request req = rs.FindRequestByRetId(rId);
             Retrieval ret = rs.FindRetById(rId);

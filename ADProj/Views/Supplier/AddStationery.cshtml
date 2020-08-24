@@ -28,6 +28,7 @@
             <label class="col-sm-5 control-label">Item Description:</label>
             <div class="col-sm-3">
                 <select id="inventoryId" class="form-control" name="InventoryItemId" style="width:300px">
+                    <option>Select Item</option>
                     @foreach (var item in inventoryList)
                     {
                         <option data-uom=@item.UOM id="InventoryItemId" value=@item.Id>@item.Description </option>

@@ -31,6 +31,8 @@ namespace ADProj.Controllers
 
         public IActionResult SetCollectionPoint(int collectionPointId)
         {
+
+
             int empId = Convert.ToInt32(HttpContext.Session.GetString("id"));
 
             if (!(HttpContext.Session.GetString("role") == EmployeeRole.DEPTREP))
