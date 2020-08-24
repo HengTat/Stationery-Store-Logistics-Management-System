@@ -6,6 +6,7 @@ using ADProj.Models;
 using ADProj.Services;
 using Castle.Components.DictionaryAdapter;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace ADProj.Controllers
 {
@@ -32,6 +33,10 @@ namespace ADProj.Controllers
 
         public IActionResult Index()
         {
+            if (!(HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
             List<DateTime> distinctDisbursedDates = ds.GetAllDistinctDisbursedDates();
             ViewData["dates"] = distinctDisbursedDates;
             return View();
@@ -39,6 +44,10 @@ namespace ADProj.Controllers
 
         public IActionResult Generate(int retrievalId)
         {
+            if (!(HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
             List<Request> requestList = rs.GetRequestsByRetrievalId(retrievalId);
             var iter = requestList
                 .GroupBy(req => req.Employee.DepartmentId);
@@ -73,6 +82,10 @@ namespace ADProj.Controllers
 
         public IActionResult ViewDisbursement(string date)
         {
+            if (!(HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
             DateTime chosenDate;
             DateTime.TryParse(date, out chosenDate);
             ViewData["selectedDisbursements"] = ds.GetDisbursementsByDisbursedDate(chosenDate);
@@ -80,6 +93,10 @@ namespace ADProj.Controllers
         }
         public IActionResult ViewDisbursementDetails(int id)
         {
+            if (!(HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORESUPERVISOR))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
             ViewData["detailsList"] = ds.GetDisbursementDetailsByDisbursementId(id);
             return View();
         }

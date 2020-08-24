@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Category List";
     var catList = (List<ItemCategory>)ViewData["CatList"];
+    var role = ViewData["role"];
     var msg = ViewData["alertMsg"];
 }
 @if (msg != null)
@@ -22,18 +23,36 @@
         <h2>Item Category List</h2>
         <table class="table table-bordered" style="width:500px; margin-top:20px; text-align:center">
             <thead style="background-color:lightgrey">
+                @if (@role.Equals("StoreClerk"))
+                {
+                <tr>
+                    <th style="text-align:center">Category Name</th>
+                </tr>
+                }
+                else {
                 <tr>
                     <th style="text-align:center">Category Name</th>
                     <th style="text-align:center">Action</th>
                 </tr>
+                }
             </thead>
             <tbody>
                 @foreach (var cat in catList)
                 {
-                    <tr>
-                        <td>@cat.Name</td>
-                        <td style="width:100px"><button type="submit" class="btn btn-warning btn-xs" formaction="EditDeleteCategory?cmd=edit&catId=@cat.Id">Edit</button></td>
-                    </tr>
+                    if (@role.Equals("StoreClerk"))
+                    {
+                        <tr>
+                            <td>@cat.Name</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr>
+                            <td>@cat.Name</td>
+                            <td style="width:100px"><button type="submit" class="btn btn-warning btn-xs" formaction="EditDeleteCategory?cmd=edit&catId=@cat.Id">Edit</button></td>
+                        </tr>
+                    }
+
                 }
             </tbody>
         </table>

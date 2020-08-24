@@ -37,7 +37,7 @@ namespace ADProj.Controllers
             {
                 return RedirectToAction("Index", "Account");
             }
-            return View();
+            return RedirectToAction(HttpContext.Session.GetString("role"));
         }
 
         public IActionResult Privacy()

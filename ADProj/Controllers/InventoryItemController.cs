@@ -19,6 +19,10 @@ namespace ADProj.Controllers
         }
         public IActionResult Index()
         {
+            if (!(HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == Enums.EmployeeRole.STOREMANAGER))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
             List<InventoryItem> itemList = invService.ItemList();
             ViewData["itemList"] = itemList;
             if (TempData["alertMsg"] != null)
@@ -30,6 +34,10 @@ namespace ADProj.Controllers
 
         public IActionResult AddItemCategory()
         {
+            if (!(HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == Enums.EmployeeRole.STOREMANAGER))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
             if (TempData["alertMsg"] != null)
             {
                 ViewData["alertMsg"] = TempData["alertMsg"];
@@ -39,6 +47,10 @@ namespace ADProj.Controllers
 
         public IActionResult SaveItemCategory(string categoryName)
         {
+            if (!(HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == Enums.EmployeeRole.STOREMANAGER))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
             if (categoryName != null)
             {
                 invService.CreateCategory(categoryName);
@@ -55,6 +67,10 @@ namespace ADProj.Controllers
 
         public IActionResult AddInventoryItem()
         {
+            if (!(HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == Enums.EmployeeRole.STOREMANAGER))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
             List<ItemCategory> catList = invService.CategoryList();
             List<string> catNameList = new List<string>();
             foreach (ItemCategory cat in catList)
@@ -74,6 +90,10 @@ namespace ADProj.Controllers
         public IActionResult SaveInventoryItem(string id, string desc, string catName, string bin,
             string qtyInStock, string reorderLevel, string reorderQty, string uom)
         {
+            if (!(HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == Enums.EmployeeRole.STOREMANAGER))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
             bool isNum1 = int.TryParse(qtyInStock, out int stockQty);
             bool isNum2 = int.TryParse(reorderLevel, out int reorderLev);
             bool isNum3 = int.TryParse(reorderQty, out int orderQty);
@@ -112,8 +132,13 @@ namespace ADProj.Controllers
 
         public IActionResult CategoryList()
         {
+            if (!(HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == Enums.EmployeeRole.STOREMANAGER))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
             List<ItemCategory> catList = invService.CategoryList();
             ViewData["CatList"] = catList;
+            ViewData["role"] = HttpContext.Session.GetString("role");
             if (TempData["alertMsg"] != null)
             {
                 ViewData["alertMsg"] = TempData["alertMsg"];
@@ -123,6 +148,10 @@ namespace ADProj.Controllers
 
         public IActionResult EditDeleteCategory(string cmd, int catId)
         {
+            if (!(HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == Enums.EmployeeRole.STOREMANAGER))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
             ViewData["alertMsg"] = TempData["alertMsg"];
 
             if (cmd == "edit")
@@ -136,6 +165,10 @@ namespace ADProj.Controllers
 
         public IActionResult UpdateCategory(int id, string categoryName)
         {
+            if (!(HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == Enums.EmployeeRole.STOREMANAGER))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
             if (categoryName != null)
             {
                 invService.UpdateCategoryById(id, categoryName);
@@ -147,12 +180,14 @@ namespace ADProj.Controllers
                 TempData["alertMsg"] = "Please enter category name!";
                 return RedirectToAction("EditDeleteCategory", new { cmd = "edit", catId = id });
             }
-
-
         }
 
         public IActionResult EditDeleteItem(string cmd, string itemId)
         {
+            if (!(HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == Enums.EmployeeRole.STOREMANAGER))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
             ViewData["alertMsg"] = TempData["alertMsg"];
 
             if (cmd == "edit")
@@ -181,6 +216,10 @@ namespace ADProj.Controllers
         public IActionResult UpdateInvItem(string id, string desc, string catName, string bin,
             string qtyInStock, string reorderLevel, string reorderQty, string uom)
         {
+            if (!(HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == Enums.EmployeeRole.STOREMANAGER))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
             bool isNum1 = int.TryParse(qtyInStock, out int stockQty);
             bool isNum2 = int.TryParse(reorderLevel, out int reorderLev);
             bool isNum3 = int.TryParse(reorderQty, out int orderQty);
@@ -219,6 +258,10 @@ namespace ADProj.Controllers
 
         public IActionResult ManageInvItem(string itemId, string inputupdateQty)
         {
+            if (!(HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == Enums.EmployeeRole.STOREMANAGER))
+            {
+                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+            }
             bool isNum = int.TryParse(inputupdateQty, out int updateQty);
 
             if (!(inputupdateQty != null))
