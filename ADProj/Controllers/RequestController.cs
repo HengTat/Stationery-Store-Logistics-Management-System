@@ -56,7 +56,7 @@ namespace ADProj.Controllers
             string employeeId = HttpContext.Session.GetString("id");
             int RequestId = rs.addRequest(employeeId);
             rs.addRequestDetails(RequestId, data);
-
+            emailservice.sendrequestsubmitemailnotifitcation(int.Parse(employeeId));
 
             return View();
         }
@@ -163,7 +163,7 @@ namespace ADProj.Controllers
 
         public IActionResult Submit(string submitButton, int requestid, string Comments)
         {
-            if (!(HttpContext.Session.GetString("role") == EmployeeRole.EMPLOYEE || HttpContext.Session.GetString("role") == EmployeeRole.DEPTREP))
+            if(HttpContext.Session.GetString("role") != EmployeeRole.DEPTHEAD )
             {
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
 
@@ -173,13 +173,14 @@ namespace ADProj.Controllers
             request.Comments = Comments;
             dbcontext.SaveChanges();
             int id = request.EmployeeId;
-            emailservice.sendrequestapprovalemailnotifitcation(id);
             if (submitButton == "Reject")
             {
+                emailservice.sendrequestrejectionemailnotifitcation(id);
                 return RedirectToAction("RejectRequest", new { id = requestid });
             }
             else
             {
+                emailservice.sendrequestapprovalemailnotifitcation(id);
                 return RedirectToAction("ApproveRequest", new { id = requestid });
             }
 

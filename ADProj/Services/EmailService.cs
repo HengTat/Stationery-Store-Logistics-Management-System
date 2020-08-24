@@ -67,7 +67,7 @@ namespace ADProj.Services
             //mail.To.Add(new MailAddress(employeeemail));
             mail.Subject = "Request has been submitted";
             mail.Body = "Your Request has been submitted";
-            //smtpClient.Send(mail);
+            smtpClient.Send(mail);
         }
 
 
@@ -86,8 +86,27 @@ namespace ADProj.Services
             //mail.To.Add(new MailAddress(employeeemail));
             mail.Subject = "Request has been Approved";
             mail.Body = "Your Request has been Approved. Please login to find out more";
-            //smtpClient.Send(mail);
+            smtpClient.Send(mail);
         }
+
+        //EMAIL FOR REJECTION OF REQUEST (EMPLOYEE)
+
+        public void sendrequestrejectionemailnotifitcation(int id)
+        {
+
+            string employeeemail = dbcontext.Employees.Find(id).Email;
+
+            SmtpClient smtpClient = setupsmtpclient();
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress("team9springboot@gmail.com", "team9");
+            mail.To.Add(new MailAddress("team9employee@gmail.com"));
+            //remove comment if employee has correct email
+            //mail.To.Add(new MailAddress(employeeemail));
+            mail.Subject = "Request has been Rejected";
+            mail.Body = "Your Request has been Rejected. Please login to find out more";
+            smtpClient.Send(mail);
+        }
+
 
 
         //EMAIL FOR LOW STOCK (CLERK)
@@ -118,7 +137,7 @@ namespace ADProj.Services
             //mail.To.Add(new MailAddress(employeeemail));
             mail.Subject = "Appointment as acting approving authority";
             mail.Body = "You has been appointed as the Acting Department Head from " + startDate.ToString() + " to " + endDate.ToString() + " .";
-            //smtpClient.Send(mail);
+            smtpClient.Send(mail);
         }
 
         //EMAIL WHEN DELEGATE CANCELLED
@@ -134,7 +153,7 @@ namespace ADProj.Services
             //mail.To.Add(new MailAddress(employeeemail));
             mail.Subject = "Cancellation of approving authority appointment";
             mail.Body = "The department head has rescinded your previous Acting Department Head appointment.";
-            //smtpClient.Send(mail);
+            smtpClient.Send(mail);
         }
 
         //EMAIL TO INFORM OF DISBURSEMENT
@@ -150,7 +169,7 @@ namespace ADProj.Services
             //mail.To.Add(new MailAddress(employeeemail));
             mail.Subject = "Stationery Disbursement on " + date.ToString("dd/MMM/yyyy") + ", " + time + " at " + location;
             mail.Body = "Please be present at your department's stationery collection point to collect your department's stationeries.";
-            //smtpClient.Send(mail);
+            smtpClient.Send(mail);
         }
     }
 }
