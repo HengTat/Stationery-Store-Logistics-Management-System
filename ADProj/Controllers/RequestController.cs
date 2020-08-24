@@ -56,7 +56,10 @@ namespace ADProj.Controllers
             string employeeId = HttpContext.Session.GetString("id");
             int RequestId = rs.addRequest(employeeId);
             rs.addRequestDetails(RequestId, data);
+            //email notification to employee to indicate successful submission
             emailservice.sendrequestsubmitemailnotifitcation(int.Parse(employeeId));
+            //email notification to ActingHead or DepartmentHead to review request
+            emailservice.sendPendingApprovalEmailNotification(int.Parse(employeeId));
 
             return View();
         }
@@ -166,7 +169,6 @@ namespace ADProj.Controllers
             if(HttpContext.Session.GetString("role") != EmployeeRole.DEPTHEAD )
             {
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
-
             }
 
             Request request = rs.FindRequestbyId(requestid);
@@ -183,7 +185,6 @@ namespace ADProj.Controllers
                 emailservice.sendrequestapprovalemailnotifitcation(id);
                 return RedirectToAction("ApproveRequest", new { id = requestid });
             }
-
         }
 
         public IActionResult RejectRequest(int id)
@@ -191,7 +192,6 @@ namespace ADProj.Controllers
             if (HttpContext.Session.GetString("role") != EmployeeRole.DEPTHEAD)
             {
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
-
             }
             Request request = rs.FindRequestbyId(id);
             request.Status = Enums.Status.Rejected;
@@ -205,7 +205,6 @@ namespace ADProj.Controllers
             if (HttpContext.Session.GetString("role") != EmployeeRole.DEPTHEAD)
             {
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
-
             }
             // push this to service
             Request request = rs.FindRequestbyId(id);
@@ -250,7 +249,6 @@ namespace ADProj.Controllers
             if (!(HttpContext.Session.GetString("role") == EmployeeRole.EMPLOYEE || HttpContext.Session.GetString("role") == EmployeeRole.DEPTREP))
             {
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
-
             }
             string employeeId = HttpContext.Session.GetString("id");
             List<RequestDetails> requestDetails = requestdetailservice.FindRequestDetailByRequestId(id);
@@ -268,6 +266,10 @@ namespace ADProj.Controllers
                 customRequestDetailsList.Add(cusReqDet);
             }
             rs.addRequestDetails(requestId, customRequestDetailsList);
+            //email notification to employee to indicate successful submission
+            emailservice.sendrequestsubmitemailnotifitcation(int.Parse(employeeId));
+            //email notification to ActingHead or DepartmentHead to review request
+            emailservice.sendPendingApprovalEmailNotification(int.Parse(employeeId));
             TempData["repeatRequestStatus"] = "success";
             return RedirectToAction("ViewMyRequestHistory");
         }

@@ -25,9 +25,8 @@ namespace ADProj.Services
             return smtpClient;
         }
 
-
         //EMAIL FOR UPDATE IN COLLECTION POINT (CLERK)
-        public void sendupdateincollectionpointemailnotification()
+        public void sendupdateincollectionpointemailnotification(string deptName)
         {
             SmtpClient smtpClient = setupsmtpclient();
             MailMessage mail = new MailMessage();
@@ -36,23 +35,23 @@ namespace ADProj.Services
             //remove comment if employee has correct email
             //mail.To.Add(new MailAddress(employeeemail));
             mail.Subject = "CollectionPoint has been updated";
-            mail.Body = " Please note that Collection point has Changed. Please Log In to find out more.";
-            //smtpClient.Send(mail);
+            mail.Body = "Please note that Collection Point for " + deptName + " has Changed. Please Log In to find out more.";
+            smtpClient.Send(mail);
         }
 
         //EMAIL FOR CHANGE IN DEPT REP (EMPLOYEE + CLERK)
-        public void sendchangeofdeptrepemailnotification()
+        public void sendchangeofdeptrepemailnotification(Department dept)
         {
             SmtpClient smtpClient = setupsmtpclient();
             MailMessage mail = new MailMessage();
             mail.From = new MailAddress("team9springboot@gmail.com", "team9");
             mail.To.Add(new MailAddress("team9employee@gmail.com"));
+            //mail.To.Add(new MailAddress(dept.DepartmentRep.Email));
             mail.CC.Add(new MailAddress("team9clerk@gmail.com"));
-            mail.Subject = "Dept Rep has changed";
-            mail.Body = " Please note that Dept Rep has Changed. Please Log In to find out more.";
-            //smtpClient.Send(mail);
+            mail.Subject = "New Dept Rep appointed for " + dept.Name + " Department";
+            mail.Body = "Please note that " + dept.DepartmentRep.Name + " has been appointed as the new Dept Rep for " + dept.Name + " Department.";
+            smtpClient.Send(mail);
         }
-
 
         //EMAIL FOR SUBMISSION OF REQUEST (EMPLOYEE)
         public void sendrequestsubmitemailnotifitcation(int id)
@@ -69,8 +68,6 @@ namespace ADProj.Services
             mail.Body = "Your Request has been submitted";
             smtpClient.Send(mail);
         }
-
-
 
         //EMAIL FOR APPROVAL OF REQUEST (EMPLOYEE)
         public void sendrequestapprovalemailnotifitcation(int id)
@@ -90,7 +87,6 @@ namespace ADProj.Services
         }
 
         //EMAIL FOR REJECTION OF REQUEST (EMPLOYEE)
-
         public void sendrequestrejectionemailnotifitcation(int id)
         {
 
@@ -106,8 +102,6 @@ namespace ADProj.Services
             mail.Body = "Your Request has been Rejected. Please login to find out more";
             smtpClient.Send(mail);
         }
-
-
 
         //EMAIL FOR LOW STOCK (CLERK)
         public void sendlowstockemailnotifitcation(string id)
@@ -170,6 +164,43 @@ namespace ADProj.Services
             mail.Subject = "Stationery Disbursement on " + date.ToString("dd/MMM/yyyy") + ", " + time + " at " + location;
             mail.Body = "Please be present at your department's stationery collection point to collect your department's stationeries.";
             smtpClient.Send(mail);
+        }
+
+        //EMAIL TO INFORM PENDING APPROVAL (DEPTHEAD)
+        public void sendPendingApprovalEmailNotification(int id)
+        {
+            Employee emp = dbcontext.Employees.Find(id);
+            if (emp != null)
+            {
+                //if ActingHead is present, send email to him
+                DateTime currentDate = DateTime.Today;
+                ActingDepartmentHead actingDepartmentHead = dbcontext.ActingDepartmentHeads.Where(x => x.Employee.DepartmentId == emp.DepartmentId && x.StartDate <= currentDate && x.EndDate >= currentDate).FirstOrDefault();
+                if (actingDepartmentHead != null)
+                {
+                    SmtpClient smtpClient = setupsmtpclient();
+                    MailMessage mail = new MailMessage();
+                    mail.From = new MailAddress("team9springboot@gmail.com", "team9");
+                    mail.To.Add(new MailAddress("team9employee@gmail.com"));
+                    //remove comment if employee has correct email
+                    //mail.To.Add(new MailAddress(actingDepartmentHead.Employee.Email));
+                    mail.Subject = "New Request Pending Approval";
+                    mail.Body = "An employee has submitted a stationery request for your approval. Please log in to review the request.";
+                    smtpClient.Send(mail);
+                }
+                //no Current ActingHead, send email to Department Head
+                else
+                {
+                    SmtpClient smtpClient = setupsmtpclient();
+                    MailMessage mail = new MailMessage();
+                    mail.From = new MailAddress("team9springboot@gmail.com", "team9");
+                    mail.To.Add(new MailAddress("team9employee@gmail.com"));
+                    //remove comment if employee has correct email
+                    //mail.To.Add(new MailAddress(emp.Department.DepartmentHead.Email));
+                    mail.Subject = "New Request Pending Approval";
+                    mail.Body = "An employee has submitted a stationery request for your approval. Please log in to review the request.";
+                    smtpClient.Send(mail);
+                }
+            }
         }
     }
 }

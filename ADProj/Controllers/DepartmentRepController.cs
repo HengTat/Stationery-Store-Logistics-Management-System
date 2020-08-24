@@ -67,7 +67,7 @@ namespace ADProj.Controllers
                     CollectionPoint currentCollectionPoint = cps.GetCollectionPointByDeptId(dept.Id);
                     ViewData["currentCollectionPoint"] = currentCollectionPoint;
                 }
-                ems.sendupdateincollectionpointemailnotification();
+                ems.sendupdateincollectionpointemailnotification(dept.Name);
                 return View();
             }
         }

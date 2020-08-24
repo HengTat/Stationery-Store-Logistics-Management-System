@@ -61,7 +61,7 @@ namespace ADProj.Controllers
                     Employee currentDeptRep = es.GetDeptRepByDeptId(dept.Id);
                     ViewData["currentDeptRep"] = currentDeptRep;
                 }
-                ems.sendchangeofdeptrepemailnotification();
+                ems.sendchangeofdeptrepemailnotification(dept);
                 return View();
             }
         }

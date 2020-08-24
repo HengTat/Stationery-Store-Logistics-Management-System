@@ -39,7 +39,6 @@ namespace ADProj.Services
 
         }
 
-
         public void UpdateDepartment(int EmployeeId, Department dept)
         {
             Department dbDept = dbcontext.Departments.Where(x => x.Id == dept.Id).FirstOrDefault();

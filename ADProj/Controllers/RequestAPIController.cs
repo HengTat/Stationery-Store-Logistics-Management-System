@@ -20,7 +20,6 @@ namespace ADProj.Controllers
         private RequestServices requestService;
         private Emailservice emailservice;
 
-
         public RequestAPIController(InventoryService inventService, RequestDetailService requestDetailservice, RequestServices requestService, Emailservice emailservice)
         {
             this.inventService = inventService;
@@ -28,7 +27,6 @@ namespace ADProj.Controllers
             this.requestService = requestService;
             this.emailservice = emailservice;
         }
-
 
         public IEnumerable<InventoryItem> Get()
         {
@@ -66,7 +64,6 @@ namespace ADProj.Controllers
             string employeeId = data.EmployeeId.ToString();
             int RequestId = requestService.addRequest(employeeId);
 
-
             CustomRequestDetails crq = new CustomRequestDetails();
             crq.Category = data.Category;
             crq.Description = data.Description;
@@ -76,10 +73,9 @@ namespace ADProj.Controllers
             findItem= inventService.GetItemByDescription(crq.Description);
             crq.ItemId = findItem.Id;
             requestService.addRequestDetailsMobile(RequestId, crq);
+            emailservice.sendrequestsubmitemailnotifitcation(data.EmployeeId);
             return Ok(crq);
-
         }
-
 
         [HttpGet("PendingApproval")]
         public IEnumerable<Request> Requestpendingapproval()
@@ -102,12 +98,12 @@ namespace ADProj.Controllers
             return Listofitems;
         }
 
-
         [HttpPost("PendingApproval/{id}/Reject")]
         public string RejectRequest(int id)
         {
             Request request = requestService.FindRequestbyId(id);
             requestService.updateStatus(request, Enums.Status.Rejected);
+            emailservice.sendrequestrejectionemailnotifitcation(request.EmployeeId);
             return JsonSerializer.Serialize(new { Id = id, Status = Enums.Status.Rejected });
         }
 
@@ -132,6 +128,7 @@ namespace ADProj.Controllers
             {
                 request.Status = Enums.Status.Approved;
                 requestService.updateStatus(request, Enums.Status.Approved);
+                emailservice.sendrequestapprovalemailnotifitcation(request.EmployeeId);
                 foreach (RequestDetails rd in RDlist)
                 {
                     InventoryItem item = inventService.FindbyId(rd.InventoryItemId);
@@ -147,6 +144,7 @@ namespace ADProj.Controllers
             {
                 request.Status = Enums.Status.PendingStock;
                 requestService.updateStatus(request, Enums.Status.PendingStock);
+                emailservice.sendrequestapprovalemailnotifitcation(request.EmployeeId);
             }
 
             return JsonSerializer.Serialize(new { Id = id, Status = request.Status });
