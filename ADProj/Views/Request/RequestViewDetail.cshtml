@@ -20,50 +20,50 @@
 
 <a href="/request/requestpendingapproval"><h4> < View Request List </h4> </a>
 
-<div align="center">
+<div class="container" align="center" style="margin-bottom:40px">
     <img src="~/Icons/Listicon.png" alt="listicon" width="260" height="130" />
-    <h1>Request Details</h1>
-</div>
+    <h1 align="center">Request Details</h1>
 
-<table class="table">
-    <thead>
-        <tr style="background:lightgrey">
-            <th>
-                @Html.DisplayNameFor(model => model.InventoryItemId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InventoryItem.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.QtyRequested)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.InventoryItem.UOM)
-            </th>
+    <table class="table table-bordered" style="margin-top:20px; text-align:center">
+        <thead style="background-color:lightgrey">
+            <tr align="center">
+                <th>
+                    @Html.DisplayNameFor(model => model.InventoryItemId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InventoryItem.Description)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.QtyRequested)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.InventoryItem.UOM)
+                </th>
 
 
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.InventoryItemId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.InventoryItem.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.QtyRequested)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.InventoryItem.UOM)
-                </td>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InventoryItemId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InventoryItem.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QtyRequested)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.InventoryItem.UOM)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 
 
@@ -82,12 +82,10 @@
         <table>
             <tr>
                 <td>
-                    <input class="rejectbutton" type="submit" name="submitButton" value="Reject" />
-                    &nbsp;&nbsp;&nbsp;
+                    <input class="btn btn-danger" type="submit" name="submitButton" value="Reject" />
                 </td>
                 <td>
-                    &nbsp;&nbsp;&nbsp;
-                    <input class="approvebutton" type="submit" name="submitButton" value="Approve" />
+                    <input class="btn btn-success" type="submit" name="submitButton" value="Approve" />
                 </td>
             </tr>
         </table>

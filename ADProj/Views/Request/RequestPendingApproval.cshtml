@@ -3,66 +3,59 @@
 @{
     ViewData["Title"] = "Request Pending Approval";
 }
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-<div align="center">
-    <img src="~/Icons/tickicon.png" alt="tickicon" width="140" height="140" />
-    <h1>Request Pending Approval</h1>
-</div>
-&nbsp;
-&nbsp;
-&nbsp;
-&nbsp;
-<table class="table">
-    <thead>
-        <tr style="background:lightgrey">
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Employee.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateRequested)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
 
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Employee.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateRequested)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Status)
-                </td>
-                <td>
-                    @{
-                        string id = item.Id.ToString();
-                        string viewdetailurl = "/request/RequestViewDetail/" + id;
-                    }
-                    <form action=@viewdetailurl>
-                        <input type="submit" value="View Details >" />
-                    </form>
-                </td>
+<div class="container" align="center" style="margin-bottom:40px">
+    <img src="~/Icons/tickicon.png" alt="tickicon" width="140" height="140" />
+    <h1 align="center">@ViewData["Title"]</h1>
+    <table class="table table-bordered" style="margin-top:20px; text-align:center">
+        <thead style="background-color:lightgrey">
+            <tr align="center">
+                <th>
+                    @Html.DisplayNameFor(model => model.Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Employee.Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DateRequested)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+
+                <th>Action</th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Employee.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateRequested)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @{
+                            string id = item.Id.ToString();
+                            string viewdetailurl = "/request/RequestViewDetail/" + id;
+                        }
+                        <form action=@viewdetailurl>
+                            <button type="submit" class="btn btn-primary btn-xs" value="View Details>">View Details</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 
 

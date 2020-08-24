@@ -9,85 +9,79 @@
 
 <div>
     <h2 align="center">Request Form</h2>
-    <form class="form-horizontal col-sm-5" method="POST" style="margin-top:40px; margin-bottom:50px">
+    <form class="form-horizontal col-sm-5" action="SaveInventoryItem" method="POST" style="margin-top:40px; margin-bottom:50px">
+        <div align="center">
+            <div class="form-group">
+                <label class="col-sm-5 control-label">Category:</label>
+                <div class="col-sm-3">
+                    <select class="form-control" id="selectOne" name="catName" style="width:300px">
+                        <option>Select Category</option>
+                        @foreach (var category in categories)
+                        {
+                            <option id="category-name" value=@category.Id>@category.Name</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-5 control-label">Description:</label>
+                <div class="col-sm-3">
+                    <select id="selectTwo" class="form-control" style="width:300px">
+                        <option>Select Item</option>
+                        @foreach (var item in inventories)
+                        {
+                            <option data-uom=@item.UOM data-id=@item.Id value=@item.ItemCategoryId>@item.Description</option>
 
-        <div class="form-group">
-            <label class="col-sm-5 control-label">Category:</label>
-            <div class="col-sm-3">
-                <select class="form-control" id="selectOne" name="catName" style="width:300px">
-                    <option>Select Category</option>
-                    @foreach (var category in categories)
-                    {
-                    <option id="category-name" value=@category.Id>@category.Name</option>
-                    }
-                </select>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-5 control-label">Unit of Measurement:</label>
+                <div class="col-sm-3">
+                    <input type="text" name="demo" id="demo" class="form-control" style="width:300px" readonly />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-5 control-label">Request Quantity:</label>
+                <div class="col-sm-3">
+                    <input type="text" name="requestQty" id="requestQty" class="form-control" style="width:300px" />
+                </div>
+            </div>
+            <div class="form-group" style="margin-left:300px">
+                <div class="col-sm-3">
+                    <button type="button" id="btn_Add" class="btn btn-success">Add</button>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-5 control-label" style="display:none">ItemId:</label>
+                <div class="col-sm-3">
+                    <input type="text" name="demo2" id="demo2" class="form-control" style="display:none" />
+                </div>
             </div>
         </div>
-
-        <div class="form-group">
-            <label class="col-sm-5 control-label">Description:</label>
-            <div class="col-sm-3">
-                <select id="selectTwo" class="form-control" style="width:300px">
-                    <option>Select Item</option>
-                    @foreach (var item in inventories)
-                    {
-                    <option data-uom=@item.UOM data-id=@item.Id value=@item.ItemCategoryId>@item.Description</option>
-
-                    }
-                </select>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-sm-5 control-label">Unit of Measurement:</label>
-            <div class="col-sm-3">
-                <input type="text" name="demo" id="demo" class="form-control" style="width:300px" readonly />
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-sm-5 control-label">Request Quantity:</label>
-            <div class="col-sm-3">
-                <input type="text" name="requestQty" id="requestQty" class="form-control" style="width:300px" />
-            </div>
-        </div>
-
-        <div class="form-group" style="margin-left:300px">
-            <div>
-                <button type="button" id="btn_Add" class="btn btn-danger">Add</button>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="col-sm-5 control-label" style="display:none">ItemId:</label>
-            <div class="col-sm-3">
-                <input type="text" name="demo2" id="demo2" class="form-control" style="display:none" />
-            </div>
-        </div>
-
     </form>
 </div>
-
 <div class="container" align="center" style="margin-top:30px">
-    <table id="tblRequestsDetails" class="table table-bordered" style="width:600px; margin-top:20px">
-        <thead>
-            <tr>
-                <th>Category</th>
-                <th>Description</th>
-                <th style="display:none">ItemCode</th>
-                <th>Quantity</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-
-    <div class="form-group">
-        <div class="col-sm-6">
-
-            <button type="button" value="Reset" id="btnReset" class="btn btn-danger">Reset</button>
-            <button type="button" value="Submit" id="btnSubmit" class="btn btn-success">Submit</button>
+    <div align="center">
+        <table id="tblRequestsDetails" class="table table-bordered" style="width:600px; margin-top:20px">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th style="display:none">ItemCode</th>
+                    <th>Quantity</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <div class="form-group">
+            <div align="center">
+                <button type="button" value="Reset" id="btnReset" class="btn btn-danger">Reset</button>
+                <button type="button" value="Submit" id="btnSubmit" class="btn btn-success">Submit</button>
+            </div>
         </div>
     </div>
 </div>
