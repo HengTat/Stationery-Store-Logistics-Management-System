@@ -10,10 +10,12 @@ namespace ADProj.Controllers
     public class SupplierController : Controller
     {
         private SupplierService supService;
+        private InventoryService inventService;
 
-        public SupplierController(SupplierService supService)
+        public SupplierController(SupplierService supService, InventoryService inventService )
         {
             this.supService = supService;
+            this.inventService = inventService;
         }
         public IActionResult Index()
         {
@@ -37,8 +39,11 @@ namespace ADProj.Controllers
 
         public IActionResult AddStationery(string id)
         {
-            SupplierStationery s = supService.GetSupplierStationeryBySupplierId(id);
+            //SupplierStationery s = supService.GetSupplierStationeryBySupplierId(id);
+            List<InventoryItem> iList = inventService.ItemList();
+
             ViewData["supplierid"] = id;
+            ViewData["inventList"] = iList;
             if (TempData["alertMsg"] != null)
             {
                 ViewData["alertMsg"] = TempData["alertMsg"];
@@ -80,7 +85,7 @@ namespace ADProj.Controllers
             }
             else
             {
-                TempData["alertMsg"] = "Already Exist!";
+                TempData["alertMsg"] = "Item already exist!";
                 return RedirectToAction("AddStationery", new { id = SupplierId });
             }
         }

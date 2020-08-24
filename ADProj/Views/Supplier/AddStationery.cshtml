@@ -3,16 +3,18 @@
     //var supplierid = (string)ViewData["supplierid"];
     var supplierid = ViewData["supplierid"];
     var msg = ViewData["alertMsg"];
+    var inventoryList = (List<InventoryItem>)ViewData["inventList"];
 }
 
 @if (msg != null)
 {
-    <script type="text/javascript">
+<script type="text/javascript">
         window.onload = function () {
-            swal("@msg");
-
+            if ("@msg" !== "Saved successfully!") {
+                swal("@msg");
+            }
         };
-    </script>
+</script>
 }
 
 <div align="center">
@@ -26,16 +28,26 @@
         </div>
 
         <div class="form-group">
-            <label class="col-sm-5 control-label">Inventory Item Id:</label>
+            <label class="col-sm-5 control-label">Item Description:</label>
             <div class="col-sm-3">
-                <input class="form-control" name="InventoryItemId" type="text" style="width:300px">
+                <select id="inventoryId" class="form-control" name="InventoryItemId" style="width:300px">
+                    @foreach (var item in inventoryList)
+                    {
+                        <option data-uom=@item.UOM id="InventoryItemId" value=@item.Id>@item.Description </option>
+                    }
+                </select>
             </div>
         </div>
-
         <div class="form-group">
-            <label class="col-sm-5 control-label">UOM:</label>
+            <label class="col-sm-5 control-label">Item ID:</label>
             <div class="col-sm-3">
-                <input class="form-control" name="UOM" type="text" style="width:300px">
+                <input class="form-control" id="itemId" name="itemId" type="text" style="width:300px" readonly>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-5 control-label">Unit of Measure:</label>
+            <div class="col-sm-3">
+                <input class="form-control" id="UOM" name="UOM" type="text" style="width:300px" readonly>
             </div>
         </div>
 
@@ -52,4 +64,15 @@
         </div>
     </form>
 </div>
+
+<script>
+    $("#inventoryId").change(function () {
+        var uom = $(this).find(':selected').data('uom')
+        $("#UOM").val(uom);
+        var itemId = $(this).val()
+        $("#itemId").val(itemId)
+    });
+
+
+</script>
 
