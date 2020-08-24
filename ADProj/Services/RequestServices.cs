@@ -100,6 +100,13 @@ namespace ADProj.Services
             return dbcontext.Requests.Where(x => x.RetrievalId == retrievalId).ToList();
         }
 
+        public void updateStatus(Request request, ADProj.Enums.Status status)
+        {
+            request.Status = status;
+            dbcontext.Update(request);
+            dbcontext.SaveChanges();
+        }
+
         public void UpdateDisbursementId(int requestId, int disbursementId)
         {
             Request request = dbcontext.Requests.Where(x => x.Id == requestId).FirstOrDefault();

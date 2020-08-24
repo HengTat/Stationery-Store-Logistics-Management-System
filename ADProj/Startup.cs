@@ -28,7 +28,7 @@ namespace ADProj
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews()
-                .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+                    .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddDistributedMemoryCache();
             services.AddSession();
 

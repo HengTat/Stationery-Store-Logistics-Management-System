@@ -49,6 +49,8 @@ namespace ADProj.Controllers
                     Password = employee0.Password,
                     Role = employee0.Role.ToString()
                 };
+                HttpContext.Session.SetString("id", employee0.Id.ToString());
+                HttpContext.Session.SetString("role", employee0.Role);
                 return Ok(emp);
 
             }
@@ -67,6 +69,8 @@ namespace ADProj.Controllers
                 Role = "ActingHead",
                 DelegateExpiration = new DateTimeOffset(actingDepartmentHead.EndDate).ToUnixTimeMilliseconds()
             };
+            HttpContext.Session.SetString("id", actingDepartmentHead.EmployeeId.ToString());
+            HttpContext.Session.SetString("role", "ActingHead");
             return Ok(emp2);
         }
     }
