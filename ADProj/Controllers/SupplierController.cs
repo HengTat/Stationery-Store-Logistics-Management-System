@@ -41,9 +41,16 @@ namespace ADProj.Controllers
         {
             //SupplierStationery s = supService.GetSupplierStationeryBySupplierId(id);
             List<InventoryItem> iList = inventService.ItemList();
-
-            ViewData["supplierid"] = id;
+            if (id != null)
+            {
+                ViewData["supplierid"] = id;
+            }
+            else
+            {
+                ViewData["supplierid"] = TempData["supplierId"];
+            }
             ViewData["inventList"] = iList;
+            
             if (TempData["alertMsg"] != null)
             {
                 ViewData["alertMsg"] = TempData["alertMsg"];
@@ -69,11 +76,23 @@ namespace ADProj.Controllers
         public IActionResult SaveStationery(int Id, string SupplierId, string InventoryItemId, string UOM, float TenderPrice)
         {
             List<SupplierStationery> supplierStationeryList = supService.GetSupplierStationeryListByCompositeKey(SupplierId, InventoryItemId);
-            if (supplierStationeryList == null || supplierStationeryList.Count == 0)
-            {
+
                 if (!(SupplierId != null && InventoryItemId != null && UOM != null))
                 {
                     TempData["alertMsg"] = "Please enter all information!";
+                    TempData["supplierId"] = SupplierId;
+                    return RedirectToAction("AddStationery");
+                }
+                else if (TenderPrice == 0)
+                {
+                    TempData["alertMsg"] = "Please enter Tender Price!";
+                    TempData["supplierId"] = SupplierId;
+                    return RedirectToAction("AddStationery");
+                }
+                else if(supplierStationeryList.Count != 0)
+                {
+                    TempData["alertMsg"] = "Item already exist!";
+                    TempData["supplierId"] = SupplierId;
                     return RedirectToAction("AddStationery");
                 }
                 else
@@ -82,12 +101,7 @@ namespace ADProj.Controllers
                     TempData["alertMsg"] = "Saved successfully!";
                     return RedirectToAction("Details", new { Id = SupplierId });
                 }
-            }
-            else
-            {
-                TempData["alertMsg"] = "Item already exist!";
-                return RedirectToAction("AddStationery", new { id = SupplierId });
-            }
+
         }
 
         public IActionResult SupplierList()
@@ -157,7 +171,9 @@ namespace ADProj.Controllers
             List<SupplierStationery> supplierstationeryList = supService.GetSupplierStationeryListById(Id);
             ViewData["supplierstationeryList"] = supplierstationeryList;
             ViewData["supplierid"] = Id;
-
+            
+            if(TempData["alertMsg"]!=null)
+                ViewData["alertMsg"]=TempData["alertMsg"];
             return View();
         }
     }

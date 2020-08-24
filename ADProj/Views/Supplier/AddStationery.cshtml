@@ -1,6 +1,5 @@
 ﻿@{
     ViewData["Title"] = "AddStationery";
-    //var supplierid = (string)ViewData["supplierid"];
     var supplierid = ViewData["supplierid"];
     var msg = ViewData["alertMsg"];
     var inventoryList = (List<InventoryItem>)ViewData["inventList"];
@@ -8,18 +7,16 @@
 
 @if (msg != null)
 {
-<script type="text/javascript">
+    <script type="text/javascript">
         window.onload = function () {
-            if ("@msg" !== "Saved successfully!") {
-                swal("@msg");
-            }
+            swal("@msg");
         };
-</script>
+    </script>
 }
 
 <div align="center">
     <h2>New Stationery</h2>
-    <form class="form-horizontal" action="SaveStationery" method="POST" style="margin-top:40px; margin-bottom:50px;">
+    <form class="form-horizontal" action="/Supplier/SaveStationery" method="POST" style="margin-top:40px; margin-bottom:50px;">
         <div class="form-group">
             <label class="col-sm-5 control-label">Supplier Id:</label>
             <div class="col-sm-3">
