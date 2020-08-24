@@ -64,7 +64,8 @@ namespace ADProj.Controllers
                 Email = employee.Email,
                 Name = employee.Name,
                 Password = employee.Password,
-                Role = "ActingHead"
+                Role = "ActingHead",
+                DelegateExpiration = new DateTimeOffset(actingDepartmentHead.EndDate).ToUnixTimeMilliseconds()
             };
             return Ok(emp2);
         }

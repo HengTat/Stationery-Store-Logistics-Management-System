@@ -181,5 +181,17 @@ namespace ADProj.Services
             }
             return restockRequired;
         }
+
+        public void ResetRequestQtyByRetrievalId(int id)
+        {
+            List<InventoryItem> items = adProjContext.RetrievalDetails.Where(x => x.RetrievalId == id).Select(x => x.InventoryItem).ToList();
+            foreach (InventoryItem item in items)
+            {
+                item.QtyInStock -= item.RequestQty;
+                item.RequestQty = 0;
+                adProjContext.Update(item);
+            }
+            adProjContext.SaveChanges();
+        }
     }
 }

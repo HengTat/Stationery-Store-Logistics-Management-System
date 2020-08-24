@@ -3,7 +3,7 @@
     var disbursementList = (List<Disbursement>)ViewData["selectedDisbursements"];
 }
 <div style="margin-left:50px">
-    <a href="/request/outstanding"><h4> << View Request List </h4> </a>
+    <a href="/disbursement/index"><h4> << View Other Disbursement Records </h4> </a>
 </div>
 <form method="post" style="margin-bottom:40px">
     <div class="container" align="center">
@@ -26,7 +26,7 @@
                         <td>@dbm.Department.Name</td>
                         <td>@dbm.Department.DepartmentRep.Name</td>
                         <td>@dbm.Department.CollectionPointId</td>
-                        <td><button type="submit" formaction="ViewDisbursementDetails?Id=@dbm.Id" class="btn btn-primary btn-xs">View Details ></button></td>
+                        <td><button type="submit" formaction="/Disbursement/ViewDisbursementDetails?Id=@dbm.Id" class="btn btn-primary btn-xs">View Details ></button></td>
                     </tr>
                 }
 
