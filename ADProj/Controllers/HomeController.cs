@@ -127,7 +127,6 @@ namespace ADProj.Controllers
         }
         public IActionResult StoreManager()
         {
-            int empId = Convert.ToInt32(HttpContext.Session.GetString("id"));
             if (HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER)
             {
                 return RedirectToAction("GeneralTrend", "TrendAnalysis");
@@ -137,7 +136,6 @@ namespace ADProj.Controllers
         }
         public IActionResult StoreSupervisor()
         {
-            int empId = Convert.ToInt32(HttpContext.Session.GetString("id"));
             if (HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR)
             {
                 return RedirectToAction("GeneralTrend", "TrendAnalysis");

@@ -27,8 +27,8 @@ namespace ADProj.Controllers
         {
             if (HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER)
             {
-                List<CollectionPoint> cplist = cps.ListCollectionPoints();
-                ViewData["cplist"] = cplist;
+                List<CollectionPoint> cpList = cps.ListCollectionPoints();
+                ViewData["cplist"] = cpList;
                 if (TempData["alertMsg"] != null)
                 {
                     ViewData["alertMsg"] = TempData["alertMsg"];

@@ -41,9 +41,9 @@ namespace ADProj.Controllers
                 dept = emp.Department;
                 Employee currentDeptRep = es.GetDeptRepByDeptId(dept.Id);
 
-                List<Employee> employeesunderdepthead = es.FindAllEmployeesByDepartment(dept.Id);
+                List<Employee> employeesUnderDeptHead = es.FindAllEmployeesByDepartment(dept.Id);
 
-                ViewData["emplist"] = employeesunderdepthead;
+                ViewData["emplist"] = employeesUnderDeptHead;
                 ViewData["currentDeptRep"] = currentDeptRep;
                 ViewData["deptHead"] = emp;
             }

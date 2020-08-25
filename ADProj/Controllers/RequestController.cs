@@ -17,18 +17,18 @@ namespace ADProj.Controllers
     {
         private ADProjContext dbcontext;
         private readonly ILogger<RequestController> _logger;
-        private RequestServices rs;
-        private RequestDetailService requestdetailservice;
-        private InventoryService inventoryitemservice;
-        private Emailservice emailservice;
+        private RequestServices requestService;
+        private RequestDetailService requestDetailService;
+        private InventoryService inventoryItemService;
+        private Emailservice emailService;
 
-        public RequestController(ILogger<RequestController> logger, RequestServices rs, RequestDetailService requestdetailservice, InventoryService inventoryitemservice, Emailservice emailservice, ADProjContext dbcontext)
+        public RequestController(ILogger<RequestController> logger, RequestServices requestService, RequestDetailService requestDetailService, InventoryService inventoryItemService, Emailservice emailService, ADProjContext dbcontext)
         {
             _logger = logger;
-            this.rs = rs;
-            this.requestdetailservice = requestdetailservice;
-            this.inventoryitemservice = inventoryitemservice;
-            this.emailservice = emailservice;
+            this.requestService = requestService;
+            this.requestDetailService = requestDetailService;
+            this.inventoryItemService = inventoryItemService;
+            this.emailService = emailService;
             this.dbcontext = dbcontext;
         }
 
@@ -40,8 +40,8 @@ namespace ADProj.Controllers
 
             }
 
-            ViewData["CategoryData"] = inventoryitemservice.CategoryList();
-            ViewData["InventoryData"] = inventoryitemservice.ItemList();
+            ViewData["CategoryData"] = inventoryItemService.CategoryList();
+            ViewData["InventoryData"] = inventoryItemService.ItemList();
             return View();
 
         }
@@ -54,12 +54,12 @@ namespace ADProj.Controllers
 
             }
             string employeeId = HttpContext.Session.GetString("id");
-            int RequestId = rs.addRequest(employeeId);
-            rs.AddRequestDetails(RequestId, data);
+            int RequestId = requestService.addRequest(employeeId);
+            requestService.AddRequestDetails(RequestId, data);
             //email notification to employee to indicate successful submission
-            emailservice.sendrequestsubmitemailnotifitcation(int.Parse(employeeId));
+            emailService.sendrequestsubmitemailnotifitcation(int.Parse(employeeId));
             //email notification to ActingHead or DepartmentHead to review request
-            emailservice.sendPendingApprovalEmailNotification(int.Parse(employeeId));
+            emailService.sendPendingApprovalEmailNotification(int.Parse(employeeId));
 
             return View();
         }
@@ -74,7 +74,7 @@ namespace ADProj.Controllers
             List<Request> approvedRequest = new List<Request>();
             List<Request> pendingStockRequest = new List<Request>();
 
-            List<Request> requestList = rs.GetApprovedAndPendingStockRequests();
+            List<Request> requestList = requestService.GetApprovedAndPendingStockRequests();
             foreach (Request request in requestList)
             {
                 if (request.Status == Enums.Status.Approved)
@@ -100,9 +100,9 @@ namespace ADProj.Controllers
 
             }
 
-            List<RequestDetails> Listofitems = requestdetailservice.FindRequestDetailByRequestId(id);
+            List<RequestDetails> listOfItems = requestDetailService.FindRequestDetailByRequestId(id);
             ViewData["Requestid"] = id;
-            ViewData["Listofitems"] = Listofitems;
+            ViewData["Listofitems"] = listOfItems;
             return View("OutstandingRequestDetail");
         }
 
@@ -121,9 +121,9 @@ namespace ADProj.Controllers
                 ViewData["repeatRequestStatus"] = TempData["repeatRequestStatus"];
             }
 
-            int CurrentId = int.Parse(HttpContext.Session.GetString("id"));
-            List<Request> ListofRequest = rs.FindRequestbyUserId(CurrentId);
-            return View(ListofRequest);
+            int currentId = int.Parse(HttpContext.Session.GetString("id"));
+            List<Request> listOfRequest = requestService.FindRequestbyUserId(currentId);
+            return View(listOfRequest);
         }
 
         public IActionResult ViewMyRequestHistoryDetail(int id)
@@ -133,12 +133,12 @@ namespace ADProj.Controllers
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
 
             }
-            List<RequestDetails> Listofitems = requestdetailservice.FindRequestDetailByRequestId(id);
+            List<RequestDetails> listOfItems = requestDetailService.FindRequestDetailByRequestId(id);
             ViewData["Requestid"] = id;
-            return View(Listofitems);
+            return View(listOfItems);
         }
 
-        public IActionResult Requestpendingapproval()
+        public IActionResult RequestPendingApproval()
         {
             if (HttpContext.Session.GetString("role") != EmployeeRole.DEPTHEAD)
             {
@@ -146,8 +146,8 @@ namespace ADProj.Controllers
 
             }
             int CurrentId = int.Parse(HttpContext.Session.GetString("id"));
-            List<Request> Listofrequestpendingapproval = rs.FindPendingRequestByDepartmenthead(CurrentId);
-            return View(Listofrequestpendingapproval);
+            List<Request> listOfRequestPendingApproval = requestService.FindPendingRequestByDepartmenthead(CurrentId);
+            return View(listOfRequestPendingApproval);
         }
 
 
@@ -158,9 +158,9 @@ namespace ADProj.Controllers
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
 
             }
-            List<RequestDetails> Listofitems = requestdetailservice.FindRequestDetailByRequestId(id);
+            List<RequestDetails> listOfItems = requestDetailService.FindRequestDetailByRequestId(id);
             ViewData["Requestid"] = id;
-            return View(Listofitems);
+            return View(listOfItems);
         }
 
 
@@ -171,18 +171,18 @@ namespace ADProj.Controllers
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
             }
 
-            Request request = rs.FindRequestbyId(requestid);
+            Request request = requestService.FindRequestbyId(requestid);
             request.Comments = Comments;
             dbcontext.SaveChanges();
             int id = request.EmployeeId;
             if (submitButton == "Reject")
             {
-                emailservice.sendrequestrejectionemailnotifitcation(id);
+                emailService.sendrequestrejectionemailnotifitcation(id);
                 return RedirectToAction("RejectRequest", new { id = requestid });
             }
             else
             {
-                emailservice.sendrequestapprovalemailnotifitcation(id);
+                emailService.sendrequestapprovalemailnotifitcation(id);
                 return RedirectToAction("ApproveRequest", new { id = requestid });
             }
         }
@@ -193,8 +193,8 @@ namespace ADProj.Controllers
             {
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
             }
-            Request request = rs.FindRequestbyId(id);
-            request.Status = Enums.Status.Rejected;
+            Request request = requestService.FindRequestbyId(id);
+            request.Status = Status.Rejected;
             dbcontext.SaveChanges();
             return RedirectToAction("Requestpendingapproval");
         }
@@ -207,36 +207,36 @@ namespace ADProj.Controllers
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
             }
             // push this to service
-            Request request = rs.FindRequestbyId(id);
-            List<RequestDetails> RDlist = requestdetailservice.FindRequestDetailByRequestId(id);
-            bool canbefufilled = true;
+            Request request = requestService.FindRequestbyId(id);
+            List<RequestDetails> rdList = requestDetailService.FindRequestDetailByRequestId(id);
+            bool canBeFufilled = true;
             //check if all items can be fufilled 
-            foreach (RequestDetails rd in RDlist)
+            foreach (RequestDetails rd in rdList)
             {
-                InventoryItem item = inventoryitemservice.FindbyId(rd.InventoryItemId);
+                InventoryItem item = inventoryItemService.FindbyId(rd.InventoryItemId);
                 if (item.RequestQty + rd.QtyRequested > item.QtyInStock)
                 {
-                    canbefufilled = false;
+                    canBeFufilled = false;
                 }
             }
             // if can be fufilled (qty is add to requestqty and status is changed to approved)
-            if (canbefufilled == true)
+            if (canBeFufilled == true)
             {
-                request.Status = Enums.Status.Approved;
-                foreach (RequestDetails rd in RDlist)
+                request.Status = Status.Approved;
+                foreach (RequestDetails rd in rdList)
                 {
-                    InventoryItem item = inventoryitemservice.FindbyId(rd.InventoryItemId);
+                    InventoryItem item = inventoryItemService.FindbyId(rd.InventoryItemId);
                     item.RequestQty = item.RequestQty + rd.QtyRequested;
                     //send email notification if lowstock
                     if (item.QtyInStock - item.RequestQty < item.ReorderLevel)
                     {
-                        emailservice.sendlowstockemailnotifitcation(item.Id);
+                        emailService.sendlowstockemailnotifitcation(item.Id);
                     }
                 }
             }
             else
             {
-                request.Status = Enums.Status.PendingStock;
+                request.Status = Status.PendingStock;
             }
 
             dbcontext.SaveChanges();
@@ -251,8 +251,8 @@ namespace ADProj.Controllers
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
             }
             string employeeId = HttpContext.Session.GetString("id");
-            List<RequestDetails> requestDetails = requestdetailservice.FindRequestDetailByRequestId(id);
-            int requestId = rs.addRequest(employeeId);
+            List<RequestDetails> requestDetails = requestDetailService.FindRequestDetailByRequestId(id);
+            int requestId = requestService.addRequest(employeeId);
             List<CustomRequestDetails> customRequestDetailsList = new List<CustomRequestDetails>();
 
             foreach (RequestDetails rd in requestDetails)
@@ -265,11 +265,11 @@ namespace ADProj.Controllers
 
                 customRequestDetailsList.Add(cusReqDet);
             }
-            rs.AddRequestDetails(requestId, customRequestDetailsList);
+            requestService.AddRequestDetails(requestId, customRequestDetailsList);
             //email notification to employee to indicate successful submission
-            emailservice.sendrequestsubmitemailnotifitcation(int.Parse(employeeId));
+            emailService.sendrequestsubmitemailnotifitcation(int.Parse(employeeId));
             //email notification to ActingHead or DepartmentHead to review request
-            emailservice.sendPendingApprovalEmailNotification(int.Parse(employeeId));
+            emailService.sendPendingApprovalEmailNotification(int.Parse(employeeId));
             TempData["repeatRequestStatus"] = "success";
             return RedirectToAction("ViewMyRequestHistory");
         }

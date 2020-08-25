@@ -29,7 +29,7 @@ namespace ADProj.Controllers
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
 
             }
-            List<PurchaseOrder> poHistory = poService.GetPOList();
+            List<PurchaseOrder> poHistory = poService.GetPoList();
             poHistory.Reverse();
             ViewData["poHistory"] = poHistory;
             return View();
@@ -58,8 +58,8 @@ namespace ADProj.Controllers
             var firstElement = data.First();
             string supplierId = firstElement.SupplierId;
             //string employeeId = HttpContext.Session.GetString("id");
-            int newPOId = poService.addPO(supplierId);
-            poService.addPODetails(newPOId, data);
+            int newPoId = poService.addPO(supplierId);
+            poService.addPoDetails(newPoId, data);
             return View();
         }
         public IActionResult Details(int id)
@@ -69,7 +69,7 @@ namespace ADProj.Controllers
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
 
             }
-            List<PurchaseOrderDetails> podList = poService.FindPODetailByPOId(id);
+            List<PurchaseOrderDetails> podList = poService.FindPoDetailByPoId(id);
             ViewData["poId"] = id;
             ViewData["ListofPO"] = podList;
             return View("Details");

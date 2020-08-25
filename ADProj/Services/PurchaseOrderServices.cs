@@ -25,7 +25,7 @@ namespace ADProj.Services
             dbcontext.Entry(po).GetDatabaseValues();
             return po.Id;
         }
-        public void addPODetails(int poId, List<CustomPODetails> poDetailsList)
+        public void addPoDetails(int poId, List<CustomPODetails> poDetailsList)
         {
             foreach (CustomPODetails detail in poDetailsList)
             {
@@ -38,13 +38,13 @@ namespace ADProj.Services
                 dbcontext.SaveChanges();
             }
         }
-        public List<PurchaseOrder> GetPOList()
+        public List<PurchaseOrder> GetPoList()
         {
             List<PurchaseOrder> poList = dbcontext.PurchaseOrders.ToList();
             return poList;
         }
 
-        public List<PurchaseOrderDetails> FindPODetailByPOId(int id)
+        public List<PurchaseOrderDetails> FindPoDetailByPoId(int id)
         {
             return dbcontext.PurchaseOrderDetails.Where(x => x.PurchaseOrderId == id).ToList();
 

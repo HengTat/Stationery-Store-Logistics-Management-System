@@ -13,12 +13,12 @@ namespace ADProj.Controllers
     public class RetrievalController : Controller
     {
         private RetrievalService rs;
-        private InventoryService invsvc;
+        private InventoryService invSvc;
 
-        public RetrievalController(RetrievalService rs, InventoryService invsvc)
+        public RetrievalController(RetrievalService rs, InventoryService invSvc)
         {
             this.rs = rs;
-            this.invsvc = invsvc;
+            this.invSvc = invSvc;
         }
         public IActionResult Index()
         {
@@ -62,7 +62,7 @@ namespace ADProj.Controllers
             Retrieval ret = rs.CreateRetrieval(empId, requests);
             rs.CreateRetrievalDetails(ret.Id, retrieveList);
             List<RetrievalDetails> rtList = rs.FindRetrievalDetails(ret.Id);
-            invsvc.ResetRequestQtyByRetrievalId(ret.Id);
+            invSvc.ResetRequestQtyByRetrievalId(ret.Id);
             ViewData["retrieveList"] = rtList;
             ViewData["retId"] = ret.Id;
             return View();
