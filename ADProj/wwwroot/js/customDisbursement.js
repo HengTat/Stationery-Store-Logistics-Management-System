@@ -26,17 +26,16 @@
     });
 
     $('#submit').click(function () {
-        if ($('#customDate').val() == '') {
-            swal('Date is mandatory for ad-hoc disbursements')
-            return false;
-        }
-
         if ($('#disbursementDefault').prop('checked') === true) {
             var disbursedDate = $('#disbursementDefault').val();
             $('#disbursedDate').val(disbursedDate);
             $('#disbursementGenForm').submit();
         }
         else {
+            if ($('#customDate').val() == '') {
+                swal('Date is mandatory for ad-hoc disbursements')
+                return false;
+            }
             var disbursedDate = $('#customDate').val();
             $('#disbursedDate').val(disbursedDate);
             $('#disbursementGenForm').submit();
