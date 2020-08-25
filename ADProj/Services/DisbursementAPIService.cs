@@ -106,6 +106,13 @@ namespace ADProj.Services
             {
                 d.DisbursementStatus = Enums.DisbursementStatus.COLLECTED;
             }
+            // update associated request status to completed
+            List<Request> requests = dbcontext.Requests.Where(x => x.DisbursementId == d.Id).ToList();
+            foreach (Request r in requests)
+            {
+                r.Status = Enums.Status.Completed;
+                dbcontext.Update(r);
+            }
             dbcontext.Update(d);
             dbcontext.SaveChanges();
         }
