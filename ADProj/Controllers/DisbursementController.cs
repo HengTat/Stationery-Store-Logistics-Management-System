@@ -42,42 +42,76 @@ namespace ADProj.Controllers
             return View();
         }
 
-        public IActionResult Generate(int retrievalId)
+        public IActionResult Generate(string disbursedDate, int retrievalId)
         {
             if (!(HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == Enums.EmployeeRole.STORESUPERVISOR))
             {
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
             }
-            List<Request> requestList = rs.GetRequestsByRetrievalId(retrievalId);
-            var iter = requestList
-                .GroupBy(req => req.Employee.DepartmentId);
-            List<Disbursement> currentDisbursements = new List<Disbursement>();
-            //List<DisbursementDetails> deptDisbursementDetails = new List<DisbursementDetails>();
-
-            foreach (var grp in iter)
+            if (disbursedDate.Equals("default"))
             {
-                DateTime nextMonday = GetNextWeekday(DateTime.Today.AddDays(1), DayOfWeek.Monday);
-                int disbursementId = ds.GenerateDisbursement(DateTime.Today, nextMonday, grp.Key);
-                Disbursement currentDisbursement = ds.GetDisbursementById(disbursementId);
-                ems.sendDisbursementEmail((int)currentDisbursement.Department.DepartmentRepId, nextMonday, currentDisbursement.Department.CollectionPoint.Time, currentDisbursement.Department.CollectionPoint.Name);
-                currentDisbursements.Add(currentDisbursement);
-                List<RequestDetails> deptRequestDetails = new List<RequestDetails>();
-                foreach (var req in grp)
+                List<Request> requestList = rs.GetRequestsByRetrievalId(retrievalId);
+                var iter = requestList
+                    .GroupBy(req => req.Employee.DepartmentId);
+                List<Disbursement> currentDisbursements = new List<Disbursement>();
+
+                foreach (var grp in iter)
                 {
-                    rs.UpdateDisbursementId(req.Id, disbursementId);
-                    List<RequestDetails> rd = rds.FindRequestDetailByRequestId(req.Id);
-                    deptRequestDetails.AddRange(rd);
+                    DateTime nextMonday = GetNextWeekday(DateTime.Today.AddDays(1), DayOfWeek.Monday);
+                    int disbursementId = ds.GenerateDisbursement(DateTime.Today, nextMonday, grp.Key);
+                    Disbursement currentDisbursement = ds.GetDisbursementById(disbursementId);
+                    ems.sendDisbursementEmail((int)currentDisbursement.Department.DepartmentRepId, nextMonday, currentDisbursement.Department.CollectionPoint.Time, currentDisbursement.Department.CollectionPoint.Name);
+                    currentDisbursements.Add(currentDisbursement);
+                    List<RequestDetails> deptRequestDetails = new List<RequestDetails>();
+                    foreach (var req in grp)
+                    {
+                        rs.UpdateDisbursementId(req.Id, disbursementId);
+                        List<RequestDetails> rd = rds.FindRequestDetailByRequestId(req.Id);
+                        deptRequestDetails.AddRange(rd);
+                    }
+                    var iter2 = deptRequestDetails
+                        .GroupBy(det => det.InventoryItemId)
+                        .Select(det => new { InventoryItemId = det.Key, Qty = det.Sum(t => t.QtyRequested) });
+                    foreach (var uniqueItem in iter2)
+                    {
+                        ds.GenerateDisbursementDetails(uniqueItem.Qty, uniqueItem.Qty, disbursementId, uniqueItem.InventoryItemId);
+                    }
                 }
-                var iter2 = deptRequestDetails
-                    .GroupBy(det => det.InventoryItemId)
-                    .Select(det => new { InventoryItemId = det.Key, Qty = det.Sum(t => t.QtyRequested) });
-                foreach (var uniqueItem in iter2)
-                {
-                    ds.GenerateDisbursementDetails(uniqueItem.Qty, uniqueItem.Qty, disbursementId, uniqueItem.InventoryItemId);
-                }
+                ViewData["selectedDisbursements"] = currentDisbursements;
+                return View("ViewDisbursement");
             }
-            ViewData["selectedDisbursements"] = currentDisbursements;
-            return View("ViewDisbursement");
+            else
+            {
+                List<Request> requestList = rs.GetRequestsByRetrievalId(retrievalId);
+                var iter = requestList
+                    .GroupBy(req => req.Employee.DepartmentId);
+                List<Disbursement> currentDisbursements = new List<Disbursement>();
+
+                foreach (var grp in iter)
+                {
+                    DateTime customDate = DateTime.Parse(disbursedDate);
+                    int disbursementId = ds.GenerateDisbursement(DateTime.Today, customDate, grp.Key);
+                    Disbursement currentDisbursement = ds.GetDisbursementById(disbursementId);
+                    ems.sendDisbursementEmail((int)currentDisbursement.Department.DepartmentRepId, customDate, currentDisbursement.Department.CollectionPoint.Time, currentDisbursement.Department.CollectionPoint.Name);
+                    currentDisbursements.Add(currentDisbursement);
+                    List<RequestDetails> deptRequestDetails = new List<RequestDetails>();
+                    foreach (var req in grp)
+                    {
+                        rs.UpdateDisbursementId(req.Id, disbursementId);
+                        List<RequestDetails> rd = rds.FindRequestDetailByRequestId(req.Id);
+                        deptRequestDetails.AddRange(rd);
+                    }
+                    var iter2 = deptRequestDetails
+                        .GroupBy(det => det.InventoryItemId)
+                        .Select(det => new { InventoryItemId = det.Key, Qty = det.Sum(t => t.QtyRequested) });
+                    foreach (var uniqueItem in iter2)
+                    {
+                        ds.GenerateDisbursementDetails(uniqueItem.Qty, uniqueItem.Qty, disbursementId, uniqueItem.InventoryItemId);
+                    }
+                }
+                ViewData["selectedDisbursements"] = currentDisbursements;
+                return View("ViewDisbursement");
+            }    
         }
 
         public IActionResult ViewDisbursement(string date)
