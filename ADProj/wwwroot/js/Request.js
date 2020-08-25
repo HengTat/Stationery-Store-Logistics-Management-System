@@ -7,7 +7,7 @@ $(document).ready(function () {
         //Extracting all selected fields
         var txtCategroy = $("#selectOne option:selected").text().toString();
         var txtDescription = $("#selectTwo option:selected").text().toString();
-        var txtItemCode = $("#demo2").val().toString();
+        var txtItemCode = $("#itemId").val().toString();
         var qty = $("#requestQty").val();
 
         //validations for quantity, category,item
@@ -62,8 +62,8 @@ $(document).ready(function () {
         $("#selectOne").val('');
         $("#selectTwo").val('');
         $("#requestQty").val('');
-        $("#demo2").val('');
-        $("#demo").val('');
+        $("#itemId").val('');
+        $("#uom").val('');
 
         $('td:nth-child(3),th:nth-child(3)').hide();
 
@@ -147,15 +147,13 @@ $(document).ready(function () {
 
         var id = $("#selectTwo").find(':selected').data('id')
         var uom = $("#selectTwo").find(':selected').data('uom')
-        $('#demo').val(uom);
-        $('#demo2').val(id);
-
+        $('#uom').val(uom);
+        $('#itemId').val(id);
     });
     $("#selectTwo").change(function () {
         var id = $(this).find(':selected').data('id')
         var uom = $(this).find(':selected').data('uom')
-        $('#demo').val(uom);
-        $('#demo2').val(id);
-
+        $('#uom').val(uom);
+        $('#itemId').val(id);
     });
 });

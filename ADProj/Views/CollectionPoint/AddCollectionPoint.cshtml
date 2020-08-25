@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "AddCollectionPoint";
+    ViewData["Title"] = "New Collection Point";
     List<Employee> clerkList = (List<Employee>)ViewData["clerkList"];
     var msg = ViewData["alertMsg"];
 }
@@ -20,7 +20,7 @@
 }
 
 <div align="center">
-    <h1>New Collection Point</h1>
+    <h1>@ViewData["Title"]</h1>
     <form class="form-horizontal" id="AddCollectionPointForm" action="SaveCollectionPoint" method="post">
         <div class="form-group">
             <label class="col-sm-5 control-label">Name: </label>

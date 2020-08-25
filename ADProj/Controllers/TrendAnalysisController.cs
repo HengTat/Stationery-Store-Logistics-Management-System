@@ -43,161 +43,161 @@ namespace ADProj.Controllers
             }
 
             //First Diagram           
-            List<string> listOfCategories = trendAnalysisSerivce.ReturnListOfCatogeriesOrderInPastMonth();
-            List<int> listOfRequestQty = trendAnalysisSerivce.ReturnListOfVolumeOfCatogeriesOrderInPastMonth();
-            ViewData["Listofcategories"] = listOfCategories;
-            ViewData["ListofRequestyQty"] = listOfRequestQty;
+            List<string> ListofCategories = trendAnalysisSerivce.ReturnListOfCatogeriesOrderInPastMonth();
+            List<int> ListofRequestQty = trendAnalysisSerivce.ReturnListOfVolumeOfCatogeriesOrderInPastMonth();
+            ViewData["Listofcategories"] = ListofCategories;
+            ViewData["ListofRequestyQty"] = ListofRequestQty;
 
             //Second Diagram          
-            List<int> totalOrdersThisYear = trendAnalysisSerivce.ReturnMonthlyListOfTotalOrdersCurrentYear();
-            ViewData["CurrentYear"] = totalOrdersThisYear;
-            List<int> totalOrdersPastYear = trendAnalysisSerivce.ReturnMonthlyListOfTotalOrdersPastYear();
-            ViewData["PastYear"] = totalOrdersPastYear;
+            List<int> TotalOrdersthisyear = trendAnalysisSerivce.ReturnMonthlyListOfTotalOrdersCurrentYear();
+            ViewData["CurrentYear"] = TotalOrdersthisyear;
+            List<int> TotalOrderspastyear = trendAnalysisSerivce.ReturnMonthlyListOfTotalOrdersPastYear();
+            ViewData["PastYear"] = TotalOrderspastyear;
 
             return View();
         }
 
 
-        public IActionResult SubmitForRequestVolume(string[] dept, string monthOne, string monthTwo)
+        public IActionResult submitforrequestvolume(string[] dept, string M1, string M2)
         {
             if (!(HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
             {
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
             }
-            List<string> listOfSelectedDept = new List<string>();
+            List<string> listofselecteddept = new List<string>();
             for (int i = 0; i < dept.Length; i++)
             {
 
-                listOfSelectedDept.Add(dept[i]);
+                listofselecteddept.Add(dept[i]);
             }
-            return RedirectToAction("TrendAnalysisRequestVolume", new { listofselecteddep = listOfSelectedDept, Month1 = monthOne, Month2 = monthTwo });
+            return RedirectToAction("TrendAnalysisRequestVolume", new { listofselecteddep = listofselecteddept, Month1 = M1, Month2 = M2 });
 
         }
 
 
-        public IActionResult TrendAnalysisRequestVolume(List<string> listOfSelectedDep, string montheOne, string monthTwo)
+        public IActionResult TrendAnalysisRequestVolume(List<string> listofselecteddep, string Month1, string Month2)
         {
             if (!(HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
             {
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
             }
-            ViewData["M1"] = montheOne;
-            ViewData["M2"] = monthTwo;
+            ViewData["M1"] = Month1;
+            ViewData["M2"] = Month2;
             DateTime M1 = DateTime.Now; ;
-            if (montheOne != null)
+            if (Month1 != null)
             {
-                string[] first = montheOne.Split("-");
+                string[] first = Month1.Split("-");
                 int firsty = Int32.Parse(first[0]);
                 int firstm = Int32.Parse(first[1]);
                 M1 = new DateTime(firsty, firstm, 01);
             }
 
             DateTime M2 = DateTime.Now;
-            if (monthTwo != null)
+            if (Month2 != null)
             {
-                string[] second = monthTwo.Split("-");
+                string[] second = Month2.Split("-");
                 int secondy = Int32.Parse(second[0]);
                 int secondm = Int32.Parse(second[1]);
                 M2 = new DateTime(secondy, secondm, 01);
             }
 
-            List<string> listOfDepartmentNames = trendAnalysisSerivce.ReturnAllDepartmentNames();
-            listOfDepartmentNames.Sort();
-            listOfSelectedDep.Sort();
-            ViewData["ListofDepartments"] = listOfDepartmentNames;
-            ViewData["ListofselectedDepartments"] = listOfSelectedDep;
+            List<string> listofdepartmentnames = trendAnalysisSerivce.ReturnAllDepartmentNames();
+            listofdepartmentnames.Sort();
+            listofselecteddep.Sort();
+            ViewData["ListofDepartments"] = listofdepartmentnames;
+            ViewData["ListofselectedDepartments"] = listofselecteddep;
 
             //currentmonth
-            int thisYear = DateTime.Now.Year;
-            int currentMonth = DateTime.Now.Month;
-            DateTime startOfCurrentMonth = new DateTime(thisYear, currentMonth, 1);
-            DateTime endOfCurrentMonth = startOfCurrentMonth.AddMonths(1);
-            List<int> listOfTotalOrdersByDepartmentCurrentMonth = trendAnalysisSerivce.ReturnListOfOrderByDeptByMonth(startOfCurrentMonth, endOfCurrentMonth, listOfSelectedDep);
-            ViewData["Listoftotalordercurrentmonth"] = listOfTotalOrdersByDepartmentCurrentMonth;
+            int thisyear = DateTime.Now.Year;
+            int currentmonth = DateTime.Now.Month;
+            DateTime startofcurrentmonth = new DateTime(thisyear, currentmonth, 1);
+            DateTime endofcurrentmonth = startofcurrentmonth.AddMonths(1);
+            List<int> listoftotalordersbydepartmentcurrentmonth = trendAnalysisSerivce.ReturnListOfOrderByDeptByMonth(startofcurrentmonth, endofcurrentmonth, listofselecteddep);
+            ViewData["Listoftotalordercurrentmonth"] = listoftotalordersbydepartmentcurrentmonth;
 
             //M1
-            DateTime startOfM1 = M1;
-            DateTime endOfM1 = startOfM1.AddMonths(1);
-            List<int> listOfTotalOrdersByDepartmentM1 = trendAnalysisSerivce.ReturnListOfOrderByDeptByMonth(startOfM1, endOfM1, listOfSelectedDep);
-            ViewData["Listoftotalorderpastmonth"] = listOfTotalOrdersByDepartmentM1;
+            DateTime startofM1 = M1;
+            DateTime endofM1 = startofM1.AddMonths(1);
+            List<int> listoftotalordersbydepartmentM1 = trendAnalysisSerivce.ReturnListOfOrderByDeptByMonth(startofM1, endofM1, listofselecteddep);
+            ViewData["Listoftotalorderpastmonth"] = listoftotalordersbydepartmentM1;
 
             //M2
-            DateTime startOfM2 = M2;
-            DateTime endOfM2 = startOfM2.AddMonths(1);
-            List<int> listOfTotalOrdersByDepartmentM2 = trendAnalysisSerivce.ReturnListOfOrderByDeptByMonth(startOfM2, endOfM2, listOfSelectedDep);
-            ViewData["Listoftotalorderpasttwomonth"] = listOfTotalOrdersByDepartmentM2;
+            DateTime startofM2 = M2;
+            DateTime endofM2 = startofM2.AddMonths(1);
+            List<int> listoftotalordersbydepartmentM2 = trendAnalysisSerivce.ReturnListOfOrderByDeptByMonth(startofM2, endofM2, listofselecteddep);
+            ViewData["Listoftotalorderpasttwomonth"] = listoftotalordersbydepartmentM2;
             return View();
         }
 
 
-        public IActionResult SubmitForOrderQuantity(string[] cat, string monthOne, string monthTwo)
+        public IActionResult submitforOrderQuantity(string[] cat, string M1, string M2)
         {
             if (!(HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
             {
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
             }
 
-            List<string> listOfSelectedCat = new List<string>();
+            List<string> listofselectedcat = new List<string>();
             for (int i = 0; i < cat.Length; i++)
             {
-                listOfSelectedCat.Add(cat[i]);
+                listofselectedcat.Add(cat[i]);
             }
-            return RedirectToAction("TrendAnalysisOrderQuantity", new { listofselectedcat = listOfSelectedCat, Month1 = monthOne, Month2 = monthTwo });
+            return RedirectToAction("TrendAnalysisOrderQuantity", new { listofselectedcat = listofselectedcat, Month1 = M1, Month2 = M2 });
         }
 
 
-        public IActionResult TrendAnalysisOrderQuantity(List<string> listOfSelectedCat, string monthOne, string monthTwo)
+        public IActionResult TrendAnalysisOrderQuantity(List<string> listofselectedcat, string Month1, string Month2)
         {
             if (!(HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
             {
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
             }
 
-            ViewData["M1"] = monthOne;
-            ViewData["M2"] = monthTwo;
+            ViewData["M1"] = Month1;
+            ViewData["M2"] = Month2;
             DateTime M1 = DateTime.Now; ;
-            if (monthOne != null)
+            if (Month1 != null)
             {
-                string[] first = monthOne.Split("-");
-                int firstY = Int32.Parse(first[0]);
-                int firstM = Int32.Parse(first[1]);
-                M1 = new DateTime(firstY, firstM, 01);
+                string[] first = Month1.Split("-");
+                int firsty = Int32.Parse(first[0]);
+                int firstm = Int32.Parse(first[1]);
+                M1 = new DateTime(firsty, firstm, 01);
             }
 
             DateTime M2 = DateTime.Now;
-            if (monthTwo != null)
+            if (Month2 != null)
             {
-                string[] second = monthTwo.Split("-");
-                int secondY = Int32.Parse(second[0]);
-                int secondM = Int32.Parse(second[1]);
-                M2 = new DateTime(secondY, secondM, 01);
+                string[] second = Month2.Split("-");
+                int secondy = Int32.Parse(second[0]);
+                int secondm = Int32.Parse(second[1]);
+                M2 = new DateTime(secondy, secondm, 01);
             }
 
-            List<string> listOfCategoryMames = trendAnalysisSerivce.ReturnAllItemCategoryNames();
-            listOfCategoryMames.Sort();
-            listOfSelectedCat.Sort();
-            ViewData["ListofCategories"] = listOfCategoryMames;
-            ViewData["ListofselectedCategories"] = listOfSelectedCat;
+            List<string> listofcategorynames = trendAnalysisSerivce.ReturnAllItemCategoryNames();
+            listofcategorynames.Sort();
+            listofselectedcat.Sort();
+            ViewData["ListofCategories"] = listofcategorynames;
+            ViewData["ListofselectedCategories"] = listofselectedcat;
 
             //currentmonth
-            int thisYear = DateTime.Now.Year;
-            int currentMonth = DateTime.Now.Month;
-            DateTime startOfCurrentMonth = new DateTime(thisYear, currentMonth, 1);
-            DateTime endOfCurrentMonth = startOfCurrentMonth.AddMonths(1);
-            List<int> listOfTotalOrdersByCategoryCurrentMonth = trendAnalysisSerivce.ListOfOrderVolumeByItemCategoryByMonth(startOfCurrentMonth, endOfCurrentMonth, listOfSelectedCat);
-            ViewData["Listoftotalordercurrentmonth"] = listOfTotalOrdersByCategoryCurrentMonth;
+            int thisyear = DateTime.Now.Year;
+            int currentmonth = DateTime.Now.Month;
+            DateTime startofcurrentmonth = new DateTime(thisyear, currentmonth, 1);
+            DateTime endofcurrentmonth = startofcurrentmonth.AddMonths(1);
+            List<int> listoftotalordersbycategorycurrentmonth = trendAnalysisSerivce.ListOfOrderVolumeByItemCategoryByMonth(startofcurrentmonth, endofcurrentmonth, listofselectedcat);
+            ViewData["Listoftotalordercurrentmonth"] = listoftotalordersbycategorycurrentmonth;
 
             //M1
-            DateTime startOfM1 = M1;
-            DateTime endOfM1 = startOfM1.AddMonths(1);
-            List<int> listOfTotalOrdersByCategoryM1 = trendAnalysisSerivce.ListOfOrderVolumeByItemCategoryByMonth(startOfM1, endOfM1, listOfSelectedCat);
-            ViewData["Listoftotalorderpastmonth"] = listOfTotalOrdersByCategoryM1;
+            DateTime startofM1 = M1;
+            DateTime endofM1 = startofM1.AddMonths(1);
+            List<int> listoftotalordersbycategoryM1 = trendAnalysisSerivce.ListOfOrderVolumeByItemCategoryByMonth(startofM1, endofM1, listofselectedcat);
+            ViewData["Listoftotalorderpastmonth"] = listoftotalordersbycategoryM1;
 
             //M2
-            DateTime startOfM2 = M2;
-            DateTime endOfM2 = startOfM2.AddMonths(1);
-            List<int> listOfTotalOrdersByCategoryM2 = trendAnalysisSerivce.ListOfOrderVolumeByItemCategoryByMonth(startOfM2, endOfM2, listOfSelectedCat);
-            ViewData["Listoftotalorderpasttwomonth"] = listOfTotalOrdersByCategoryM2;
+            DateTime startofM2 = M2;
+            DateTime endofM2 = startofM2.AddMonths(1);
+            List<int> listoftotalordersbycategoryM2 = trendAnalysisSerivce.ListOfOrderVolumeByItemCategoryByMonth(startofM2, endofM2, listofselectedcat);
+            ViewData["Listoftotalorderpasttwomonth"] = listoftotalordersbycategoryM2;
 
             return View();
         }

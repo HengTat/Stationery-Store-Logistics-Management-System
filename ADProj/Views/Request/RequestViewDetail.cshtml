@@ -15,15 +15,16 @@
 </head>
 
 @{
-    ViewData["Title"] = "Request View Detail";
+    ViewData["Title"] = "Request Detail";
 }
 
-<a href="/request/requestpendingapproval"><h4> < View Request List </h4> </a>
 
 <div class="container" align="center" style="margin-bottom:40px">
     <img src="~/Icons/Listicon.png" alt="listicon" width="260" height="130" />
-    <h1 align="center">Request Details</h1>
-
+    <h1 align="center">@ViewData["Title"]</h1>
+</div>
+<div class="container">
+    <a href="/request/requestpendingapproval"><button type="button" class="btn btn-primary">Back To Request List</button></a>
     <table class="table table-bordered" style="margin-top:20px; text-align:center">
         <thead style="background-color:lightgrey">
             <tr align="center">

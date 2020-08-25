@@ -46,8 +46,6 @@ $(document).ready(function () {
         var cell6 = newRow.insertCell(5);
         var cell7 = newRow.insertCell(6);
 
-
-
         var cell1Text = document.createTextNode(txtSupplier);
         cell1.appendChild(cell1Text);
 
@@ -125,9 +123,6 @@ $(document).ready(function () {
 
     });
 
-
-
-
     $("#btnReset").click(function (event) {
 
         var tbody = $("#tblOrderDetails tbody");
@@ -185,7 +180,5 @@ $(document).ready(function () {
         $('#uom').val(uom);
         $('#cat').val(cat);
         $('#itemid').val(itemid);
-
-
     });
 });
