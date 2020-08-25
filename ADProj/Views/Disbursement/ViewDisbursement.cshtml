@@ -2,13 +2,13 @@
     ViewData["Title"] = "Disbursement";
     var disbursementList = (List<Disbursement>)ViewData["selectedDisbursements"];
 }
-<div style="margin-left:50px">
-    <a href="/disbursement/index"><h4> << View Other Disbursement Records </h4> </a>
+<div class="container" align="center" style="margin-bottom:40px">
+    <h2>Disbursement - @disbursementList[0].DisbursedDate.ToString("dd/MMM/yyyy")</h2>
 </div>
 <form method="post" style="margin-bottom:40px">
-    <div class="container" align="center">
-        <h2>Disbursement - @disbursementList[0].DisbursedDate.ToString("dd/MMM/yyyy")</h2>
-        <table class="table table-bordered" style="width:800px; margin-top:20px; text-align:center">
+    <div class="container">
+        <a href="/disbursement/index"><button type="button" class="btn btn-primary"> Back To Disbursement Records</button></a>
+        <table class="table table-bordered" style="margin-top:20px; text-align:center">
             <thead style="background-color:lightgrey">
                 <tr align="center">
                     <th style="width:100px; text-align:center">Department Code</th>
@@ -34,3 +34,4 @@
         </table>
     </div>
 </form>
+</div>
