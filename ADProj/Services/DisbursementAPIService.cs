@@ -11,10 +11,12 @@ namespace ADProj.Services
     public class DisbursementAPIService
     {
         private ADProjContext dbcontext;
+        private Emailservice ems;
 
-        public DisbursementAPIService(ADProjContext dbcontext)
+        public DisbursementAPIService(ADProjContext dbcontext, Emailservice ems)
         {
             this.dbcontext = dbcontext;
+            this.ems = ems;
         }
 
         public static DisbursementDetailAPIModel DisbursementdetailmodelConverttoAPImodel(DisbursementDetails dd)
@@ -112,6 +114,7 @@ namespace ADProj.Services
             {
                 r.Status = Enums.Status.Completed;
                 dbcontext.Update(r);
+                ems.sendCompletedRequestToEmployeeEmail(r);
             }
             dbcontext.Update(d);
             dbcontext.SaveChanges();

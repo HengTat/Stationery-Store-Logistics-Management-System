@@ -166,6 +166,21 @@ namespace ADProj.Services
             smtpClient.Send(mail);
         }
 
+        //EMAIL TO INFORM OF DISBURSEMENT
+        public void sendCompletedRequestToEmployeeEmail(Request r)
+        {
+            string employeeemail = dbcontext.Employees.Find(r.EmployeeId).Email;
+            SmtpClient smtpClient = setupsmtpclient();
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress("team9springboot@gmail.com", "team9");
+            mail.To.Add(new MailAddress("team9employee@gmail.com"));
+            //remove comment if employee has correct email
+            //mail.To.Add(new MailAddress(employeeemail));
+            mail.Subject = "[COMPLETED] Request Id: " + r.Id;
+            mail.Body = "Your department representative has collected your requested items for Request Id: " + r.Id;
+            smtpClient.Send(mail);
+        }
+
         //EMAIL TO INFORM PENDING APPROVAL (DEPTHEAD)
         public void sendPendingApprovalEmailNotification(int id)
         {
