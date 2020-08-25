@@ -43,15 +43,15 @@ namespace ADProj.Controllers
             }
 
             //First Diagram           
-            List<string> ListofCategories = trendAnalysisSerivce.returnlistofcatogeriesorderinpastmonth();
-            List<int> ListofRequestQty = trendAnalysisSerivce.returnlistofvolumeofcatogeriesorderinpastmonth();
+            List<string> ListofCategories = trendAnalysisSerivce.ReturnListOfCatogeriesOrderInPastMonth();
+            List<int> ListofRequestQty = trendAnalysisSerivce.ReturnListOfVolumeOfCatogeriesOrderInPastMonth();
             ViewData["Listofcategories"] = ListofCategories;
             ViewData["ListofRequestyQty"] = ListofRequestQty;
 
             //Second Diagram          
-            List<int> TotalOrdersthisyear = trendAnalysisSerivce.returnmonthlylistoftotalorderscurrentyear();
+            List<int> TotalOrdersthisyear = trendAnalysisSerivce.ReturnMonthlyListOfTotalOrdersCurrentYear();
             ViewData["CurrentYear"] = TotalOrdersthisyear;
-            List<int> TotalOrderspastyear = trendAnalysisSerivce.returnmonthlylistoftotalorderspastyear();
+            List<int> TotalOrderspastyear = trendAnalysisSerivce.ReturnMonthlyListOfTotalOrdersPastYear();
             ViewData["PastYear"] = TotalOrderspastyear;
 
             return View();
@@ -101,7 +101,7 @@ namespace ADProj.Controllers
                 M2 = new DateTime(secondy, secondm, 01);
             }
 
-            List<string> listofdepartmentnames = trendAnalysisSerivce.returnalldepartmentnames();
+            List<string> listofdepartmentnames = trendAnalysisSerivce.ReturnAllDepartmentNames();
             listofdepartmentnames.Sort();
             listofselecteddep.Sort();
             ViewData["ListofDepartments"] = listofdepartmentnames;
@@ -112,19 +112,19 @@ namespace ADProj.Controllers
             int currentmonth = DateTime.Now.Month;
             DateTime startofcurrentmonth = new DateTime(thisyear, currentmonth, 1);
             DateTime endofcurrentmonth = startofcurrentmonth.AddMonths(1);
-            List<int> listoftotalordersbydepartmentcurrentmonth = trendAnalysisSerivce.returnlistoforderbydeptbymonth(startofcurrentmonth, endofcurrentmonth, listofselecteddep);
+            List<int> listoftotalordersbydepartmentcurrentmonth = trendAnalysisSerivce.ReturnListOfOrderByDeptByMonth(startofcurrentmonth, endofcurrentmonth, listofselecteddep);
             ViewData["Listoftotalordercurrentmonth"] = listoftotalordersbydepartmentcurrentmonth;
 
             //M1
             DateTime startofM1 = M1;
             DateTime endofM1 = startofM1.AddMonths(1);
-            List<int> listoftotalordersbydepartmentM1 = trendAnalysisSerivce.returnlistoforderbydeptbymonth(startofM1, endofM1, listofselecteddep);
+            List<int> listoftotalordersbydepartmentM1 = trendAnalysisSerivce.ReturnListOfOrderByDeptByMonth(startofM1, endofM1, listofselecteddep);
             ViewData["Listoftotalorderpastmonth"] = listoftotalordersbydepartmentM1;
 
             //M2
             DateTime startofM2 = M2;
             DateTime endofM2 = startofM2.AddMonths(1);
-            List<int> listoftotalordersbydepartmentM2 = trendAnalysisSerivce.returnlistoforderbydeptbymonth(startofM2, endofM2, listofselecteddep);
+            List<int> listoftotalordersbydepartmentM2 = trendAnalysisSerivce.ReturnListOfOrderByDeptByMonth(startofM2, endofM2, listofselecteddep);
             ViewData["Listoftotalorderpasttwomonth"] = listoftotalordersbydepartmentM2;
             return View();
         }
@@ -173,7 +173,7 @@ namespace ADProj.Controllers
                 M2 = new DateTime(secondy, secondm, 01);
             }
 
-            List<string> listofcategorynames = trendAnalysisSerivce.returnallitemcategorynames();
+            List<string> listofcategorynames = trendAnalysisSerivce.ReturnAllItemCategoryNames();
             listofcategorynames.Sort();
             listofselectedcat.Sort();
             ViewData["ListofCategories"] = listofcategorynames;
@@ -184,19 +184,19 @@ namespace ADProj.Controllers
             int currentmonth = DateTime.Now.Month;
             DateTime startofcurrentmonth = new DateTime(thisyear, currentmonth, 1);
             DateTime endofcurrentmonth = startofcurrentmonth.AddMonths(1);
-            List<int> listoftotalordersbycategorycurrentmonth = trendAnalysisSerivce.Listofordervolumebyitemcategorybymonth(startofcurrentmonth, endofcurrentmonth, listofselectedcat);
+            List<int> listoftotalordersbycategorycurrentmonth = trendAnalysisSerivce.ListOfOrderVolumeByItemCategoryByMonth(startofcurrentmonth, endofcurrentmonth, listofselectedcat);
             ViewData["Listoftotalordercurrentmonth"] = listoftotalordersbycategorycurrentmonth;
 
             //M1
             DateTime startofM1 = M1;
             DateTime endofM1 = startofM1.AddMonths(1);
-            List<int> listoftotalordersbycategoryM1 = trendAnalysisSerivce.Listofordervolumebyitemcategorybymonth(startofM1, endofM1, listofselectedcat);
+            List<int> listoftotalordersbycategoryM1 = trendAnalysisSerivce.ListOfOrderVolumeByItemCategoryByMonth(startofM1, endofM1, listofselectedcat);
             ViewData["Listoftotalorderpastmonth"] = listoftotalordersbycategoryM1;
 
             //M2
             DateTime startofM2 = M2;
             DateTime endofM2 = startofM2.AddMonths(1);
-            List<int> listoftotalordersbycategoryM2 = trendAnalysisSerivce.Listofordervolumebyitemcategorybymonth(startofM2, endofM2, listofselectedcat);
+            List<int> listoftotalordersbycategoryM2 = trendAnalysisSerivce.ListOfOrderVolumeByItemCategoryByMonth(startofM2, endofM2, listofselectedcat);
             ViewData["Listoftotalorderpasttwomonth"] = listoftotalordersbycategoryM2;
 
             return View();

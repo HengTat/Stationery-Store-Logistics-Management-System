@@ -16,7 +16,6 @@ namespace ADProj.Models
         public int QtyRetrieved { get; set; }
         public int RetrievalId { get;  set;  }
         public string InventoryItemId { get; set;   }
-        
         public virtual Retrieval Retrieval { get; set; }
         public virtual InventoryItem InventoryItem { get; set; }
 

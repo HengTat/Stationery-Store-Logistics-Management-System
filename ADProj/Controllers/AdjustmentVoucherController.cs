@@ -95,7 +95,7 @@ namespace ADProj.Controllers
                 else
                 {
                     Amv.createAdjustmentVoucher(itemname, AdjustQty, AdjustAmt, reason, employeeId);
-                    invService.checkifpendingstockrequestcanbefufilled();
+                    invService.CheckIfPendingStockRequestCanBeFufilled();
                     TempData["Msg"] = "Adjustment voucher form has been created!";
                     return RedirectToAction("AddAdjustmentVoucher");
                     // return RedirectToAction("Index", "AdjustmentVoucher");

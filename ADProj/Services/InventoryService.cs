@@ -79,14 +79,12 @@ namespace ADProj.Services
             adProjContext.SaveChanges();
         }
 
-
         public void UpdateCategoryById(int catId, string newCatName)
         {
             ItemCategory cat = GetCategoryById(catId);
             cat.Name = newCatName;
             adProjContext.SaveChanges();
         }
-
 
         public void UpdateItemById(string id, string desc, string catName, string bin,
             int qtyInStock, int reorderLevel, int reorderQty, string uom)
@@ -125,31 +123,31 @@ namespace ADProj.Services
 
         }
 
-        public void checkifpendingstockrequestcanbefufilled()
+        public void CheckIfPendingStockRequestCanBeFufilled()
         {
             //getallpendingstockrequest
-            List<Request> Listofpendingstockrequest = adProjContext.Requests.Where(x => x.Status == Enums.Status.PendingStock).ToList();
-            foreach (Request r in Listofpendingstockrequest)
+            List<Request> listOfPendingStockRequest = adProjContext.Requests.Where(x => x.Status == Enums.Status.PendingStock).ToList();
+            foreach (Request r in listOfPendingStockRequest)
             {
                 //getallitemsinpendingstockrequest
-                List<RequestDetails> ListofRequestdetail = adProjContext.RequestDetails.Where(x => x.RequestId == r.Id).ToList();
-                bool allitemscanfufilled = true;
+                List<RequestDetails> listOfRequestDetail = adProjContext.RequestDetails.Where(x => x.RequestId == r.Id).ToList();
+                bool allItemsCanFufilled = true;
 
                 //if all items can be fufilled
-                foreach (RequestDetails rd in ListofRequestdetail)
+                foreach (RequestDetails rd in listOfRequestDetail)
                 {
                     InventoryItem item = adProjContext.InventoryItems.Find(rd.InventoryItemId);
                     if (item.RequestQty + rd.QtyRequested > item.QtyInStock)
                     {
-                        allitemscanfufilled = false;
+                        allItemsCanFufilled = false;
                     }
                 }
 
                 //increase requestqty and change status if can be fufilled
-                if (allitemscanfufilled == true)
+                if (allItemsCanFufilled == true)
                 {
                     r.Status = Enums.Status.Approved;
-                    foreach (RequestDetails rd in ListofRequestdetail)
+                    foreach (RequestDetails rd in listOfRequestDetail)
                     {
                         InventoryItem item = adProjContext.InventoryItems.Find(rd.InventoryItemId);
                         item.RequestQty += rd.QtyRequested;

@@ -55,7 +55,7 @@ namespace ADProj.Controllers
             }
             string employeeId = HttpContext.Session.GetString("id");
             int RequestId = rs.addRequest(employeeId);
-            rs.addRequestDetails(RequestId, data);
+            rs.AddRequestDetails(RequestId, data);
             //email notification to employee to indicate successful submission
             emailservice.sendrequestsubmitemailnotifitcation(int.Parse(employeeId));
             //email notification to ActingHead or DepartmentHead to review request
@@ -265,7 +265,7 @@ namespace ADProj.Controllers
 
                 customRequestDetailsList.Add(cusReqDet);
             }
-            rs.addRequestDetails(requestId, customRequestDetailsList);
+            rs.AddRequestDetails(requestId, customRequestDetailsList);
             //email notification to employee to indicate successful submission
             emailservice.sendrequestsubmitemailnotifitcation(int.Parse(employeeId));
             //email notification to ActingHead or DepartmentHead to review request

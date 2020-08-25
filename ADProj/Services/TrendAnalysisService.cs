@@ -15,121 +15,112 @@ namespace ADProj.Services
         {
             this.dbcontext = dbcontext;
         }
-        public Dictionary<string, int> givedictionaryofcategoriesanditemsorderedinpastmonth()
+        public Dictionary<string, int> GiveDictionaryOfCategoriesAndItemsOrderedInPastMonth()
         {
-            DateTime currenttime = DateTime.Now;
-            DateTime pastmonth = currenttime.AddMonths(-1);
-            var totalorderamount = dbcontext.RequestDetails.Where(x => x.Request.DateRequested > pastmonth & x.Request.DateRequested < currenttime & x.Request.Status != Enums.Status.Rejected).GroupBy(x => x.InventoryItem.ItemCategory.Name).Select(x => new { name = x.Key, y = x.Sum(x => x.QtyRequested) }).ToList();
-            Dictionary<string, int> objectDictionary = totalorderamount.ToDictionary(o => o.name, o => o.y);
+            DateTime currentTime = DateTime.Now;
+            DateTime pastMonth = currentTime.AddMonths(-1);
+            var totalOrderAmount = dbcontext.RequestDetails.Where(x => x.Request.DateRequested > pastMonth & x.Request.DateRequested < currentTime & x.Request.Status != Enums.Status.Rejected).GroupBy(x => x.InventoryItem.ItemCategory.Name).Select(x => new { name = x.Key, y = x.Sum(x => x.QtyRequested) }).ToList();
+            Dictionary<string, int> objectDictionary = totalOrderAmount.ToDictionary(o => o.name, o => o.y);
             return objectDictionary;
         }
-
-        public List<string> returnlistofcatogeriesorderinpastmonth()
+        public List<string> ReturnListOfCatogeriesOrderInPastMonth()
         {
-            Dictionary<string, int> objectDictionary = givedictionaryofcategoriesanditemsorderedinpastmonth();
-            List<string> ListofCategories = objectDictionary.Keys.ToList();
-            return ListofCategories;
+            Dictionary<string, int> objectDictionary = GiveDictionaryOfCategoriesAndItemsOrderedInPastMonth();
+            List<string> listofCategories = objectDictionary.Keys.ToList();
+            return listofCategories;
+        }
+        public List<int> ReturnListOfVolumeOfCatogeriesOrderInPastMonth()
+        {
+            Dictionary<string, int> objectDictionary = GiveDictionaryOfCategoriesAndItemsOrderedInPastMonth();
+            List<int> listofRequestQty = objectDictionary.Values.ToList();
+            return listofRequestQty;
         }
 
-        public List<int> returnlistofvolumeofcatogeriesorderinpastmonth()
-        {
-            Dictionary<string, int> objectDictionary = givedictionaryofcategoriesanditemsorderedinpastmonth();
-            List<int> ListofRequestQty = objectDictionary.Values.ToList();
-            return ListofRequestQty;
-        }
-
-        public List<int> returnmonthlylistoftotalorderscurrentyear()
+        public List<int> ReturnMonthlyListOfTotalOrdersCurrentYear()
         {
             int thisyear = DateTime.Now.Year;
             //querying everymonth this year
-            DateTime startofthisyear = new DateTime(thisyear, 1, 1);
-            DateTime beginthisyearmonth = startofthisyear;
-            DateTime Endthisyearmonth = startofthisyear.AddMonths(1);
-            int totalmonths = DateTime.Now.Month;
-            List<int> TotalOrdersthisyear = new List<int>();
+            DateTime startOfThisYear = new DateTime(thisyear, 1, 1);
+            DateTime beginThisYearMonth = startOfThisYear;
+            DateTime endThisYearMonth = startOfThisYear.AddMonths(1);
+            int totalMonths = DateTime.Now.Month;
+            List<int> totalOrdersThisYear = new List<int>();
 
-            for (int i = 0; i < totalmonths; i++)
+            for (int i = 0; i < totalMonths; i++)
             {
-                DateTime startofthismonth = beginthisyearmonth.AddMonths(i);
-                DateTime endofthismonth = Endthisyearmonth.AddMonths(i);
-                int Totalorderformonth = dbcontext.Requests.Where(x => x.DateRequested > startofthismonth & x.DateRequested < endofthismonth & x.Status != Enums.Status.Rejected).Count();
-                TotalOrdersthisyear.Add(Totalorderformonth);
+                DateTime startOfThisMonth = beginThisYearMonth.AddMonths(i);
+                DateTime endOfThisMonth = endThisYearMonth.AddMonths(i);
+                int totalOrderForMonth = dbcontext.Requests.Where(x => x.DateRequested > startOfThisMonth & x.DateRequested < endOfThisMonth & x.Status != Enums.Status.Rejected).Count();
+                totalOrdersThisYear.Add(totalOrderForMonth);
             }
-            return TotalOrdersthisyear;
+            return totalOrdersThisYear;
         }
 
-        public List<int> returnmonthlylistoftotalorderspastyear()
+        public List<int> ReturnMonthlyListOfTotalOrdersPastYear()
         {
-            int thisyear = DateTime.Now.Year;
-            DateTime startofthisyear = new DateTime(thisyear, 1, 1);
-            DateTime startofpastyear = startofthisyear.AddYears(-1);
-            DateTime beginpastyearmonth = startofpastyear;
-            DateTime Endpastyearmonth = startofpastyear.AddMonths(1);
+            int thisYear = DateTime.Now.Year;
+            DateTime startOfThisYear = new DateTime(thisYear, 1, 1);
+            DateTime startOfPastYear = startOfThisYear.AddYears(-1);
+            DateTime beginPastYeaMonth = startOfPastYear;
+            DateTime endPastYearMonth = startOfPastYear.AddMonths(1);
 
-            List<int> TotalOrderspastyear = new List<int>();
+            List<int> totalOrdersPastYear = new List<int>();
             for (int i = 0; i < 12; i++)
             {
-                DateTime startofthismonth = beginpastyearmonth.AddMonths(i);
-                DateTime endofthismonth = Endpastyearmonth.AddMonths(i);
-                int Totalorderformonth = dbcontext.Requests.Where(x => x.DateRequested > startofthismonth & x.DateRequested < endofthismonth & x.Status != Enums.Status.Rejected).Count();
-                TotalOrderspastyear.Add(Totalorderformonth);
+                DateTime startOfThisMonth = beginPastYeaMonth.AddMonths(i);
+                DateTime endOfThisMonth = endPastYearMonth.AddMonths(i);
+                int totalOrderForMonth = dbcontext.Requests.Where(x => x.DateRequested > startOfThisMonth & x.DateRequested < endOfThisMonth & x.Status != Enums.Status.Rejected).Count();
+                totalOrdersPastYear.Add(totalOrderForMonth);
             }
-            return TotalOrderspastyear;
+            return totalOrdersPastYear;
         }
 
-        public List<string> returnalldepartmentnames()
+        public List<string> ReturnAllDepartmentNames()
         {
-            List<Department> totallistofdepartments = dbcontext.Set<Department>().ToList();
-            List<string> listofdepartmentnames = new List<string>();
-            foreach (Department d in totallistofdepartments)
+            List<Department> totalListOfDepartments = dbcontext.Set<Department>().ToList();
+            List<string> listOfDepartmentNames = new List<string>();
+            foreach (Department d in totalListOfDepartments)
             {
-                listofdepartmentnames.Add(d.Name);
+                listOfDepartmentNames.Add(d.Name);
             }
-            return listofdepartmentnames;
+            return listOfDepartmentNames;
         }
 
-
-        public List<int> returnlistoforderbydeptbymonth(DateTime startofmonth, DateTime endofmonth, List<string> listofselecteddep)
+        public List<int> ReturnListOfOrderByDeptByMonth(DateTime startOfMonth, DateTime endOfMonth, List<string> listOfSelectedDep)
         {
-            List<int> listoftotalordersbydepartment = new List<int>();
+            List<int> listOfTotalOrdersByDepartment = new List<int>();
 
-            foreach (string deptname in listofselecteddep)
+            foreach (string deptName in listOfSelectedDep)
             {
-                int totalorderofdepartmentcurrentmonth = dbcontext.Requests.Where(x => x.Employee.Department.Name == deptname & x.DateRequested > startofmonth & x.DateRequested < endofmonth & x.Status != Enums.Status.Rejected).Count();
-                listoftotalordersbydepartment.Add(totalorderofdepartmentcurrentmonth);
+                int totalOrderOfDepartmentCurrentMonth = dbcontext.Requests.Where(x => x.Employee.Department.Name == deptName & x.DateRequested > startOfMonth & x.DateRequested < endOfMonth & x.Status != Enums.Status.Rejected).Count();
+                listOfTotalOrdersByDepartment.Add(totalOrderOfDepartmentCurrentMonth);
             }
-            return listoftotalordersbydepartment;
+            return listOfTotalOrdersByDepartment;
         }
 
-
-        public List<string> returnallitemcategorynames()
+        public List<string> ReturnAllItemCategoryNames()
         {
-            List<ItemCategory> totallistofcategory = dbcontext.Set<ItemCategory>().ToList();
-            List<string> listofcategorynames = new List<string>();
-            foreach (ItemCategory d in totallistofcategory)
+            List<ItemCategory> totalListOfCategory = dbcontext.Set<ItemCategory>().ToList();
+            List<string> listOfCategoryNames = new List<string>();
+            foreach (ItemCategory d in totalListOfCategory)
             {
-                listofcategorynames.Add(d.Name);
+                listOfCategoryNames.Add(d.Name);
             }
-            return listofcategorynames;
+            return listOfCategoryNames;
         }
 
-
-        public List<int> Listofordervolumebyitemcategorybymonth(DateTime startofmonth, DateTime endofmonth, List<string> listofselectedcat)
+        public List<int> ListOfOrderVolumeByItemCategoryByMonth(DateTime startOfMonth, DateTime endOfMonth, List<string> listOfSelectedCat)
         {
-            List<int> listoftotalordersbymonth = new List<int>();
+            List<int> listOfTotalOrdersByMonth = new List<int>();
             //CHANGE TO SELECTED LIST
-            foreach (string catname in listofselectedcat)
+            foreach (string catName in listOfSelectedCat)
             {
-                var totalorderamount = dbcontext.RequestDetails.Where(x => x.InventoryItem.ItemCategory.Name == catname & x.Request.DateRequested > startofmonth & x.Request.DateRequested < endofmonth & x.Request.Status != Enums.Status.Rejected).GroupBy(x => x.InventoryItem.ItemCategory.Name).Select(x => new { name = x.Key, y = x.Sum(x => x.QtyRequested) }).ToList(); ;
-                Dictionary<string, int> objectDictionary = totalorderamount.ToDictionary(o => o.name, o => o.y);
-                int ListofRequestQty = objectDictionary.Values.FirstOrDefault();
-                listoftotalordersbymonth.Add(ListofRequestQty);
+                var totalOrderAmount = dbcontext.RequestDetails.Where(x => x.InventoryItem.ItemCategory.Name == catName & x.Request.DateRequested > startOfMonth & x.Request.DateRequested < endOfMonth & x.Request.Status != Enums.Status.Rejected).GroupBy(x => x.InventoryItem.ItemCategory.Name).Select(x => new { name = x.Key, y = x.Sum(x => x.QtyRequested) }).ToList(); ;
+                Dictionary<string, int> objectDictionary = totalOrderAmount.ToDictionary(o => o.name, o => o.y);
+                int listOfRequestQty = objectDictionary.Values.FirstOrDefault();
+                listOfTotalOrdersByMonth.Add(listOfRequestQty);
             }
-            return listoftotalordersbymonth;
+            return listOfTotalOrdersByMonth;
         }
-
-
-
-
     }
 }

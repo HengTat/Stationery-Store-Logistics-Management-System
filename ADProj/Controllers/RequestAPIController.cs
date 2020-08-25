@@ -72,7 +72,7 @@ namespace ADProj.Controllers
             InventoryItem findItem = new InventoryItem();
             findItem= inventService.GetItemByDescription(crq.Description);
             crq.ItemId = findItem.Id;
-            requestService.addRequestDetailsMobile(RequestId, crq);
+            requestService.AddRequestDetailsMobile(RequestId, crq);
             emailservice.sendrequestsubmitemailnotifitcation(data.EmployeeId);
             return Ok(crq);
         }

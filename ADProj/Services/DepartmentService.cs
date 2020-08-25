@@ -28,9 +28,9 @@ namespace ADProj.Services
             return dbcontext.Departments.Where(x => x.Id == deptId).FirstOrDefault();
         }
 
-        public void AddDepartment(int EmployeeId, Department dept)
+        public void AddDepartment(int employeeId, Department dept)
         {
-            Employee adder = dbcontext.Employees.Where(x => x.Id == EmployeeId).FirstOrDefault();
+            Employee adder = dbcontext.Employees.Where(x => x.Id == employeeId).FirstOrDefault();
             if (adder.Role == EmployeeRole.STORECLERK || adder.Role == EmployeeRole.STOREMANAGER || adder.Role == EmployeeRole.STORESUPERVISOR)
             {               
                 dbcontext.Departments.Add(dept);
@@ -39,10 +39,10 @@ namespace ADProj.Services
 
         }
 
-        public void UpdateDepartment(int EmployeeId, Department dept)
+        public void UpdateDepartment(int employeeId, Department dept)
         {
             Department dbDept = dbcontext.Departments.Where(x => x.Id == dept.Id).FirstOrDefault();
-            Employee updater = dbcontext.Employees.Where(x => x.Id == EmployeeId).FirstOrDefault();
+            Employee updater = dbcontext.Employees.Where(x => x.Id == employeeId).FirstOrDefault();
 
             if (updater == null || dbDept == null)
             {
@@ -56,13 +56,13 @@ namespace ADProj.Services
                     // reset old dept rep's role to employee and update new dept rep's role 
 
 
-                    this.changeDepRepRoles(dbDept, dept.DepartmentRepId); 
+                    this.ChangeDepRepRoles(dbDept, dept.DepartmentRepId); 
                     dbDept.DepartmentRepId = dept.DepartmentRepId;
                 }
                 else if (updater.isActingDepartmentHead())
                 {
                     // updater is acting department head
-                    this.changeDepRepRoles(dbDept, dept.DepartmentRepId);
+                    this.ChangeDepRepRoles(dbDept, dept.DepartmentRepId);
                     dbDept.DepartmentRepId = dept.DepartmentRepId;
                 }
                 else if (updater.Department.DepartmentRep.Id == updater.Id)
@@ -81,9 +81,9 @@ namespace ADProj.Services
             dbcontext.SaveChanges();
         }
 
-        public void DeleteDepartment(int EmployeeId, Department dept)
+        public void DeleteDepartment(int employeeId, Department dept)
         {
-            Employee remover = dbcontext.Employees.Where(x => x.Id == EmployeeId).FirstOrDefault();
+            Employee remover = dbcontext.Employees.Where(x => x.Id == employeeId).FirstOrDefault();
             if (remover.Role == EmployeeRole.STORECLERK || remover.Role == EmployeeRole.STORESUPERVISOR || remover.Role == EmployeeRole.STOREMANAGER)
             {
                 dbcontext.Departments.Remove(dept);
@@ -94,7 +94,7 @@ namespace ADProj.Services
         }
 
 
-        public void changeDepRepRoles(Department dbDept, int? newDepartmentRepId)
+        public void ChangeDepRepRoles(Department dbDept, int? newDepartmentRepId)
         {
             dbDept.DepartmentRep.Role = EmployeeRole.EMPLOYEE;
             Employee newDeptRep = dbcontext.Employees.Where(x => x.Id == newDepartmentRepId).FirstOrDefault();

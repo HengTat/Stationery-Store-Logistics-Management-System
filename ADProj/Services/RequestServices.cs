@@ -31,7 +31,7 @@ namespace ADProj.Services
             return request.Id;
         }
 
-        public void addRequestDetails(int requestId, List<CustomRequestDetails> reqDetailsList)
+        public void AddRequestDetails(int requestId, List<CustomRequestDetails> reqDetailsList)
         {
             foreach (CustomRequestDetails detail in reqDetailsList)
             {
@@ -43,7 +43,7 @@ namespace ADProj.Services
                 dbcontext.SaveChanges();
             }
         }
-        public void addRequestDetailsMobile(int requestId, CustomRequestDetails reqDetail)
+        public void AddRequestDetailsMobile(int requestId, CustomRequestDetails reqDetail)
         {
             RequestDetails addDetail = new RequestDetails();
             addDetail.RequestId = requestId;
