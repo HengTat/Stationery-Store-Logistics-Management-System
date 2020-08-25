@@ -21,10 +21,10 @@ $(document).ready(function () {
         var price = $("#selectTwo").find(':selected').data('price')
         var currentQty = $("#selectTwo").find(':selected').data('yy')
 
-        $('#demo').val(uom);
-        $('#demo2').val(id);
-        $('#demo4').val(price);
-        $('#demo5').val(currentQty);
+        $('#uom').val(uom);
+        $('#itemid').val(id);
+        $('#price').val(price);
+        $('#currentqty').val(currentQty);
 
     });
 
@@ -37,11 +37,11 @@ $(document).ready(function () {
 
        
 
-        $('#demo').val(uom);
-        $('#demo2').val(id);
+        $('#uom').val(uom);
+        $('#itemid').val(id);
 
-        $('#demo4').val(price);
-        $('#demo5').val(currentQty);
+        $('#price').val(price);
+        $('#currentqty').val(currentQty);
       
 
 
