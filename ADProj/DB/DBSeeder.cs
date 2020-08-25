@@ -1625,6 +1625,22 @@ namespace ADProj.DB
             dbcontext.Update(r5);
             dbcontext.SaveChanges();
 
+            //Seed Retrieval Details
+
+            RetrievalDetails retd1 = new RetrievalDetails();
+            retd1.InventoryItemId = "C001";
+            retd1.QtyNeeded = 10;
+            retd1.RetrievalId = rtv1.Id;
+            dbcontext.Add(retd1);
+            dbcontext.SaveChanges();
+
+            RetrievalDetails retd2 = new RetrievalDetails();
+            retd2.InventoryItemId = "T021";
+            retd2.QtyNeeded = 20;
+            retd2.RetrievalId = rtv1.Id;
+            dbcontext.Add(retd2);
+            dbcontext.SaveChanges();
+
             //Seed Supplier Stationery
 
             SupplierStationery stationery1 = new SupplierStationery()

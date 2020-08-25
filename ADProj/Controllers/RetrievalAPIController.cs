@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ADProj.Models;
 using ADProj.Services;
+using ADProj.ModelsAPI;
+
 namespace ADProj.Controllers
 {
     [Route("api/[controller]")]
@@ -19,17 +21,35 @@ namespace ADProj.Controllers
             this.rs = rs;
         }
 
+        [HttpPost]
+        public IActionResult Post([FromBody] List<RetrievalDetailsAPI> retrievalDetailsList)
+        {
+            List<RetrievalDetailsAPI> list = retrievalDetailsList;
+            foreach (RetrievalDetailsAPI rd in list)
+            {
+
+                int rtDetailsId = rd.RetrievalDetailsId;
+                int actualRetQty = rd.ActualRetrievedQty;
+
+                RetrievalDetails rtd = rs.FindRetDetailsByRetDetailsId(rtDetailsId);
+                rs.UpdateRetrievedQty(rtd, actualRetQty);
+            }
+
+            Retrieval retrieval = rs.FindRetById(retrievalDetailsList.First().RetrievalId);
+            rs.UpdateRetStatus(retrieval);
+            return Ok();
+        }
+
         public IEnumerable<Retrieval> Get()
         {
-            List<Retrieval> list = rs.GetRetrievals();
+            List<Retrieval> list = rs.GetUnretrievedList();
             return list;
         }
 
         [HttpGet("{id}")]
-        public List<RequestDetails> Get(int id)
+        public List<RetrievalDetails> Get(int id)
         {
-            List<RequestDetails> list = new List<RequestDetails>();
-            list = rs.FindRquestDetailsById(id);
+            List<RetrievalDetails> list = rs.FindRetrievalDetails(id);
             return list;
         }
     }

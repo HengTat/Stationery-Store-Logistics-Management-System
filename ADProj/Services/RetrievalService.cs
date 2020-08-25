@@ -85,5 +85,29 @@ namespace ADProj.Services
             Request req = adProjContext.Requests.Where(x => x.RetrievalId == id).FirstOrDefault();
             return req;
         }
+
+        public RetrievalDetails FindRetDetailsByRetDetailsId(int retdetId)
+        {
+            RetrievalDetails retdetails = adProjContext.RetrievalDetails.Where(x => x.Id == retdetId).FirstOrDefault();
+            return retdetails;
+        }
+
+        public void UpdateRetrievedQty(RetrievalDetails rtDetails, int qty)
+        {
+            rtDetails.QtyRetrieved = qty;
+            adProjContext.SaveChanges();
+        }
+
+        public void UpdateRetStatus(Retrieval retrieval)
+        {
+            retrieval.status = "retrieved";
+            adProjContext.SaveChanges();
+        }
+
+        public List<Retrieval> GetUnretrievedList()
+        {
+            List<Retrieval> retList = adProjContext.Retrievals.Where(x => x.status == null).ToList();
+            return retList;
+        }
     }
 }
