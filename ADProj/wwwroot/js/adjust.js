@@ -35,24 +35,29 @@ $(document).ready(function () {
         var price = $(this).find(':selected').data('price')
         var currentQty = $(this).find(':selected').data('yy')
 
-        var currentAmt = parseFloat(price) * parseFloat(currentQty);
+       
 
         $('#demo').val(uom);
         $('#demo2').val(id);
 
         $('#demo4').val(price);
         $('#demo5').val(currentQty);
-        $('#demo6').val(currentAmt);
-
+      
 
 
 
 
     });
 
+    //$("#demo6").change(function () {
+    //    var price = $('demo4').val;
+    //    var adjustQty = $(this).val;
+
+    //    var adjustAmt = parseFloat(price) * parseFloat(adjustQty);
+
+    //    $('#demo7').val(adjustAmt);
 
 
-
-
+    //});
 
 });
