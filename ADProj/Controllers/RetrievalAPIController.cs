@@ -25,19 +25,32 @@ namespace ADProj.Controllers
         public IActionResult Post([FromBody] List<RetrievalDetailsAPI> retrievalDetailsList)
         {
             List<RetrievalDetailsAPI> list = retrievalDetailsList;
+            bool status = true;
             foreach (RetrievalDetailsAPI rd in list)
             {
-
                 int rtDetailsId = rd.RetrievalDetailsId;
                 int actualRetQty = rd.ActualRetrievedQty;
 
-                RetrievalDetails rtd = rs.FindRetDetailsByRetDetailsId(rtDetailsId);
-                rs.UpdateRetrievedQty(rtd, actualRetQty);
+                if (actualRetQty > 0)
+                {
+                    RetrievalDetails rtd = rs.FindRetDetailsByRetDetailsId(rtDetailsId);
+                    rs.UpdateRetrievedQty(rtd, actualRetQty);
+                }
+                else
+                {
+                    status= false;
+                }
             }
-
-            Retrieval retrieval = rs.FindRetById(retrievalDetailsList.First().RetrievalId);
-            rs.UpdateRetStatus(retrieval);
-            return Ok();
+            if (status)
+            {
+                Retrieval retrieval = rs.FindRetById(retrievalDetailsList.First().RetrievalId);
+                rs.UpdateRetStatus(retrieval);
+                return Ok(retrievalDetailsList);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         public IEnumerable<Retrieval> Get()
