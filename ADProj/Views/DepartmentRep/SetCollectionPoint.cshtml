@@ -34,8 +34,13 @@
             </table>
         </div>
         <div class="form-group">
-            <a href="/" ><button type="button" class="btn btn-danger">Cancel</button></a>
+            <button type="submit" id="btnCancel" class="btn btn-danger" formaction="/Home/">Cancel</button>
             <button type="submit" id="btnSave" class="btn btn-success">Save</button>
         </div>
     </form>
 </div>
+<script>
+    $("#btnSave").click(function () {
+        swal("Success", "Collection point has been updated", "success");
+    });
+</script>
