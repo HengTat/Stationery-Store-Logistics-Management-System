@@ -35,12 +35,6 @@ namespace ADProj.Services
             return dbcontext.CollectionPoints.Where(x => x.Id == collectionPointId).FirstOrDefault();
         }
 
-/*        public CollectionPoint GetCollectionPointByName(string name)
-        {
-            return dbcontext.CollectionPoints.Where(x => x.Name == name).FirstOrDefault();
-        }
-*/
-
         public void AddCollectionPoint(int EmployeeId, CollectionPoint cp)
         {
             Employee adder = dbcontext.Employees.Where(x => x.Id == EmployeeId).FirstOrDefault();
@@ -78,11 +72,5 @@ namespace ADProj.Services
             }
 
         }
-
-
-
-
-
-
     }
 }

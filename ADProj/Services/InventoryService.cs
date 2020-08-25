@@ -99,12 +99,6 @@ namespace ADProj.Services
             item.ReorderQty = reorderQty;
             item.UOM = uom;
             adProjContext.SaveChanges();
-
-        }
-
-        public InventoryItem FindbyId(string id)
-        {
-            return adProjContext.InventoryItems.Find(id);
         }
 
         public void CreateInvMgmt(string itemId, int updateQty, int empId)
@@ -120,7 +114,6 @@ namespace ADProj.Services
 
             item.QtyInStock = currQty + updateQty;
             adProjContext.SaveChanges();
-
         }
 
         public void CheckIfPendingStockRequestCanBeFufilled()
@@ -154,9 +147,7 @@ namespace ADProj.Services
                     }
                     adProjContext.SaveChanges();
                 }
-
             }
-
         }
 
         public List<InventoryItem> DistinctItemsInPendingStockRequestsRequiringRestock()

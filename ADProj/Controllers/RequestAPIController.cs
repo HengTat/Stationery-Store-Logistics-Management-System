@@ -117,7 +117,7 @@ namespace ADProj.Controllers
             //check if all items can be fufilled 
             foreach (RequestDetails rd in RDlist)
             {
-                InventoryItem item = inventService.FindbyId(rd.InventoryItemId);
+                InventoryItem item = inventService.GetItemById(rd.InventoryItemId);
                 if (item.RequestQty + rd.QtyRequested > item.QtyInStock)
                 {
                     canbefufilled = false;
@@ -131,7 +131,7 @@ namespace ADProj.Controllers
                 emailservice.sendrequestapprovalemailnotifitcation(request.EmployeeId);
                 foreach (RequestDetails rd in RDlist)
                 {
-                    InventoryItem item = inventService.FindbyId(rd.InventoryItemId);
+                    InventoryItem item = inventService.GetItemById(rd.InventoryItemId);
                     item.RequestQty = item.RequestQty + rd.QtyRequested;
                     //send email notification if lowstock
                     if (item.QtyInStock - item.RequestQty < item.ReorderLevel)

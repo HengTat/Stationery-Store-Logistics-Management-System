@@ -90,11 +90,7 @@ namespace ADProj.Services
         {
             return dbcontext.Requests.Where(x => x.EmployeeId == empId).OrderByDescending(x => x.DateRequested).Take(5).ToList();
         }
-        public List<Request> getRequests()
-        {
-            List<Request> requests = dbcontext.Requests.ToList();
-            return requests;
-        }
+
         public List<Request> GetRequestsByRetrievalId(int retrievalId)
         {
             return dbcontext.Requests.Where(x => x.RetrievalId == retrievalId).ToList();

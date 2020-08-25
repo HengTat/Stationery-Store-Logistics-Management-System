@@ -14,7 +14,7 @@ namespace ADProj.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
-        public string EmployeeId { get; set; }
+        public int EmployeeId { get; set; }
         [Required]
         public string InventoryItemId { get; set; }
         [Required]

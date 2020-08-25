@@ -15,15 +15,17 @@ namespace ADProj.Controllers
 
     public class AdjustmentVoucherController : Controller
     {
-        private AdjustmentVoucherValidation Amv;
+        private AdjustmentVoucherValidation avService;
         private EmployeeService es;
         private InventoryService invService;
+        private SupplierService supService;
 
-        public AdjustmentVoucherController(AdjustmentVoucherValidation Amv, EmployeeService es, InventoryService invService)
+        public AdjustmentVoucherController(AdjustmentVoucherValidation avService, EmployeeService es, InventoryService invService, SupplierService supService)
         {
-            this.Amv = Amv;
+            this.avService = avService;
             this.es = es;
             this.invService = invService;
+            this.supService = supService;
         }
 
 
@@ -32,7 +34,7 @@ namespace ADProj.Controllers
             if (HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER)
             {
 
-                List<AdjustmentVoucher> voucherlist = Amv.ListofAdjustmentVoucher();
+                List<AdjustmentVoucher> voucherlist = avService.ListofAdjustmentVoucher();
                 ViewData["AdjustmentVoucherList"] = voucherlist;
 
 
@@ -47,11 +49,9 @@ namespace ADProj.Controllers
             {
                 List<Employee> clerkList = es.GetAllClerks();
                 ViewData["clerkList"] = clerkList;
-
-                //ViewData["InventoryItem"] = Amv.ListOfInventoryItem();
-                ViewData["InventoryItem"] = Amv.ListOfInventoryItem();
-                ViewData["SupplierStationery"] = Amv.ListOfSupplierstationery();
-                ViewData["ItemCategory"] = Amv.ListOfItem();
+                ViewData["InventoryItem"] = invService.ItemList();
+                ViewData["SupplierStationery"] = supService.SupplierStationeryList();
+                ViewData["ItemCategory"] = invService.CategoryList();
 
                 if (TempData["Msg"] != null)
                 {
@@ -66,47 +66,31 @@ namespace ADProj.Controllers
 
         public IActionResult saveAdjustmentVoucher(string itemname, int AdjustQty, double AdjustAmt, string reason)
         {
-
-
-
             if (HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER)
             {
-
-                string employeeId = HttpContext.Session.GetString("id");
-                //bool isNum1 = double.TryParse(AdjustAmt, out double adjustAmt);
-                // double adjustamt = System.Math.Abs(AdjustAmt);
+                int employeeId = int.Parse(HttpContext.Session.GetString("id"));
                 if (itemname == null || AdjustQty == 0)
                 {
                     TempData["Msg"] = "Please enter all information (Reason is optional)";
                     return RedirectToAction("AddAdjustmentVoucher");
                 }
 
-
-
                 else if (HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR && System.Math.Abs(AdjustAmt) > 250)
                 {
-
-
                     TempData["Msg"] = "Adjust amount has exceeded $250! Please direct to your manager for item adjustment.";
-
                     return RedirectToAction("AddAdjustmentVoucher");
                 }
 
                 else
                 {
-                    Amv.createAdjustmentVoucher(itemname, AdjustQty, AdjustAmt, reason, employeeId);
+                    avService.createAdjustmentVoucher(itemname, AdjustQty, AdjustAmt, reason, employeeId);
                     invService.CheckIfPendingStockRequestCanBeFufilled();
                     TempData["Msg"] = "Adjustment voucher form has been created!";
                     return RedirectToAction("AddAdjustmentVoucher");
                     // return RedirectToAction("Index", "AdjustmentVoucher");
                 }
-
             }
             return RedirectToAction("Index", "Home");
-
         }
-
-
-
     }
 }

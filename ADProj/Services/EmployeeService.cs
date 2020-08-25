@@ -49,7 +49,7 @@ namespace ADProj.Services
         public ActingDepartmentHead GetActingDepartmentHead(string email)
         {
             DateTime currentDate = DateTime.Today;
-            // 
+ 
             ActingDepartmentHead actingDepartmentHead = dbcontext.ActingDepartmentHeads.Where(x => x.Employee.Email == email && x.StartDate <= currentDate && x.EndDate >= currentDate).FirstOrDefault();
             return actingDepartmentHead;
         }
