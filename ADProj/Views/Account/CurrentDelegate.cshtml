@@ -18,9 +18,15 @@
                     <td>@actingHead.Employee.Name</td>
                     <td>@actingHead.StartDate.ToString("dd/MMM/yyyy")</td>
                     <td>@actingHead.EndDate.ToString("dd/MMM/yyyy")</td>
-                    <td style="width:100px"><button type="submit" class="btn btn-danger btn-xs" formaction="CancelDelegation?id=@actingHead.Id">Cancel Delegation</button></td>
+                    <td style="width:100px"><button type="submit" id="btnSave" class="btn btn-danger btn-xs" formaction="CancelDelegation?id=@actingHead.Id">Cancel Delegation</button></td>
                 </tr>
             </tbody>
         </table>
     </div>
 </form>
+
+<script>
+    $("#btnSave").click(function () {
+        swal("Success", "Delegation Cancelled", "success");
+    });
+</script>
