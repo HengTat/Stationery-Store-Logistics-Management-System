@@ -1610,7 +1610,8 @@ namespace ADProj.DB
             Retrieval rtv1 = new Retrieval()
             {
                 DateRetrieved = new DateTime(2020, 08, 12),
-                EmployeeId = 2
+                EmployeeId = 2,
+                Status = false
             };
             dbcontext.Add(rtv1);
             dbcontext.SaveChanges();

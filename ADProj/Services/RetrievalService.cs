@@ -34,6 +34,7 @@ namespace ADProj.Services
             Retrieval r = new Retrieval();
             r.DateRetrieved = DateTime.Now;
             r.EmployeeId = empId;
+            r.Status = false;
             adProjContext.Add(r);
             adProjContext.SaveChanges();
 
@@ -100,13 +101,13 @@ namespace ADProj.Services
 
         public void UpdateRetStatus(Retrieval retrieval)
         {
-            retrieval.status = "retrieved";
+            retrieval.Status = true;
             adProjContext.SaveChanges();
         }
 
         public List<Retrieval> GetUnretrievedList()
         {
-            List<Retrieval> retList = adProjContext.Retrievals.Where(x => x.status == null).ToList();
+            List<Retrieval> retList = adProjContext.Retrievals.Where(x => x.Status == false).ToList();
             return retList;
         }
     }

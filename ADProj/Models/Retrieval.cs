@@ -15,7 +15,7 @@ namespace ADProj.Models
         public DateTime DateRetrieved { get; set; }
         [Required]
         public int EmployeeId { get;  set; }
-        public string status { get; set; }
+        public bool Status { get; set; }
 
         public virtual Employee Employee { get; set; }
     }
