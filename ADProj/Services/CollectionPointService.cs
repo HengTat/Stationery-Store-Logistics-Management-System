@@ -61,16 +61,5 @@ namespace ADProj.Services
             dbcontext.CollectionPoints.Update(dbCollectionPoint);
             dbcontext.SaveChanges();
         }
-
-        public void DeleteCollectionPoint(int EmployeeId, CollectionPoint cp)
-        {
-            Employee remover = dbcontext.Employees.Where(x => x.Id == EmployeeId).FirstOrDefault();
-            if (remover.Role == EmployeeRole.STORECLERK || remover.Role == EmployeeRole.STORESUPERVISOR || remover.Role == EmployeeRole.STOREMANAGER)
-            {
-                dbcontext.CollectionPoints.Remove(cp);
-                dbcontext.SaveChanges();
-            }
-
-        }
     }
 }

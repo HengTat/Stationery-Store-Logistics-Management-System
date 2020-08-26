@@ -36,7 +36,6 @@
                     <th style="text-align:center">Collection Time</th>
                     <th style="text-align:center">Store Clerk</th>
                     <th style="text-align:center">Action</th>
-                    <th style="text-align:center">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,7 +46,6 @@
                         <td>@cp.Time</td>
                         <td>@cp.Employee.Name</td>
                         <td><button type="submit" class="btn btn-warning btn-xs" formaction="/CollectionPoint/EditCollectionPoint?cpId=@cp.Id">Edit</button></td>
-                        <td><button type="submit" class="btn btn-danger btn-xs" formaction="/CollectionPoint/DeleteCollectionPoint?cpId=@cp.Id">Delete</button></td>
                     </tr>
                 }
             </tbody>

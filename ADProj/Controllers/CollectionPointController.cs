@@ -116,18 +116,5 @@ namespace ADProj.Controllers
             return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
         }
 
-        public IActionResult DeleteCollectionPoint(int cpId)
-        {
-            int empId = Convert.ToInt32(HttpContext.Session.GetString("id"));
-            if (HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER)
-            {
-                CollectionPoint cpToDelete = cps.GetCollectionPointById(cpId);
-                cps.DeleteCollectionPoint(empId, cpToDelete);
-                TempData["alertMsg"] = "Deleted successfully!";
-                return RedirectToAction("Index");
-            }
-            return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
-        }
-
     }
 }

@@ -81,19 +81,6 @@ namespace ADProj.Services
             dbcontext.SaveChanges();
         }
 
-        public void DeleteDepartment(int employeeId, Department dept)
-        {
-            Employee remover = dbcontext.Employees.Where(x => x.Id == employeeId).FirstOrDefault();
-            if (remover.Role == EmployeeRole.STORECLERK || remover.Role == EmployeeRole.STORESUPERVISOR || remover.Role == EmployeeRole.STOREMANAGER)
-            {
-                dbcontext.Departments.Remove(dept);
-                dbcontext.SaveChanges();
-            }
-            return;
-
-        }
-
-
         public void ChangeDepRepRoles(Department dbDept, int? newDepartmentRepId)
         {
             dbDept.DepartmentRep.Role = EmployeeRole.EMPLOYEE;

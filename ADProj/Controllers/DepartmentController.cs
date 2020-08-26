@@ -26,7 +26,7 @@ namespace ADProj.Controllers
 
         public IActionResult Index()
         {
-            if (HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER)
+            if (HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER)
             {
                 List<Department> deptlist = ds.ListAllDepartments();
                 ViewData["deptlist"] = deptlist;
@@ -41,7 +41,7 @@ namespace ADProj.Controllers
 
         public IActionResult AddDepartment()
         {   
-            if (HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER)
+            if (HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER)
             {
                 List<CollectionPoint> cplist = cps.ListCollectionPoints();
                 ViewData["cplist"] = cplist;
@@ -59,7 +59,7 @@ namespace ADProj.Controllers
         {
             int empId = Convert.ToInt32(HttpContext.Session.GetString("id"));
             
-            if(HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER)
+            if(HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER)
             {
                 if (!(deptId != null && name != null))
                 {
@@ -81,7 +81,7 @@ namespace ADProj.Controllers
         public IActionResult EditDepartment(string deptId)
         {
             ViewData["alertMsg"] = TempData["alertMsg"];
-            if (HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER)
+            if (HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER)
             {
                 List<CollectionPoint> cplist = cps.ListCollectionPoints();
                 ViewData["cplist"] = cplist;
@@ -98,7 +98,7 @@ namespace ADProj.Controllers
         {
             int empId = Convert.ToInt32(HttpContext.Session.GetString("id"));
             Department dept = null;
-            if(HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER)
+            if(HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER)
             {
                 if (!(deptId != null && name != null))
                 {
@@ -115,19 +115,5 @@ namespace ADProj.Controllers
             }
             return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
         }
-
-        public IActionResult DeleteDepartment(string deptId)
-        {
-            int empId = Convert.ToInt32(HttpContext.Session.GetString("id"));
-            if (HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK || HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR || HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER)
-            {
-                Department deptToDelete = ds.GetDepartmentById(deptId);
-                ds.DeleteDepartment(empId, deptToDelete);
-                TempData["alertMsg"] = "Deleted successfully!";
-                return RedirectToAction("Index");
-            }
-            return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
-        }
-
     }
 }
