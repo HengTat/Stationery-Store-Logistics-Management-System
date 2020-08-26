@@ -130,7 +130,6 @@ namespace ADProj.Controllers
             if (HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER)
             {
                 return RedirectToAction("GeneralTrend", "TrendAnalysis");
-
             }
             return RedirectToAction("Index", "Home");
         }
@@ -139,7 +138,14 @@ namespace ADProj.Controllers
             if (HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR)
             {
                 return RedirectToAction("GeneralTrend", "TrendAnalysis");
-
+            }
+            return RedirectToAction("Index", "Home");
+        }
+        public IActionResult ActingHead()
+        {
+            if (HttpContext.Session.GetString("role") == "ActingHead")
+            {
+                return RedirectToAction("DepartmentHead");
             }
             return RedirectToAction("Index", "Home");
         }

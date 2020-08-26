@@ -140,10 +140,9 @@ namespace ADProj.Controllers
 
         public IActionResult RequestPendingApproval()
         {
-            if (HttpContext.Session.GetString("role") != EmployeeRole.DEPTHEAD)
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.DEPTHEAD || HttpContext.Session.GetString("role") == "ActingHead"))
             {
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
-
             }
             int CurrentId = int.Parse(HttpContext.Session.GetString("id"));
             List<Request> listOfRequestPendingApproval = requestService.FindPendingRequestByDepartmenthead(CurrentId);
@@ -153,10 +152,9 @@ namespace ADProj.Controllers
 
         public IActionResult RequestViewDetail(int id)
         {
-            if (HttpContext.Session.GetString("role") != EmployeeRole.DEPTHEAD)
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.DEPTHEAD || HttpContext.Session.GetString("role") == "ActingHead"))
             {
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
-
             }
             List<RequestDetails> listOfItems = requestDetailService.FindRequestDetailByRequestId(id);
             ViewData["Requestid"] = id;
@@ -166,7 +164,7 @@ namespace ADProj.Controllers
 
         public IActionResult Submit(string submitButton, int requestid, string Comments)
         {
-            if(HttpContext.Session.GetString("role") != EmployeeRole.DEPTHEAD )
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.DEPTHEAD || HttpContext.Session.GetString("role") == "ActingHead"))
             {
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
             }
@@ -189,7 +187,7 @@ namespace ADProj.Controllers
 
         public IActionResult RejectRequest(int id)
         {
-            if (HttpContext.Session.GetString("role") != EmployeeRole.DEPTHEAD)
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.DEPTHEAD || HttpContext.Session.GetString("role") == "ActingHead"))
             {
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
             }
@@ -202,7 +200,7 @@ namespace ADProj.Controllers
 
         public IActionResult ApproveRequest(int id)
         {
-            if (HttpContext.Session.GetString("role") != EmployeeRole.DEPTHEAD)
+            if (!(HttpContext.Session.GetString("role") == EmployeeRole.DEPTHEAD || HttpContext.Session.GetString("role") == "ActingHead"))
             {
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
             }

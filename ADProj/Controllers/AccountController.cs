@@ -73,6 +73,7 @@ namespace ADProj.Controllers
             //actinghead validated, store username in session, redirect to Home
             HttpContext.Session.SetString("id", actingDepartmentHead.EmployeeId.ToString());
             HttpContext.Session.SetString("role", "ActingHead");
+            HttpContext.Session.SetString("name", actingDepartmentHead.Employee.Name);
 
             return RedirectToAction("DepartmentHead", "Home");
         }
