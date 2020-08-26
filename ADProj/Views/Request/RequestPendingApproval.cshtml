@@ -10,27 +10,27 @@
     <table class="table table-bordered" style="margin-top:20px; text-align:center">
         <thead style="background-color:lightgrey">
             <tr align="center">
-                <th>
+                <th style="display:none">
                     @Html.DisplayNameFor(model => model.Id)
                 </th>
-                <th>
+                <th style="text-align:center">
                     @Html.DisplayNameFor(model => model.Employee.Name)
                 </th>
-                <th>
+                <th style="text-align:center">
                     @Html.DisplayNameFor(model => model.DateRequested)
                 </th>
-                <th>
+                <th style="text-align:center">
                     @Html.DisplayNameFor(model => model.Status)
                 </th>
 
-                <th>Action</th>
+                <th style="text-align:center">Action</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
+                    <td style="display:none">
                         @Html.DisplayFor(modelItem => item.Id)
                     </td>
                     <td>

@@ -28,16 +28,16 @@
     <table class="table table-bordered" style="margin-top:20px; text-align:center">
         <thead style="background-color:lightgrey">
             <tr align="center">
-                <th>
+                <th style="display:none">
                     @Html.DisplayNameFor(model => model.InventoryItemId)
                 </th>
-                <th>
+                <th style="text-align:center">
                     @Html.DisplayNameFor(model => model.InventoryItem.Description)
                 </th>
-                <th>
+                <th style="text-align:center">
                     @Html.DisplayNameFor(model => model.QtyRequested)
                 </th>
-                <th>
+                <th style="text-align:center">
                     @Html.DisplayNameFor(model => model.InventoryItem.UOM)
                 </th>
 
@@ -48,7 +48,7 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
+                    <td style="display:none">
                         @Html.DisplayFor(modelItem => item.InventoryItemId)
                     </td>
                     <td>
