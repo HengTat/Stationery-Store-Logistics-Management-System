@@ -153,7 +153,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Delegate">Delegate Authority</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="DepartmentHead" asp-action="MaintainDepartmentRep">Maintain Department Representative</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="DepartmentHead" asp-action="UpdateDepartmentRep">Update Department Representative</a>
                         </li>
                     }
                     else if (role == "ActingHead")
@@ -163,7 +163,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Request" asp-action="Requestpendingapproval">Approve Request</a>
                         </li>
                         <li>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="DepartmentHead" asp-action="MaintainDepartmentRep">Maintain Department Representative</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="DepartmentHead" asp-action="UpdateDepartmentRep">Update Department Representative</a>
                         </li>
                     }
                     else if (role == ADProj.Enums.EmployeeRole.DEPTREP)

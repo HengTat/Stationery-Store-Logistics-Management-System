@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Maintain Department Representative";
+    ViewData["Title"] = "Update Department Representative";
     List<Employee> employees = (List<Employee>)ViewData["emplist"];
     Employee currentDeptRep = (Employee)ViewData["currentDeptRep"];
     Employee deptHead = (Employee)ViewData["deptHead"];
@@ -7,7 +7,7 @@
 
 
 <div align="center">
-    <form class="form-horizontal" id="maintainDepRepForm" action="/DepartmentHead/MaintainDepartmentRep" method="post" style="margin-top:40px" margin-bottom:50px;">
+    <form class="form-horizontal" id="maintainDepRepForm" action="/DepartmentHead/UpdateDepartmentRep" method="post" style="margin-top:40px" margin-bottom:50px;">
         <div class="container" align="center">
             <h2> @ViewData["Title"]</h2>
             <div class="form-group">

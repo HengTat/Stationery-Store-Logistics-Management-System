@@ -25,7 +25,7 @@ namespace ADProj.Controllers
             this.ems = ems;
         }
 
-        public IActionResult MaintainDepartmentRep(int deptRepId)
+        public IActionResult UpdateDepartmentRep(int deptRepId)
         {
             int empId = Convert.ToInt32(HttpContext.Session.GetString("id"));
             if (!(HttpContext.Session.GetString("role") == EmployeeRole.DEPTHEAD || HttpContext.Session.GetString("role") == "ActingHead"))
