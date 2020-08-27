@@ -195,7 +195,7 @@ namespace ADProj.Services
                     SmtpClient smtpClient = setupsmtpclient();
                     MailMessage mail = new MailMessage();
                     mail.From = new MailAddress("team9springboot@gmail.com", "team9");
-                    mail.To.Add(new MailAddress("team9employee@gmail.com"));
+                    mail.To.Add(new MailAddress("team9manager@gmail.com"));
                     //remove comment if employee has correct email
                     //mail.To.Add(new MailAddress(actingDepartmentHead.Employee.Email));
                     mail.Subject = "New Request Pending Approval";
@@ -208,7 +208,7 @@ namespace ADProj.Services
                     SmtpClient smtpClient = setupsmtpclient();
                     MailMessage mail = new MailMessage();
                     mail.From = new MailAddress("team9springboot@gmail.com", "team9");
-                    mail.To.Add(new MailAddress("team9employee@gmail.com"));
+                    mail.To.Add(new MailAddress("team9manager@gmail.com"));
                     //remove comment if employee has correct email
                     //mail.To.Add(new MailAddress(emp.Department.DepartmentHead.Email));
                     mail.Subject = "New Request Pending Approval";
