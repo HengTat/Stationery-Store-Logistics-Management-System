@@ -2085,6 +2085,201 @@ namespace ADProj.DB
                 Status = Status.Completed,
             };
             dbcontext.Add(request_30_2019);
+            
+            //TREND ANALYSIS SEEDER (2020) VALUES
+
+            Request request_31_2020 = new Request()
+            {
+                EmployeeId = employee7.Id,
+                DateRequested = new DateTime(2020, 1, 15),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_31_2020);
+
+            Request request_32_2020 = new Request()
+            {
+                EmployeeId = employee5.Id,
+                DateRequested = new DateTime(2020, 1, 15),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_32_2020);
+
+            Request request_33_2020 = new Request()
+            {
+                EmployeeId = employee5.Id,
+                DateRequested = new DateTime(2020, 1, 12),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_33_2020);
+
+            Request request_34_2020 = new Request()
+            {
+                EmployeeId = employee6.Id,
+                DateRequested = new DateTime(2020, 1, 12),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_34_2020);
+
+            Request request_35_2020 = new Request()
+            {
+                EmployeeId = employee7.Id,
+                DateRequested = new DateTime(2020, 2, 12),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_35_2020);
+
+            Request request_36_2020 = new Request()
+            {
+                EmployeeId = employee7.Id,
+                DateRequested = new DateTime(2020, 2, 17),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_36_2020);
+
+            Request request_37_2020 = new Request()
+            {
+                EmployeeId = employee4.Id,
+                DateRequested = new DateTime(2020, 2, 17),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_37_2020);
+
+            Request request_38_2020 = new Request()
+            {
+                EmployeeId = employee4.Id,
+                DateRequested = new DateTime(2020, 2, 10),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_38_2020);
+
+            Request request_39_2020 = new Request()
+            {
+                EmployeeId = employee9.Id,
+                DateRequested = new DateTime(2020, 3, 10),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_39_2020);
+
+            Request request_40_2020 = new Request()
+            {
+                EmployeeId = employee4.Id,
+                DateRequested = new DateTime(2020, 3, 15),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_40_2020);
+
+            Request request_41_2020 = new Request()
+            {
+                EmployeeId = employee4.Id,
+                DateRequested = new DateTime(2020, 3, 16),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_41_2020);
+
+            Request request_42_2020 = new Request()
+            {
+                EmployeeId = employee7.Id,
+                DateRequested = new DateTime(2020, 3, 06),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_42_2020);
+
+            Request request_43_2020 = new Request()
+            {
+                EmployeeId = employee2.Id,
+                DateRequested = new DateTime(2020, 4, 16),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_43_2020);
+
+            Request request_44_2020 = new Request()
+            {
+                EmployeeId = employee2.Id,
+                DateRequested = new DateTime(2020, 4, 16),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_44_2020);
+
+            Request request_45_2020 = new Request()
+            {
+                EmployeeId = employee2.Id,
+                DateRequested = new DateTime(2020, 4, 16),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_45_2020);
+
+            Request request_46_2020 = new Request()
+            {
+                EmployeeId = employee2.Id,
+                DateRequested = new DateTime(2020, 4, 16),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_46_2020);
+
+            Request request_47_2020 = new Request()
+            {
+                EmployeeId = employee2.Id,
+                DateRequested = new DateTime(2020, 4, 16),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_47_2020);
+
+            Request request_48_2020 = new Request()
+            {
+                EmployeeId = employee4.Id,
+                DateRequested = new DateTime(2020, 5, 16),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_48_2020);
+
+            Request request_49_2020 = new Request()
+            {
+                EmployeeId = employee4.Id,
+                DateRequested = new DateTime(2020, 5, 16),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_49_2020);
+
+            Request request_50_2020 = new Request()
+            {
+                EmployeeId = employee4.Id,
+                DateRequested = new DateTime(2020, 5, 16),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_50_2020);
+
+            Request request_51_2020 = new Request()
+            {
+                EmployeeId = employee4.Id,
+                DateRequested = new DateTime(2020, 1, 16),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_51_2020);
+
+            Request request_52_2020 = new Request()
+            {
+                EmployeeId = employee4.Id,
+                DateRequested = new DateTime(2020, 3, 16),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_52_2020);
+
+            Request request_53_2020 = new Request()
+            {
+                EmployeeId = employee4.Id,
+                DateRequested = new DateTime(2020, 3, 16),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_53_2020);
+
+            Request request_54_2020 = new Request()
+            {
+                EmployeeId = employee4.Id,
+                DateRequested = new DateTime(2020, 6, 16),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_54_2020);
+
 
             dbcontext.SaveChanges();
 
