@@ -81,7 +81,7 @@ namespace ADProj.Services
             return ret;
         }
 
-        public Request FindRequestByRetId(int id)
+        public Request FindRequestByRetId(int id) 
         {
             Request req = adProjContext.Requests.Where(x => x.RetrievalId == id).FirstOrDefault();
             return req;

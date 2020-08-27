@@ -29,7 +29,7 @@
             <ul class="nav navbar-nav navbaralign">
                 @{ if (role == ADProj.Enums.EmployeeRole.STORECLERK)
                     {
-                        <li class="active"><a asp-controller="Home" asp-action="StoreClerk">Home</a></li>
+                        <li class="nav-item"><a asp-controller="Home" asp-action="StoreClerk">Home</a></li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown">Inventory<span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -65,7 +65,7 @@
  }
                     else if (role == ADProj.Enums.EmployeeRole.STORESUPERVISOR)
                     {
-                        <li class="active"><a asp-controller="TrendAnalysis" asp-action="GeneralTrend">Home</a></li>
+                        <li class="nav-item"><a asp-controller="TrendAnalysis" asp-action="GeneralTrend">Home</a></li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown">Inventory<span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -89,7 +89,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="CollectionPoint" asp-action="Index">Collection Points</a>
                         </li>
-                        <li><a href="/trendanalysis/trendanalysisrequestvolume">Trend Analysis</a></li>
+                        <li class="nav-item"><a href="/trendanalysis/trendanalysisrequestvolume">Trend Analysis</a></li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="AdjustmentVoucher" asp-action="Index">Adjustment Voucher</a>
                         </li>
@@ -113,8 +113,8 @@
                         </li>
                     }
                     else if (role == ADProj.Enums.EmployeeRole.STOREMANAGER)
-                    {
-                        <li class="active"><a asp-controller="TrendAnalysis" asp-action="GeneralTrend">Home</a></li>
+                    { 
+                        <li class="nav-item"><a asp-controller="TrendAnalysis" asp-action="GeneralTrend">Home</a></li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown">Inventory<span class="caret"></span></a>
                             <ul class="dropdown-menu">
@@ -145,7 +145,7 @@
                     }
                     else if (role == ADProj.Enums.EmployeeRole.DEPTHEAD)
                     {
-                        <li class="active"><a asp-controller="Home" asp-action="DepartmentHead">Home</a></li>
+                        <li class="nav-item"><a asp-controller="Home" asp-action="DepartmentHead">Home</a></li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Request" asp-action="Requestpendingapproval">Approve Request</a>
                         </li>
@@ -158,7 +158,7 @@
                     }
                     else if (role == "ActingHead")
                     {
-                        <li class="active"><a asp-controller="Home" asp-action="DepartmentHead">Home</a></li>
+                        <li class="nav-item"><a asp-controller="Home" asp-action="DepartmentHead">Home</a></li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Request" asp-action="Requestpendingapproval">Approve Request</a>
                         </li>
@@ -168,7 +168,7 @@
                     }
                     else if (role == ADProj.Enums.EmployeeRole.DEPTREP)
                     {
-                        <li class="active"><a asp-controller="Home" asp-action="Employee">Home</a></li>
+                        <li class="nav-item"><a asp-controller="Home" asp-action="Employee">Home</a></li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Request" asp-action="Index">Raise Request</a>
                         </li>
@@ -181,7 +181,7 @@
                     }
                     else
                     {
-                        <li class="active"><a asp-controller="Home" asp-action="Employee">Home</a></li>
+                        <li class="nav-item"><a asp-controller="Home" asp-action="Employee">Home</a></li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Request" asp-action="Index">Raise Request</a>
                         </li>
