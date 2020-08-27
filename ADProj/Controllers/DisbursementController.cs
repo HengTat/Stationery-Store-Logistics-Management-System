@@ -38,6 +38,7 @@ namespace ADProj.Controllers
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
             }
             List<DateTime> distinctDisbursedDates = ds.GetAllDistinctDisbursedDates();
+            distinctDisbursedDates.Reverse();
             ViewData["dates"] = distinctDisbursedDates;
             return View();
         }

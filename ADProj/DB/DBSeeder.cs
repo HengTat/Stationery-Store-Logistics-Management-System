@@ -1834,7 +1834,7 @@ namespace ADProj.DB
             {
                 DateRetrieved = new DateTime(2020, 06, 05),
                 EmployeeId = 2,
-                Status = true
+                RetrievalStatus = RetrievalStatus.RETRIEVED
             };
             dbcontext.Add(rt1);
 
@@ -1842,7 +1842,7 @@ namespace ADProj.DB
             {
                 DateRetrieved = new DateTime(2020, 06, 26),
                 EmployeeId = 2,
-                Status = true
+                RetrievalStatus = RetrievalStatus.RETRIEVED
             };
             dbcontext.Add(rt2);
             dbcontext.SaveChanges();
@@ -1972,7 +1972,7 @@ namespace ADProj.DB
             {
                 DateRetrieved = new DateTime(2020, 07, 03),
                 EmployeeId = 2,
-                Status = true
+                RetrievalStatus = RetrievalStatus.RETRIEVED
             };
             dbcontext.Add(rt3);
 
@@ -1980,7 +1980,7 @@ namespace ADProj.DB
             {
                 DateRetrieved = new DateTime(2020, 07, 31),
                 EmployeeId = 2,
-                Status = true
+                RetrievalStatus = RetrievalStatus.RETRIEVED
             };
             dbcontext.Add(rt4);
             dbcontext.SaveChanges();
@@ -2108,7 +2108,7 @@ namespace ADProj.DB
             {
                 DateRetrieved = new DateTime(2020, 08, 07),
                 EmployeeId = 2,
-                Status = true
+                RetrievalStatus = RetrievalStatus.RETRIEVED
             };
             dbcontext.Add(rt5);
 

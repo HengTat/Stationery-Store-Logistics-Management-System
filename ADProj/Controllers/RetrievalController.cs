@@ -28,6 +28,7 @@ namespace ADProj.Controllers
             }
 
             List<Retrieval> retrivals = rs.GetRetrievals();
+            retrivals.Reverse();
             ViewData["rtList"] = retrivals;
             return View();
         }
