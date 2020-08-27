@@ -20,109 +20,6 @@ namespace ADProj.DB
 
             dbcontext.SaveChanges();
 
-
-            //commented out department + employee seeder and add new ones below
-
-            /*//Department seeder
-            Department department1 = new Department()
-            {
-                Id = "SCI",
-                Name = "Science",
-                CollectionPointId = cp1.Id
-            };
-            dbcontext.Add(department1);
-
-            Department department2 = new Department()
-            {
-                Id = "STA",
-                Name = "Stationery Store",
-                CollectionPointId = cp1.Id //dummy collection point for Stationery Store
-            };
-            dbcontext.Add(department2);
-
-            dbcontext.SaveChanges();
-
-            //test
-            //Employee seeder
-            Employee employee1 = new Employee()
-            {
-
-                DepartmentId = department1.Id,
-                Role = "Employee",
-                Name = "John",
-                Email = "John@gmail.com",
-                Password = Services.Crypto.Sha256("Password")
-            };
-            dbcontext.Add(employee1);
-
-            Employee employee2 = new Employee()
-            {
-
-                DepartmentId = department1.Id,
-                Role = "Head",
-                Name = "David",
-                Email = "David@gmail.com",
-                Password = Services.Crypto.Sha256("Password")
-            };
-            dbcontext.Add(employee2);
-
-            Employee employee3 = new Employee()
-            {
-
-                DepartmentId = department1.Id,
-                Role = "Employee",
-                Name = "Janice",
-                Email = "Janice@gmail.com",
-                Password = Services.Crypto.Sha256("Password")
-            };
-            dbcontext.Add(employee3);
-
-            Employee employee4 = new Employee()
-            {
-
-                DepartmentId = department1.Id,
-                Role = "Representative",
-                Name = "Stephanie",
-                Email = "Stephanie@gmail.com",
-                Password = Services.Crypto.Sha256("Password")
-            };
-            dbcontext.Add(employee4);
-
-            Employee employee5 = new Employee()
-            {
-
-                DepartmentId = department2.Id,
-                Role = "Clerk",
-                Name = "Esther",
-                Email = "Esther@gmail.com",
-                Password = Services.Crypto.Sha256("Password")
-            };
-            dbcontext.Add(employee5);
-
-            Employee employee6 = new Employee()
-            {
-
-                DepartmentId = department2.Id,
-                Role = "Supervisor",
-                Name = "MQ",
-                Email = "MQ@gmail.com",
-                Password = Services.Crypto.Sha256("Password")
-            };
-            dbcontext.Add(employee6);
-
-            Employee employee7 = new Employee()
-            {
-
-                DepartmentId = department2.Id,
-                Role = "Manager",
-                Name = "Koong",
-                Email = "Koong@gmail.com",
-                Password = Services.Crypto.Sha256("Password")
-            };
-            dbcontext.Add(employee7);
-
-            dbcontext.SaveChanges();*/
-
             Department department1 = new Department()
             {
                 Id = "SCI",
@@ -150,8 +47,8 @@ namespace ADProj.DB
 
             Department department4 = new Department()
             {
-                Id = "COMM",
-                Name = "Commerce Dept",
+                Id = "STORE",
+                Name = "Stationery Store",
                 CollectionPointId = cp1.Id
             };
             dbcontext.Add(department4);
@@ -204,7 +101,6 @@ namespace ADProj.DB
 
             Employee employee5 = new Employee()
             {
-
                 DepartmentId = department2.Id,
                 Role = EmployeeRole.DEPTHEAD,
                 Name = "Edison",
@@ -215,7 +111,6 @@ namespace ADProj.DB
 
             Employee employee6 = new Employee()
             {
-
                 DepartmentId = department3.Id,
                 Role = EmployeeRole.DEPTHEAD,
                 Name = "Johnson",
@@ -226,7 +121,6 @@ namespace ADProj.DB
 
             Employee employee7 = new Employee()
             {
-
                 DepartmentId = department1.Id,
                 Role = EmployeeRole.DEPTREP,
                 Name = "Cornie",
@@ -237,7 +131,6 @@ namespace ADProj.DB
 
             Employee employee8 = new Employee()
             {
-
                 DepartmentId = department2.Id,
                 Role = EmployeeRole.DEPTREP,
                 Name = "Cody",
@@ -248,7 +141,6 @@ namespace ADProj.DB
 
             Employee employee9 = new Employee()
             {
-
                 DepartmentId = department3.Id,
                 Role = EmployeeRole.DEPTREP,
                 Name = "Cashiew",
@@ -257,27 +149,9 @@ namespace ADProj.DB
             };
 
             dbcontext.Add(employee9);
-            dbcontext.SaveChanges();
 
-            cp1.EmployeeId = employee3.Id;
-            department1.DepartmentHeadId = employee4.Id;
-            department2.DepartmentHeadId = employee5.Id;
-            department3.DepartmentHeadId = employee6.Id;
-            department1.DepartmentRepId = employee7.Id;
-            department2.DepartmentRepId = employee8.Id;
-            department3.DepartmentRepId = employee9.Id;
-            dbcontext.Update(department1);
-            dbcontext.Update(department2);
-            dbcontext.Update(department3);
-            dbcontext.Update(department4);
-            // dbcontext.Update(department5);
-            // dbcontext.Update(department6);
-            dbcontext.SaveChanges();
-
-            // seed 2 more store clerks: 
             Employee employee10 = new Employee()
             {
-
                 DepartmentId = department4.Id,
                 Role = EmployeeRole.STORECLERK,
                 Name = "clerk2",
@@ -289,7 +163,6 @@ namespace ADProj.DB
 
             Employee employee11 = new Employee()
             {
-
                 DepartmentId = department4.Id,
                 Role = EmployeeRole.STORECLERK,
                 Name = "clerk3",
@@ -297,12 +170,9 @@ namespace ADProj.DB
                 Password = Services.Crypto.Sha256("Password")
             };
             dbcontext.Add(employee11);
-            dbcontext.SaveChanges();
 
-            // seed Store's Head and Store's rep: 
             Employee employee12 = new Employee()
             {
-
                 DepartmentId = department4.Id,
                 Role = EmployeeRole.STORESUPERVISOR,
                 Name = "Storesup",
@@ -314,7 +184,6 @@ namespace ADProj.DB
 
             Employee employee13 = new Employee()
             {
-
                 DepartmentId = department4.Id,
                 Role = EmployeeRole.STOREMANAGER,
                 Name = "Storemanager",
@@ -322,18 +191,75 @@ namespace ADProj.DB
                 Password = Services.Crypto.Sha256("Password")
             };
             dbcontext.Add(employee13);
+
+            Employee employee14 = new Employee()
+            {
+                DepartmentId = department2.Id,
+                Role = EmployeeRole.EMPLOYEE,
+                Name = "Benny",
+                Email = "Benny@gmail.com",
+                Password = Services.Crypto.Sha256("Password")
+            };
+            dbcontext.Add(employee14);
+
+            Employee employee15 = new Employee()
+            {
+                DepartmentId = department2.Id,
+                Role = EmployeeRole.EMPLOYEE,
+                Name = "Sunny",
+                Email = "Sunny@gmail.com",
+                Password = Services.Crypto.Sha256("Password")
+            };
+            dbcontext.Add(employee15);
+
+            Employee employee16 = new Employee()
+            {
+                DepartmentId = department3.Id,
+                Role = EmployeeRole.EMPLOYEE,
+                Name = "Penny",
+                Email = "Penny@gmail.com",
+                Password = Services.Crypto.Sha256("Password")
+            };
+            dbcontext.Add(employee16);
+
+            Employee employee17 = new Employee()
+            {
+                DepartmentId = department3.Id,
+                Role = EmployeeRole.EMPLOYEE,
+                Name = "Ginny",
+                Email = "Ginny@gmail.com",
+                Password = Services.Crypto.Sha256("Password")
+            };
+            dbcontext.Add(employee17);
             dbcontext.SaveChanges();
 
+            cp1.EmployeeId = employee3.Id;
+            department1.DepartmentHeadId = employee4.Id;
+            department2.DepartmentHeadId = employee5.Id;
+            department3.DepartmentHeadId = employee6.Id;
+            department1.DepartmentRepId = employee7.Id;
+            department2.DepartmentRepId = employee8.Id;
+            department3.DepartmentRepId = employee9.Id;
             department4.DepartmentHeadId = employee13.Id;
             department4.DepartmentRepId = employee12.Id;
+            dbcontext.Update(department1);
+            dbcontext.Update(department2);
+            dbcontext.Update(department3);
+            dbcontext.Update(department4);
             dbcontext.SaveChanges();
 
+            //seed Acting Dept Head
+            ActingDepartmentHead ad1 = new ActingDepartmentHead()
+            {
+                EmployeeId = employee1.Id,
+                StartDate = new DateTime(2020, 8, 14, 0, 0, 0),
+                EndDate = new DateTime(2020, 9, 30, 0, 0, 0)
+            };
+            dbcontext.Add(ad1);
+
             //collectionpoint seeder
-
-
             CollectionPoint cp2 = new CollectionPoint()
             {
-
                 Name = "Management School",
                 Time = "11 00 am",
                 EmployeeId = employee3.Id
@@ -342,7 +268,6 @@ namespace ADProj.DB
 
             CollectionPoint cp3 = new CollectionPoint()
             {
-
                 Name = "Medical School",
                 Time = "09 30 am",
                 EmployeeId = employee3.Id
@@ -402,6 +327,18 @@ namespace ADProj.DB
                 GSTReg = "-"
             };
             dbcontext.Add(s2);
+
+            Supplier s3 = new Supplier()
+            {
+                Id = "BANE",
+                Name = "BANES Shop",
+                ContactName = "Mr Loh Ah Pek",
+                PhoneNo = "478 1234",
+                FaxNo = "479 2434",
+                Address = "Blk 124 Alexandra Road #03-04 Banes Building Singapore 550315",
+                GSTReg = "MR-8200420-2"
+            };
+            dbcontext.Add(s3);
 
             ItemCategory cat1 = new ItemCategory()
             {
@@ -1003,263 +940,6 @@ namespace ADProj.DB
             dbcontext.Add(item35);
             dbcontext.SaveChanges();
 
-            //seed Acting Dept Head
-            ActingDepartmentHead ad1 = new ActingDepartmentHead()
-            {
-                EmployeeId = employee1.Id,
-                StartDate = new DateTime(2020, 8, 14, 0, 0, 0),
-                EndDate = new DateTime(2020, 9, 30, 0, 0, 0)
-            };
-            dbcontext.Add(ad1);
-            //test
-          
-  
-
-            dbcontext.SaveChanges();
-
-            //seeing request and requestdetails
-
- /*           Request request1 = new Request()
-            {
-                EmployeeId = employee3.Id,
-                DateRequested = DateTime.Now,
-                Status = Enums.Status.Approved,
-                Comments = ""
-            };
-            dbcontext.Add(request1);
-            dbcontext.SaveChanges();
-
-            RequestDetails rqDet1 = new RequestDetails()
-            {
-                RequestId = request1.Id,
-                InventoryItemId = "T020",
-                QtyRequested = 5
-            };
-            dbcontext.Add(rqDet1);
-            dbcontext.SaveChanges();
-
-            RequestDetails rqDet1_2 = new RequestDetails()
-            {
-                RequestId = request1.Id,
-                InventoryItemId = "T021",
-                QtyRequested = 10
-            };
-            dbcontext.Add(rqDet1_2);
-            dbcontext.SaveChanges();
-
-
-
-            Request request2 = new Request()
-            {
-                EmployeeId = employee1.Id,
-                DateRequested = DateTime.Now,
-                Status = Enums.Status.PendingStock,
-                Comments = ""
-            };
-            dbcontext.Add(request2);
-            dbcontext.SaveChanges();
-
-            RequestDetails rqDet2 = new RequestDetails()
-            {
-                RequestId = request2.Id,
-                InventoryItemId = "T021",
-                QtyRequested = 15
-            };
-            dbcontext.Add(rqDet2);
-            dbcontext.SaveChanges();
-
-
-            Request request3 = new Request()
-            {
-                EmployeeId = employee3.Id,
-                DateRequested = DateTime.Now,
-                Status = Enums.Status.PendingStock,
-                Comments = ""
-            };
-            dbcontext.Add(request3);
-            dbcontext.SaveChanges();
-
-            RequestDetails rqDet3 = new RequestDetails()
-            {
-                RequestId = request3.Id,
-                InventoryItemId = "C001",
-                QtyRequested = 20
-            };
-            dbcontext.Add(rqDet3);
-            dbcontext.SaveChanges();
-
-            Request request4 = new Request()
-            {
-                EmployeeId = employee1.Id,
-                DateRequested = DateTime.Now,
-                Status = Enums.Status.Approved,
-                Comments = ""
-            };
-            dbcontext.Add(request4);
-            dbcontext.SaveChanges();
-
-            RequestDetails rqDet4 = new RequestDetails()
-            {
-                RequestId = request4.Id,
-                InventoryItemId = "T100",
-                QtyRequested = 20
-            };
-            dbcontext.Add(rqDet4);
-            dbcontext.SaveChanges();
-
-            // Request seeder
-            Request r1 = new Request()
-            {
-                EmployeeId = 3,
-                DateRequested = new DateTime(2020, 08, 05),
-                Status = Status.PendingApproval,
-            };
-
-            dbcontext.Add(r1);
-
-            Request r2 = new Request()
-            {
-                EmployeeId = 3,
-                DateRequested = new DateTime(2020, 08, 11),
-                Status = Status.PendingApproval,
-            };
-            dbcontext.Add(r2);
-
-            Request r3 = new Request()
-            {
-                EmployeeId = 3,
-                DateRequested = new DateTime(2020, 08, 07),
-                Status = Status.Approved,
-            };
-            dbcontext.Add(r3);
-
-            Request r4 = new Request()
-            {
-                EmployeeId = 7,
-                DateRequested = new DateTime(2020, 06, 12),
-                Status = Status.Approved,
-            };
-            dbcontext.Add(r4);
-
-            Request r5 = new Request()
-            {
-                EmployeeId = 8,
-                DateRequested = new DateTime(2019, 06, 12),
-                Status = Status.Approved,
-            };
-            dbcontext.Add(r5);
-
-
-            dbcontext.SaveChanges();*/
-
-/*            //seed retrieval 
-            Retrieval rtv1 = new Retrieval()
-            {
-                DateRetrieved = new DateTime(2020, 08, 12),
-                EmployeeId = 2
-            };
-            dbcontext.Add(rtv1);
-            dbcontext.SaveChanges();
-
-            //update requests with retrievalId
-
-            r3.RetrievalId = rtv1.Id;
-            r4.RetrievalId = rtv1.Id;
-            r5.RetrievalId = rtv1.Id;
-            dbcontext.Update(r3);
-            dbcontext.Update(r4);
-            dbcontext.Update(r5);
-            dbcontext.SaveChanges();*/
-
-            //requestdetail seeder
-
-/*            // Request seeder
-            //request1
-            RequestDetails rd1 = new RequestDetails()
-            {
-                RequestId = r1.Id,
-                QtyRequested = 10,
-                InventoryItemId = "P030"
-            };
-            dbcontext.Add(rd1);
-
-            RequestDetails rd2 = new RequestDetails()
-            {
-                RequestId = r1.Id,
-                QtyRequested = 10,
-                InventoryItemId = "P031"
-            };
-            dbcontext.Add(rd2);
-
-            //request2
-            RequestDetails rd3 = new RequestDetails()
-            {
-                RequestId = r2.Id,
-                QtyRequested = 10,
-                InventoryItemId = "F020"
-            };
-            dbcontext.Add(rd3);
-
-            RequestDetails rd4 = new RequestDetails()
-            {
-                RequestId = r2.Id,
-                QtyRequested = 10,
-                InventoryItemId = "F021"
-            };
-            dbcontext.Add(rd4);
-
-            //request3
-            RequestDetails rd5 = new RequestDetails()
-            {
-                RequestId = r3.Id,
-                QtyRequested = 10,
-                InventoryItemId = "C001"
-            };
-            dbcontext.Add(rd5);
-
-            RequestDetails rd6 = new RequestDetails()
-            {
-                RequestId = r3.Id,
-                QtyRequested = 150,
-                InventoryItemId = "C002"
-            };
-            dbcontext.Add(rd6);
-
-            RequestDetails rd7 = new RequestDetails()
-            {
-                RequestId = r4.Id,
-                QtyRequested = 10,
-                InventoryItemId = "R001"
-            };
-            dbcontext.Add(rd7);
-
-            RequestDetails rd8 = new RequestDetails()
-            {
-                RequestId = r4.Id,
-                QtyRequested = 10,
-                InventoryItemId = "R002"
-            };
-            dbcontext.Add(rd8);
-
-            RequestDetails rd9 = new RequestDetails()
-            {
-                RequestId = r5.Id,
-                QtyRequested = 10,
-                InventoryItemId = "S040"
-            };
-            dbcontext.Add(rd9);
-
-            RequestDetails rd10 = new RequestDetails()
-            {
-                RequestId = r5.Id,
-                QtyRequested = 10,
-                InventoryItemId = "S041"
-            };
-            dbcontext.Add(rd10);
-
-            dbcontext.SaveChanges();*/
-
-
             // Request seeder - change requester to David to test Employee homepage to view last 5 request sort by latest date
             Request r1 = new Request()
             {
@@ -1302,8 +982,6 @@ namespace ADProj.DB
             };
             dbcontext.Add(r5);
 
-
-
             Request r6 = new Request()
             {
                 EmployeeId = employee2.Id,
@@ -1311,7 +989,6 @@ namespace ADProj.DB
                 Status = Status.Approved,
             };
             dbcontext.Add(r6);
-
 
             Request r7 = new Request()
             {
@@ -1363,8 +1040,6 @@ namespace ADProj.DB
             };
             dbcontext.Add(r12);
 
-
-
             Request r13 = new Request()
             {
                 EmployeeId = employee7.Id,
@@ -1381,7 +1056,6 @@ namespace ADProj.DB
                 Status = Status.Approved,
             };
             dbcontext.Add(r14);
-
 
             dbcontext.SaveChanges();
 
