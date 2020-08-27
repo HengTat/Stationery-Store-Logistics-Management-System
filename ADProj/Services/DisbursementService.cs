@@ -56,7 +56,7 @@ namespace ADProj.Services
             DisbursementDetails disbursementDetails = new DisbursementDetails()
             {
                 QtyNeeded = qtyNeeded,
-                QtyReceived = qtyReceived,
+                QtyReceived = 0,
                 DisbursementId = disbursementId,
                 InventoryItemId = inventoryItem.Id
             };
