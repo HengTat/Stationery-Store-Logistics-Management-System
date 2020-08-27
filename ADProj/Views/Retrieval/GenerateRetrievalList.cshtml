@@ -4,11 +4,14 @@
     var rtList = (List<RetrievalDetails>)ViewData["retrieveList"];
     string retId =(Convert.ToString(ViewData["retId"])).ToUpper();
 }
+    <div class="container" align="center" style="margin-bottom:40px">
+        <h2>Retrieval Form ID - @retId</h2>
+    </div>
 
     <form id="disbursementGenForm" method="post" style="margin-bottom:40px" action="/Disbursement/Generate">
-        <div class="container" align="center">
-            <h2>Retrieval Form ID - @retId</h2>
-            <table class="table table-bordered" style="width:500px; margin-top:20px">
+        <div class="container">
+            <a href="/retrieval/index"><button type="button" class="btn btn-primary"> Go To Retrieval List</button></a>
+            <table class="table table-bordered" style="margin-top:20px">
                 <thead style="background-color:lightgrey">
                     <tr>
                         <th>Item Code</th>
@@ -31,11 +34,11 @@
                     }
                 </tbody>
             </table>
-            <h5>Disbursement Dates</h5>
-            <div class="col-sm-12">
+            <h5 align="center"><b>Disbursement Dates</b></h5>
+            <div class="col-sm-12" align="center">
                 <input type="radio" id="disbursementDefault" name="option" value="default" checked="checked" /><label for="default"> Default - Every Monday</label><br />
                 <input type="radio" id="disbursementCustom" name="option" value="custom" /><label for="custom"> Ad-hoc - Please select date:</label>
-                <input type="date" id="customDate" name="option" disabled/> <br /> <br /> <br />
+                <input type="date" id="customDate" name="option" disabled /> <br /> <br /> <br />
                 <button type="submit" id="submit" class="btn btn-primary">Generate Disbursement List</button>
                 <input id="disbursedDate" name="disbursedDate" value="0" type="hidden" />
                 <input id="retrievalId" name="retrievalId" value="@retId" type="hidden" />

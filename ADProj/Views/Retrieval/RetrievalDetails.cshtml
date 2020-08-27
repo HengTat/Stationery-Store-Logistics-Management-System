@@ -5,10 +5,13 @@
     var ret = (Retrieval)ViewData["ret"];
     var disbId = ViewData["disbId"];
 }
-<form method="post" style="margin-bottom:40px" action="/Disbursement/Generate">
-    <div class="container" align="center">
+    <div class="container" align="center" style="margin-bottom:40px">
         <h2>Retrieval Form ID - @ret.Id</h2>
-        <table class="table table-bordered" style="width:500px; margin-top:20px">
+    </div>
+<form method="post" style="margin-bottom:40px" action="/Disbursement/Generate">
+    <div class="container">
+        <a href="/retrieval/index"><button type="button" class="btn btn-primary"> Back To Retrieval List</button></a>
+        <table class="table table-bordered" style="margin-top:20px">
             <thead style="background-color:lightgrey">
                 <tr>
                     <th>Item Code</th>
@@ -35,8 +38,8 @@
         </table>
         @{ if (!(disbId != null))
             {
-                <h5>Disbursement Dates</h5>
-                <div class="col-sm-12">
+                <h5 align="center">Disbursement Dates</h5>
+                <div class="col-sm-12" align="center">
                     <input type="radio" id="disbursementDefault" name="option" value="default" checked="checked" /><label for="default"> Default - Every Monday</label><br />
                     <input type="radio" id="disbursementCustom" name="option" value="custom" /><label for="custom"> Ad-hoc - Please select date:</label>
                     <input type="date" id="customDate" name="option" disabled /> <br /> <br /> <br />
