@@ -1058,6 +1058,10 @@ namespace ADProj.DB
 
             dbcontext.SaveChanges();
 
+
+
+
+
             //requestdetail seeder
 
             RequestDetails rd1 = new RequestDetails()
@@ -1828,6 +1832,549 @@ namespace ADProj.DB
             };
             dbcontext.Add(rd59);
             dbcontext.SaveChanges();
+
+
+            //DB seeder for trend analysis (2019 data)
+
+
+            Request request_1_2019 = new Request()
+            {
+                EmployeeId = employee3.Id,
+                DateRequested = new DateTime(2019, 08, 05),
+                Status = Status.Completed,
+            };
+
+            dbcontext.Add(request_1_2019);
+
+            Request request_2_2019 = new Request()
+            {
+                EmployeeId = employee2.Id,
+                DateRequested = new DateTime(2019, 07, 11),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_2_2019);
+
+            Request request_3_2019 = new Request()
+            {
+                EmployeeId = employee6.Id,
+                DateRequested = new DateTime(2019, 07, 07),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_3_2019);
+
+            Request request_4_2019 = new Request()
+            {
+                EmployeeId = employee7.Id,
+                DateRequested = new DateTime(2019, 11, 12),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_4_2019);
+
+            Request request_5_2019 = new Request()
+            {
+                EmployeeId = employee8.Id,
+                DateRequested = new DateTime(2019, 06, 12),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_5_2019);
+
+            Request request_6_2019 = new Request()
+            {
+                EmployeeId = employee3.Id,
+                DateRequested = new DateTime(2019, 02, 16),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_6_2019);
+
+            Request request_7_2019 = new Request()
+            {
+                EmployeeId = employee5.Id,
+                DateRequested = new DateTime(2019, 07, 07),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_7_2019);
+
+            dbcontext.SaveChanges();
+
+            Request request_8_2019 = new Request()
+            {
+                EmployeeId = employee7.Id,
+                DateRequested = new DateTime(2019, 04, 15),
+                Status = Status.Completed,
+            };
+
+            dbcontext.Add(request_8_2019);
+
+            Request request_9_2019 = new Request()
+            {
+                EmployeeId = employee7.Id,
+                DateRequested = new DateTime(2019, 10, 11),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_9_2019);
+            dbcontext.SaveChanges();
+
+            Request request_10_2019 = new Request()
+            {
+                EmployeeId = employee7.Id,
+                DateRequested = new DateTime(2019, 10, 11),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_10_2019);
+
+            dbcontext.SaveChanges();
+
+            Request request_11_2019 = new Request()
+            {
+                EmployeeId = employee8.Id,
+                DateRequested = new DateTime(2020, 06, 22),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_11_2019);
+
+            Request request_12_2019 = new Request()
+            {
+                EmployeeId = employee6.Id,
+                DateRequested = new DateTime(2019, 05, 12),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_12_2019);
+
+            Request request_13_2019 = new Request()
+            {
+                EmployeeId = employee7.Id,
+                DateRequested = new DateTime(2019, 08, 27),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_13_2019);
+
+
+            Request request_14_2019 = new Request()
+            {
+                EmployeeId = employee8.Id,
+                DateRequested = new DateTime(2019, 02, 17),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_14_2019);
+
+            Request request_15_2019 = new Request()
+            {
+                EmployeeId = employee5.Id,
+                DateRequested = new DateTime(2019, 01, 13),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_15_2019);
+
+            Request request_16_2019 = new Request()
+            {
+                EmployeeId = employee4.Id,
+                DateRequested = new DateTime(2019, 12, 17),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_16_2019);
+
+            Request request_17_2019 = new Request()
+            {
+                EmployeeId = employee12.Id,
+                DateRequested = new DateTime(2019, 09, 12),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_17_2019);
+
+            Request request_18_2019 = new Request()
+            {
+                EmployeeId = employee11.Id,
+                DateRequested = new DateTime(2019, 04, 11),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_18_2019);
+
+            Request request_19_2019 = new Request()
+            {
+                EmployeeId = employee8.Id,
+                DateRequested = new DateTime(2019, 07, 10),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_19_2019);
+
+
+            Request request_20_2019 = new Request()
+            {
+                EmployeeId = employee2.Id,
+                DateRequested = new DateTime(2019, 11, 17),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_20_2019);
+
+            Request request_21_2019 = new Request()
+            {
+                EmployeeId = employee7.Id,
+                DateRequested = new DateTime(2019, 05, 17),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_21_2019);
+
+            Request request_22_2019 = new Request()
+            {
+                EmployeeId = employee5.Id,
+                DateRequested = new DateTime(2019, 04, 17),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_22_2019);
+
+            Request request_23_2019 = new Request()
+            {
+                EmployeeId = employee7.Id,
+                DateRequested = new DateTime(2019, 12, 12),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_23_2019);
+
+            Request request_24_2019 = new Request()
+            {
+                EmployeeId = employee7.Id,
+                DateRequested = new DateTime(2019, 03, 12),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_24_2019);
+
+            Request request_25_2019 = new Request()
+            {
+                EmployeeId = employee10.Id,
+                DateRequested = new DateTime(2019, 02, 12),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_25_2019);
+
+            Request request_26_2019 = new Request()
+            {
+                EmployeeId = employee10.Id,
+                DateRequested = new DateTime(2019, 10, 12),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_26_2019);
+
+            Request request_27_2019 = new Request()
+            {
+                EmployeeId = employee12.Id,
+                DateRequested = new DateTime(2019, 10, 12),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_27_2019);
+
+            Request request_28_2019 = new Request()
+            {
+                EmployeeId = employee7.Id,
+                DateRequested = new DateTime(2019, 12, 02),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_28_2019);
+
+            Request request_29_2019 = new Request()
+            {
+                EmployeeId = employee7.Id,
+                DateRequested = new DateTime(2019, 03, 14),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_29_2019);
+
+            Request request_30_2019 = new Request()
+            {
+                EmployeeId = employee7.Id,
+                DateRequested = new DateTime(2019, 10, 15),
+                Status = Status.Completed,
+            };
+            dbcontext.Add(request_30_2019);
+
+            dbcontext.SaveChanges();
+
+            //TREND ANAYLSIS SEEDER (2019) VALUES
+
+
+            RequestDetails requestDetail_1_2019 = new RequestDetails()
+            {
+                RequestId = request_1_2019.Id,
+                QtyRequested = 10,
+                InventoryItemId = "P030"
+            };
+            dbcontext.Add(requestDetail_1_2019);
+
+            RequestDetails requestDetail_2_2019 = new RequestDetails()
+            {
+                RequestId = request_1_2019.Id,
+                QtyRequested = 10,
+                InventoryItemId = "P031"
+            };
+            dbcontext.Add(requestDetail_2_2019);
+
+
+            RequestDetails requestDetail_3_2019 = new RequestDetails()
+            {
+                RequestId = request_2_2019.Id,
+                QtyRequested = 13,
+                InventoryItemId = "F020"
+            };
+            dbcontext.Add(requestDetail_3_2019);
+
+            RequestDetails requestDetail_4_2019 = new RequestDetails()
+            {
+                RequestId = request_3_2019.Id,
+                QtyRequested = 20,
+                InventoryItemId = "F021"
+            };
+            dbcontext.Add(requestDetail_4_2019);
+
+
+            RequestDetails requestDetail_5_2019 = new RequestDetails()
+            {
+                RequestId = request_4_2019.Id,
+                QtyRequested = 20,
+                InventoryItemId = "C001"
+            };
+            dbcontext.Add(requestDetail_5_2019);
+
+
+
+            RequestDetails requestDetail_6_2019 = new RequestDetails()
+            {
+                RequestId = request_4_2019.Id,
+                QtyRequested = 45,
+                InventoryItemId = "C002"
+            };
+            dbcontext.Add(requestDetail_6_2019);
+
+
+            dbcontext.SaveChanges();
+
+
+
+            RequestDetails requestDetail_7_2019 = new RequestDetails()
+            {
+                RequestId = request_5_2019.Id,
+                QtyRequested = 13,
+                InventoryItemId = "R001"
+            };
+            dbcontext.Add(requestDetail_7_2019);
+
+
+
+
+            RequestDetails requestDetail_8_2019 = new RequestDetails()
+            {
+                RequestId = request_6_2019.Id,
+                QtyRequested = 12,
+                InventoryItemId = "R002"
+            };
+            dbcontext.Add(requestDetail_8_2019);
+
+            RequestDetails requestDetail_9_2019 = new RequestDetails()
+            {
+                RequestId = request_7_2019.Id,
+                QtyRequested = 32,
+                InventoryItemId = "S040"
+            };
+            dbcontext.Add(requestDetail_9_2019);
+
+            RequestDetails requestDetail_10_2019 = new RequestDetails()
+            {
+                RequestId = request_8_2019.Id,
+                QtyRequested = 17,
+                InventoryItemId = "S041"
+            };
+            dbcontext.Add(requestDetail_10_2019);
+
+            RequestDetails requestDetail_11_2019 = new RequestDetails()
+            {
+                RequestId = request_10_2019.Id,
+                QtyRequested = 6,
+                InventoryItemId = "S041"
+            };
+            dbcontext.Add(requestDetail_11_2019);
+
+            RequestDetails requestDetail_12_2019 = new RequestDetails()
+            {
+                RequestId = request_10_2019.Id,
+                QtyRequested = 23,
+                InventoryItemId = "S041"
+            };
+            dbcontext.Add(requestDetail_12_2019);
+
+            RequestDetails requestDetail_13_2019 = new RequestDetails()
+            {
+                RequestId = request_11_2019.Id,
+                QtyRequested = 19,
+                InventoryItemId = "S041"
+            };
+            dbcontext.Add(requestDetail_13_2019);
+
+            RequestDetails requestDetail_14_2019 = new RequestDetails()
+            {
+                RequestId = request_12_2019.Id,
+                QtyRequested = 10,
+                InventoryItemId = "P030"
+            };
+            dbcontext.Add(requestDetail_14_2019);
+
+            RequestDetails requestDetail_15_2019 = new RequestDetails()
+            {
+                RequestId = request_13_2019.Id,
+                QtyRequested = 34,
+                InventoryItemId = "P031"
+            };
+            dbcontext.Add(requestDetail_15_2019);
+
+            RequestDetails requestDetail_16_2019 = new RequestDetails()
+            {
+                RequestId = request_14_2019.Id,
+                QtyRequested = 17,
+                InventoryItemId = "F020"
+            };
+            dbcontext.Add(requestDetail_16_2019);
+
+            RequestDetails requestDetail_17_2019 = new RequestDetails()
+            {
+                RequestId = request_15_2019.Id,
+                QtyRequested = 8,
+                InventoryItemId = "F021"
+            };
+            dbcontext.Add(requestDetail_17_2019);
+
+
+            RequestDetails requestDetail_18_2019 = new RequestDetails()
+            {
+                RequestId = request_16_2019.Id,
+                QtyRequested = 10,
+                InventoryItemId = "C001"
+            };
+            dbcontext.Add(requestDetail_18_2019);
+
+            RequestDetails requestDetail_19_2019 = new RequestDetails()
+            {
+                RequestId = request_17_2019.Id,
+                QtyRequested = 15,
+                InventoryItemId = "C002"
+            };
+            dbcontext.Add(requestDetail_19_2019);
+
+            RequestDetails requestDetail_20_2019 = new RequestDetails()
+            {
+                RequestId = request_18_2019.Id,
+                QtyRequested = 15,
+                InventoryItemId = "R001"
+            };
+            dbcontext.Add(requestDetail_20_2019);
+
+            RequestDetails requestDetail_21_2019 = new RequestDetails()
+            {
+                RequestId = request_19_2019.Id,
+                QtyRequested = 7,
+                InventoryItemId = "R002"
+            };
+            dbcontext.Add(requestDetail_21_2019);
+
+            RequestDetails requestDetail_22_2019 = new RequestDetails()
+            {
+                RequestId = request_20_2019.Id,
+                QtyRequested = 12,
+                InventoryItemId = "S040"
+            };
+            dbcontext.Add(requestDetail_22_2019);
+
+
+            RequestDetails requestDetail_23_2019 = new RequestDetails()
+            {
+                RequestId = request_21_2019.Id,
+                QtyRequested = 17,
+                InventoryItemId = "S041"
+            };
+            dbcontext.Add(requestDetail_23_2019);
+
+            RequestDetails requestDetail_24_2019 = new RequestDetails()
+            {
+                RequestId = request_22_2019.Id,
+                QtyRequested = 6,
+                InventoryItemId = "S041"
+            };
+            dbcontext.Add(requestDetail_24_2019);
+
+            RequestDetails requestDetail_25_2019 = new RequestDetails()
+            {
+
+                RequestId = request_23_2019.Id,
+                QtyRequested = 17,
+                InventoryItemId = "S041"
+            };
+            dbcontext.Add(requestDetail_25_2019);
+
+            RequestDetails requestDetail_26_2019 = new RequestDetails()
+            {
+                RequestId = request_24_2019.Id,
+                QtyRequested = 19,
+                InventoryItemId = "S041"
+            };
+            dbcontext.Add(requestDetail_26_2019);
+
+            RequestDetails requestDetail_27_2019 = new RequestDetails()
+            {
+                RequestId = request_25_2019.Id,
+                QtyRequested = 19,
+                InventoryItemId = "S041"
+            };
+            dbcontext.Add(requestDetail_27_2019);
+
+            RequestDetails requestDetail_28_2019 = new RequestDetails()
+            {
+                RequestId = request_25_2019.Id,
+                QtyRequested = 19,
+                InventoryItemId = "S041"
+            };
+            dbcontext.Add(requestDetail_28_2019);
+
+            RequestDetails requestDetail_29_2019 = new RequestDetails()
+            {
+                RequestId = request_26_2019.Id,
+                QtyRequested = 19,
+                InventoryItemId = "S041"
+            };
+            dbcontext.Add(requestDetail_29_2019);
+
+            RequestDetails requestDetail_30_2019 = new RequestDetails()
+            {
+                RequestId = request_27_2019.Id,
+                QtyRequested = 19,
+                InventoryItemId = "S041"
+            };
+            dbcontext.Add(requestDetail_30_2019);
+
+            RequestDetails requestDetail_31_2019 = new RequestDetails()
+            {
+                RequestId = request_28_2019.Id,
+                QtyRequested = 19,
+                InventoryItemId = "S041"
+            };
+            dbcontext.Add(requestDetail_31_2019);
+
+            RequestDetails requestDetail_32_2019 = new RequestDetails()
+            {
+                RequestId = request_29_2019.Id,
+                QtyRequested = 19,
+                InventoryItemId = "S041"
+            };
+            dbcontext.Add(requestDetail_32_2019);
+
+            RequestDetails requestDetail_33_2019 = new RequestDetails()
+            {
+                RequestId = request_30_2019.Id,
+                QtyRequested = 19,
+                InventoryItemId = "S041"
+            };
+            dbcontext.Add(requestDetail_33_2019);
+
+            dbcontext.SaveChanges();
+
+
+
+
 
             // retrieval JUN
             Retrieval rt1 = new Retrieval()
