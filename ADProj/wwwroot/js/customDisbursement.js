@@ -15,13 +15,13 @@
         if ([6, 0].includes(day)) {
             e.preventDefault();
             this.value = '';
-            swal('Weekends not allowed');
+            alert('Weekends not allowed');
         }
         var date = new Date(this.value);
         if (date < today) {
             e.preventDefault();
             this.value = '';
-            swal('Disbursement date must be a future date')
+            alert('Disbursement date must be a future date');
         }
     });
 

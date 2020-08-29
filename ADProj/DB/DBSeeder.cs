@@ -3100,7 +3100,7 @@ namespace ADProj.DB
             dbcontext.Update(r1); dbcontext.Update(r2); dbcontext.Update(r23); dbcontext.Update(r25); dbcontext.Update(r35); dbcontext.Update(r37);
             dbcontext.SaveChanges();
 
-            // Disbursement Details for AUG
+            // Disbursement Details for AUG 11
             DisbursementDetails dd01 = new DisbursementDetails()
             {
                 QtyNeeded = 10,
@@ -3178,6 +3178,239 @@ namespace ADProj.DB
             // Update Request Qty for Inventory Item
             item4.RequestQty = 20; item9.RequestQty = 3; item15.RequestQty = 6; item20.RequestQty = 2; item24.RequestQty = 20; item25.RequestQty = 30;
             dbcontext.Update(item4); dbcontext.Update(item9); dbcontext.Update(item15); dbcontext.Update(item19); dbcontext.Update(item20); dbcontext.Update(item24); dbcontext.Update(item25);
+
+            // Disbursement Details for AUG 03
+            DisbursementDetails dd09 = new DisbursementDetails()
+            {
+                QtyNeeded = 10,
+                QtyReceived = 10,
+                DisbursementId = d09.Id,
+                InventoryItemId = item31.Id
+            };
+            dbcontext.Add(dd09);
+
+            DisbursementDetails dd10 = new DisbursementDetails()
+            {
+                QtyNeeded = 10,
+                QtyReceived = 10,
+                DisbursementId = d09.Id,
+                InventoryItemId = item32.Id
+            };
+            dbcontext.Add(dd10);
+
+            DisbursementDetails dd11 = new DisbursementDetails()
+            {
+                QtyNeeded = 6,
+                QtyReceived = 6,
+                DisbursementId = d10.Id,
+                InventoryItemId = item29.Id
+            };
+            dbcontext.Add(dd11);
+
+            DisbursementDetails dd12 = new DisbursementDetails()
+            {
+                QtyNeeded = 2,
+                QtyReceived = 2,
+                DisbursementId = d10.Id,
+                InventoryItemId = item22.Id
+            };
+            dbcontext.Add(dd12);
+
+            DisbursementDetails dd13 = new DisbursementDetails()
+            {
+                QtyNeeded = 6,
+                QtyReceived = 6,
+                DisbursementId = d11.Id,
+                InventoryItemId = item10.Id
+            };
+            dbcontext.Add(dd13);
+
+            DisbursementDetails dd14 = new DisbursementDetails()
+            {
+                QtyNeeded = 20,
+                QtyReceived = 20,
+                DisbursementId = d11.Id,
+                InventoryItemId = item3.Id
+            };
+            dbcontext.Add(dd14);
+            dbcontext.SaveChanges();
+
+            // Disbursement Details for JUL 6
+            DisbursementDetails dd15 = new DisbursementDetails()
+            {
+                QtyNeeded = 10,
+                QtyReceived = 10,
+                DisbursementId = d06.Id,
+                InventoryItemId = item1.Id
+            };
+            dbcontext.Add(dd15);
+
+            DisbursementDetails dd16 = new DisbursementDetails()
+            {
+                QtyNeeded = 10,
+                QtyReceived = 10,
+                DisbursementId = d06.Id,
+                InventoryItemId = item35.Id
+            };
+            dbcontext.Add(dd16);
+
+            DisbursementDetails dd17 = new DisbursementDetails()
+            {
+                QtyNeeded = 10,
+                QtyReceived = 10,
+                DisbursementId = d06.Id,
+                InventoryItemId = item31.Id
+            };
+            dbcontext.Add(dd17);
+
+            DisbursementDetails dd18 = new DisbursementDetails()
+            {
+                QtyNeeded = 2,
+                QtyReceived = 2,
+                DisbursementId = d07.Id,
+                InventoryItemId = item31.Id
+            };
+            dbcontext.Add(dd18);
+
+            DisbursementDetails dd19 = new DisbursementDetails()
+            {
+                QtyNeeded = 5,
+                QtyReceived = 5,
+                DisbursementId = d07.Id,
+                InventoryItemId = item23.Id
+            };
+            dbcontext.Add(dd19);
+
+            DisbursementDetails dd20 = new DisbursementDetails()
+            {
+                QtyNeeded = 3,
+                QtyReceived = 3,
+                DisbursementId = d08.Id,
+                InventoryItemId = item7.Id
+            };
+            dbcontext.Add(dd20);
+
+            DisbursementDetails dd21 = new DisbursementDetails()
+            {
+                QtyNeeded = 50,
+                QtyReceived = 50,
+                DisbursementId = d08.Id,
+                InventoryItemId = item4.Id
+            };
+            dbcontext.Add(dd21);
+            dbcontext.SaveChanges();
+
+            // Disbursement Details for JUN 29
+            DisbursementDetails dd22 = new DisbursementDetails()
+            {
+                QtyNeeded = 4,
+                QtyReceived = 4,
+                DisbursementId = d04.Id,
+                InventoryItemId = item9.Id
+            };
+            dbcontext.Add(dd22);
+
+            DisbursementDetails dd23 = new DisbursementDetails()
+            {
+                QtyNeeded = 20,
+                QtyReceived = 20,
+                DisbursementId = d04.Id,
+                InventoryItemId = item3.Id
+            };
+            dbcontext.Add(dd23);
+
+            DisbursementDetails dd24 = new DisbursementDetails()
+            {
+                QtyNeeded = 1,
+                QtyReceived = 1,
+                DisbursementId = d05.Id,
+                InventoryItemId = item13.Id
+            };
+            dbcontext.Add(dd24);
+
+            DisbursementDetails dd25 = new DisbursementDetails()
+            {
+                QtyNeeded = 10,
+                QtyReceived = 10,
+                DisbursementId = d05.Id,
+                InventoryItemId = item16.Id
+            };
+            dbcontext.Add(dd25);
+            dbcontext.SaveChanges();
+
+            // Disbursement Details for JUN 8
+            DisbursementDetails dd26 = new DisbursementDetails()
+            {
+                QtyNeeded = 10,
+                QtyReceived = 10,
+                DisbursementId = d01.Id,
+                InventoryItemId = item26.Id
+            };
+            dbcontext.Add(dd26);
+
+            DisbursementDetails dd27 = new DisbursementDetails()
+            {
+                QtyNeeded = 3,
+                QtyReceived = 3,
+                DisbursementId = d01.Id,
+                InventoryItemId = item29.Id
+            };
+            dbcontext.Add(dd27);
+
+            DisbursementDetails dd28 = new DisbursementDetails()
+            {
+                QtyNeeded = 10,
+                QtyReceived = 10,
+                DisbursementId = d01.Id,
+                InventoryItemId = item31.Id
+            };
+            dbcontext.Add(dd28);
+
+            DisbursementDetails dd29 = new DisbursementDetails()
+            {
+                QtyNeeded = 7,
+                QtyReceived = 7,
+                DisbursementId = d01.Id,
+                InventoryItemId = item22.Id
+            };
+            dbcontext.Add(dd29);
+
+            DisbursementDetails dd30 = new DisbursementDetails()
+            {
+                QtyNeeded = 2,
+                QtyReceived = 2,
+                DisbursementId = d02.Id,
+                InventoryItemId = item11.Id
+            };
+            dbcontext.Add(dd30);
+
+            DisbursementDetails dd31 = new DisbursementDetails()
+            {
+                QtyNeeded = 5,
+                QtyReceived = 5,
+                DisbursementId = d02.Id,
+                InventoryItemId = item5.Id
+            };
+            dbcontext.Add(dd31);
+
+            DisbursementDetails dd32 = new DisbursementDetails()
+            {
+                QtyNeeded = 5,
+                QtyReceived = 5,
+                DisbursementId = d03.Id,
+                InventoryItemId = item12.Id
+            };
+            dbcontext.Add(dd32);
+
+            DisbursementDetails dd33 = new DisbursementDetails()
+            {
+                QtyNeeded = 50,
+                QtyReceived = 50,
+                DisbursementId = d03.Id,
+                InventoryItemId = item3.Id
+            };
+            dbcontext.Add(dd33);
+            dbcontext.SaveChanges();
 
             //Seed Supplier Stationery
 
