@@ -28,7 +28,6 @@ namespace ADProj.Controllers
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
             }
 
-
             List<Supplier> supplierList = supService.SupplierList();
             ViewData["supplierList"] = supplierList;
             if (TempData["alertMsg"] != null)
@@ -138,7 +137,6 @@ namespace ADProj.Controllers
                 TempData["alertMsg"] = "Saved successfully!";
                 return RedirectToAction("Details", new { Id = SupplierId });
             }
-
         }
 
         public IActionResult SupplierList()
@@ -211,12 +209,6 @@ namespace ADProj.Controllers
             {
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
             }
-            if (!(HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK ||
-                HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER ||
-                HttpContext.Session.GetString("role") == EmployeeRole.STORESUPERVISOR))
-            {
-                return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
-            }
             if (!(Id != null && Name != null && ContactName != null && PhoneNo != null && FaxNo != null && Address != null && GSTReg != null))
             {
                 TempData["alertMsg"] = "Please enter all information!";
@@ -235,9 +227,7 @@ namespace ADProj.Controllers
             {
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
             }
-            supService.UpdateSupplierStationeryById(SupplierId, InventoryItemId, UOM, TenderPrice);
-            SupplierStationery s = supService.GetSupplierStationeryById(StationeryId);
-            /*return RedirectToAction("EditDeleteStationery", new { Id = s.Id });*/
+            supService.UpdateSupplierStationeryById(StationeryId, SupplierId, InventoryItemId, UOM, TenderPrice);
             return RedirectToAction("Details", new { Id = SupplierId });
         }
 
@@ -257,6 +247,5 @@ namespace ADProj.Controllers
                 ViewData["alertMsg"] = TempData["alertMsg"];
             return View();
         }
-
     }
 }

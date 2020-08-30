@@ -107,12 +107,11 @@ namespace ADProj.Services
             adProjContext.SaveChanges();
         }
 
-        public void UpdateSupplierStationeryById(string SupplierId, string InventoryItemId, string UOM, float TenderPrice)
+        public void UpdateSupplierStationeryById(int StationeryId, string SupplierId, string InventoryItemId, string UOM, float TenderPrice)
         {
-            SupplierStationery item = GetSupplierStationeryBySupplierId(SupplierId);
-            /*item.SupplierId = SupplierId;
-            item.InventoryItemId = InventoryItemId;
-            item.UOM = UOM;*/
+            SupplierStationery item = GetSupplierStationeryById(StationeryId);
+            item.SupplierId = SupplierId;
+            item.UOM = UOM;
             item.TenderPrice = TenderPrice;
             adProjContext.SaveChanges();
         }
