@@ -56,6 +56,37 @@ namespace ADProj.Services
             return actingDepartmentHead;
         }
 
+        public List<ActingDepartmentHead> GetFutureActingDepartmentHeads(Employee employee)
+        {
+            DateTime currentDate = DateTime.Today;
+
+            List<ActingDepartmentHead> actingDepartmentHeads = dbcontext.ActingDepartmentHeads.Where(x => x.Employee.Department == employee.Department && x.EndDate >= currentDate).ToList();
+            return actingDepartmentHeads;
+        }
+
+        public bool OverlappingAppointment(int employeeId, DateTime startDate, DateTime endDate)
+        {
+            bool overlap = false;
+            Employee employee = GetEmployeeById(employeeId);
+            List<ActingDepartmentHead> actingDepartmentHeads = dbcontext.ActingDepartmentHeads.Where(x => x.Employee.Department == employee.Department).ToList();
+            if (actingDepartmentHeads.Count() > 0)
+            {
+                overlap = true;
+                foreach (ActingDepartmentHead head in actingDepartmentHeads)
+                {
+                    if (startDate > head.EndDate)
+                    {
+                        overlap = false;
+                    }
+                    else if (head.StartDate > endDate)
+                    {
+                        overlap = false;
+                    }
+                }
+            }
+            return overlap;
+        }
+
         public bool PasswordCheck(Employee employee, string hashPassword)
         {
             return (employee.Password == hashPassword);

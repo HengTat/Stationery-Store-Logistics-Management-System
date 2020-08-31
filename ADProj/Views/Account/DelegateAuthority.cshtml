@@ -1,8 +1,9 @@
 ﻿<!--AUTHOR: LENG CHUNG HIANG-->
 
 
-@{ ViewData["Title"] = "Assign Delegate";
+@{ ViewData["Title"] = "Delegate Authority";
     var deptEmployeeList = (List<Employee>)ViewData["deptEmployeeList"];
+    var validDelegates = (List<ActingDepartmentHead>)ViewData["validDelegates"];
     var msg = ViewData["errmsg"]; }
 
 
@@ -18,13 +19,43 @@
 }
 
 
-
-
 <div align="center">
     <h2>@ViewData["Title"]</h2>
+    @if (validDelegates.Count() > 0)
+    {
+        <form method="post" style="margin-bottom:40px">
+            <div class="container" align="center">
+                <h3>List of Appointed Acting Department Head</h3>
+                <table class="table table-bordered" style="width:500px; margin-top:20px">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var appointedDelegate in validDelegates)
+                        {
+                            <tr>
+                                <td>@appointedDelegate.Employee.Name</td>
+                                <td>@appointedDelegate.StartDate.ToString("dd/MMM/yyyy")</td>
+                                <td>@appointedDelegate.EndDate.ToString("dd/MMM/yyyy")</td>
+                                <td style="width:100px"><button type="submit" id="btnCancel" class="btn btn-danger btn-xs" formaction="CancelDelegation?id=@appointedDelegate.Id">Cancel Delegation</button></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </form>
+        <br />
+    }
+
     <form class="form-horizontal" action="ConfirmDelegation" method="POST" style="margin-top:40px">
 
         <div class="form-group">
+            <h3>Appoint Acting Department Head</h3>
             <label class="col-sm-5 control-label">Employee Name:</label>
             <div class="col-sm-3">
                 <select class="form-control" id="employeeId" name="employeeId" style="width:300px">
@@ -58,7 +89,11 @@
     </form>
 </div>
 
-
+<script>
+    $("#btnCancel").click(function () {
+        swal("Success", "Delegation Cancelled", "success");
+    });
+</script>
 
 
 

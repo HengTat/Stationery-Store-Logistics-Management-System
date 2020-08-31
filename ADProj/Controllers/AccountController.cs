@@ -7,6 +7,7 @@ using ADProj.Models;
 using ADProj.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Identity;
 
 namespace ADProj.Controllers
     //AUTHOR: LENG CHUNG HIANG, GUO JIEYI
@@ -116,8 +117,10 @@ namespace ADProj.Controllers
 
             int employeeId = int.Parse(HttpContext.Session.GetString("id"));
             Employee employee = es.GetEmployeeById(employeeId);
-            ActingDepartmentHead currentDelegate = es.CurrentDelegate(employee);
-            if (currentDelegate == null)
+            //ActingDepartmentHead currentDelegate = es.CurrentDelegate(employee);
+            List<ActingDepartmentHead> futureDelegates = es.GetFutureActingDepartmentHeads(employee);
+            //futureDelegates.Add(currentDelegate);
+            if (futureDelegates == null)
             {
                 List<Employee> deptEmployeeList = es.DepartmentEmployeeList(employee);
                 ViewData["deptEmployeeList"] = deptEmployeeList;
@@ -127,9 +130,42 @@ namespace ADProj.Controllers
                 }
                 return View("DelegateAuthority");
             }
-            ViewData["currentDelegate"] = currentDelegate;
-            return View("CurrentDelegate");
+            else
+            {
+                ViewData["validDelegates"] = futureDelegates;
+                List<Employee> deptEmployeeList = es.DepartmentEmployeeList(employee);
+                ViewData["deptEmployeeList"] = deptEmployeeList;
+                if (TempData["errmsg"] != null)
+                {
+                    ViewData["errmsg"] = TempData["errmsg"];
+                }
+                return View("DelegateAuthority");
+            }
         }
+
+        /*        public IActionResult ViewDelegate([FromServices] EmployeeService es)
+                {
+                    if (!(HttpContext.Session.GetString("role") == EmployeeRole.DEPTHEAD))
+                    {
+                        return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
+                    }
+
+                    int employeeId = int.Parse(HttpContext.Session.GetString("id"));
+                    Employee employee = es.GetEmployeeById(employeeId);
+                    ActingDepartmentHead currentDelegate = es.CurrentDelegate(employee);
+                    if (currentDelegate == null)
+                    {
+                        List<Employee> deptEmployeeList = es.DepartmentEmployeeList(employee);
+                        ViewData["deptEmployeeList"] = deptEmployeeList;
+                        if (TempData["errmsg"] != null)
+                        {
+                            ViewData["errmsg"] = TempData["errmsg"];
+                        }
+                        return View("DelegateAuthority");
+                    }
+                    ViewData["currentDelegate"] = currentDelegate;
+                    return View("CurrentDelegate");
+                }*/
 
         public IActionResult CancelDelegation([FromServices] EmployeeService es, [FromServices] Emailservice ems, int id)
         {
@@ -157,6 +193,11 @@ namespace ADProj.Controllers
             if (startDate < DateTime.Today)
             {
                 TempData["errmsg"] = "Invalid date input. Ensure both Start Date and End Date are selected and Start Date should be today or later.";
+                return RedirectToAction("Delegate");
+            }
+            if (es.OverlappingAppointment(employeeId, startDate, endDate))
+            {
+                TempData["errmsg"] = "An employee has already been appointed as the Acting Dept Head for the period.";
                 return RedirectToAction("Delegate");
             }
             es.AddActingDepartmentHead(employeeId, startDate, endDate);
