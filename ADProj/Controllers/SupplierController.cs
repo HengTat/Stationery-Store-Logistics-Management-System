@@ -155,7 +155,8 @@ namespace ADProj.Controllers
             }
             return View();
         }
-        public IActionResult EditDeleteSupplier(string cmd, string Id)
+
+        public IActionResult EditDeleteSupplier(string cmd, string supId)
         {
             if (!(HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK ||
                 HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER ||
@@ -168,7 +169,7 @@ namespace ADProj.Controllers
 
             if (cmd == "edit")
             {
-                Supplier supplier = supService.GetSupplierById(Id);
+                Supplier supplier = supService.GetSupplierById(supId);
                 ViewData["item"] = supplier;
                 return View("UpdateSupplier");
             }
@@ -201,7 +202,7 @@ namespace ADProj.Controllers
             return RedirectToAction("Details", new { Id = s.SupplierId });
         }
 
-        public IActionResult UpdateSupplier(string Id, string Name, string ContactName, string PhoneNo, string FaxNo, string Address, string GSTReg)
+        public IActionResult UpdateSupplier(string SupplierId, string Name, string ContactName, string PhoneNo, string FaxNo, string Address, string GSTReg)
         {
             if (!(HttpContext.Session.GetString("role") == EmployeeRole.STORECLERK ||
                 HttpContext.Session.GetString("role") == EmployeeRole.STOREMANAGER ||
@@ -209,12 +210,12 @@ namespace ADProj.Controllers
             {
                 return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
             }
-            if (!(Id != null && Name != null && ContactName != null && PhoneNo != null && FaxNo != null && Address != null && GSTReg != null))
+            if (!(SupplierId != null && Name != null && ContactName != null && PhoneNo != null && FaxNo != null && Address != null && GSTReg != null))
             {
                 TempData["alertMsg"] = "Please enter all information!";
-                return RedirectToAction("EditDeleteSupplier", new { cmd = "edit", Id = Id });
+                return RedirectToAction("EditDeleteSupplier", new { cmd = "edit", supId = SupplierId });
             }
-            supService.UpdateSupplierById(Id, Name, ContactName, PhoneNo, FaxNo, Address, GSTReg);
+            supService.UpdateSupplierById(SupplierId, Name, ContactName, PhoneNo, FaxNo, Address, GSTReg);
             TempData["alertMsg"] = "Updated successfully!";
             return RedirectToAction("Index");
         }
