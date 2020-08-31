@@ -71,16 +71,11 @@ namespace ADProj.Services
             List<ActingDepartmentHead> actingDepartmentHeads = dbcontext.ActingDepartmentHeads.Where(x => x.Employee.Department == employee.Department).ToList();
             if (actingDepartmentHeads.Count() > 0)
             {
-                overlap = true;
                 foreach (ActingDepartmentHead head in actingDepartmentHeads)
                 {
-                    if (startDate > head.EndDate)
+                    if (head.EndDate > startDate && head.StartDate < endDate || head.StartDate == startDate)
                     {
-                        overlap = false;
-                    }
-                    else if (head.StartDate > endDate)
-                    {
-                        overlap = false;
+                        overlap = true;
                     }
                 }
             }

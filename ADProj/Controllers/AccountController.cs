@@ -117,9 +117,7 @@ namespace ADProj.Controllers
 
             int employeeId = int.Parse(HttpContext.Session.GetString("id"));
             Employee employee = es.GetEmployeeById(employeeId);
-            //ActingDepartmentHead currentDelegate = es.CurrentDelegate(employee);
             List<ActingDepartmentHead> futureDelegates = es.GetFutureActingDepartmentHeads(employee);
-            //futureDelegates.Add(currentDelegate);
             if (futureDelegates == null)
             {
                 List<Employee> deptEmployeeList = es.DepartmentEmployeeList(employee);
@@ -142,30 +140,6 @@ namespace ADProj.Controllers
                 return View("DelegateAuthority");
             }
         }
-
-        /*        public IActionResult ViewDelegate([FromServices] EmployeeService es)
-                {
-                    if (!(HttpContext.Session.GetString("role") == EmployeeRole.DEPTHEAD))
-                    {
-                        return RedirectToAction(HttpContext.Session.GetString("role"), "Home");
-                    }
-
-                    int employeeId = int.Parse(HttpContext.Session.GetString("id"));
-                    Employee employee = es.GetEmployeeById(employeeId);
-                    ActingDepartmentHead currentDelegate = es.CurrentDelegate(employee);
-                    if (currentDelegate == null)
-                    {
-                        List<Employee> deptEmployeeList = es.DepartmentEmployeeList(employee);
-                        ViewData["deptEmployeeList"] = deptEmployeeList;
-                        if (TempData["errmsg"] != null)
-                        {
-                            ViewData["errmsg"] = TempData["errmsg"];
-                        }
-                        return View("DelegateAuthority");
-                    }
-                    ViewData["currentDelegate"] = currentDelegate;
-                    return View("CurrentDelegate");
-                }*/
 
         public IActionResult CancelDelegation([FromServices] EmployeeService es, [FromServices] Emailservice ems, int id)
         {
