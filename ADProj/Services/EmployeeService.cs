@@ -21,7 +21,7 @@ namespace ADProj.Services
 
         public List<Employee> FindAllEmployeesByDepartment(string DeptId)
         {
-            List<Employee> employees = dbcontext.Employees.Where(x => x.DepartmentId == DeptId).ToList();
+            List<Employee> employees = dbcontext.Employees.Where(x => x.DepartmentId == DeptId && x.Role != EmployeeRole.DEPTHEAD).ToList();
             return employees;
         }
 
