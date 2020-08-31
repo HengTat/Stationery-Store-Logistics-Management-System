@@ -29,10 +29,7 @@ $(document).ready(function () {
             return;
         }
 
-        if (qty > 99) {
-            swal("Unable make a request for more than 99 items");
-            return;
-        }
+
 
         var txtQty = qty.toString();
 
