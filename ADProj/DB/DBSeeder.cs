@@ -6,6 +6,8 @@ using ADProj.Enums;
 using ADProj.Models;
 
 namespace ADProj.DB
+//AUTHOR: EVERYBODY
+
 {
     public class DBSeeder
     {

@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 
 namespace ADProj.Controllers
+//AUTHOR: CHONG HENG TAT
 {
     public class TrendAnalysisController : Controller
     {

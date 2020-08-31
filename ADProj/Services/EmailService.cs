@@ -7,6 +7,8 @@ using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace ADProj.Services
+//AUTHOR: CHONG HENG TAT, JAMES FOO, LENG CHUNG HIANG
+
 {
     public class Emailservice
     {

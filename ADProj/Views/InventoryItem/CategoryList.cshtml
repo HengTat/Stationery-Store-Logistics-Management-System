@@ -1,4 +1,5 @@
-﻿
+﻿<!--AUTHOR: YADANAR PHYO -->
+
 @{
     ViewData["Title"] = "Category List";
     var catList = (List<ItemCategory>)ViewData["CatList"];
@@ -25,15 +26,16 @@
             <thead style="background-color:lightgrey">
                 @if (@role.Equals("StoreClerk"))
                 {
-                <tr>
-                    <th style="text-align:center">Category Name</th>
-                </tr>
+                    <tr>
+                        <th style="text-align:center">Category Name</th>
+                    </tr>
                 }
-                else {
-                <tr>
-                    <th style="text-align:center">Category Name</th>
-                    <th style="text-align:center">Action</th>
-                </tr>
+                else
+                {
+                    <tr>
+                        <th style="text-align:center">Category Name</th>
+                        <th style="text-align:center">Action</th>
+                    </tr>
                 }
             </thead>
             <tbody>

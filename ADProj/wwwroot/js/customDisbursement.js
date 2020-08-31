@@ -1,4 +1,7 @@
-﻿$(document).ready(function () {
+﻿
+//AUTHOR: LENG CHUNG HIANG
+
+$(document).ready(function () {
 
     $('#disbursementCustom').click(function () {
         $('#customDate').removeAttr("disabled");

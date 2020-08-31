@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 
 namespace ADProj.Controllers
+//AUTHOR: NGUI KAI LIN
 {
     public class DepartmentHeadController : Controller
     {

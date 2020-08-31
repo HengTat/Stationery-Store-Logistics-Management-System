@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using ADProj.Models;
 
 namespace ADProj.Services
+//AUTHOR: THUN SU NYI NYI
 {
     public class SupplierService
     {

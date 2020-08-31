@@ -1,13 +1,14 @@
-﻿
+﻿<!--AUTHOR: YADANAR PHYO -->
+
 @{
     ViewData["Title"] = "Retrieval List";
     var rtd = (List<RetrievalDetails>)ViewData["rtd"];
     var ret = (Retrieval)ViewData["ret"];
     var disbId = ViewData["disbId"];
 }
-    <div class="container" align="center" style="margin-bottom:40px">
-        <h2>Retrieval Form ID - @ret.Id</h2>
-    </div>
+<div class="container" align="center" style="margin-bottom:40px">
+    <h2>Retrieval Form ID - @ret.Id</h2>
+</div>
 <form method="post" style="margin-bottom:40px" action="/Disbursement/Generate">
     <div class="container">
         <a href="/retrieval/index"><button type="button" class="btn btn-primary"> Back To Retrieval List</button></a>

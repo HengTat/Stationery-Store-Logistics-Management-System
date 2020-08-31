@@ -1,4 +1,6 @@
-﻿@{
+﻿<!--AUTHOR: THUN SU NYI NYI -->
+
+@{
     ViewData["Title"] = "UpdateStationery";
     List<string> supplierstationeryList = ViewBag.supplierstationeryList;
     SupplierStationery item = (SupplierStationery)ViewData["item"];
@@ -31,7 +33,7 @@
         <div class="form-group">
             <label class="col-sm-5 control-label">Tender Price:</label>
             <div class="col-sm-3">
-                <input type="number" min="0" step="any" class="form-control"  value="@item.TenderPrice" name="TenderPrice" style="width:300px">
+                <input type="number" min="0" step="any" class="form-control" value="@item.TenderPrice" name="TenderPrice" style="width:300px">
             </div>
         </div>
 

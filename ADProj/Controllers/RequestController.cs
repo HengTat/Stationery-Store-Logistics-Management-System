@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace ADProj.Controllers
+//AUTHOR: JAMES FOO, CHONG HENG TAT
 {
     public class RequestController : Controller
     {

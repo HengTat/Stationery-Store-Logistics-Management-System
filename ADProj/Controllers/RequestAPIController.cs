@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ADProj.Controllers
+//AUTHOR: JAMES FOO, NGUI KAI LIN
 {
     [Route("api/[controller]")]
     [ApiController]

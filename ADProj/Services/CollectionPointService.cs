@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace ADProj.Services
+//AUTHOR: NGUI KAI LIN
 {
     public class CollectionPointService
     {

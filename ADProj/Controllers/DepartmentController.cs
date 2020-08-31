@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.VisualBasic;
 
 namespace ADProj.Controllers
+//AUTHOR: NGUI KAI LIN
 {
     public class DepartmentController : Controller
     {

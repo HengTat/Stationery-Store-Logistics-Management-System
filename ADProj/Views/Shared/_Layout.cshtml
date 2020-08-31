@@ -1,9 +1,13 @@
-﻿@using Microsoft.AspNetCore.Http
+﻿<!--AUTHOR: YADANAR PHYO, LENG CHUNG HIANG, CHONG HENG TAT -->
+
+
+
+@using Microsoft.AspNetCore.Http
 @{ string role = (string)Context.Session.GetString("role");
     string name = (string)Context.Session.GetString("name");
     string id = (string)Context.Session.GetString("id");
     string userimageurl = "/employeeimages/" + @id + ".jpg";
-    }
+}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -62,7 +66,7 @@
                                 <li><a asp-controller="PurchaseOrder" asp-action="Index">Purchase Order List</a></li>
                             </ul>
                         </li>
- }
+                    }
                     else if (role == ADProj.Enums.EmployeeRole.STORESUPERVISOR)
                     {
                         <li class="nav-item"><a asp-controller="TrendAnalysis" asp-action="GeneralTrend">Home</a></li>
@@ -113,7 +117,7 @@
                         </li>
                     }
                     else if (role == ADProj.Enums.EmployeeRole.STOREMANAGER)
-                    { 
+                    {
                         <li class="nav-item"><a asp-controller="TrendAnalysis" asp-action="GeneralTrend">Home</a></li>
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown">Inventory<span class="caret"></span></a>
@@ -192,8 +196,8 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a>Welcome @name ! &nbsp;&nbsp;&nbsp; <img src=@userimageurl onerror="this.src='/employeeimages/avatarimage.png'" style="border-radius:28px; width:50px" /></a></li>
-                <li><a asp-controller="Account" asp-action="PasswordChange"class="navbaralign"><span class="glyphicon glyphicon-lock"></span> Change Password</a></li>
-                <li><a asp-controller="Account" asp-action="Logout"class="navbaralign"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
+                <li><a asp-controller="Account" asp-action="PasswordChange" class="navbaralign"><span class="glyphicon glyphicon-lock"></span> Change Password</a></li>
+                <li><a asp-controller="Account" asp-action="Logout" class="navbaralign"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
             </ul>
         </div>
     </nav>

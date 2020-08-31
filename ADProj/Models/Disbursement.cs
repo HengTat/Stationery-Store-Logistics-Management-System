@@ -8,6 +8,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.CompilerServices;
 
 namespace ADProj.Models
+//AUTHOR: EVERYBODY
+
 {
     public class Disbursement
     {

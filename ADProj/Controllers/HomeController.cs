@@ -11,7 +11,7 @@ using ADProj.Services;
 using ADProj.Enums;
 
 namespace ADProj.Controllers
-{
+{//AUTHOR: NGUI KAI LIN, JAMES FOO, LENG CHUNG HIANG
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

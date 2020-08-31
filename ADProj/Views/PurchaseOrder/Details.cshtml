@@ -1,4 +1,6 @@
-﻿@{
+﻿<!--AUTHOR: JAMES FOO -->
+
+@{
     ViewData["Title"] = "Purchase Order Details";
     var details = (List<PurchaseOrderDetails>)ViewData["ListofPO"];
     var poId = (int)ViewData["poId"];
@@ -9,41 +11,41 @@
     <img src="~/Icons/Listicon.png" alt="listicon" width="260" height="130" />
     <h1>Purchase Order Id: @poId</h1>
 </div>
-    <div class="container">
-        <a href="/PurchaseOrder/Index"><button type="button" class="btn btn-primary">Back To Puchase Order History</button></a>
+<div class="container">
+    <a href="/PurchaseOrder/Index"><button type="button" class="btn btn-primary">Back To Puchase Order History</button></a>
 
-        <table align="center" class="table table-bordered" style="margin-top:20px; text-align:center">
-            <thead>
-                <tr style="background-color:lightgrey">
-                    <th style="width:50px; text-align:center">Supplier Id</th>
-                    <th style="width:50px; text-align:center">Item Id</th>
-                    <th style="width:50px; text-align:center">Description</th>
-                    <th style="width:50px; text-align:center">Quantity</th>
-                    <th style="width:50px; text-align:center">UOM</th>
+    <table align="center" class="table table-bordered" style="margin-top:20px; text-align:center">
+        <thead>
+            <tr style="background-color:lightgrey">
+                <th style="width:50px; text-align:center">Supplier Id</th>
+                <th style="width:50px; text-align:center">Item Id</th>
+                <th style="width:50px; text-align:center">Description</th>
+                <th style="width:50px; text-align:center">Quantity</th>
+                <th style="width:50px; text-align:center">UOM</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in details)
+            {
+                <tr>
+                    <td>
+                        @item.PurchaseOrder.SupplierId
+                    </td>
+                    <td>
+                        @item.InventoryItemId
+                    </td>
+                    <td>
+                        @item.InventoryItem.Description
+                    </td>
+                    <td>
+                        @item.Qty
+                    </td>
+                    <td>
+                        @item.InventoryItem.UOM
+                    </td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in details)
-                {
-                    <tr>
-                        <td>
-                            @item.PurchaseOrder.SupplierId
-                        </td>
-                        <td>
-                            @item.InventoryItemId
-                        </td>
-                        <td>
-                            @item.InventoryItem.Description
-                        </td>
-                        <td>
-                            @item.Qty
-                        </td>
-                        <td>
-                            @item.InventoryItem.UOM
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+            }
+        </tbody>
+    </table>
 
-    </div>
+</div>

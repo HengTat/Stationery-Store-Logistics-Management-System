@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 
 namespace ADProj.Controllers
+//AUTHOR: CHONG HENG TAT
 {
     [Route("api/[controller]")]
     [ApiController]

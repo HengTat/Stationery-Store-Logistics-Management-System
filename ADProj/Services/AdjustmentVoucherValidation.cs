@@ -5,6 +5,8 @@ using ADProj.DB;
 using ADProj.Models;
 
 namespace ADProj.Services
+//AUTHOR: MA LULU, LENG CHUNG HIANG
+
 {
     public class AdjustmentVoucherValidation
     {

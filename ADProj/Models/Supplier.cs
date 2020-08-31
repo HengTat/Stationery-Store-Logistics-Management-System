@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 
 namespace ADProj.Models
+//AUTHOR: EVERYBODY
+
 {
     public class Supplier
     {

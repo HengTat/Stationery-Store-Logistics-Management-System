@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ADProj.Controllers
+//AUTHOR: NGUI KAI LIN
 {
     public class DepartmentRepController : Controller
     {

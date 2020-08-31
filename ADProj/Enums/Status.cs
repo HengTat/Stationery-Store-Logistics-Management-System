@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace ADProj.Enums
+//AUTHOR: JAMES FOO
 {
     public enum Status
     {

@@ -5,8 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace ADProj.Services
+//AUTHOR: LENG CHUNG HIANG
+
 {
     public class DisbursementService
+
     {
         protected ADProjContext dbcontext;
         protected DepartmentService deptsvc;

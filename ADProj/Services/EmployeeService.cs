@@ -7,6 +7,8 @@ using ADProj.Enums;
 using ADProj.Models;
 
 namespace ADProj.Services
+//AUTHOR: LENG CHUNG HIANG, GUO JIEYI, NGUI KAI LIN
+
 {
     public class EmployeeService
     {

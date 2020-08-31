@@ -7,6 +7,8 @@ using ADProj.Models;
 using System.Security.Cryptography;
 
 namespace ADProj.Services
+//AUTHOR: YADANAR PHYO
+
 {
     public class InventoryService
     {

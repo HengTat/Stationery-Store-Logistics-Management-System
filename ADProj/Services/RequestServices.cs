@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 
 namespace ADProj.Services
+//AUTHOR: JAMES FOO, CHONG HENG TAT, NGUI KAI LIN
 {
     public class RequestServices
     {

@@ -1,34 +1,36 @@
-﻿@{
+﻿<!--AUTHOR: LENG CHUNG HIANG -->
+
+@{
     ViewData["Title"] = "Disbursement Details";
     var detailsList = (List<DisbursementDetails>)ViewData["detailsList"];
 }
 
-    <div class="container" align="center">
-        <h2>Disbursement Details - @detailsList[0].Disbursement.DepartmentId</h2>
-        <table class="table table-bordered" style="width:900px; margin-top:20px; text-align:center">
-            <thead style="background-color:lightgrey">
-                <tr align="center">
-                    <th style="width:100px; text-align:center">Item Id</th>
-                    <th style="width:200px; text-align:center">Description</th>
-                    <th style="width:150px; text-align:center">UOM</th>
-                    <th style="width:70px; text-align:center">Quantity Needed</th>
-                    <th style="width:50px; text-align:center">Actual Quantity</th>
+<div class="container" align="center">
+    <h2>Disbursement Details - @detailsList[0].Disbursement.DepartmentId</h2>
+    <table class="table table-bordered" style="width:900px; margin-top:20px; text-align:center">
+        <thead style="background-color:lightgrey">
+            <tr align="center">
+                <th style="width:100px; text-align:center">Item Id</th>
+                <th style="width:200px; text-align:center">Description</th>
+                <th style="width:150px; text-align:center">UOM</th>
+                <th style="width:70px; text-align:center">Quantity Needed</th>
+                <th style="width:50px; text-align:center">Actual Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var det in detailsList)
+            {
+                <tr>
+                    <td>@det.InventoryItemId</td>
+                    <td>@det.InventoryItem.Description</td>
+                    <td>@det.InventoryItem.UOM</td>
+                    <td>@det.QtyNeeded</td>
+                    <td>@det.QtyReceived</td>
                 </tr>
-            </thead>
-            <tbody>
-                @foreach (var det in detailsList)
-                {
-                    <tr>
-                        <td>@det.InventoryItemId</td>
-                        <td>@det.InventoryItem.Description</td>
-                        <td>@det.InventoryItem.UOM</td>
-                        <td>@det.QtyNeeded</td>
-                        <td>@det.QtyReceived</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-        <div>
-            <button type="button" id="backBtn" class="btn btn-success" onclick="window.location.href = '/Disbursement/ViewDisbursement?Date=@detailsList[0].Disbursement.DisbursedDate.ToString("dd/MM/yyyy")'">< Back</button>
-        </div>
+            }
+        </tbody>
+    </table>
+    <div>
+        <button type="button" id="backBtn" class="btn btn-success" onclick="window.location.href = '/Disbursement/ViewDisbursement?Date=@detailsList[0].Disbursement.DisbursedDate.ToString("dd/MM/yyyy")'">< Back</button>
     </div>
+</div>

@@ -5,6 +5,8 @@ using System.Reflection.Metadata;
 using System.Threading.Tasks;
 
 namespace ADProj.Enums
+//AUTHOR: NGUI KAI LIN
+
 {
     public class EmployeeRole
     {

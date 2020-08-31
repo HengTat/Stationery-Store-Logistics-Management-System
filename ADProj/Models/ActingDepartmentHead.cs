@@ -7,6 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 
 namespace ADProj.Models
+//AUTHOR: EVERYBODY
 {
     public class ActingDepartmentHead
     {

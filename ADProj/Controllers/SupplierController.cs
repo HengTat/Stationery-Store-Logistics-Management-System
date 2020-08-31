@@ -8,6 +8,7 @@ using ADProj.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 namespace ADProj.Controllers
+//AUTHOR: THUN SU NYI NYI
 {
     public class SupplierController : Controller
     {

@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ADProj.Controllers
+    //AUTHOR: LENG CHUNG HIANG, GUO JIEYI
 {
     public class AccountController : Controller
     {

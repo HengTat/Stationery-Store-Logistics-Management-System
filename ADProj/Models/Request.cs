@@ -7,6 +7,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 using ADProj.Enums;
 
 namespace ADProj.Models
+//AUTHOR: EVERYBODY
+
 {
     public class Request
     {

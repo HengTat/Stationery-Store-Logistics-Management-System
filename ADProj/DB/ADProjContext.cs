@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using ADProj.Models;
 
 namespace ADProj.DB
+//AUTHOR: EVERYBODY
 {
     public class ADProjContext : DbContext
     {

@@ -1,4 +1,6 @@
-﻿@{
+﻿<!--AUTHOR: LENG CHUNG HIANG -->
+
+@{
     ViewData["Title"] = "Disbursement";
     var disbursementList = (List<Disbursement>)ViewData["selectedDisbursements"];
 }
@@ -22,14 +24,14 @@
             <tbody>
                 @foreach (var dbm in disbursementList)
                 {
-                <tr>
-                    <td>@dbm.DepartmentId</td>
-                    <td>@dbm.Department.Name</td>
-                    <td>@dbm.Department.DepartmentRep.Name</td>
-                    <td>@dbm.Department.CollectionPointId</td>
-                    <td>@dbm.DisbursementStatus</td>
-                    <td><button type="submit" formaction="/Disbursement/ViewDisbursementDetails?Id=@dbm.Id" class="btn btn-primary btn-xs">View Details ></button></td>
-                </tr>
+                    <tr>
+                        <td>@dbm.DepartmentId</td>
+                        <td>@dbm.Department.Name</td>
+                        <td>@dbm.Department.DepartmentRep.Name</td>
+                        <td>@dbm.Department.CollectionPointId</td>
+                        <td>@dbm.DisbursementStatus</td>
+                        <td><button type="submit" formaction="/Disbursement/ViewDisbursementDetails?Id=@dbm.Id" class="btn btn-primary btn-xs">View Details ></button></td>
+                    </tr>
                 }
 
             </tbody>

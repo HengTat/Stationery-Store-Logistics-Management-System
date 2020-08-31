@@ -4,8 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace ADProj.Models
+//AUTHOR: JAMES FOO
+
 {
-    //This model is required for sending json data with ajax for the PO forms.
 
     public class CustomPODetails
     {
